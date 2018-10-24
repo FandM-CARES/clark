@@ -1,21 +1,33 @@
 import csv
 import re
 import nltk
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from scipy import stats
+import random
 
 from nltk.corpus import stopwords
 stop_words = set(stopwords.words('english'))
 
 class ProcessedData(object):
 
+    dataPoints = {}
+    totals = {}
+    PPs = {}
+
     def __init__(self, linkToRawDataSet, variables):
         self.input = linkToRawDataSet
-        self.result = self.processDataUnigrams(linkToRawDataSet, variables)
-
+        self.unigrams = self.processDataUnigrams(linkToRawDataSet, variables)
+        
     def processDataUnigrams(self, linkToRawDataset, variables):
         result = {}
         for var in variables:
             unigrams, totals, PPs = self.parseCSVIntoLabelledUnigrams(linkToRawDataset, var)
-            result[var] = self.normalizeValues(unigrams, totals)
+            self.totals[var] = totals
+            self.PPs[var] = PPs
+            result[var] = unigrams
         return result
 
     def parseCSVIntoLabelledUnigrams(self, linkToRawDataset, variable, words={}):
@@ -25,10 +37,13 @@ class ProcessedData(object):
             'num_high': 0
         }
 
+        self.dataPoints[variable] = []
+
         with open(linkToRawDataset, mode='r') as rawData:
             csv_reader = csv.DictReader(rawData)
             for row in csv_reader:
                 weight = self.numToClassificationWeight(row, variable)
+                self.dataPoints[variable].append(float(row[variable]))
                 for word in re.sub(r'[.!,;?]', " ",  row['Player Message']).split(): # substituting any non-alphanumerical with a space and then splitting on it to get words
                     if word in stop_words:
                         continue
@@ -42,20 +57,89 @@ class ProcessedData(object):
                         totals = self.allocateClassificationWeightToTotal(weight, totals)
 
         PPs = {
-            'low': float(totals['num_low'])/float(totals['num_low'] + totals['num_med'] + totals['num_high'])
-            'med': float(totals['num_med'])/float(totals['num_low'] + totals['num_med'] + totals['num_high'])
+            'low': float(totals['num_low'])/float(totals['num_low'] + totals['num_med'] + totals['num_high']),
+            'med': float(totals['num_med'])/float(totals['num_low'] + totals['num_med'] + totals['num_high']),
             'high': float(totals['num_high'])/float(totals['num_low'] + totals['num_med'] + totals['num_high'])
         }
 
         return words, totals, PPs
+    
+    def plotData(self):
+        colors = ["red", "blue", "green", "yellow", "brown", "purple"]
+        i = 0
+        for var in self.dataPoints:
+            sns.distplot(self.dataPoints[var], color = colors[i], label=var)
+            i += 1
+        plt.legend()
+        plt.show()
+    
+    def calcSTDData(self):
+        res = []
+        for var in self.dataPoints:
+            res.append([np.mean(self.dataPoints[var]), np.std(self.dataPoints[var]), var])
+        return res
+    
+    def calcBoundsData(self, stdData):
+        for var in stdData:
+            lb = var[0] - (var[1] / 2)
+            ub = var[0] + (var[1] / 2)
+            print(lb, ub, var[2])
 
     def numToClassificationWeight(self, row, variable):
-        if float(row[variable]) < 1.0: 
-            return 'low'
-        elif float(row[variable]) < 2.0:
-            return 'med'
-        else: 
+        def numToCWForPleasantness(row):
+            if float(row['Pleasantness']) < 0.817:
+                return 'low'
+            if float(row['Pleasantness']) < 1.214:
+                return 'med'
             return 'high'
+        
+        def numToCWForAttention(row):
+            if float(row['Attention']) < 1.007:
+                return 'low'
+            if float(row['Attention']) < 1.430:
+                return 'med'
+            return 'high'
+
+        def numToCWForControl(row):
+            if float(row['Control']) < 0.963:
+                return 'low'
+            if float(row['Control']) < 1.410:
+                return 'med'
+            return 'high'
+
+        def numToCWForCertainty(row):
+            if float(row['Certainty']) < 0.915:
+                return 'low'
+            if float(row['Certainty']) < 1.341:
+                return 'med'
+            return 'high'
+
+        def numToCWForAnticipatedEffort(row):
+            if float(row['Anticipated Effort']) < 0.960:
+                return 'low'
+            if float(row['Anticipated Effort']) < 1.366:
+                return 'med'
+            return 'high'
+        
+        def numToCWForResponsibility(row):
+            if float(row['Responsibililty']) < 0.913:
+                return 'low'
+            if float(row['Responsibililty']) < 1.291:
+                return 'med'
+            return 'high'
+
+        if variable == 'Pleasantness':
+            return numToCWForPleasantness(row)
+        if variable == 'Attention':
+            return numToCWForAttention(row)
+        if variable == 'Control':
+            return numToCWForControl(row)
+        if variable == 'Certainty':
+            return numToCWForCertainty(row)
+        if variable == 'Anticipated Effort':
+            return numToCWForAnticipatedEffort(row)
+        if variable == 'Responsibililty':
+            return numToCWForResponsibility(row)
     
     def allocateClassificationWeightToTotal(self, cw, totals):
         if cw == 'low':
@@ -66,19 +150,4 @@ class ProcessedData(object):
             totals['num_high'] += 1
         return totals
 
-    def normalizeValues(self, labelledUnigrams, totals):
-        for word in labelledUnigrams:
-            if labelledUnigrams[word]['low'] == 0:
-                labelledUnigrams[word]['low'] = float(1)/float(totals['num_low']+1)
-            else:
-                labelledUnigrams[word]['low'] = float(labelledUnigrams[word]['low'])/float(totals['num_low'])
-            if labelledUnigrams[word]['med'] == 0:
-                labelledUnigrams[word]['med'] = float(1)/float(totals['num_med']+1)
-            else:
-                labelledUnigrams[word]['med'] = float(labelledUnigrams[word]['med'])/float(totals['num_med'])
-            if labelledUnigrams[word]['high'] == 0:
-                labelledUnigrams[word]['high'] = float(1)/float(totals['num_high']+1)
-            else:
-                labelledUnigrams[word]['high'] = float(labelledUnigrams[word]['high'])/float(totals['num_high'])
-        
-        return labelledUnigrams
+    
