@@ -27,7 +27,7 @@ class ProcessedData(object):
     def labelData(self, dset, vars):
         labelledData = {}
         for row in dset:
-            message = row['Player Message']
+            message = re.sub(r'[.!,;?]', "",  row['Player Message'])
             labelledData[message] = {}
             for var in vars:
                 weight = self.numToClassificationWeight(row, var)

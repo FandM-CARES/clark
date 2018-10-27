@@ -1,5 +1,8 @@
 from processedData import *
 import math
+# from sklearn.model_selection import KFold
+from nltk.corpus import stopwords
+stop_words = set(stopwords.words('english'))
 
 class Model(object):
 
@@ -24,7 +27,9 @@ class Model(object):
 
         for message in self.labelledTestingData:
             for var in self.variable:
-                classification = self.classify(self.trainingData.unigrams[var], message, self.trainingData.totals[var], self.trainingData.PPs[var])
+                parsed_message = ' '.join([word for word in message.split() if word not in stop_words])
+                classification = self.classify(
+                    self.trainingData.unigrams[var], parsed_message, self.trainingData.totals[var], self.trainingData.PPs[var])
                 if classification == self.labelledTestingData[message][var]:
                     accuracies[var] += 1
 
@@ -36,11 +41,13 @@ class Model(object):
     def processData(self, datasets, train_test_split):
         train, test = self.split_data(datasets, train_test_split)
 
-        self.labelledTestingData = ProcessedData(test, self.variable).labelledData
+        self.labelledTestingData = ProcessedData(
+            test, self.variable).labelledData
 
         for dset in datasets:
             self.trainingData = ProcessedData(train, self.variable)
-            normalizedDict = self.normalizeValues(self.trainingData.unigrams, self.trainingData.totals)
+            normalizedDict = self.normalizeValues(
+                self.trainingData.unigrams, self.trainingData.totals)
 
         self.test()
 
@@ -111,11 +118,3 @@ class Model(object):
             return 'med'
         else:
             return 'high'
-
-    def sort(self, processedData):
-        print('hi')
-
-    def nfold(X, Y, n):
-        x_set = np.split(X, n)
-        y_set = np.split(Y, n)
-        return x_set, y_set
