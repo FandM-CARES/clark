@@ -1,51 +1,110 @@
 from processedData import *
+import math
 
-class Model:
+class Model(object):
 
-    def __init__(self, datasets=[]):
+    variable = ['Pleasantness', 'Attention', 'Control',
+                'Certainty', 'Anticipated Effort', 'Responsibililty']
+
+    def __init__(self, datasets, train_test_split):
         self.datasets = datasets
         self.trained = False
         self.accuracy = 0
-    
-    def processData(self, datasets):
+        self.trainingData = None
+        self.labelledTestingData = None
+        self.classification = self.processData(datasets, train_test_split)
+
+    def test(self):
+        correct = 0
+        total = len(self.labelledTestingData)
+        accuracies = {}
+
+        for var in self.variable:
+            accuracies[var] = 0
+
+        for message in self.labelledTestingData:
+            for var in self.variable:
+                classification = self.classify(self.trainingData.unigrams[var], message, self.trainingData.totals[var], self.trainingData.PPs[var])
+                if classification == self.labelledTestingData[message][var]:
+                    accuracies[var] += 1
+
+        for var in accuracies:
+            accuracies[var] = float(accuracies[var]/total)
+
+        self.accuracy = accuracies
+
+    def processData(self, datasets, train_test_split):
+        train, test = self.split_data(datasets, train_test_split)
+
+        self.labelledTestingData = ProcessedData(test, self.variable).labelledData
+
         for dset in datasets:
-            test = np.spli
-            pdata = ProcessedData(dset)
-            normalizedDict = self.normalizeValues(pdata.unigrams, pdata.totals)
+            self.trainingData = ProcessedData(train, self.variable)
+            normalizedDict = self.normalizeValues(self.trainingData.unigrams, self.trainingData.totals)
+
+        self.test()
+
+        return {}
+
+    def split_data(self, datasets, split):
+        train = []
+        test = []
+        for dset in datasets:
+            with open(dset) as rawData:
+                csv_reader = csv.DictReader(rawData)
+                amount_of_training = math.floor(
+                    split * sum(1 for row in csv_reader))
+                # resetting the iterator to the start of the file
+                rawData.seek(0)
+                for i, row in enumerate(csv_reader):
+                    if i == 0:
+                        continue
+                    if i > amount_of_training:
+                        test.append(row)
+                    else:
+                        train.append(row)
+        return train, test
 
     def normalizeValues(self, labelledUnigrams, totals):
-        for word in labelledUnigrams:
-            if labelledUnigrams[word]['low'] == 0:
-                labelledUnigrams[word]['low'] = float(1)/float(totals['num_low']+1)
-            else:
-                labelledUnigrams[word]['low'] = float(labelledUnigrams[word]['low'])/float(totals['num_low'])
-            if labelledUnigrams[word]['med'] == 0:
-                labelledUnigrams[word]['med'] = float(1)/float(totals['num_med']+1)
-            else:
-                labelledUnigrams[word]['med'] = float(labelledUnigrams[word]['med'])/float(totals['num_med'])
-            if labelledUnigrams[word]['high'] == 0:
-                labelledUnigrams[word]['high'] = float(1)/float(totals['num_high']+1)
-            else:
-                labelledUnigrams[word]['high'] = float(labelledUnigrams[word]['high'])/float(totals['num_high'])
-        
+        for var in labelledUnigrams:
+            for word in labelledUnigrams[var]:
+                if labelledUnigrams[var][word]['low'] == 0:
+                    labelledUnigrams[var][word]['low'] = float(
+                        1)/float(totals[var]['num_low']+1)
+                else:
+                    labelledUnigrams[var][word]['low'] = float(
+                        labelledUnigrams[var][word]['low'])/float(totals[var]['num_low'])
+                if labelledUnigrams[var][word]['med'] == 0:
+                    labelledUnigrams[var][word]['med'] = float(
+                        1)/float(totals[var]['num_med']+1)
+                else:
+                    labelledUnigrams[var][word]['med'] = float(
+                        labelledUnigrams[var][word]['med'])/float(totals[var]['num_med'])
+                if labelledUnigrams[var][word]['high'] == 0:
+                    labelledUnigrams[var][word]['high'] = float(
+                        1)/float(totals[var]['num_high']+1)
+                else:
+                    labelledUnigrams[var][word]['high'] = float(
+                        labelledUnigrams[var][word]['high'])/float(totals[var]['num_high'])
+
         return labelledUnigrams
 
-    def classify(self, variable, trainingDict, content, totals, PPs):
+    def classify(self, trainingDict, content, totals, PPs):
         sumLow = float(0)
         sumMed = float(0)
         sumHigh = float(0)
 
         for word in content:
-            if x in trainingDict:
-                sumLow += float(math.log(trainingDict[variable]['low'],10))
-                sumMed += float(math.log(trainingDict[variable]['med'], 10))
-                sumHigh += float(math.log(trainingDict[variable]['high'], 10))
-        
+            if word in trainingDict:
+                sumLow += float(math.log(trainingDict[word]['low'], 10))
+                sumMed += float(math.log(trainingDict[word]['med'], 10))
+                sumHigh += float(math.log(trainingDict[word]['high'], 10))
+
         lowProb = math.log(PPs['low']) + sumLow
         medProb = math.log(PPs['med']) + sumMed
         highProb = math.log(PPs['high']) + sumHigh
 
-        maxVal =  max([lowProb, medProb, highProb])
+        maxVal = max([lowProb, medProb, highProb])
         if lowProb == maxVal:
             return 'low'
         if medProb == maxVal:
@@ -56,8 +115,7 @@ class Model:
     def sort(self, processedData):
         print('hi')
 
-
     def nfold(X, Y, n):
         x_set = np.split(X, n)
         y_set = np.split(Y, n)
-        return x_set, y_set        
+        return x_set, y_set
