@@ -1,63 +1,292 @@
-from processedData import *
+import math
+import re
+from nltk.corpus import stopwords
+stop_words = set(stopwords.words('english'))
 
-class Model:
 
-    def __init__(self, datasets=[]):
-        self.datasets = datasets
-        self.trained = False
-        self.accuracy = 0
-    
-    def processData(self, datasets):
-        for dset in datasets:
-            test = np.spli
-            pdata = ProcessedData(dset)
-            normalizedDict = self.normalizeValues(pdata.unigrams, pdata.totals)
+class Model(object):
 
-    def normalizeValues(self, labelledUnigrams, totals):
-        for word in labelledUnigrams:
-            if labelledUnigrams[word]['low'] == 0:
-                labelledUnigrams[word]['low'] = float(1)/float(totals['num_low']+1)
-            else:
-                labelledUnigrams[word]['low'] = float(labelledUnigrams[word]['low'])/float(totals['num_low'])
-            if labelledUnigrams[word]['med'] == 0:
-                labelledUnigrams[word]['med'] = float(1)/float(totals['num_med']+1)
-            else:
-                labelledUnigrams[word]['med'] = float(labelledUnigrams[word]['med'])/float(totals['num_med'])
-            if labelledUnigrams[word]['high'] == 0:
-                labelledUnigrams[word]['high'] = float(1)/float(totals['num_high']+1)
-            else:
-                labelledUnigrams[word]['high'] = float(labelledUnigrams[word]['high'])/float(totals['num_high'])
-        
-        return labelledUnigrams
+    def __init__(self):
+        self.variables = ['Pleasantness', 'Attention', 'Control',
+                          'Certainty', 'Anticipated Effort', 'Responsibililty']
+        self.unigrams = {}
+        self.priors = {}
+        self.accuracies = {}
 
-    def classify(self, variable, trainingDict, content, totals, PPs):
+    def train(self, training_data):
+        """
+        Builds a trained CLARK model
+
+        Parameters:
+        training_data (array): training data used to train the model
+
+        Returns:
+        Model: a trained model
+        """
+
+        for var in self.variables:
+            unigrams, totals, PPs = self.train_by_variable(training_data, var)
+            self.priors[var] = PPs
+            self.unigrams[var] = self.smooth_values(unigrams, var, totals)
+
+    def train_by_variable(self, training_set, variable):
+        """
+        Calculates the counts for each unigram and priors for each classification
+
+        Parameters:
+        training_set (array): training data used to train the model
+        variable (string): variable in use in training
+
+        Returns:
+        Object: unigrams with associated counts
+        Object: sums for each classification
+        Object: priors for each classification
+        """
+
+        words = {}
+        totals = {
+            'num_low': 0,
+            'num_med': 0,
+            'num_high': 0
+        }
+
+        # self.dataPoints[variable] = []
+
+        for row in training_set:
+            weight = self.numToClassificationWeight(row, variable)
+            # self.dataPoints[variable].append(float(row[variable]))
+            for word in re.sub(r'[.!,;?]', " ",  row['Player Message']).split():
+                if word in stop_words:
+                    continue
+                word = word.lower()
+                if word in words:
+                    words[word][weight] += 1
+                    totals = self.allocateClassificationWeightToTotal(
+                        weight, totals)
+                else:
+                    words[word] = {'low': 1, 'med': 1, 'high': 1}
+                    words[word][weight] += 1
+                    totals = self.allocateClassificationWeightToTotal(
+                        weight, totals)
+
+        PPs = {
+            'low': float(totals['num_low'])/float(totals['num_low'] + totals['num_med'] + totals['num_high']),
+            'med': float(totals['num_med'])/float(totals['num_low'] + totals['num_med'] + totals['num_high']),
+            'high': float(totals['num_high'])/float(totals['num_low'] + totals['num_med'] + totals['num_high'])
+        }
+
+        return words, totals, PPs
+
+    def allocateClassificationWeightToTotal(self, cw, totals):
+        """
+        Updates the totals
+
+        Parameters:
+        cw (string): classification weight
+        totals (object): totals to be updates
+
+        Returns:
+        Object: totals
+        """
+
+        if cw == 'low':
+            totals['num_low'] += 1
+        elif cw == 'med':
+            totals['num_med'] += 1
+        elif cw == 'high':
+            totals['num_high'] += 1
+        return totals
+
+    def numToClassificationWeight(self, row, variable):
+        """
+        Converts number values to a classification weighting
+
+        Parameters:
+        row (array): row of data contianing variables
+        variable (string): the variable to look at
+
+        Returns:
+        String: classification weight
+
+        TODO: update bounds automatically
+        """
+
+        def numToCWForPleasantness(row):
+            if float(row['Pleasantness']) < 0.817:
+                return 'low'
+            if float(row['Pleasantness']) < 1.214:
+                return 'med'
+            return 'high'
+
+        def numToCWForAttention(row):
+            if float(row['Attention']) < 1.007:
+                return 'low'
+            if float(row['Attention']) < 1.430:
+                return 'med'
+            return 'high'
+
+        def numToCWForControl(row):
+            if float(row['Control']) < 0.963:
+                return 'low'
+            if float(row['Control']) < 1.410:
+                return 'med'
+            return 'high'
+
+        def numToCWForCertainty(row):
+            if float(row['Certainty']) < 0.915:
+                return 'low'
+            if float(row['Certainty']) < 1.341:
+                return 'med'
+            return 'high'
+
+        def numToCWForAnticipatedEffort(row):
+            if float(row['Anticipated Effort']) < 0.960:
+                return 'low'
+            if float(row['Anticipated Effort']) < 1.366:
+                return 'med'
+            return 'high'
+
+        def numToCWForResponsibility(row):
+            if float(row['Responsibililty']) < 0.913:
+                return 'low'
+            if float(row['Responsibililty']) < 1.291:
+                return 'med'
+            return 'high'
+
+        if variable == 'Pleasantness':
+            return numToCWForPleasantness(row)
+        if variable == 'Attention':
+            return numToCWForAttention(row)
+        if variable == 'Control':
+            return numToCWForControl(row)
+        if variable == 'Certainty':
+            return numToCWForCertainty(row)
+        if variable == 'Anticipated Effort':
+            return numToCWForAnticipatedEffort(row)
+        if variable == 'Responsibililty':
+            return numToCWForResponsibility(row)
+
+    def smooth_values(self, unigrams, variable, totals):
+        """
+        Performs smoothing on unigram values
+
+        Parameters:
+        unigrams (object): unigrams with associated counts in training data
+        variable (string): the variable associated with the unigram values
+        totals (object): total number of low, med, and high classifications for the variable
+
+        Returns:
+        Object: smoothed values for the unigrams
+        """
+
+        for word in unigrams:
+            unigrams[word]['low'] = float(
+                unigrams[word]['low'])/float(totals['num_low'])
+            unigrams[word]['med'] = float(
+                unigrams[word]['med'])/float(totals['num_med'])
+            unigrams[word]['high'] = float(
+                unigrams[word]['high'])/float(totals['num_high'])
+
+        return unigrams
+
+    def test(self, testing_data):
+        """
+        Tests the accuracy of the model
+
+        Parameters:
+        testing_data (array): data on which to test the model
+
+        Returns:
+        Null
+        """
+        correct = 0
+        total = len(testing_data)
+        messages = {}
+
+        for var in self.variables:
+            self.accuracies[var] = 0
+
+        for row in testing_data:
+            res = []
+            for word in re.sub(r'[.!,;?]', " ",  row['Player Message']):
+                if word in stop_words:
+                    continue
+                res.append(word)
+            parsed_message = ' '.join(res)
+            messages[parsed_message] = {}
+            for var in self.variables:
+                weight = self.numToClassificationWeight(row, var)
+                messages[parsed_message][var] = weight
+                classification = self.classify(self.unigrams[var], parsed_message, self.priors[var])
+                if classification == messages[parsed_message][var]:
+                    self.accuracies[var] += 1
+
+        for var in self.accuracies:
+            self.accuracies[var] = float(self.accuracies[var]/total)
+
+    # def processData(self, datasets, train_test_split):
+    #     lstData = self.parseData(datasets)
+    #     # print(lstData)
+    #     print(type(lstData))
+    #     np.random.shuffle(lstData)
+    #     # print(lstData)
+    #     # print(lstData)
+    #     # print(len(lstData))
+    #     # print(np.shape(lstData))
+    #     # exit(0)
+    #     n = 10
+    #     sets = np.array_split(lstData, n)
+
+    #     sets = [s.tolist() for s in sets]
+
+    #     for i, s in enumerate(sets):
+    #         print(sets[i+1:])
+    #         print("           ")
+    #         print("           ")
+    #         print(sets[i+1:][0][0])
+    #         exit(0)
+
+    #         self.labelledTestingData = ProcessedData(sets[i], self.variable).labelledData
+
+    #         for dset in datasets:
+    #             self.trainingData = ProcessedData((sets[:i]+sets[i+1:]), self.variable)
+    #             normalizedDict = self.normalizeValues(
+    #                 self.trainingData.unigrams, self.trainingData.totals)
+
+    #         self.test()
+
+    #     return {}
+
+    def classify(self, trainingDict, content, PPs):
+        """
+        Classifies each message according to the trained model
+
+        Parameters:
+        trainingDict (Object): trained model
+        content (String): message to be tested
+        PPs (Object): priors 
+
+        Returns:
+        String: classification according to the trained model
+        """
         sumLow = float(0)
         sumMed = float(0)
         sumHigh = float(0)
 
         for word in content:
-            if x in trainingDict:
-                sumLow += float(math.log(trainingDict[variable]['low'],10))
-                sumMed += float(math.log(trainingDict[variable]['med'], 10))
-                sumHigh += float(math.log(trainingDict[variable]['high'], 10))
-        
-        lowProb = math.log(PPs['low']) + sumLow
-        medProb = math.log(PPs['med']) + sumMed
-        highProb = math.log(PPs['high']) + sumHigh
+            if word in trainingDict:
+                sumLow += float(math.log(trainingDict[word]['low'], 10))
+                sumMed += float(math.log(trainingDict[word]['med'], 10))
+                sumHigh += float(math.log(trainingDict[word]['high'], 10))
 
-        maxVal =  max([lowProb, medProb, highProb])
+        lowProb = math.log(PPs['low'], 10) + sumLow
+        medProb = math.log(PPs['med'], 10) + sumMed
+        highProb = math.log(PPs['high'], 10) + sumHigh
+
+        maxVal = max([lowProb, medProb, highProb])
         if lowProb == maxVal:
             return 'low'
         if medProb == maxVal:
             return 'med'
         else:
             return 'high'
-
-    def sort(self, processedData):
-        print('hi')
-
-
-    def nfold(X, Y, n):
-        x_set = np.split(X, n)
-        y_set = np.split(Y, n)
-        return x_set, y_set        
