@@ -23,7 +23,7 @@ class Model(object):
         Returns:
         Model: a trained model
         """
-
+        
         for var in self.variables:
             unigrams, totals, PPs = self.train_by_variable(training_data, var)
             self.priors[var] = PPs
@@ -223,39 +223,6 @@ class Model(object):
 
         for var in self.accuracies:
             self.accuracies[var] = float(self.accuracies[var]/total)
-
-    # def processData(self, datasets, train_test_split):
-    #     lstData = self.parseData(datasets)
-    #     # print(lstData)
-    #     print(type(lstData))
-    #     np.random.shuffle(lstData)
-    #     # print(lstData)
-    #     # print(lstData)
-    #     # print(len(lstData))
-    #     # print(np.shape(lstData))
-    #     # exit(0)
-    #     n = 10
-    #     sets = np.array_split(lstData, n)
-
-    #     sets = [s.tolist() for s in sets]
-
-    #     for i, s in enumerate(sets):
-    #         print(sets[i+1:])
-    #         print("           ")
-    #         print("           ")
-    #         print(sets[i+1:][0][0])
-    #         exit(0)
-
-    #         self.labelledTestingData = ProcessedData(sets[i], self.variable).labelledData
-
-    #         for dset in datasets:
-    #             self.trainingData = ProcessedData((sets[:i]+sets[i+1:]), self.variable)
-    #             normalizedDict = self.normalizeValues(
-    #                 self.trainingData.unigrams, self.trainingData.totals)
-
-    #         self.test()
-
-    #     return {}
 
     def classify(self, trainingDict, content, PPs):
         """
