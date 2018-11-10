@@ -12,6 +12,9 @@ class Model(object):
         self.unigrams = {}
         self.priors = {}
         self.accuracies = {}
+        self.precisions = {}
+        self.recalls = {}
+        self.fscores = {}
 
     def train(self, training_data):
         """
@@ -23,7 +26,7 @@ class Model(object):
         Returns:
         Model: a trained model
         """
-        
+
         for var in self.variables:
             unigrams, totals, PPs = self.train_by_variable(training_data, var)
             self.priors[var] = PPs
@@ -203,26 +206,58 @@ class Model(object):
         total = len(testing_data)
         messages = {}
 
+        TP = {}
+        TP_FP = {}
+        TP_FN = {}
+
         for var in self.variables:
             self.accuracies[var] = 0
+            TP[var] = {
+                'high': 0,
+                'med': 0,
+                'low': 0
+            }
+            TP_FP[var] = {
+                'high': 0,
+                'med': 0,
+                'low': 0
+            }
+            TP_FN[var] = {
+                'high': 0,
+                'med': 0,
+                'low': 0
+            }
 
         for row in testing_data:
             res = []
-            for word in re.sub(r'[.!,;?]', " ",  row['Player Message']):
+            for word in re.sub(r'[.!,;?]', " ",  row['Player Message']).split():
                 if word in stop_words:
                     continue
+                word = word.lower()
                 res.append(word)
             parsed_message = ' '.join(res)
             messages[parsed_message] = {}
             for var in self.variables:
                 weight = self.numToClassificationWeight(row, var)
+                TP_FN[var][weight] += 1
                 messages[parsed_message][var] = weight
-                classification = self.classify(self.unigrams[var], parsed_message, self.priors[var])
+                classification = self.classify(self.unigrams[var], parsed_message, self.priors[var]) 
+                TP_FP[var][classification] += 1
                 if classification == messages[parsed_message][var]:
-                    self.accuracies[var] += 1
+                    self.accuracies[var] += 1    
+                    TP[var][classification] += 1 
 
         for var in self.accuracies:
             self.accuracies[var] = float(self.accuracies[var]/total)
+            mean_precision = 0
+            mean_recall = 0
+            for label in ['high', 'med', 'low']:
+                mean_precision += float(TP[var][label]/TP_FP[var][label])
+                mean_recall += float(TP[var][label]/TP_FN[var][label])
+            self.precisions[var] = float(mean_precision/3)
+            self.recalls[var] = float(mean_recall/3)
+
+            self.fscores[var] = (2 * self.precisions[var] * self.recalls[var])/(self.precisions[var] + self.recalls[var]) 
 
     def classify(self, trainingDict, content, PPs):
         """
@@ -240,7 +275,7 @@ class Model(object):
         sumMed = float(0)
         sumHigh = float(0)
 
-        for word in content:
+        for word in content.split():
             if word in trainingDict:
                 sumLow += float(math.log(trainingDict[word]['low'], 10))
                 sumMed += float(math.log(trainingDict[word]['med'], 10))

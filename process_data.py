@@ -30,7 +30,7 @@ class ProcessedData(object):
                     parsed.append(row)
         return parsed
 
-    def split_data(self, datasets, split=.75):
+    def split_data(self, datasets, split=0.75):
         """
         Splits data into training and testing sets 
 
