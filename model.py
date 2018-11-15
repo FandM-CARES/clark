@@ -1,6 +1,8 @@
 import math
 import re
 import numpy as np
+from metrics import *
+from sklearn.metrics import confusion_matrix
 from nltk.corpus import stopwords
 stop_words = set(stopwords.words('english'))
 
@@ -13,10 +15,11 @@ class Model(object):
         self.unigrams = {}
         self.priors = {}
         self.bounds = {}
-        self.accuracies = {}
         self.precisions = {}
         self.recalls = {}
         self.fscores = {}
+        self.true = {}
+        self.pred = {}
 
     def train(self, training_data):
         """
@@ -62,7 +65,7 @@ class Model(object):
             # weight = self.numToClassificationWeight(row, variable)
             dataPoints[variable].append(float(row[variable]))
         
-        self.calcBoundsData(dataPoints)
+        self.calc_bounds_data(dataPoints)
 
         for row in training_set:
             weight = self.numToClassificationWeight(row, variable)
@@ -202,7 +205,7 @@ class Model(object):
 
     def test(self, testing_data):
         """
-        Tests the accuracy of the model
+        Tests the precision/recall of the model
 
         Parameters:
         testing_data (array): data on which to test the model
@@ -219,7 +222,6 @@ class Model(object):
         TP_FN = {}
 
         for var in self.variables:
-            self.accuracies[var] = 0
             TP[var] = {
                 'high': 0,
                 'med': 0,
@@ -235,7 +237,9 @@ class Model(object):
                 'med': 0,
                 'low': 0
             }
-
+            self.true[var] = []
+            self.pred[var] = []
+        
         for row in testing_data:
             res = []
             for word in re.sub(r'[.!,;?]', " ",  row['Player Message']).split():
@@ -248,16 +252,16 @@ class Model(object):
             for var in self.variables:
                 weight = self.numToClassificationWeight(row, var)
                 TP_FN[var][weight] += 1
+                self.true[var].append(weight)
                 messages[parsed_message][var] = weight
                 classification = self.classify(
                     self.unigrams[var], parsed_message, self.priors[var])
                 TP_FP[var][classification] += 1
+                self.pred[var].append(classification)
                 if classification == messages[parsed_message][var]:
-                    self.accuracies[var] += 1
                     TP[var][classification] += 1
 
-        for var in self.accuracies:
-            self.accuracies[var] = float(self.accuracies[var]/total)
+        for var in self.variables:
             mean_precision = 0
             mean_recall = 0
             for label in ['high', 'med', 'low']:
@@ -268,6 +272,7 @@ class Model(object):
 
             self.fscores[var] = (2 * self.precisions[var] * self.recalls[var]
                                  )/(self.precisions[var] + self.recalls[var])
+        
 
     def classify(self, trainingDict, content, PPs):
         """
@@ -312,17 +317,47 @@ class Model(object):
     #     plt.legend()
     #     plt.show()
 
-    def calcSTDData(self, dataPoints):
+    def calc_std_data(self, dataPoints):
+        """
+
+        Calculates the standard deviation of the data points
+
+        Parameters:
+        dataPoints (object): data points for each variable
+
+        Returns:
+        Array: standard deviations for the variable
+        """
         res = []
         for var in dataPoints:
             res.append([np.mean(dataPoints[var]), np.std(dataPoints[var]), var])
         return res
 
-    def calcBoundsData(self, dataPoints):
-        stdData = self.calcSTDData(dataPoints)
-        for var in stdData:
+    def calc_bounds_data(self, dataPoints):
+        """
+        Calculates the upper and lower bounds of the classification based on the data provided
+
+        Parameters:
+        dataPoints (Object): contains training data points for each variable
+
+        Returns:
+        None
+
+        """
+        std_data = self.calc_std_data(dataPoints)
+        for var in std_data:
             lb = var[0] - (var[1] / 2)
             ub = var[0] + (var[1] / 2)
             self.bounds[var[2]] = {}
             self.bounds[var[2]]['upper'] = ub
             self.bounds[var[2]]['lower'] = lb
+
+    def confusion_matrix(self, normalize=False):
+        """
+        
+        Computes the confusion matrices for each of the variables
+
+        """
+        for var in self.variables:
+            cn_matrix = confusion_matrix(self.true[var], self.pred[var])
+            plot_confusion_matrix(cn_matrix, ['low', 'med', 'high'], var, normalize)

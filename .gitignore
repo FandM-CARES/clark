@@ -105,3 +105,6 @@ venv.bak/
 
 # editor configurations
 .vscode/
+
+# project stuff
+/results
