@@ -102,9 +102,12 @@ class Model(object):
         String: tokenized word
         """
 
-        stop_characters = ['.',';',':','/','-','_','&','~']
+        stop_characters = ['.',';',':','/','-','_','&','~',',']
         init_res = nltk.word_tokenize(row)
         for i, word in enumerate(init_res):
+            if word[0] == "'":
+                init_res[i-1] = init_res[i-1] + init_res[i]
+                del init_res[i]
             if word in stop_characters:
                 del init_res[i]
         
