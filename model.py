@@ -1,11 +1,12 @@
 import math
 import re
 import numpy as np
-from metrics import *
+import itertools
+import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
+import nltk
 from nltk.corpus import stopwords
 stop_words = set(stopwords.words('english'))
-
 
 class Model(object):
 
@@ -37,7 +38,7 @@ class Model(object):
             self.priors[var] = PPs
             self.unigrams[var] = self.smooth_values(unigrams, var, totals)
 
-    def train_by_variable(self, training_set, variable, dataPoints = {}):
+    def train_by_variable(self, training_set, variable, dataPoints={}):
         """
         Calculates the counts for each unigram and priors for each classification
 
@@ -60,16 +61,15 @@ class Model(object):
 
         dataPoints[variable] = []
 
-        # There has to be a better way to get priors
         for row in training_set:
-            # weight = self.numToClassificationWeight(row, variable)
             dataPoints[variable].append(float(row[variable]))
-        
+
         self.calc_bounds_data(dataPoints)
 
         for row in training_set:
             weight = self.numToClassificationWeight(row, variable)
-            for word in re.sub(r'[.!,;?]', " ",  row['Player Message']).split():
+            res = self.tokenize(row['Player Message'])
+            for word in res:
                 if word in stop_words:
                     continue
                 word = word.lower()
@@ -90,6 +90,25 @@ class Model(object):
         }
 
         return words, totals, PPs
+
+    def tokenize(self, row):
+        """
+        Tokenizes the row exluding .;,:/-_&~
+
+        Parameters:
+        row (string): row of data
+
+        Returns:
+        String: tokenized word
+        """
+
+        stop_characters = ['.',';',':','/','-','_','&','~']
+        init_res = nltk.word_tokenize(row)
+        for i, word in enumerate(init_res):
+            if word in stop_characters:
+                del init_res[i]
+        
+        return init_res
 
     def allocateClassificationWeightToTotal(self, cw, totals):
         """
@@ -121,8 +140,6 @@ class Model(object):
 
         Returns:
         String: classification weight
-
-        TODO: update bounds automatically
         """
 
         def numToCWForPleasantness(row):
@@ -213,7 +230,6 @@ class Model(object):
         Returns:
         Null
         """
-        correct = 0
         total = len(testing_data)
         messages = {}
 
@@ -239,10 +255,11 @@ class Model(object):
             }
             self.true[var] = []
             self.pred[var] = []
-        
+
         for row in testing_data:
             res = []
-            for word in re.sub(r'[.!,;?]', " ",  row['Player Message']).split():
+            response = self.tokenize(row['Player Message'])
+            for word in response:
                 if word in stop_words:
                     continue
                 word = word.lower()
@@ -272,7 +289,6 @@ class Model(object):
 
             self.fscores[var] = (2 * self.precisions[var] * self.recalls[var]
                                  )/(self.precisions[var] + self.recalls[var])
-        
 
     def classify(self, trainingDict, content, PPs):
         """
@@ -330,7 +346,8 @@ class Model(object):
         """
         res = []
         for var in dataPoints:
-            res.append([np.mean(dataPoints[var]), np.std(dataPoints[var]), var])
+            res.append([np.mean(dataPoints[var]),
+                        np.std(dataPoints[var]), var])
         return res
 
     def calc_bounds_data(self, dataPoints):
@@ -354,10 +371,41 @@ class Model(object):
 
     def confusion_matrix(self, normalize=False):
         """
-        
+
         Computes the confusion matrices for each of the variables
 
         """
         for var in self.variables:
             cn_matrix = confusion_matrix(self.true[var], self.pred[var])
-            plot_confusion_matrix(cn_matrix, ['low', 'med', 'high'], var, normalize)
+            self.plot_confusion_matrix(
+                cn_matrix, ['low', 'med', 'high'], var, normalize)
+
+    def plot_confusion_matrix(self, cm, classes, title, normalize=False, cmap=plt.cm.Blues):
+        """
+        This function prints and plots the confusion matrix.
+        Normalization can be applied by setting `normalize=True`.
+
+        Courtesy of scikit-learn
+        """
+        if normalize:
+            cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+
+        plt.imshow(cm, interpolation='nearest', cmap=cmap)
+        plt.title(title)
+        plt.colorbar()
+        tick_marks = np.arange(len(classes))
+        plt.xticks(tick_marks, classes, rotation=45)
+        plt.yticks(tick_marks, classes)
+
+        fmt = '.2f' if normalize else 'd'
+        thresh = cm.max() / 2.
+        for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+            plt.text(j, i, format(cm[i, j], fmt),
+                    horizontalalignment="center",
+                    color="white" if cm[i, j] > thresh else "black")
+
+        plt.ylabel('True label')
+        plt.xlabel('Predicted label')
+        plt.tight_layout()
+        plt.savefig('results/' + title + '.png')
+        plt.close()

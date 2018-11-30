@@ -1,5 +1,6 @@
 from model import *
 from process_data import *
+import numpy as np
 
 def n_fold_test(data_list, n):
     """
