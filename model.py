@@ -1,8 +1,12 @@
 import math
 import re
+import numpy as np
+import itertools
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+import nltk
 from nltk.corpus import stopwords
 stop_words = set(stopwords.words('english'))
-
 
 class Model(object):
 
@@ -11,7 +15,12 @@ class Model(object):
                           'Certainty', 'Anticipated Effort', 'Responsibililty']
         self.unigrams = {}
         self.priors = {}
-        self.accuracies = {}
+        self.bounds = {}
+        self.precisions = {}
+        self.recalls = {}
+        self.fscores = {}
+        self.true = {}
+        self.pred = {}
 
     def train(self, training_data):
         """
@@ -29,7 +38,7 @@ class Model(object):
             self.priors[var] = PPs
             self.unigrams[var] = self.smooth_values(unigrams, var, totals)
 
-    def train_by_variable(self, training_set, variable):
+    def train_by_variable(self, training_set, variable, dataPoints={}):
         """
         Calculates the counts for each unigram and priors for each classification
 
@@ -50,12 +59,17 @@ class Model(object):
             'num_high': 0
         }
 
-        # self.dataPoints[variable] = []
+        dataPoints[variable] = []
+
+        for row in training_set:
+            dataPoints[variable].append(float(row[variable]))
+
+        self.calc_bounds_data(dataPoints)
 
         for row in training_set:
             weight = self.numToClassificationWeight(row, variable)
-            # self.dataPoints[variable].append(float(row[variable]))
-            for word in re.sub(r'[.!,;?]', " ",  row['Player Message']).split():
+            res = self.tokenize(row['Player Message'])
+            for word in res:
                 if word in stop_words:
                     continue
                 word = word.lower()
@@ -76,6 +90,28 @@ class Model(object):
         }
 
         return words, totals, PPs
+
+    def tokenize(self, row):
+        """
+        Tokenizes the row exluding .;,:/-_&~
+
+        Parameters:
+        row (string): row of data
+
+        Returns:
+        String: tokenized word
+        """
+
+        stop_characters = ['.',';',':','/','-','_','&','~',',']
+        init_res = nltk.word_tokenize(row)
+        for i, word in enumerate(init_res):
+            if word[0] == "'":
+                init_res[i-1] = init_res[i-1] + init_res[i]
+                del init_res[i]
+            if word in stop_characters:
+                del init_res[i]
+        
+        return init_res
 
     def allocateClassificationWeightToTotal(self, cw, totals):
         """
@@ -107,49 +143,47 @@ class Model(object):
 
         Returns:
         String: classification weight
-
-        TODO: update bounds automatically
         """
 
         def numToCWForPleasantness(row):
-            if float(row['Pleasantness']) < 0.817:
+            if float(row['Pleasantness']) <= self.bounds['Pleasantness']['lower']:
                 return 'low'
-            if float(row['Pleasantness']) < 1.214:
+            if float(row['Pleasantness']) <= self.bounds['Pleasantness']['upper']:
                 return 'med'
             return 'high'
 
         def numToCWForAttention(row):
-            if float(row['Attention']) < 1.007:
+            if float(row['Attention']) <= self.bounds['Attention']['lower']:
                 return 'low'
-            if float(row['Attention']) < 1.430:
+            if float(row['Attention']) <= self.bounds['Attention']['upper']:
                 return 'med'
             return 'high'
 
         def numToCWForControl(row):
-            if float(row['Control']) < 0.963:
+            if float(row['Control']) <= self.bounds['Control']['lower']:
                 return 'low'
-            if float(row['Control']) < 1.410:
+            if float(row['Control']) <= self.bounds['Control']['upper']:
                 return 'med'
             return 'high'
 
         def numToCWForCertainty(row):
-            if float(row['Certainty']) < 0.915:
+            if float(row['Certainty']) <= self.bounds['Certainty']['lower']:
                 return 'low'
-            if float(row['Certainty']) < 1.341:
+            if float(row['Certainty']) <= self.bounds['Certainty']['upper']:
                 return 'med'
             return 'high'
 
         def numToCWForAnticipatedEffort(row):
-            if float(row['Anticipated Effort']) < 0.960:
+            if float(row['Anticipated Effort']) <= self.bounds['Anticipated Effort']['lower']:
                 return 'low'
-            if float(row['Anticipated Effort']) < 1.366:
+            if float(row['Anticipated Effort']) <= self.bounds['Anticipated Effort']['upper']:
                 return 'med'
             return 'high'
 
         def numToCWForResponsibility(row):
-            if float(row['Responsibililty']) < 0.913:
+            if float(row['Responsibililty']) <= self.bounds['Responsibililty']['lower']:
                 return 'low'
-            if float(row['Responsibililty']) < 1.291:
+            if float(row['Responsibililty']) <= self.bounds['Responsibililty']['upper']:
                 return 'med'
             return 'high'
 
@@ -191,7 +225,7 @@ class Model(object):
 
     def test(self, testing_data):
         """
-        Tests the accuracy of the model
+        Tests the precision/recall of the model
 
         Parameters:
         testing_data (array): data on which to test the model
@@ -199,63 +233,65 @@ class Model(object):
         Returns:
         Null
         """
-        correct = 0
         total = len(testing_data)
         messages = {}
 
+        TP = {}
+        TP_FP = {}
+        TP_FN = {}
+
         for var in self.variables:
-            self.accuracies[var] = 0
+            TP[var] = {
+                'high': 0,
+                'med': 0,
+                'low': 0
+            }
+            TP_FP[var] = {
+                'high': 0,
+                'med': 0,
+                'low': 0
+            }
+            TP_FN[var] = {
+                'high': 0,
+                'med': 0,
+                'low': 0
+            }
+            self.true[var] = []
+            self.pred[var] = []
 
         for row in testing_data:
             res = []
-            for word in re.sub(r'[.!,;?]', " ",  row['Player Message']):
+            response = self.tokenize(row['Player Message'])
+            for word in response:
                 if word in stop_words:
                     continue
+                word = word.lower()
                 res.append(word)
             parsed_message = ' '.join(res)
             messages[parsed_message] = {}
             for var in self.variables:
                 weight = self.numToClassificationWeight(row, var)
+                TP_FN[var][weight] += 1
+                self.true[var].append(weight)
                 messages[parsed_message][var] = weight
-                classification = self.classify(self.unigrams[var], parsed_message, self.priors[var])
+                classification = self.classify(
+                    self.unigrams[var], parsed_message, self.priors[var])
+                TP_FP[var][classification] += 1
+                self.pred[var].append(classification)
                 if classification == messages[parsed_message][var]:
-                    self.accuracies[var] += 1
+                    TP[var][classification] += 1
 
-        for var in self.accuracies:
-            self.accuracies[var] = float(self.accuracies[var]/total)
+        for var in self.variables:
+            mean_precision = 0
+            mean_recall = 0
+            for label in ['high', 'med', 'low']:
+                mean_precision += float(TP[var][label]/TP_FP[var][label])
+                mean_recall += float(TP[var][label]/TP_FN[var][label])
+            self.precisions[var] = float(mean_precision/3)
+            self.recalls[var] = float(mean_recall/3)
 
-    # def processData(self, datasets, train_test_split):
-    #     lstData = self.parseData(datasets)
-    #     # print(lstData)
-    #     print(type(lstData))
-    #     np.random.shuffle(lstData)
-    #     # print(lstData)
-    #     # print(lstData)
-    #     # print(len(lstData))
-    #     # print(np.shape(lstData))
-    #     # exit(0)
-    #     n = 10
-    #     sets = np.array_split(lstData, n)
-
-    #     sets = [s.tolist() for s in sets]
-
-    #     for i, s in enumerate(sets):
-    #         print(sets[i+1:])
-    #         print("           ")
-    #         print("           ")
-    #         print(sets[i+1:][0][0])
-    #         exit(0)
-
-    #         self.labelledTestingData = ProcessedData(sets[i], self.variable).labelledData
-
-    #         for dset in datasets:
-    #             self.trainingData = ProcessedData((sets[:i]+sets[i+1:]), self.variable)
-    #             normalizedDict = self.normalizeValues(
-    #                 self.trainingData.unigrams, self.trainingData.totals)
-
-    #         self.test()
-
-    #     return {}
+            self.fscores[var] = (2 * self.precisions[var] * self.recalls[var]
+                                 )/(self.precisions[var] + self.recalls[var])
 
     def classify(self, trainingDict, content, PPs):
         """
@@ -264,7 +300,7 @@ class Model(object):
         Parameters:
         trainingDict (Object): trained model
         content (String): message to be tested
-        PPs (Object): priors 
+        PPs (Object): priors
 
         Returns:
         String: classification according to the trained model
@@ -273,7 +309,7 @@ class Model(object):
         sumMed = float(0)
         sumHigh = float(0)
 
-        for word in content:
+        for word in content.split():
             if word in trainingDict:
                 sumLow += float(math.log(trainingDict[word]['low'], 10))
                 sumMed += float(math.log(trainingDict[word]['med'], 10))
@@ -290,3 +326,89 @@ class Model(object):
             return 'med'
         else:
             return 'high'
+
+    # def plotData(self):
+    #     colors = ["red", "blue", "green", "yellow", "brown", "purple"]
+    #     i = 0
+    #     for var in self.dataPoints:
+    #         sns.distplot(self.dataPoints[var], color=colors[i], label=var)
+    #         i += 1
+    #     plt.legend()
+    #     plt.show()
+
+    def calc_std_data(self, dataPoints):
+        """
+
+        Calculates the standard deviation of the data points
+
+        Parameters:
+        dataPoints (object): data points for each variable
+
+        Returns:
+        Array: standard deviations for the variable
+        """
+        res = []
+        for var in dataPoints:
+            res.append([np.mean(dataPoints[var]),
+                        np.std(dataPoints[var]), var])
+        return res
+
+    def calc_bounds_data(self, dataPoints):
+        """
+        Calculates the upper and lower bounds of the classification based on the data provided
+
+        Parameters:
+        dataPoints (Object): contains training data points for each variable
+
+        Returns:
+        None
+
+        """
+        std_data = self.calc_std_data(dataPoints)
+        for var in std_data:
+            lb = var[0] - (var[1] / 2)
+            ub = var[0] + (var[1] / 2)
+            self.bounds[var[2]] = {}
+            self.bounds[var[2]]['upper'] = ub
+            self.bounds[var[2]]['lower'] = lb
+
+    def confusion_matrix(self, normalize=False):
+        """
+
+        Computes the confusion matrices for each of the variables
+
+        """
+        for var in self.variables:
+            cn_matrix = confusion_matrix(self.true[var], self.pred[var])
+            self.plot_confusion_matrix(
+                cn_matrix, ['low', 'med', 'high'], var, normalize)
+
+    def plot_confusion_matrix(self, cm, classes, title, normalize=False, cmap=plt.cm.Blues):
+        """
+        This function prints and plots the confusion matrix.
+        Normalization can be applied by setting `normalize=True`.
+
+        Courtesy of scikit-learn
+        """
+        if normalize:
+            cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+
+        plt.imshow(cm, interpolation='nearest', cmap=cmap)
+        plt.title(title)
+        plt.colorbar()
+        tick_marks = np.arange(len(classes))
+        plt.xticks(tick_marks, classes, rotation=45)
+        plt.yticks(tick_marks, classes)
+
+        fmt = '.2f' if normalize else 'd'
+        thresh = cm.max() / 2.
+        for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+            plt.text(j, i, format(cm[i, j], fmt),
+                    horizontalalignment="center",
+                    color="white" if cm[i, j] > thresh else "black")
+
+        plt.ylabel('True label')
+        plt.xlabel('Predicted label')
+        plt.tight_layout()
+        plt.savefig('results/' + title + '.png')
+        plt.close()

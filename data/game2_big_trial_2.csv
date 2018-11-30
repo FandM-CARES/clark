@@ -1,0 +1,586 @@
+convo_id,m.iid,Player Message,Bot Response,Pleasantness,Attention,Control,Certainty,Anticipated Effort,Responsibililty,Emotion
+8193,0,tell me more about no,"I've seen your profile data, citizen. You might just be the most important person on Marginal Station right now.",1.0,1.33333333333,1.33333333333,1.0,0.666666666667,1.0,sadness
+8193,1,not really,"The thing is, citizen, I've got a job for a person who won't mistreat readers. Let's try this question instead.",0.666666666667,0.666666666667,1.0,0.666666666667,0.333333333333,0.333333333333,anger
+8193,2,tell me more about yeah,No bigotry. Great. I'm going to tell you something.,1.66666666667,1.66666666667,1.33333333333,1.66666666667,0.666666666667,1.33333333333,joy
+8193,3,can't say I hve,"Okay. Foolish question, I know, but some people come to Marginal from the other direction.",1.0,0.666666666667,0.666666666667,1.0,1.0,1.0,anger
+8193,4,what direction,Anyway. You know... I don't think we have established a strong trust here.,1.0,1.0,1.66666666667,0.666666666667,1.0,1.0,anger
+8193,5,okay then,(Frown.) Maybe I can find someone else. I'd be better off sending Sheba away with a nice lady pirate. ......,1.33333333333,1.66666666667,1.33333333333,1.0,1.33333333333,1.33333333333,joy
+5788,0,"That's not my real name, you know.","I've seen your profile data, citizen. I am Kara. Vice Commander here, but I need to speak to you.",1.0,1.25,1.75,1.0,1.0,1.5,challenge
+5788,1,tell me more about Yes,...Thanks for not giving some excuse. A lot of readers try to keep their skills quiet around here. There's something important I need to tell you.,1.5,1.75,1.75,0.75,1.0,0.5,challenge
+5788,2,I am one of them.,"If you were Our Glorious Flesh Eating Emperor, you'd have an entourage and the odor of a deceased goat. ... There's an entire flotilla of imperial cruisers heading over here now.",1.5,1.25,1.75,1.25,1.0,1.5,challenge
+5788,3,"Yes, and I am their scout.",Yep. Marginal Station can't keep out the entire flotilla of imperial cruisers.,1.5,1.5,1.5,0.75,1.0,1.75,challenge
+5788,4,But it can try!,... I've got a daughter named Sheba. ...,1.0,1.0,1.5,1.5,1.25,1.75,joy
+5788,5,why would I do that?,I don't want Sheba on Marginal when the Empire boards. ... Would you look after her?,1.0,1.0,1.75,1.25,1.25,1.5,sadness
+5788,6,Why don't you want her here when the empire boards?,You're a real jerk. In any case...,1.5,1.75,1.75,1.5,1.0,0.5,frustration
+6536,0,tell me more about yes,"(She looks serene.)Pleasure to meet you, citizen. You might be my new best friend.",1.66666666667,1.33333333333,1.66666666667,1.33333333333,0.666666666667,1.66666666667,joy
+6536,1,tell me more about yes,...Thanks for not bullshitting me. Readers will not usually volunteer who they are. There's something important I need to tell you.,1.33333333333,1.66666666667,1.33333333333,1.66666666667,1.33333333333,2.0,anger
+6536,2,tell me more about yes,"Fine. Foolish question, I know, but some people come to Marginal Station from the other direction.",1.0,1.66666666667,0.666666666667,1.0,1.0,2.0,joy
+6536,3,tell me more about ok,Yep. Long range sensors have picked up an entire flotilla of imperial cruisers heading here.,1.0,1.66666666667,1.33333333333,1.66666666667,1.0,0.666666666667,anger
+6536,4,that sounds bad,Marginal Station can't defend itself against an entire flotilla of imperial cruisers.,0.333333333333,1.0,0.666666666667,1.0,0.666666666667,0.666666666667,frustration
+6536,5,tell me more about ok,Yep. I've got a girl named Sheba. ...,1.33333333333,2.0,1.33333333333,2.0,1.33333333333,1.33333333333,joy
+6536,6,why,I don't want Sheba on Marginal Station when the Empire boards. ... But would you escort her away from here?,1.0,2.0,1.33333333333,1.33333333333,1.0,1.0,sadness
+6536,7,tell me more about yes,Then we have a plan. ...,1.33333333333,1.0,1.33333333333,1.0,1.0,0.666666666667,fear
+6536,8,tell me more about ok,"Thanks. This matters more than... well, do you have children?",1.0,1.66666666667,1.33333333333,1.33333333333,1.0,1.0,joy
+6536,9,tell me more about yes,Then you know. ... So...,1.0,1.66666666667,1.0,1.33333333333,0.666666666667,0.666666666667,joy
+6536,10,tell me more about yes,Good. ...,1.33333333333,1.66666666667,1.33333333333,2.0,1.33333333333,1.33333333333,joy
+6536,11,tell me more about yes,(Frown.) ...,1.33333333333,2.0,1.33333333333,2.0,1.33333333333,1.33333333333,challenge
+6536,12,dont worry,... I need you to believe I am doing my best for Sheba.,1.66666666667,1.66666666667,1.33333333333,1.66666666667,1.33333333333,1.0,sadness
+6536,13,why?,"The thing is... if you hate me, she'll know. She'll read it off you. ... I don't want her to grow up thinking I didn't care about her.",1.0,1.66666666667,1.66666666667,1.66666666667,1.66666666667,1.33333333333,anger
+6536,14,tell me more about ok,I'm glad you understand. ... This is Ty's responsibility. You can tell him that when you see him. ......,1.0,1.66666666667,1.33333333333,1.66666666667,1.66666666667,1.0,joy
+9993,0,"tell me more about yeah, i think so","(She looks serene.)Pleasure to see you, citizen. I'm Kara. Vice Commander here. But I need to speak to you.",1.0,1.66666666667,2.0,1.66666666667,1.33333333333,1.0,joy
+9993,1,"tell me more about yeah, i see a flowchart",...Thanks for not lying. Readers aren't always popular around here. I need to tell you something.,0.666666666667,1.66666666667,1.66666666667,2.0,1.66666666667,1.33333333333,joy
+9993,2,actually i don't,You must be new around here. The Empire owns a bigger and bigger chunk of the galaxy.,0.666666666667,1.66666666667,1.66666666667,1.66666666667,1.66666666667,1.33333333333,challenge
+9993,3,"wow, how are they holding so much territory ","Wow, citizen. ... Your database file didn't mention what a child you are. Long range sensors have picked up an entire flotilla of imperial cruisers heading to Marginal Station.",0.666666666667,1.33333333333,1.66666666667,1.33333333333,1.0,1.0,anger
+9993,4,what should we do?,"If we act now, you might not wind up in an imperial brig.",0.666666666667,1.0,1.33333333333,1.33333333333,1.66666666667,0.0,fear
+9993,5,"that sounds like a great idea, what do you need?","I like puppies and clean sheets, but we can't always have what we want. ...",1.0,1.66666666667,2.0,2.0,1.66666666667,0.666666666667,joy
+9993,6,how shall we proceed?,Anyway. I've got a child named Sheba. ...,0.666666666667,1.33333333333,2.0,1.0,1.0,0.666666666667,challenge
+9993,7,why can't you take her off the station?,I don't want Sheba on Marginal when the Empire boards. ... Would you take her with you?,0.666666666667,1.33333333333,1.0,1.66666666667,1.0,0.666666666667,challenge
+9993,8,are you not coming with us?,You're heartless. Okay.,1.0,1.33333333333,2.0,1.33333333333,1.33333333333,1.33333333333,fear
+1805,0,tell me more about Sure,"(She looks serene.)Pleasure to see you, good citizen. I am Kara. Vice Commander here. But I need a favor.",1.0,1.66666666667,1.66666666667,1.33333333333,1.0,1.33333333333,challenge
+1805,1,tell me more about no,"The thing is, citizen, I've got a job for someone who won't mistreat a reader. Let's try this question instead.",1.0,2.0,1.66666666667,1.33333333333,1.33333333333,1.33333333333,anger
+1805,2,that's true,"... (She looks disgusted.) You don't like readers. I looked all over this station for someone who might not have that prejudice. You are an unpleasant type, aren't you.",1.0,1.33333333333,1.33333333333,1.33333333333,0.666666666667,1.66666666667,anger
+1805,3,because you are extremely optimistic,"Yep. I know this Station is a refueling station. But I hoped I could make it something more. But people don't feel like they owe each other anything. We don't do anniversaries, or weddings for the most part.",1.33333333333,1.33333333333,1.66666666667,1.33333333333,1.33333333333,2.0,joy
+1805,4,What's next?,I'm not sure of about the repetition. ... Possibly I can find someone else. I would be better off sending Sheba away with Frank the amnesiac bartender. ......,1.66666666667,1.0,0.666666666667,1.66666666667,1.66666666667,1.33333333333,challenge
+3982,0,tell me more about sure,"(She looks serene.)Pleasure to see you, citizen. Being Vice Commander of Marginal Station, I can see anyone's personal profile.",0.75,0.75,0.75,1.0,0.5,1.0,challenge
+3982,1,tell me more about nope,"The thing is, citizen, I've got a job for a person who won't mistreat a reader. Let's try this question instead.",1.0,1.25,0.75,0.75,1.0,1.5,challenge
+3982,2,i guess,"... (She looks disgusted.) You don't like readers. I looked all over this station for someone who might not have that prejudice. You are an unpleasant type, aren't you.",1.0,0.5,1.75,1.25,0.5,1.75,frustration
+3982,3,cause life sucks,"Wow, citizen. ... Your database file didn't mention what a child you are. If Marginal were a better place, I'd have someone I trusted with Sheba already.",0.25,1.25,1.5,1.25,1.0,1.0,frustration
+6675,0,That's me!,"(She looks serene.)Pleasure to meet you, citizen. You might be my new best friend.",1.0,1.0,1.0,0.666666666667,1.0,1.0,joy
+6675,1,"tell me more about I've got a pretty good idea, yes.",...Thanks for not lying. Not every reader wants to admit it. There's something important I need to tell you.,1.0,1.0,0.333333333333,1.0,0.666666666667,1.0,challenge
+6675,2,I may have heard of them.,"It's hard not to know about them, I guess.",1.0,1.0,1.0,1.0,1.0,1.0,challenge
+6675,3,That's true enough.,... There is an entire flotilla of imperial cruisers heading to Marginal Station now.,0.333333333333,1.0,0.333333333333,0.333333333333,0.666666666667,1.0,anger
+6675,4,Oh...that's not good.,... ... Marginal Station can't keep out the entire flotilla of imperial cruisers.,0.333333333333,1.0,0.333333333333,0.333333333333,0.666666666667,1.0,joy
+6675,5,What do you want me to do?,"The thing is, good citizen, I've got a job for someone who won't mistreat readers. ... I've got a child called Sheba. ...",1.0,1.0,1.0,0.666666666667,1.0,1.0,challenge
+6675,6,"Will do.,",... But would you take her with you?,1.0,1.0,1.0,1.0,0.333333333333,1.0,challenge
+6675,7,Of course!,I don't want Sheba on Marginal Station when the Empire boards. I'm so glad you can do this thing. ...,1.0,1.0,1.0,1.0,1.0,1.0,joy
+6675,8,I'll do everything in my power.,Anyway. So...,1.0,1.0,1.0,1.0,1.0,1.0,challenge
+6675,9,Not off the top of my head.,There has to be some way to help you escape. ...,0.666666666667,0.666666666667,0.666666666667,0.666666666667,0.666666666667,0.666666666667,anger
+6675,10,Lead the way and i'll take over from there.,"... You'll have a couple of crew members, room for passage...",1.0,1.0,0.333333333333,1.0,1.0,1.0,challenge
+6675,11,will do.,"Right, well. ...",1.0,1.0,0.333333333333,1.0,1.0,1.0,challenge
+6675,12,"You stay safe, Vice Commander. You have to come back for her, after all.","I grew up in Eyautan Empire. (She looks serene.) Stay alive. Keep her alive. Above all, don't let the Most Noble and Refined Eyautan Empire of Shoesho and Associated Planets take her. ......",1.0,1.0,0.333333333333,0.666666666667,1.0,1.0,joy
+4241,0,tell me more about yes,"(She looks serene.)Pleasure to meet you, citizen. You could be the most important person on Marginal Station right now.",1.75,1.75,1.5,1.25,1.75,1.25,challenge
+4241,1,tell me more about yes,...Thanks for not lying. Readers aren't always popular around here. There's something important I need to tell you.,0.75,1.25,1.0,0.5,1.25,1.25,joy
+1810,0,tell me more about yes,"(She looks serene.)Pleasure to meet you, citizen. Being Vice Commander of Marginal Station, I can see anyone's personal profile.",1.33333333333,1.0,1.0,1.66666666667,1.0,1.0,joy
+1810,1,tell me more about yes,...Thanks for not lying. Not every reader wants to admit it. I'm going to tell you something.,1.33333333333,1.0,1.0,1.66666666667,0.666666666667,1.33333333333,joy
+1810,2,tell me more about yes,"Right. Foolish question, I know, but some people come to this Station from the other direction.",1.33333333333,0.666666666667,0.666666666667,1.0,0.666666666667,1.33333333333,joy
+1810,3,tell me more about ok,Yep. There's an entire flotilla of imperial cruisers on their way to this Station now.,0.666666666667,0.666666666667,0.666666666667,1.33333333333,0.666666666667,1.33333333333,joy
+1810,4,that sounds bad,Marginal Station can't defend itself against an entire flotilla of imperial cruisers.,1.0,1.66666666667,1.0,1.66666666667,1.0,1.33333333333,sadness
+1810,5,tell me more about ok,Yep. I've got a daughter called Sheba. ...,1.0,0.333333333333,0.333333333333,0.666666666667,0.666666666667,0.666666666667,joy
+1810,6,tell me more about ok,Then we have a plan. ...,1.33333333333,1.33333333333,1.0,0.333333333333,0.666666666667,0.666666666667,joy
+1810,7,tell me more about ok,"Thanks. This matters more than... well, do you have children?",1.33333333333,0.666666666667,0.333333333333,0.666666666667,0.0,1.33333333333,joy
+1810,8,tell me more about no,It's hard to explain. The obligation to someone you don't even always like. ... So...,1.33333333333,0.666666666667,0.666666666667,0.333333333333,0.333333333333,1.0,anger
+1810,9,tell me more about yes,Good. ...,1.33333333333,0.666666666667,1.0,1.0,0.666666666667,1.0,joy
+1810,10,tell me more about ok,(Frown.) ...,1.33333333333,0.0,0.666666666667,0.0,1.0,0.666666666667,joy
+1810,11,tell me more about ok,Yep. I need you to believe I'm doing my best for Sheba.,1.0,0.666666666667,1.0,0.666666666667,0.666666666667,1.0,joy
+1810,12,tell me more about ok,I need you to go on thinking that. So Sheba reads it when she looks at you. ... I don't want her to grow up thinking I didn't care about her.,1.0,0.0,0.666666666667,0.666666666667,0.0,0.333333333333,joy
+1810,13,I understand,"... When you find Ty..., tell him this was his fault. ......",1.0,0.666666666667,1.0,1.33333333333,1.0,1.33333333333,joy
+4371,0,i am a potato,"(She looks serene.)Pleasure to see you, citizen. Being Vice Commander of Marginal Station, I can see anyone's personal profile.",0.666666666667,1.66666666667,1.0,2.0,1.33333333333,0.666666666667,fear
+4371,1,I can not see that,"The thing is, citizen, I've got a job for a person who won't mistreat a reader. Let's try this question instead.",0.666666666667,1.33333333333,1.0,1.33333333333,0.666666666667,0.666666666667,anger
+4371,2,what is a reader?,Sometimes readers from the Most Noble and Refined Eyautan Empire of Shoesho and Associated Planets leave home and try to hide elsewhere. ... I have to tell you something.,1.0,1.33333333333,1.33333333333,1.0,1.0,0.666666666667,anger
+4371,3,what did you say?,Obviously I am not the Emperor. ... Long range sensors have picked up an entire flotilla of imperial cruisers on the way to this Station.,1.0,1.0,1.66666666667,0.666666666667,1.0,1.0,sadness
+4371,4,I don't want to talk about that,Everyone wants something. ... Marginal Station can't defend itself against an entire flotilla of imperial cruisers.,1.0,1.33333333333,1.0,1.33333333333,0.666666666667,1.33333333333,joy
+4371,5,tell me more about hello,"Um, okay. The Eyautan Empire will forcibly offer ideological reorientation to any readers it finds when it gets over here.",1.33333333333,1.0,1.33333333333,0.333333333333,1.33333333333,1.33333333333,joy
+4371,6,who are you?,"What, did you just dock yesterday? I am Kara. Vice Commander of Marginal Station. ... I've got a daughter called Sheba. ...",1.0,1.33333333333,1.66666666667,0.666666666667,1.0,1.0,anger
+4371,7,who am I?,"Right, well. But would you help me with Sheba?",0.666666666667,1.0,0.666666666667,0.333333333333,1.0,0.666666666667,joy
+4371,8,can you tell me about your daughter again?,"Sheba is too young to be shipped off to some Imperial Training school for readers. ... You may not be a reader, but Sheba is. She can't be caught here when the entire flotilla of imperial cruisers arrives.",1.66666666667,1.33333333333,1.0,1.0,0.666666666667,1.33333333333,joy
+4371,9,tell me about shiba,I have a responsibility to the people on the station. ... ...,1.0,1.33333333333,1.0,1.0,1.33333333333,1.0,anger
+4371,10,what are we doing now?,Anyway. So...,0.666666666667,1.33333333333,1.0,1.0,1.33333333333,1.66666666667,boredom
+4756,0,"No, I'm not Gordo.","I've seen your profile data, good citizen. You are possibly my new best friend.",0.333333333333,1.0,1.66666666667,0.666666666667,1.0,1.0,challenge
+4756,1,"No, but I'd like to be your friend.","The thing is, good citizen, I've got a job for a person who won't mistreat a reader. Let's try this question instead.",0.333333333333,1.0,1.66666666667,0.666666666667,1.0,1.0,joy
+4756,2,I dp,No bias. Great. There's something important I need to tell you.,1.0,1.0,1.0,0.333333333333,1.33333333333,1.0,joy
+4756,3,tell me more about Yes.,"Right. Foolish question, I know, but some people come to Marginal Station from the other direction.",0.666666666667,1.0,1.66666666667,0.666666666667,1.33333333333,1.0,joy
+4756,4,What about the Empire?,Get a few light years out from Most Noble and Refined Eyautan Empire and you get to see it for what it really is. Parasitical. ... You know... I don't think we have established a strong trust here.,0.333333333333,1.0,1.0,1.0,1.0,1.0,frustration
+4756,5,I would be happy to help you.  How can I help?,"Not a lot of joy right now, I can tell you that. ... I know this Station is a waypoint, but I hoped I could make it something more. But people don't bond around here. People here don't celebrate holidays.",0.333333333333,1.0,1.33333333333,1.66666666667,1.0,1.0,joy
+4756,6,That's sad.,I'm feeling afraid. ...,1.0,0.666666666667,1.0,0.666666666667,0.666666666667,1.0,sadness
+4756,7,Are you afraid of the empire?,I'm sad. ... What am I missing. God. Even Frank the amnesiac bartender might be better. ......,0.333333333333,1.0,1.33333333333,0.666666666667,1.0,1.0,fear
+9881,0,Now that's a name I haven't heard in a long time...a long time.,... Right. ...,1.33333333333,1.33333333333,1.66666666667,1.0,1.0,1.66666666667,boredom
+9881,1,"Perhaps, what's it to you?","Until Imperial battle group gets here, I'm Vice Commander of this station. ... You're a reader. Sound right?",0.666666666667,1.33333333333,1.66666666667,0.666666666667,0.666666666667,0.333333333333,anger
+9881,2,I do not know how to read.,"The thing is, citizen, I've got a job for a person who won't mistreat readers. Let's try this question instead.",1.0,0.666666666667,0.333333333333,0.666666666667,1.0,1.0,frustration
+9881,3,Yeah that sounds kinda...not so good.,"God. (She looks disgusted.) You don't like readers. I looked all over this station for someone who might not have that prejudice. You are an unpleasant type, aren't you.",0.666666666667,1.33333333333,0.666666666667,2.0,1.33333333333,1.66666666667,challenge
+9881,4,"I mean, just because I don't like their mistreatment doesn't mean that I'm gonna start a revolution, ya know?","Agreed. ... I know Marginal is a waystation, but I hoped I could make it something more. But people don't feel like they owe each other anything. There are no children here.",0.666666666667,1.33333333333,0.333333333333,1.0,0.666666666667,1.66666666667,anger
+9881,5,Word.,"Right, well. Possibly I can find someone else. I would be better off sending Sheba away with a nice lady pirate. ......",1.66666666667,0.666666666667,1.0,1.66666666667,0.333333333333,0.666666666667,anger
+7322,0,"Yeah, I'm gordo","(She looks serene.) Pleasure to see you, good citizen. You might just be the most important person on Marginal Station right now.",1.33333333333,1.66666666667,1.33333333333,1.33333333333,1.33333333333,1.33333333333,joy
+7322,1,tell me more about no,"The thing is, citizen, I've got a job for a person who won't mistreat readers. Let's try this question instead.",1.33333333333,1.66666666667,1.33333333333,1.66666666667,1.66666666667,1.33333333333,challenge
+7322,2,of course not,"... (She looks disgusted.) You don't like readers. I looked all over this station for someone who might not have that prejudice. You are an unpleasant type, aren't you.",1.66666666667,1.0,2.0,1.33333333333,1.0,1.33333333333,joy
+7322,3,i can help!,"Right, well. If Marginal were a better place, I'd have someone I trusted with Sheba already.",1.33333333333,1.66666666667,1.0,1.66666666667,0.666666666667,2.0,challenge
+7322,4,who is sheba,Sheba is my daughter. ... Maybe I can find someone else. I would be better off sending Sheba away with Frank the amnesiac bartender. ......,1.0,1.33333333333,1.66666666667,1.33333333333,1.33333333333,1.66666666667,challenge
+6939,0,who is asking?,I needed to get your attention. ... Right. ...,0.0,1.0,2.0,0.0,1.0,2.0,boredom
+6939,1,"yes, i am a reader",...Thanks for not lying. Readers will not usually volunteer who they are. I need to tell you something.,1.0,2.0,1.0,1.0,1.0,2.0,anger
+6939,2,is the emperor really that old?,"I've got long distance sensors. I can feel them coming, right at the base of my skull. ... Long range sensors have picked up an Imperial invasion force heading here.",0.0,1.0,1.0,1.0,1.0,0.0,challenge
+6939,3,then i need to run away,The Eyautan Empire tends to reeducate any readers it finds. Forcibly.,1.0,1.0,0.0,0.0,0.0,1.0,fear
+6939,4,i need to leave,... Marginal Station can't defend itself against an Imperial fleet.,1.0,0.0,0.0,1.0,0.0,0.0,anger
+6939,5,i know,"I am Kara. Until Imperial invasion force gets here, I am Vice Commander of this station. ... I've got a kid called Sheba. ...",2.0,1.0,1.0,0.0,1.0,2.0,joy
+6939,6,why should i help you?,I don't want Sheba on this Station when the Empire boards. ... Could you take her with you?,0.0,1.0,0.0,1.0,2.0,1.0,joy
+6939,7,what is in it for me?,"I could offer you my savings. It's a few hundred thousand credits. Not bad, for Marginal, but it wouldn't buy you a doghouse in Shoesho... but it's not like I'm going to be using it for anything anyway. ...",2.0,1.0,1.0,0.0,1.0,1.0,fear
+6939,8,tell me more about yes,...,0.0,2.0,1.0,2.0,1.0,0.0,challenge
+6939,9,how will i recognize him,"Thanks. This matters more than... well, do you have children?",0.0,1.0,1.0,2.0,1.0,0.0,challenge
+6939,10,yesa,Probably most children aren't much like Sheba to raise. (She looks serene.) So...,0.0,1.0,1.0,0.0,1.0,0.0,joy
+6939,11,"no, but that much money might help",That is not good. ...,1.0,2.0,1.0,1.0,1.0,0.0,challenge
+6939,12,will ty come with us?,...,2.0,2.0,1.0,0.0,1.0,0.0,joy
+6939,13,you should come with us,"Sheba's father Ty and I met at a celebration. Thrown by old Rickles, funnily enough. (She looks serene.) Stay alive. Keep her alive. Above all, don't let the Most Noble and Refined Eyautan Empire take her. ......",1.0,2.0,1.0,2.0,1.0,0.0,fear
+3484,0,yes Im Gordo,"(She looks serene.)Pleasure to see you, citizen. At my access level, I know everything that happens on Marginal Station.",0.333333333333,1.33333333333,1.33333333333,0.666666666667,1.0,1.66666666667,joy
+3484,1,yes Im a telepath,...Thanks for not pulling out some unconvincing excuse. A reader won't usually volunteer who they are. There's something important I need to tell you.,0.333333333333,1.33333333333,0.666666666667,0.666666666667,1.33333333333,1.33333333333,joy
+3484,2,no idea what are you talking about,... Long range sensors have picked up an Imperial battle group heading here.,0.666666666667,1.0,1.66666666667,1.33333333333,1.0,1.33333333333,joy
+3484,3,Are we in danger?,There are a few mercenary ships docked for leave. That's not going to protect us from the Empire.,1.0,0.666666666667,1.66666666667,1.33333333333,1.0,0.666666666667,fear
+3484,4,So what are we suposed to do?,The Eyautan Empire will forcibly offer ideological reorientation to any readers it finds when it gets here.,0.333333333333,1.33333333333,0.666666666667,1.33333333333,1.0,1.0,fear
+3484,5,sounds scarry,... I have a kid named Sheba. ...,1.0,0.666666666667,1.33333333333,1.0,1.33333333333,1.33333333333,fear
+3484,6,tell me more about ok,Then we have a plan. ...,0.666666666667,1.33333333333,1.66666666667,1.33333333333,1.0,1.33333333333,joy
+3484,7,tell me more about all right,"Thanks. This matters more than... well, do you have children?",0.333333333333,1.33333333333,1.33333333333,1.0,1.66666666667,1.0,joy
+3484,8,I have 2 cats,Probably most children aren't much like my daughter Sheba to raise. ... So...,0.333333333333,1.33333333333,1.66666666667,0.666666666667,1.0,1.66666666667,joy
+3484,9,still not,There has to be some way to help you escape. ...,1.0,1.33333333333,1.0,1.33333333333,1.0,1.33333333333,challenge
+3484,10,cool let's do this,"Right, well. You'll have a few crew members, room for passage...",0.666666666667,1.0,0.666666666667,1.33333333333,1.0,1.0,challenge
+3484,11,where is scout vessel?,I don't understand. ... ...,1.0,1.66666666667,0.666666666667,1.33333333333,1.0,1.33333333333,fear
+3484,12,I'll protect her,"Sheba is too young to be shipped off to some Imperial Training school for readers. (She looks serene.) Stay alive. Keep her alive. Above all, don't let the Most Noble and Refined Eyautan Empire of Shoesho and Associated Planets take her. ......",1.66666666667,1.33333333333,1.33333333333,0.666666666667,0.666666666667,1.0,joy
+7069,0,that's correct,"(She looks serene.)Pleasure to meet you, good citizen. Being Vice Commander of Marginal Station, I can see anyone's personal profile.",1.0,1.33333333333,1.0,1.66666666667,1.66666666667,1.0,joy
+7069,1,"yes i ca, how ae you doing that?",...Thanks for not lying. Not every reader wants to admit it. I need to tell you something.,1.33333333333,1.66666666667,1.33333333333,2.0,1.33333333333,0.666666666667,joy
+7069,2,nope. could you tell me more about it?,You must be new on Marginal Station. The Empire owns a bigger and bigger chunk of the galaxy.,1.0,2.0,1.33333333333,2.0,0.666666666667,1.0,joy
+7069,3,is the empire bad?,The Emperor extorts tribute from the surrounding systems. He just doesn't call it that. ... The Imperial invasion force will be here in about fourteen hours.,1.0,1.66666666667,1.33333333333,1.66666666667,1.0,1.33333333333,fear
+7069,4,that's terrible,We have enough defenses to keep out pirates. That's not going to help against the Most Noble and Refined Eyautan Empire of Shoesho and Associated Planets.,1.33333333333,2.0,1.0,1.66666666667,1.33333333333,0.666666666667,sadness
+7069,5,what kind of defences do you have,"I know what I am saying, believe me. ... I've got a child named Sheba. ...",1.66666666667,1.0,1.33333333333,1.66666666667,1.33333333333,1.33333333333,fear
+7069,6,how old is she?,I am 42 years old. ... Could you take her away from here?,1.0,1.66666666667,1.66666666667,2.0,1.0,1.0,fear
+7069,7,yes i could,Then we have a plan. ...,1.66666666667,1.66666666667,1.0,1.33333333333,1.33333333333,1.66666666667,challenge
+7069,8,what does Ty do?,Sheba's father Ty works in dysprosium extraction. That might lead you to him.,1.0,1.66666666667,1.66666666667,1.66666666667,1.0,1.33333333333,anger
+7069,9,i'll do it. what about you?,I hold the rank of Vice Commander. ... So...,1.66666666667,0.666666666667,1.66666666667,1.66666666667,1.33333333333,1.0,sadness
+7069,10,i do not. could you help me acquire one?,That is not good. ...,1.33333333333,1.66666666667,1.66666666667,1.33333333333,1.33333333333,0.666666666667,sadness
+7069,11,that would be helpful,"Right, well. Once you are in space, hope you have enough fuel to reach one of the trading lanes and hail a larger vessel...",1.0,2.0,1.33333333333,1.33333333333,1.0,1.0,joy
+7069,12,i'm sure i can manage that,Anyway. ...,1.0,1.33333333333,1.0,1.33333333333,1.0,1.0,joy
+6814,0,"tell me more about No, my name is Robin.","I've seen your profile data, good citizen. ...",1.0,1.33333333333,0.666666666667,1.0,1.0,0.666666666667,anger
+6814,1,No. Not like you mean.,"The thing is, citizen, I've got a job for someone who won't mistreat readers. Let's try this question instead.",1.0,1.66666666667,1.66666666667,1.0,1.0,1.33333333333,anger
+6814,2,I think so.,No bias. Terrific. I have to tell you something.,0.666666666667,0.666666666667,0.666666666667,0.333333333333,0.666666666667,1.0,anger
+6814,3,"tell me more about Yes, I've heard of them.","Right. Foolish question, I know, but some people come to Marginal Station from the other direction.",0.666666666667,1.33333333333,1.33333333333,1.33333333333,1.66666666667,0.333333333333,challenge
+6814,4,What's in the other direction?,Angellus is out that way. Castellan Prior.,1.0,1.33333333333,1.33333333333,0.666666666667,1.33333333333,0.0,challenge
+6814,5,What do you need me for?,"The thing is, citizen, I've got a job for a person who won't mistreat readers. ... You know... I don't think we have established a strong trust here.",1.33333333333,1.66666666667,1.66666666667,0.666666666667,1.33333333333,0.333333333333,anger
+6814,6,I'll help. If you tell me what you need.,Really? I'm not going to try to unpack that. I'd be better off sending Sheba away with Commander Rickles. ......,1.66666666667,1.33333333333,1.0,2.0,1.66666666667,0.666666666667,fear
+3615,0,tell me more about no,"I've seen your profile data, good citizen. At my access level, I know everything that happens on Marginal Station.",1.0,0.666666666667,1.66666666667,1.33333333333,1.33333333333,1.33333333333,fear
+3615,1,i know what you will say,The flick of the eyes like they are reading a cargo manifest beside your head. Let's try this question instead.,0.333333333333,1.33333333333,1.33333333333,1.33333333333,1.0,1.66666666667,sadness
+3615,2,tell me more about no,Great. (She looks disgusted.) You don't like readers. I looked all over this station for someone who might not have that prejudice. You know... I don't think we have established a strong trust here.,1.33333333333,1.0,1.0,1.33333333333,0.666666666667,2.0,joy
+3615,3,tell me more about sorry,"If the station were a better place, I'd have someone I trusted with Sheba already.",1.0,1.0,0.666666666667,1.33333333333,1.0,1.33333333333,fear
+5872,0,tell me more about Nah,"I've seen your profile data, citizen. At my access level, I know everything that happens on Marginal Station.",1.66666666667,1.66666666667,1.33333333333,1.33333333333,1.33333333333,1.33333333333,joy
+5872,1,?,"The thing is, citizen, I've got a job for a person who won't mistreat a reader. Let's try this question instead.",0.333333333333,0.333333333333,0.666666666667,0.333333333333,0.0,0.333333333333,sadness
+5872,2,What are readers?,"... But seriously, do you like readers?",1.66666666667,1.33333333333,0.666666666667,1.0,1.0,0.666666666667,anger
+5872,3,I don't know what they are,"... (She looks disgusted.) You don't like readers. I looked all over this station for someone who might not have that prejudice. You are an unpleasant type, aren't you.",1.66666666667,0.666666666667,1.33333333333,0.333333333333,0.666666666667,0.666666666667,sadness
+5872,4,What?,"Anyway. I know Marginal Station is a waypoint, but I hoped I could make it something more. But people don't feel like they owe each other anything. Parties are uncommon.",0.0,0.333333333333,0.333333333333,0.666666666667,0.666666666667,0.333333333333,frustration
+5872,5,Are we on a train?,... Possibly I can find someone else. God. Even some friendly mercenary might be better. ......,1.66666666667,1.33333333333,0.666666666667,0.666666666667,0.666666666667,0.666666666667,joy
+9666,0,yes i am who are you?,"(She looks serene.)Pleasure to see you, citizen. You could be the most important person on Marginal Station right now.",1.0,1.66666666667,1.33333333333,1.33333333333,1.33333333333,1.66666666667,anger
+9666,1,tell me more about yes,...Thanks for not lying. A reader will not usually volunteer who they are. There's something important I need to tell you.,1.0,1.0,1.33333333333,0.666666666667,1.33333333333,1.66666666667,joy
+9666,2,tell me more about no,Guess you have not been here long. The Empire owns a bigger and bigger chunk of the galaxy.,0.333333333333,0.666666666667,1.0,0.666666666667,1.66666666667,1.33333333333,anger
+9666,3,so why are you telling me this,Obviously I am not the Emperor. ... Long range sensors have picked up an invading force on their way here.,0.0,1.0,0.333333333333,0.666666666667,1.0,1.66666666667,sadness
+9666,4,and,Marginal Station can't keep out the Imperial fleet.,0.333333333333,0.0,1.0,0.333333333333,0.0,1.66666666667,sadness
+9666,5,so,Anyway. I've got a child called Sheba. ...,1.33333333333,0.666666666667,1.0,1.33333333333,0.666666666667,1.33333333333,sadness
+9666,6,why?,I don't want Sheba on this Station when the Empire boards. ... Could you escort her away from here?,1.0,0.666666666667,1.0,0.333333333333,0.333333333333,1.66666666667,fear
+9666,7,how much will you pay me,"I can offer you my savings. It's a few hundred thousand credits. Not bad, for Marginal, but it wouldn't buy you a doghouse in Shoesho... but it's not like I'm going to be using it for anything anyway. ...",0.666666666667,1.33333333333,1.0,1.33333333333,1.0,0.666666666667,challenge
+9666,8,tell me more about okay,...,0.333333333333,1.0,0.666666666667,0.333333333333,0.333333333333,1.33333333333,anger
+9666,9,where do i get a ship?,"I'm sorry, I don't know.",0.333333333333,1.0,0.666666666667,0.666666666667,1.0,1.33333333333,anger
+9666,10,cock,Anyway. So...,0.333333333333,1.0,0.666666666667,0.333333333333,0.666666666667,1.0,challenge
+9666,11,tell me more about no,That is not good. ...,0.333333333333,0.0,0.666666666667,0.333333333333,0.0,1.33333333333,sadness
+9666,12,sounds like a plan,"... Once you're in space, hope you have enough fuel to reach one of the trading lanes and hail a larger vessel...",1.33333333333,0.666666666667,1.0,0.666666666667,1.33333333333,2.0,anger
+9666,13,where is you daughter now,She can be found at my quarters right about now. ... ...,1.66666666667,1.0,1.33333333333,1.0,1.33333333333,1.66666666667,sadness
+9666,14,okay lets do this,"Yep. Stay alive. Keep her alive. Above all, don't let the Most Noble and Refined Eyautan Empire of Shoesho and Associated Planets take her. ......",1.33333333333,1.66666666667,1.33333333333,1.0,1.33333333333,2.0,joy
+6086,0,That's my name. Nice to meet you.,Yeah.,0.666666666667,0.666666666667,1.0,2.0,1.0,1.33333333333,joy
+6086,1,What's going on here?,"When Imperial invasion force is visible on civilian detection systems, all but the most foolhardy people on Marginal Station will get out of here. ... Right. Evidently you know who I am.",0.666666666667,0.666666666667,1.33333333333,0.666666666667,1.33333333333,1.33333333333,joy
+6086,2,"tell me more about Yes, somewhat.",...Thanks for not lying. Readers aren't always popular around here. I have to tell you something.,1.0,0.666666666667,1.33333333333,1.66666666667,1.66666666667,2.0,anger
+6086,3,"No, can you tell me more?",You must be new on this station. The Empire owns a bigger and bigger chunk of the galaxy.,1.33333333333,0.666666666667,1.0,2.0,1.33333333333,1.0,fear
+6086,4,And what is the threat?,"As far as I know ""good emperor"" is inherently a contradiction. ... Long range sensors have picked up an invading force on their way here.",0.666666666667,1.0,1.33333333333,1.33333333333,2.0,1.33333333333,joy
+6086,5,How far out are they?,I don't follow. ... Marginal Station can't defend itself against an Imperial invasion force.,1.33333333333,0.666666666667,1.33333333333,1.33333333333,2.0,1.66666666667,challenge
+6086,6,When will the force arrive?,"Fleet arrival began on November 16th 4050, at 12:00 pm.",1.0,1.66666666667,1.33333333333,1.66666666667,1.0,1.0,anger
+6086,7,It's 4050?,... I've got a kid named Sheba. ...,1.66666666667,1.66666666667,1.0,1.66666666667,1.33333333333,1.66666666667,challenge
+6086,8,How can we leave?,Anyway. But could you take her with you?,0.666666666667,0.666666666667,1.66666666667,0.333333333333,0.666666666667,2.0,sadness
+6086,9,"tell me more about Yes, I can.",Then we have a plan. ...,1.0,1.0,1.0,1.0,1.66666666667,1.33333333333,joy
+6086,10,Where is Castellan Prior?,Castellan Prior is partway between here and Gaeban Nebula. (She looks serene.) So...,1.66666666667,0.666666666667,1.66666666667,1.33333333333,1.33333333333,1.33333333333,anger
+6086,11,Not yet. Any ideas?,There has to be some way to help you escape. ...,1.33333333333,1.33333333333,1.66666666667,0.333333333333,0.666666666667,1.33333333333,anger
+6086,12,Where are the vessels?,"I don't get it. ... You're going to have a few crew members, room for passage...",1.33333333333,2.0,1.0,1.33333333333,1.0,0.333333333333,challenge
+6086,13,How many crew?,There are 5 of crew. ... ...,1.33333333333,1.0,1.0,2.0,1.0,2.0,joy
+6086,14,Trust me.,"Right, well. Stay alive. Keep her alive. Above all, don't let the Most Noble and Refined Eyautan Empire take her. ......",0.666666666667,1.33333333333,1.33333333333,0.333333333333,1.33333333333,1.0,anger
+5414,0,I can be Gordo if you need me to be.,"(She looks serene.)Pleasure to meet you, citizen. I'm Kara. Vice Commander here, but I need a favor.",1.33333333333,1.33333333333,1.0,1.33333333333,1.0,1.33333333333,joy
+5414,1,Sometimes.,"I'm asking about those implants that let you see words forming, even get a glimpse of a person's reasons for speaking.",0.666666666667,0.666666666667,1.0,0.666666666667,1.0,1.0,joy
+5414,2,I wish I could do that.,... You're a reader. Sound right?,1.0,0.666666666667,1.0,0.333333333333,1.0,0.333333333333,anger
+5414,3,tell me more about Yes,...Thanks for not giving some excuse. A reader will not usually volunteer who they are. I'm going to tell you something.,0.333333333333,1.0,0.666666666667,0.333333333333,1.0,0.666666666667,anger
+5414,4,"Yes, I know about them.","Right. Foolish question, I know, but some people come to Marginal Station from the other direction.",1.0,1.0,1.33333333333,0.666666666667,1.0,0.666666666667,anger
+5414,5,That wasn't a foolish question.,"I've got a solid reason, trust me. ... There is an entire flotilla of imperial cruisers heading over here now.",0.333333333333,1.33333333333,0.666666666667,1.0,1.0,0.666666666667,joy
+5414,6,What can I do to help?,Marginal Station can't defend itself against an entire flotilla of imperial cruisers.,0.666666666667,1.0,0.666666666667,0.666666666667,1.0,0.666666666667,sadness
+5414,7,tell me more about Right.,I don't understand. ... I've got a girl called Sheba. ...,1.0,1.33333333333,1.33333333333,0.666666666667,1.66666666667,1.33333333333,joy
+5414,8,What should I tell Sheba?,Fine. So I am sending Sheba off with a mildly surly stranger. It's not as if I've got many options. ...,0.666666666667,1.0,0.666666666667,0.666666666667,1.66666666667,1.33333333333,joy
+5414,9,You have my word.,I was born in Eyautan Empire. ... So...,0.666666666667,0.666666666667,0.666666666667,0.0,0.666666666667,1.0,joy
+5414,10,I need transport.,"If you live on this station, you likely don't want to move to the Eyautan Empire. ... Listen to me. ...",1.33333333333,0.666666666667,0.333333333333,0.333333333333,0.666666666667,1.0,anger
+5414,11,Alright.,"Right, well. ...",1.0,0.333333333333,1.0,0.333333333333,0.666666666667,1.0,joy
+5414,12,I understand.,"Once she's gone, I can think about the next problem. ... I need you to believe I am doing my best for Sheba.",0.666666666667,1.0,0.666666666667,1.0,1.33333333333,1.0,anger
+5414,13,I'll tell her that.,"The thing is... if you hate me, she'll know. She'll read it off you. ... I don't want her to grow up thinking I didn't care about her.",0.666666666667,0.666666666667,1.33333333333,1.0,1.33333333333,1.0,joy
+5414,14,I don't hate you. You don't need to worry.,My daughter Sheba is a reader. Like you. ... This is Ty's responsibility. You can tell him that when you see him. ......,1.0,1.33333333333,1.0,0.333333333333,1.33333333333,1.33333333333,joy
+7719,0,tell me more about right,"(She looks serene.)Pleasure to meet you, citizen. You are possibly my new best friend.",0.5,1.5,0.5,2.0,1.0,1.0,boredom
+7719,1,tell me more about yes,...Thanks for not lying. A reader won't usually volunteer who they are. I have to tell you something.,0.5,0.5,0.5,1.5,0.5,1.0,boredom
+7719,2,tell me more about no,Sounds like you're new on this station. The Empire owns a bigger and bigger chunk of the galaxy.,1.5,0.5,0.0,1.5,0.0,1.5,boredom
+7719,3,cool,"As far as I know ""good emperor"" is inherently a contradiction. ... The Imperial battle group will be here in about fourteen hours.",0.5,0.5,0.0,0.5,1.0,1.0,boredom
+7719,4,what do we do?,Marginal Station can't keep out the Imperial fleet.,0.5,1.0,1.0,0.5,1.0,1.5,boredom
+7719,5,do we leave,Anyway. I've got a girl called Sheba. ...,0.0,1.0,1.5,1.0,0.5,0.5,boredom
+7719,6,tell me more about ok,Then we have a plan. ...,0.5,0.5,1.0,1.0,1.0,0.5,boredom
+7719,7,where is sheba?,She can be found at my quarters right about now. ... So...,0.5,0.5,0.5,1.0,1.5,0.5,boredom
+7719,8,where are your quarters?,"My quarters are in the front of the station, near the command center. ... Focus. ...",0.0,1.0,0.5,0.5,1.0,1.0,challenge
+7719,9,tell me more about ok,It is not as if I've got a lot of options. ... ...,1.5,1.0,0.0,1.0,1.5,1.0,boredom
+7719,10,tell me more about goodbye,"I am not done with you here, sir. ... I need you to believe I am doing my best for Sheba.",0.0,1.0,1.5,2.0,1.0,0.5,boredom
+7719,11,direct me to Sheba,"The thing is... if you hate me, she'll know. She'll read it off you. ... I don't want her to grow up thinking I didn't care about her.",1.0,1.0,1.0,1.5,1.0,1.0,boredom
+2984,0,tell me more about No.,"I've seen your profile data, citizen. You might just be the most important person on Marginal Station right now.",1.5,1.0,1.5,1.5,1.5,1.0,joy
+2984,1,tell me more about NO,"The thing is, citizen, I've got a job for someone who won't mistreat readers. Let's try this question instead.",1.0,1.5,0.5,1.5,1.5,2.0,anger
+2984,2,I don't know,Of course. (She looks disgusted.) You don't like readers. I looked all over this station for someone who might not have that prejudice. You know... I don't think we have established a strong trust here.,1.0,1.5,1.0,1.5,2.0,1.5,anger
+2984,3,I will,"Anyway. If the station were a better place, I'd have someone I trusted with Sheba already.",1.5,2.0,2.0,1.0,1.0,1.0,challenge
+2984,4,Whatever,... Maybe I can find someone else. God. Even some friendly mercenary might be better. ......,2.0,1.5,2.0,1.5,1.0,1.5,anger
+3625,0,tell me more about yes,"(She looks serene.)Pleasure to see you, citizen. I'm Kara. Vice Commander here. But I need a favor.",1.0,1.33333333333,1.0,1.0,1.0,0.333333333333,joy
+3625,1,tell me more about yes,...Thanks for not giving some excuse. A lot of readers would keep quiet what they are. I'm going to tell you something.,1.0,1.33333333333,1.33333333333,1.0,1.0,0.666666666667,anger
+6827,0,"tell me more about no, why","I've seen your profile data, good citizen. I am Kara. Vice Commander here. But I need to speak to you.",0.5,0.5,0.5,1.5,1.0,1.5,joy
+6827,1,Is something wrong?,"The thing is, citizen, I've got a job for someone who won't mistreat a reader. Let's try this question instead.",0.5,1.0,0.5,1.0,0.5,1.5,challenge
+6827,2,I do agree with you. They don't deserve that at all.,"... (She looks disgusted.) You don't like readers. I looked all over this station for someone who might not have that prejudice. You are an unpleasant type, aren't you.",0.5,1.5,0.5,0.5,1.5,2.0,joy
+6827,3,I can help you,"I am native Eyautan, born in Shoesho. ... If Marginal were a better place, I'd have someone I trusted with Sheba already.",1.0,0.0,1.0,0.0,1.5,0.5,sadness
+6827,4,What is Sheba?,Sheba is too young to be shipped off to some Imperial Training school for readers. ... Maybe I can find someone else. I'd be better off sending Sheba away with Commander Rickles. ......,0.5,1.5,1.0,0.5,1.5,1.5,anger
+4652,0,tell me more about Sure,"(She looks serene.)Pleasure to meet you, citizen. I'm Kara. Vice Commander here. But I need a favor.",2.0,2.0,2.0,2.0,2.0,2.0,anger
+4652,1,tell me more about Yes,...Thanks for not giving some excuse. Readers won't usually volunteer who they are. I'm going to tell you something.,2.0,1.0,1.0,2.0,1.0,2.0,anger
+4652,2,tell me more about No,Guess you have not been here long. The Empire owns a bigger and bigger chunk of the galaxy.,2.0,2.0,1.0,1.0,2.0,2.0,challenge
+4652,3,So?,"As far as I know ""good emperor"" is inherently a contradiction. ... The invading force is going to be here in around fourteen hours.",1.0,1.0,1.0,1.0,1.0,2.0,challenge
+4652,4,So soon?,Marginal Station can't keep out the Imperial fleet.,2.0,2.0,1.0,1.0,1.0,2.0,anger
+4652,5,What is the marginal station?,This is Marginal Station. This hallway. The docks. The rest of it. ... I've got a little girl called Sheba. ...,2.0,1.0,1.0,1.0,1.0,2.0,challenge
+4652,6,How wouol ,I don't know exactly what event you're asking about. ... Would you escort her away from here?,2.0,2.0,2.0,2.0,2.0,2.0,anger
+4652,7,tell me more about Sure,Fine. So I am sending Sheba off with a slightly surly stranger. I can't afford to be choosy. ...,2.0,2.0,2.0,1.0,2.0,2.0,anger
+4652,8,How do i travel?,I don't know quite what you have in mind. ... So...,2.0,1.0,2.0,2.0,2.0,2.0,fear
+4652,9,tell me more about No,There has to be some way to help you escape. ...,2.0,2.0,2.0,2.0,2.0,2.0,anger
+4652,10,Who is the pilot?,"I don't follow. ... You will have two or three crew members, room for passage...",2.0,2.0,2.0,2.0,1.0,2.0,joy
+4652,11,Am I the commander?,... ...,2.0,2.0,2.0,2.0,1.0,2.0,joy
+4652,12,tell me more about Really?,"I don't understand. (She looks serene.) Stay alive. Keep her alive. Above all, don't let the Most Noble and Refined Eyautan Empire take her. ......",2.0,2.0,2.0,2.0,1.0,2.0,joy
+2580,0,tell me more about yes,"(She looks serene.)Pleasure to meet you, citizen. At my access level, I know everything that happens on Marginal Station.",1.33333333333,1.0,1.33333333333,1.66666666667,1.33333333333,0.666666666667,joy
+2580,1,tell me more about yes,...Thanks for not bullshitting me. I could understand hesitating to admit you are a reader. I need to tell you something.,1.0,1.0,1.33333333333,1.66666666667,0.666666666667,0.333333333333,anger
+2580,2,tell me more about yes,"Okay. Foolish question, I know, but some people come to this Station from the other direction.",1.0,0.666666666667,1.0,1.0,0.666666666667,0.666666666667,anger
+2580,3,what is the other direction?,Angellus is out that way. Castellan Prior.,1.33333333333,0.666666666667,0.333333333333,0.333333333333,1.0,1.33333333333,challenge
+2580,4,tell me more about ok,(Frown.) Long range sensors have picked up an entire flotilla of imperial cruisers on their way here.,1.66666666667,0.666666666667,1.0,0.666666666667,1.0,1.33333333333,sadness
+2580,5,that sounds bad,Marginal Station can't keep out the entire flotilla of imperial cruisers.,0.333333333333,1.0,1.66666666667,1.66666666667,1.0,1.0,sadness
+2580,6,tell me more about ok,Yep. I've got a girl called Sheba. ...,0.666666666667,0.666666666667,1.66666666667,0.666666666667,0.666666666667,1.0,joy
+7477,0,tell me more about yes,"(She looks serene.)Pleasure to meet you, good citizen. At my access level, I know everything that happens on Marginal Station.",0.75,1.25,1.25,0.5,0.75,1.0,joy
+7477,1,I want to know the situation around us.,...Thanks for not pulling out some excuse. Readers are not always popular around here. I have to tell you something.,0.5,1.25,1.5,0.75,1.0,0.75,anger
+7477,2,tell me more about really?,"I've got long distance sensors. I can feel them coming, right at the base of my skull. ... There is an Imperial invasion force on their way over here now.",0.75,1.25,1.0,0.75,1.25,0.75,anger
+7477,3,It is interesting,"We have a few soldier of fortune crews, but nowhere near enough to defend Marginal Station.",1.25,0.75,1.0,1.0,1.0,1.0,anger
+7477,4,How about enemies?,I don't understand. ... I've got a kid named Sheba. ...,0.75,1.25,1.0,1.0,1.0,1.0,sadness
+7477,5,Who is Sheba,Sheba is my daughter. ... Could you take her with you?,0.75,1.25,1.0,0.5,1.0,0.75,joy
+7477,6,tell me more about sure,Fine. So I am sending Sheba off with a mildly surly stranger. Not that I've got much choice. ...,0.75,0.75,1.5,1.25,1.25,1.25,joy
+7477,7,Where is Sheba?,She can be found at my quarters right about now. ... So...,0.75,1.25,1.25,1.25,1.0,1.5,joy
+9910,0,My name isn't Gordo.,"(She looks serene.)Pleasure to see you, citizen. Being Vice Commander of Marginal Station, I can see anyone's personal profile.",0.666666666667,1.66666666667,1.66666666667,1.33333333333,1.0,1.66666666667,anger
+9910,1,tell me more about Yes.,...Thanks for not pulling out some unconvincing excuse. A reader won't usually volunteer who they are. I'm going to tell you something.,0.666666666667,1.33333333333,1.0,2.0,1.33333333333,1.66666666667,challenge
+9910,2,tell me more about No.,Sounds like you're new on this station. The Empire owns a bigger and bigger chunk of the galaxy.,0.666666666667,1.66666666667,1.33333333333,1.66666666667,1.33333333333,1.66666666667,joy
+9910,3,Fascinating.,"As far as I know ""good emperor"" is inherently a contradiction. ... Long range sensors have picked up an Imperial fleet on the way here.",1.0,1.0,1.66666666667,1.66666666667,1.33333333333,1.66666666667,joy
+9910,4,What should we do?,There are a few merc ships docked for leave. That's not going to protect us from the Empire.,1.0,1.0,1.33333333333,2.0,1.66666666667,1.66666666667,joy
+9910,5,How can we protect ourselves?,... I've got a girl called Sheba. ...,0.333333333333,1.66666666667,1.33333333333,1.33333333333,1.33333333333,1.66666666667,fear
+9910,6,Where can I find Sheba?,She is at my quarters right about now. ... But would you take her away from here?,0.666666666667,1.33333333333,1.33333333333,1.66666666667,1.33333333333,1.66666666667,challenge
+9910,7,tell me more about Yes.,Then we have a plan. ...,0.333333333333,0.666666666667,0.666666666667,0.666666666667,1.0,1.33333333333,joy
+9910,8,Ok. I wil leave quickly.,"Thanks. This matters more than... well, do you have children?",0.666666666667,1.0,1.0,1.33333333333,1.66666666667,2.0,anger
+9910,9,I have no children.,It's hard to explain. The obligation to someone you don't even always like. ... So...,0.666666666667,1.33333333333,1.66666666667,1.33333333333,1.66666666667,1.66666666667,joy
+9910,10,I don't have a way off Marginal Station.,That is not good. ...,1.0,1.0,1.0,1.33333333333,1.33333333333,1.33333333333,sadness
+9910,11,Where can I find a scout vessel?,"I don't follow. ... You'll have a couple of crew members, room for passage...",0.666666666667,0.666666666667,1.0,1.33333333333,1.33333333333,1.33333333333,fear
+9910,12,Where?,Anyway. ...,0.666666666667,1.33333333333,1.0,1.66666666667,1.66666666667,1.0,anger
+9910,13,Great. I''ll take good care of her.,"(She looks sad.) I may not survive to see her again. (She looks serene.) Stay alive. Keep her alive. Above all, don't let the Most Noble and Refined Eyautan Empire take her. ......",1.0,1.66666666667,1.66666666667,2.0,1.0,1.66666666667,anger
+3465,0,tell me more about wrong,"I am not sure of where to start. ... Fine. I am Kara. Vice Commander here, but what I need is more of a personal favor.",0.666666666667,1.33333333333,0.666666666667,1.0,0.666666666667,1.0,challenge
+3465,1,tell me more about no,"The thing is, good citizen, I've got a job for someone who won't mistreat readers. Let's try this question instead.",1.33333333333,1.33333333333,0.666666666667,1.66666666667,0.666666666667,1.0,sadness
+3465,2,I don't agree,"... (She looks disgusted.) You don't like readers. I looked all over this station for someone who might not have that prejudice. You are an unpleasant type, aren't you.",0.666666666667,2.0,0.666666666667,1.0,0.666666666667,1.66666666667,challenge
+3465,3,Because you're stupid,"Wow, you barely civilized merc. ... Your database file didn't mention what a child you are. I know this Station is a waypoint. But I hoped I could make it something more. But people don't feel like they owe each other anything. We don't do anniversaries, or weddings for the most part.",0.0,1.33333333333,1.33333333333,0.666666666667,1.33333333333,1.33333333333,anger
+9528,0,"Yes, That's me","(She looks serene.)Pleasure to see you, citizen. I am Kara. Vice Commander here. But I need a favor.",1.33333333333,1.66666666667,1.33333333333,1.66666666667,1.33333333333,2.0,joy
+9528,1,tell me more about No,"The thing is, good citizen, I've got a job for a person who won't mistreat a reader. Let's try this question instead.",0.666666666667,1.33333333333,1.33333333333,1.0,1.66666666667,0.666666666667,joy
+9528,2,of course i wouldn't,"... (She looks disgusted.) You don't like readers. I looked all over this station for someone who might not have that prejudice. You are an unpleasant type, aren't you.",1.66666666667,1.66666666667,1.66666666667,1.66666666667,1.0,1.33333333333,challenge
+9528,3,I want to help you,Right now I'm hoping to survive the next couple of hours. ... I know Marginal is a waypoint. But I hoped I could make it something more. But people don't bond on Marginal Station. People here don't celebrate holidays.,2.0,2.0,1.0,1.66666666667,1.66666666667,1.33333333333,sadness
+9528,4,why?,I've got a powerful reason. ... Possibly I can find someone else. God. Even Commander Rickles might be better. ......,1.0,1.66666666667,1.66666666667,1.0,1.0,1.0,anger
+1209,0,tell me more about yes,"(She looks serene.)Pleasure to meet you, citizen. At my access level, I know everything that happens on Marginal Station.",0.666666666667,1.33333333333,0.666666666667,1.0,0.666666666667,0.666666666667,joy
+1209,1,tell me more about yes,...Thanks for not lying. A lot of readers would keep quiet what they are. I have to tell you something.,0.666666666667,1.33333333333,1.33333333333,1.0,1.0,0.666666666667,anger
+1209,2,tell me more about yes,"Okay. Foolish question, I know, but some people come to Marginal from the other direction.",1.33333333333,1.33333333333,1.66666666667,1.33333333333,1.33333333333,0.333333333333,challenge
+3143,0,tell me more about yes,"(She looks serene.)Pleasure to see you, good citizen. At my access level, I know everything that happens on Marginal Station.",2.0,1.8,2.0,2.0,1.4,1.2,joy
+3143,1,tell me more about yes,...Thanks for not lying. Readers are not always popular around here. There's something important I need to tell you.,1.2,2.0,1.2,1.4,2.0,1.2,sadness
+3143,2,tell me more about yes,"Right. Foolish question, I know, but some people come to the station from the other direction.",1.6,1.8,1.4,1.8,1.2,2.0,joy
+3143,3,what is the other direction?,Angellus is out that way. Castellan Prior.,1.2,1.8,1.4,1.0,1.6,1.2,challenge
+3143,4,tell me more about ok,Yep. The entire flotilla of imperial cruisers is going to be here in around fourteen hours.,1.4,2.0,1.8,1.6,1.2,2.0,joy
+3143,5,that sounds bad,Marginal Station can't keep out the entire flotilla of imperial cruisers.,1.2,1.6,1.0,0.6,1.2,0.6,joy
+3143,6,tell me more about ok,(Frown.) I've got a daughter called Sheba. ...,1.2,1.2,1.6,1.0,0.6,2.0,joy
+3143,7,why,I don't want Sheba on Marginal when the Empire boards. ... Would you escort her away from here?,1.4,1.0,0.8,1.4,0.4,1.2,sadness
+3143,8,tell me more about ok,Then we have a plan. ...,1.2,0.8,2.0,1.6,1.2,2.0,joy
+3143,9,tell me more about ok,"Thanks. This matters more than... well, do you have children?",2.0,1.2,2.0,1.0,1.2,1.8,joy
+3143,10,tell me more about no,It's hard to explain. The obligation to someone you don't even always like. ... So...,0.8,1.2,1.4,1.6,1.0,1.8,anger
+3143,11,tell me more about yes,Good. ...,1.2,2.0,1.4,1.0,1.8,1.4,joy
+3143,12,tell me more about ok,Yep. ...,1.2,1.6,1.2,1.8,1.2,1.8,joy
+3143,13,don't worry,This is Ty's responsibility. You can tell him that when you see him. ......,1.4,1.8,1.4,1.6,1.2,2.0,joy
+5436,0,"yep, that's me","(She looks serene.)Pleasure to see you, good citizen. You are possibly the most important person on Marginal Station right now.",1.33333333333,0.666666666667,1.33333333333,2.0,1.33333333333,1.33333333333,joy
+5436,1,tell me more about just a little,...Thanks for not pulling out some excuse. Most readers would keep quiet what they are. I have to tell you something.,0.666666666667,1.0,1.66666666667,2.0,1.33333333333,1.66666666667,anger
+5436,2,tell me more about Boo!!!!!,(She looks serene.)Got it. There is an entire flotilla of imperial cruisers heading to Marginal Station now.,1.0,1.66666666667,1.0,1.33333333333,1.0,1.0,challenge
+5436,3,hello my name is daphne,"If we act now, you might not wind up in an imperial brig.",1.0,1.0,1.66666666667,1.0,1.33333333333,1.66666666667,joy
+5436,4,How are you?,I don't know exactly what event you are asking about. ... Marginal Station can't keep out the entire flotilla of imperial cruisers.,0.666666666667,1.66666666667,1.66666666667,1.33333333333,1.66666666667,1.0,anger
+5436,5,How do we get off of this station?,I don't know exactly what event you're asking about. ... I've got a daughter called Sheba. ...,0.666666666667,1.0,1.33333333333,2.0,1.33333333333,1.33333333333,challenge
+5436,6,Where is Sheba?,I'm aware Sheba is at my quarters. ... Would you look after her?,0.666666666667,1.33333333333,1.66666666667,1.0,1.33333333333,1.66666666667,anger
+5436,7,I will,"Right, well. Right.",1.0,1.66666666667,1.33333333333,0.666666666667,1.0,1.33333333333,joy
+9021,0,Thats right!,"(She looks serene.)Pleasure to meet you, citizen. I am Kara. Vice Commander here. But what I need is more of a personal favor.",1.33333333333,1.0,1.33333333333,2.0,1.33333333333,1.66666666667,joy
+9021,1,What favor are you talking about?,...Thanks for not bullshitting me. A reader won't usually volunteer who they are. I need to tell you something.,1.33333333333,1.66666666667,0.666666666667,1.66666666667,1.33333333333,2.0,challenge
+9021,2,I have heard they are evil by nature,(She looks serene.)I see. There's an entire flotilla of imperial cruisers on their way here now.,1.66666666667,1.66666666667,1.33333333333,1.66666666667,1.66666666667,1.66666666667,fear
+9021,3,COme again,Marginal Station can't defend itself against an entire flotilla of imperial cruisers.,1.33333333333,2.0,1.66666666667,2.0,1.66666666667,1.33333333333,challenge
+9021,4,"what do we need to defend the station, I am more than willing to help",Marginal Station is where you go when you don't want an allegiance or an army or a crew. ...,1.66666666667,1.66666666667,1.33333333333,1.66666666667,1.66666666667,1.66666666667,challenge
+9021,5,what would it take to save it?,... I've got a girl named Sheba. ...,1.66666666667,1.0,1.33333333333,1.66666666667,1.0,1.66666666667,challenge
+9021,6,Is Sheba your daughter?,I grew up in Eyautan Empire. ... Could you escort her away from here?,2.0,1.66666666667,2.0,1.66666666667,1.33333333333,2.0,sadness
+9021,7,escort who?,... My daughter Sheba is a reader. Like you. She can't be caught here when the entire flotilla of imperial cruisers arrives.,2.0,1.33333333333,1.66666666667,2.0,1.33333333333,1.66666666667,frustration
+9021,8,where is she?,She can be found at my quarters right about now. ... In any case...,2.0,1.33333333333,1.33333333333,1.33333333333,1.33333333333,1.66666666667,frustration
+8382,0,tell me more about yes,"(She looks serene.)Pleasure to meet you, good citizen. You might just be the most important person on Marginal Station right now.",0.666666666667,0.333333333333,1.0,0.333333333333,0.666666666667,1.0,challenge
+8382,1,tell me more about yes,...Thanks for not pulling out some excuse. Not every reader wants to admit it. There's something important I need to tell you.,0.333333333333,0.666666666667,1.0,1.0,0.666666666667,0.666666666667,joy
+8382,2,tell me more about yes,"Okay. Foolish question, I know, but some people come to Marginal from the other direction.",0.333333333333,0.666666666667,1.33333333333,0.666666666667,0.666666666667,0.666666666667,anger
+4797,0,tell me more about yes,"(She looks serene.)Pleasure to meet you, citizen. You might just be the most important person on Marginal Station right now.",1.33333333333,1.33333333333,1.33333333333,1.66666666667,1.0,1.33333333333,joy
+4797,1,tell me more about yes,...Thanks for not bullshitting me. Not every reader wants to admit it. There's something important I need to tell you.,0.333333333333,1.0,0.666666666667,1.66666666667,1.33333333333,1.66666666667,joy
+4797,2,tell me more about yes,"Fine. Foolish question, I know, but some people come to Marginal Station from the other direction.",1.0,1.0,1.66666666667,1.33333333333,1.33333333333,1.33333333333,anger
+4797,3,tell me more about ok,Yep. The entire flotilla of imperial cruisers is going to be here in about fourteen hours.,1.0,1.0,1.33333333333,1.66666666667,1.66666666667,0.666666666667,anger
+4797,4,tell me more about ok,"Um, okay. Marginal Station can't defend itself against an entire flotilla of imperial cruisers.",1.0,1.0,1.66666666667,2.0,1.0,1.33333333333,challenge
+4797,5,tell me more about ok,Yep. I've got a child named Sheba. ...,1.66666666667,1.33333333333,1.0,1.33333333333,1.33333333333,1.33333333333,sadness
+4797,6,tell me more about ok,Then we have a plan. ...,1.0,1.66666666667,0.666666666667,2.0,1.33333333333,1.0,joy
+4797,7,tell me more about ok,"Thanks. This matters more than... well, do you have children?",1.0,0.666666666667,0.666666666667,1.0,1.0,1.66666666667,joy
+4797,8,tell me more about no,It's hard to explain. The obligation to someone you don't even always like. ... So...,1.0,1.33333333333,2.0,1.66666666667,0.666666666667,1.33333333333,sadness
+4797,9,tell me more about yes,Good. ...,1.33333333333,0.666666666667,0.666666666667,0.333333333333,0.666666666667,1.33333333333,joy
+4797,10,tell me more about yes,(Frown.) ...,0.666666666667,1.0,1.33333333333,1.0,1.0,1.33333333333,boredom
+4797,11,tell me more about ok,"Um, okay. I need you to believe I am doing my best for Sheba.",1.0,1.33333333333,1.33333333333,1.33333333333,1.66666666667,1.33333333333,challenge
+4797,12,tell me more about ok,I need you to go on thinking that. So Sheba reads it when she looks at you. ... I don't want her to grow up thinking I didn't care about her.,1.0,1.33333333333,1.66666666667,0.333333333333,1.66666666667,0.666666666667,anger
+4797,13,tell me more about ok,"I am glad you understand. ... When you find Ty..., tell him this was his fault. ......",1.33333333333,2.0,1.66666666667,0.666666666667,0.666666666667,1.0,sadness
+7106,0,tell me more about yes,"(She looks serene.)Pleasure to see you, good citizen. I am Kara. Vice Commander here. But what I need is more of a personal favor.",1.5,1.75,1.25,0.5,1.0,0.5,joy
+7106,1,tell me more about No,"The thing is, good citizen, I've got a job for someone who won't mistreat a reader. Let's try this question instead.",1.0,1.25,1.5,0.75,1.5,1.25,anger
+7106,2,Perhapse note,"Fantastic. (She looks disgusted.) You don't like readers. I looked all over this station for someone who might not have that prejudice. You are an unpleasant type, aren't you.",0.75,0.5,1.5,1.25,1.75,1.0,challenge
+7106,3,Are you jumping to conclusions?,I was born in Eyautan Empire. ... I know Marginal Station is a pit stop. But I hoped I could make it something more. But people don't bond on this station. Parties are uncommon.,0.25,1.25,1.5,0.5,1.25,0.5,anger
+7106,4,You can't expect to be everyone's friend,I don't genuinely consider anyone on the station to be a friend. ...,0.5,0.75,1.25,1.25,1.25,1.0,anger
+7106,5,But you expect them to be your friend regardless?,I don't really consider anyone on the station to be a friend. ... Maybe I can find someone else. I would be better off sending Sheba away with Frank the amnesiac bartender. ......,0.5,0.75,0.75,0.75,1.0,0.75,frustration
+7670,0,"maybe, who is asking?","(She looks disgusted.) ... You're lying, but I can understand why you would. I am Kara. Vice Commander here. But I need a favor. You know... I don't think we have established a strong trust here.",1.33333333333,1.33333333333,1.0,0.0,1.0,1.66666666667,sadness
+7670,1,"i would you help you, for a price","I was born in Eyautan Empire. ... I know Marginal Station is a waypoint, but I hoped I could make it something more. But people don't feel like they owe each other anything. We don't do anniversaries, or weddings for the most part.",0.333333333333,1.0,1.66666666667,0.0,0.666666666667,1.0,joy
+7670,2,what did you do,I've admitted I spent my childhood in Shoesho. ... Maybe I can find someone else. God. Even Commander Rickles might be better. ......,1.33333333333,1.0,1.66666666667,1.0,0.666666666667,1.0,boredom
+4550,0,No that's not my name.,"I've seen your profile data, good citizen. At my access level, I know everything that happens on Marginal Station.",0.25,0.5,1.0,1.0,1.0,1.25,frustration
+4550,1,My name is Booty Juice,... You come across as a reader. Is that right?,0.25,0.75,1.25,0.75,0.75,1.25,boredom
+4550,2,not really,"The thing is, sir, I've got a job for someone who won't mistreat a reader. Let's try this question instead.",0.5,0.25,0.5,0.5,0.25,1.0,boredom
+4550,3,i like you,No bias. Good. There's something important I need to tell you.,1.5,1.0,1.25,1.0,0.75,1.0,joy
+4550,4,tell me more about no,Sounds like you are new on this station. The Empire owns a bigger and bigger chunk of the galaxy.,1.0,0.75,0.75,0.75,1.0,0.75,joy
+4550,5,I',Anyway. You know... I don't think we have established a strong trust here.,0.5,0.0,0.5,0.25,0.5,1.0,boredom
+4550,6,I am no fan of the empire,"You look like a negative person. I know the station is a refueling station, but I hoped I could make it something more. But people don't feel like they owe each other anything. I haven't been invited anywhere in years.",0.75,0.75,0.5,0.75,0.75,0.75,anger
+5319,0,That's me alright!,"(She looks serene.)Pleasure to see you, good citizen. At my access level, I know everything that happens on Marginal Station.",1.66666666667,1.33333333333,1.66666666667,1.66666666667,1.33333333333,1.33333333333,anger
+5319,1,I think so! Do you like your job?,You haven't made a great impression so far. ... You are a reader. That accurate?,1.66666666667,1.66666666667,1.33333333333,1.66666666667,1.0,1.66666666667,fear
+5319,2,I'm not sure whether i'm reading or playing?,"(She looks disgusted.) ... You're lying, but I can understand why you would. Let's try this question instead.",1.66666666667,1.0,1.0,0.666666666667,0.666666666667,1.33333333333,frustration
+5319,3,Yup!,"(She looks disgusted.) Ew. You're lying, but I can understand why you would. You know... I don't think we have established a strong trust here.",1.0,1.0,0.666666666667,1.0,0.666666666667,0.333333333333,joy
+5319,4,I want to help you,"Right now I'm hoping to survive the next couple of hours. ... I know the station is a stop, but I hoped I could make it something more. But people don't bond on this station. Parties are uncommon.",1.0,0.333333333333,0.333333333333,0.666666666667,0.666666666667,0.666666666667,joy
+5319,5,Where is the station?,We are standing right here. ... I don't know whether you can assist me.,1.33333333333,0.666666666667,1.33333333333,1.0,0.666666666667,1.33333333333,fear
+5319,6,How can I assist you?,Right now I'm hoping to survive the next couple of hours. ... That does it.,1.33333333333,1.66666666667,1.0,1.0,0.666666666667,1.0,fear
+2633,0,"No, that's not me.","I've seen your profile data, good citizen. You are possibly the most important person on Marginal Station right now.",1.0,1.0,1.25,1.0,1.5,1.25,anger
+2633,1,"No, I don't quite understand.","The thing is, citizen, I've got a job for a person who won't mistreat readers. Let's try this question instead.",1.25,0.75,1.25,0.75,1.25,1.5,joy
+2633,2,"Haha, I think I see what you're saying.","I am native Eyautan, born in Shoesho. ... There's something you need to know.",0.75,1.5,1.25,1.25,1.25,1.75,joy
+2633,3,tell me more about Right...,(Sigh.) You know... I don't think we have established a strong trust here.,0.75,1.5,1.25,1.25,1.25,1.5,joy
+2633,4,Oh?,"Anyway. I know Marginal Station is a pit stop. But I hoped I could make it something more. But people don't feel like they owe each other anything. We don't do anniversaries, or weddings for the most part.",0.75,1.5,1.75,1.0,1.0,1.5,joy
+2633,5,Words,Anyway. Possibly I can find someone else. God. Even Frank the amnesiac bartender might be better. ......,0.75,1.75,1.25,1.25,1.0,1.25,joy
+5834,0,tell me more about No,"I've seen your profile data, citizen. Being Vice Commander of Marginal Station, I can see anyone's personal profile.",1.5,1.0,2.0,2.0,1.5,2.0,anger
+5834,1,tell me more about Yes,...Thanks for not pulling out some excuse. Readers won't usually volunteer who they are. I'm going to tell you something.,1.0,1.5,2.0,2.0,2.0,2.0,joy
+5834,2,tell me more about Yes,"Okay. Foolish question, I know, but some people come to Marginal from the other direction.",1.5,1.5,1.0,1.5,1.0,2.0,challenge
+5834,3,What's Marginal?,This is Marginal Station. This hallway. The docks. The rest of it. ... There's an entire flotilla of imperial cruisers heading to Marginal Station now.,1.5,2.0,1.5,1.0,1.5,2.0,boredom
+5834,4,What about imperial cruisers?,"Anything we do, we have to do tonight. After that point, the ships will be in local space. ... Marginal Station can't keep out the entire flotilla of imperial cruisers.",2.0,1.5,1.5,1.5,2.0,1.5,challenge
+5834,5,What can we do?,"Right, well. I've got a child called Sheba. ...",2.0,2.0,1.0,1.5,1.5,1.5,sadness
+5834,6,Where is Sheba?,She can be found at my quarters right about now. ... But could you escort her away from here?,2.0,1.5,2.0,2.0,2.0,1.5,fear
+5834,7,"tell me more about Yes, I will.",Then we have a plan. ...,2.0,2.0,1.5,1.5,1.5,1.5,challenge
+5834,8,How do I get to Castellan Prior?,... So...,1.0,0.5,1.5,1.5,1.5,1.5,boredom
+5834,9,Of course.,Yes. ...,1.5,1.5,1.5,1.5,1.0,1.5,boredom
+5834,10,That's what I'll do.,Will Sheba have room to take anything with her?,1.5,1.0,1.0,1.0,1.0,1.0,fear
+5834,11,tell me more about Yes.,"She'll want to keep her clothes, and her journals, I suppose. ...",1.5,1.5,1.0,1.5,1.5,1.5,frustration
+5834,12,I'll take care of her.,My father administered a power station in Shoesho. Our Distinguished Cannibal Emperor had him executed for minor inefficiencies.,1.5,1.5,1.5,1.0,1.5,1.5,joy
+5834,13,The Distinguished Cannibal Emperor is a jerk.,"... Stay alive. Keep her alive. Above all, don't let the Most Noble and Refined Eyautan Empire take her. ......",1.5,1.0,1.0,1.5,2.0,1.5,anger
+2381,0,how do you know my name?,"I've seen your profile data, good citizen. I am Kara. Vice Commander here, but what I need is more of a personal favor.",1.66666666667,2.0,1.66666666667,0.333333333333,1.0,1.66666666667,challenge
+2381,1,Lol you so funny man,The flick of the eyes like they are reading a customs form just left of your head. Let's try this question instead.,1.33333333333,1.33333333333,1.0,1.0,0.333333333333,1.66666666667,challenge
+2381,2,tell me more about kind of,"(She looks disgusted.) Ew. Right, play it like that if you have to. You know... I don't think we have established a strong trust here.",2.0,1.66666666667,2.0,2.0,1.66666666667,1.66666666667,anger
+2381,3,You can trust me,It's clear I can't put confidence in you at all. ... I know this Station is a waystation. But I hoped I could make it something more. But people don't feel like they owe each other anything. I haven't been invited anywhere in years.,1.66666666667,1.66666666667,1.66666666667,1.66666666667,1.33333333333,0.666666666667,boredom
+2381,4,"If you give me a chance, you can trust me",It is clear I can't count on you at all. ... Possibly I can find someone else. God. Even Commander Rickles might be better. ......,1.33333333333,1.0,1.66666666667,1.66666666667,1.66666666667,1.33333333333,sadness
+4316,0,"Yeah, that's me","(She looks serene.)Pleasure to see you, good citizen. I'm Kara. Vice Commander here. But what I need is more of a personal favor.",1.33333333333,1.0,1.33333333333,1.66666666667,1.0,1.33333333333,anger
+4316,1,What's the favor?,...Thanks for not lying. Readers will not usually volunteer who they are. There's something important I need to tell you.,1.33333333333,2.0,1.66666666667,1.33333333333,1.66666666667,1.66666666667,fear
+4316,2,who hasn't?,... The entire flotilla of imperial cruisers is going to be here in roughly fourteen hours.,1.66666666667,1.66666666667,1.66666666667,1.0,1.0,1.0,challenge
+4316,3,"jesus christ, I can't believe it. This is terrible!",Marginal Station can't defend itself against an entire flotilla of imperial cruisers.,1.33333333333,1.66666666667,1.66666666667,2.0,1.66666666667,1.33333333333,fear
+4316,4,"no, it can't. I have to get out of here!","At the moment, you and I are allies. I've got a daughter called Sheba. ...",1.33333333333,2.0,2.0,1.66666666667,2.0,2.0,joy
+4316,5,it's gonna cost you,You're a real jerk. Okay.,0.666666666667,1.66666666667,1.66666666667,1.66666666667,1.66666666667,2.0,anger
+6103,0,"Yes, that's me.","(She looks serene.)Pleasure to see you, citizen. I'm Kara. Vice Commander here. But I need to speak to you.",1.0,1.0,1.33333333333,1.33333333333,1.0,1.33333333333,joy
+6103,1,tell me more about Yes,...Thanks for not bullshitting me. Readers aren't always popular around here. There's something important I need to tell you.,0.333333333333,1.66666666667,1.66666666667,1.33333333333,1.33333333333,1.33333333333,fear
+6103,2,Can't say I've heard of them.,"It's hard not to know about them, I guess.",1.0,1.0,1.0,0.333333333333,0.666666666667,0.666666666667,joy
+6103,3,What about them?,Anyway. The entire flotilla of imperial cruisers is going to be here in around fourteen hours.,1.0,1.33333333333,1.33333333333,1.0,1.0,1.33333333333,challenge
+6103,4,What happens then?,Marginal Station can't keep out the entire flotilla of imperial cruisers.,1.0,1.0,1.66666666667,0.666666666667,1.33333333333,1.33333333333,anger
+6103,5,So we're in trouble?,... I've got a child called Sheba. ...,0.333333333333,1.0,1.33333333333,0.333333333333,1.0,1.33333333333,fear
+6103,6,"tell me more about Yes, of course.",Then we have a plan. ...,1.33333333333,1.0,0.333333333333,1.0,1.0,1.33333333333,joy
+6103,7,"Ty on Castellan Prior, got it.",Sheba's father Ty works in dysprosium mining. That might lead you to him.,0.666666666667,0.333333333333,1.0,1.0,0.666666666667,0.666666666667,joy
+6103,8,I'll check the mines.,... So...,0.333333333333,1.0,0.666666666667,1.0,1.33333333333,1.0,anger
+6103,9,"No, I don't.",Oh dear. ...,0.0,0.666666666667,0.666666666667,0.666666666667,0.666666666667,1.0,frustration
+6103,10,How can I find them?,...,1.0,1.0,1.33333333333,0.333333333333,1.0,1.0,anger
+6103,11,I will take care of her.,"Right, well. Stay alive. Keep her alive. Above all, don't let the Eyautan Empire take her. ......",1.0,2.0,2.0,2.0,2.0,2.0,joy
+4184,0,"Yes, Maam, I am here to help you","(She looks serene.)Pleasure to see you, citizen. I'm Kara. Vice Commander here, but what I need is more of a personal favor.",1.0,1.66666666667,1.0,0.0,1.0,1.33333333333,joy
+4184,1,"no, but i want to help you","The thing is, citizen, I've got a job for a person who won't mistreat a reader. Let's try this question instead.",1.0,1.33333333333,1.33333333333,0.666666666667,1.0,1.33333333333,joy
+4184,2,of course not. Readers are people too!,"... (She looks disgusted.) You don't like readers. I looked all over this station for someone who might not have that prejudice. You are an unpleasant type, aren't you.",1.33333333333,1.0,0.666666666667,1.66666666667,1.0,1.33333333333,anger
+4184,3,i will help you,I was born in Eyautan Empire. ... I know this Station is a stop. But I hoped I could make it something more. But people don't feel like they owe each other anything. There are no children here.,1.33333333333,1.33333333333,1.33333333333,1.33333333333,1.0,1.33333333333,sadness
+4184,4,that is too bad. what would you like to do?,"I've admitted I was a child in Shoesho. If I could endure the Most Noble and Refined Eyautan Empire, I'd still be there. Not out here on a mining station that no longer mines anything.",1.0,1.66666666667,1.33333333333,0.333333333333,1.0,1.0,anger
+4184,5,Do you want to go back to Shoesho?,Right now I'm hoping to survive the next couple of hours. ... Maybe I can find someone else. God. Even Commander Rickles might be better. ......,0.666666666667,1.33333333333,0.666666666667,0.333333333333,1.0,0.666666666667,joy
+8539,0,tell me more about sure,"(She looks serene.)Pleasure to see you, citizen. I'm Kara. Vice Commander here. But I need a favor.",1.66666666667,2.0,1.33333333333,1.0,1.66666666667,1.33333333333,joy
+8539,1,"yeah, what do you need?",...Thanks for not lying. Readers are not always popular around here. There's something important I need to tell you.,1.33333333333,2.0,1.33333333333,1.33333333333,1.66666666667,2.0,joy
+8539,2,tell me more about no,Sounds like you are new on this station. The Empire owns a bigger and bigger chunk of the galaxy.,1.33333333333,1.33333333333,2.0,1.33333333333,1.33333333333,1.66666666667,challenge
+8539,3,i am new,"If you were Emperor Abata Kai, you'd have an entourage and the odor of a deceased goat. ... There is an Imperial battle group heading over here now.",1.0,1.66666666667,1.33333333333,1.66666666667,1.66666666667,1.33333333333,anger
+8539,4,do we fight them?,We have enough defenses to keep out pirates. That's not going to help against the Most Noble and Refined Eyautan Empire.,1.33333333333,1.33333333333,0.666666666667,1.0,1.33333333333,1.33333333333,challenge
+8539,5,make love instead of war?,... I've got a little girl named Sheba. ...,1.66666666667,1.33333333333,1.33333333333,1.0,1.33333333333,1.66666666667,anger
+8539,6,tell me more about okay,Then we have a plan. ...,1.33333333333,1.33333333333,1.33333333333,1.0,1.0,1.33333333333,anger
+8539,7,father?,My father administered a power station in Shoesho. Emperor Kai had him executed for minor inefficiencies.,1.33333333333,1.0,1.33333333333,1.0,1.0,1.33333333333,fear
+8539,8,is it my daughter?,Anyway. So...,1.33333333333,1.0,1.33333333333,1.0,1.0,1.33333333333,fear
+8539,9,tell me more about nope,"Whatever I think of you, you are Sheba's ticket off this station. ...",1.0,1.0,1.0,1.0,1.0,1.33333333333,joy
+8539,10,lets do it!,"... You will have two or three crew members, room for passage...",1.66666666667,1.33333333333,1.33333333333,1.33333333333,1.66666666667,1.66666666667,joy
+8539,11,minibar?,"Right, well. ...",1.33333333333,1.0,1.0,1.33333333333,0.666666666667,1.33333333333,joy
+8539,12,doesnt sound like a good parent,"(She looks sad.) I did not get much warning when I had to say farewell to my father. And now I have to send my daughter Sheba away. I can't promise I'll ever see her again. (She looks serene.) Stay alive. Keep her alive. Above all, don't let the Most Noble and Refined Eyautan Empire take her. ......",1.33333333333,1.33333333333,1.33333333333,1.33333333333,1.33333333333,1.0,anger
+6492,0,"yes, it is me","(She looks serene.)Pleasure to meet you, citizen. I am Kara. Vice Commander here. But I need a favor.",0.0,0.0,0.0,0.0,0.0,0.0,anger
+6492,1,what do you need,...Thanks for not lying. Not every reader wants to admit it. I'm going to tell you something.,0.0,0.0,0.0,0.0,0.0,0.0,sadness
+6492,2,no i am not,Sounds like you are new on this station. The Empire owns a bigger and bigger chunk of the galaxy.,2.0,2.0,2.0,2.0,2.0,2.0,joy
+6492,3,oh realloy,Our Distinguished Cannibal Emperor doesn't go anywhere without an entourage. ... Long range sensors have picked up an Imperial fleet on the way here.,1.0,1.0,1.0,1.0,1.0,1.0,challenge
+6492,4,That doesn't sound good.,... ... Marginal Station can't keep out the Imperial invasion force.,1.0,1.0,1.0,1.0,1.0,1.0,anger
+6492,5,What can we do?,... I've got a daughter called Sheba. ...,2.0,2.0,2.0,2.0,2.0,2.0,joy
+6492,6,What about you?,I hold the rank of Vice Commander. ... Would you look after her?,0.0,0.0,0.0,0.0,0.0,0.0,joy
+6492,7,You should come too. She's your daughter.,"I am native Eyautan, born in Shoesho. ... Okay.",1.0,1.0,1.0,1.0,1.0,1.0,anger
+3166,0,yeah it's me,"(She looks serene.)Pleasure to meet you, good citizen. You could be my new best friend.",1.75,2.0,1.5,2.0,0.5,1.75,boredom
+3166,1,yeah i see it pretty well,...Thanks for not lying. Not every reader wants to admit it. I'm going to tell you something.,1.0,1.25,1.75,1.5,0.5,1.75,boredom
+3166,2,never heard of any of that,You must be new on this station. The Empire owns a bigger and bigger chunk of the galaxy.,0.75,1.0,1.0,0.75,0.25,1.75,boredom
+3166,3,that's wild,"As far as I know ""good emperor"" is inherently a contradiction. ... The entire flotilla of imperial cruisers will be here in roughly fourteen hours.",1.75,2.0,1.0,1.5,1.75,1.0,anger
+3166,4,"14 hours, that's short notice",Marginal Station can't keep out the entire flotilla of imperial cruisers.,0.75,1.25,2.0,1.25,0.75,1.5,fear
+3166,5,why not,My objective right about now is saving Marginal. Or as much of it as I can. ... ... I have a little girl called Sheba. ...,0.5,0.5,0.5,0.0,0.25,0.75,challenge
+3166,6,what is sheba like,Sheba is too young to be shipped off to some Imperial Training school for readers. ... But could you help me with Sheba?,1.0,1.5,1.25,1.0,1.0,0.75,joy
+3166,7,how old is sheba,She is 13. ... ...,1.25,1.75,1.75,0.5,0.75,0.5,fear
+3166,8,wiggity whut,... So...,0.75,0.25,1.75,0.0,0.0,1.25,fear
+9056,0,"yeah, I'm Gordo ","(She looks serene.) Pleasure to see you, citizen. You could be the most important person on Marginal Station right now.",1.4,0.8,1.4,1.2,1.0,1.8,joy
+9056,1,"I can read it as you say it, but not before","The thing is, citizen, I've got a job for a person who won't mistreat a reader. Let's try this question instead.",1.2,1.4,1.4,1.4,0.8,1.0,joy
+9056,2,of course note!,"God. (She looks disgusted.) You don't like readers. I looked all over this station for someone who might not have that prejudice. You are an unpleasant type, aren't you.",1.2,1.2,1.0,1.2,1.2,1.6,anger
+9056,3,What can I help you with?,"I grew up in Eyautan Empire. ... If Marginal Station were a better place, I'd have someone I trusted with Sheba already.",0.6,1.2,0.8,1.0,1.2,1.0,challenge
+9056,4,where is sheba now?,She is at my quarters right about now. ... Maybe I can find someone else. I would be better off sending Sheba away with Commander Rickles. ......,1.2,1.4,1.0,1.0,1.0,1.4,sadness
+7010,0,tell me more about yes,"(She looks serene.)Pleasure to see you, citizen. You might just be my new best friend.",1.66666666667,1.0,1.33333333333,1.33333333333,0.666666666667,1.33333333333,joy
+7010,1,tell me more about yes,...Thanks for not pulling out some unconvincing excuse. I could understand hesitating to admit you are a reader. I have to tell you something.,0.666666666667,1.0,1.0,0.666666666667,0.666666666667,0.666666666667,anger
+3044,0,tell me more about Yes,"(She looks serene.)Pleasure to see you, good citizen. You might be the most important person on Marginal Station right now.",1.33333333333,1.33333333333,1.33333333333,1.66666666667,1.33333333333,1.66666666667,challenge
+3044,1,tell me more about Yes,...Thanks for not lying. A lot of readers would keep quiet what they are. I have to tell you something.,1.0,1.66666666667,1.33333333333,1.33333333333,1.0,1.66666666667,challenge
+3044,2,vicious,"As far as I know ""good emperor"" is inherently a contradiction. ... The entire flotilla of imperial cruisers will be here in about fourteen hours.",1.66666666667,1.66666666667,1.66666666667,2.0,2.0,2.0,anger
+3044,3,about,Marginal Station can't defend itself against an entire flotilla of imperial cruisers.,1.0,1.0,1.0,1.33333333333,1.0,1.0,challenge
+3044,4,entire flotilla of imperial cruisers,I don't understand. ... I've got a child named Sheba. ...,1.0,1.33333333333,1.66666666667,1.66666666667,1.33333333333,1.33333333333,fear
+3044,5,with you,"I'm native Eyautan, born in Shoesho. ... Could you escort her away from here?",1.66666666667,0.666666666667,1.0,1.66666666667,1.66666666667,1.66666666667,joy
+3044,6,?,"Right, well. Right.",1.66666666667,1.0,1.33333333333,1.33333333333,1.33333333333,1.0,challenge
+8935,0,tell me more about yes,"(She looks serene.)Pleasure to see you, good citizen. Being Vice Commander of Marginal Station, I can see anyone's personal profile.",1.0,1.33333333333,1.0,0.666666666667,0.666666666667,1.0,anger
+8935,1,tell me more about yes,...Thanks for not pulling out some unconvincing excuse. Readers will not usually volunteer who they are. There's something important I need to tell you.,0.666666666667,1.0,0.666666666667,0.666666666667,1.0,1.33333333333,joy
+8935,2,tell me more about yes,"Okay. Foolish question, I know, but some people come to this Station from the other direction.",0.333333333333,0.666666666667,1.0,0.666666666667,1.33333333333,0.666666666667,challenge
+8935,3,tell me more about yes,Yep. The entire flotilla of imperial cruisers is going to be here in around fourteen hours.,1.33333333333,1.33333333333,1.33333333333,0.333333333333,1.0,1.33333333333,fear
+8935,4,tell me more about ok,(Frown.) Marginal Station can't defend itself against an entire flotilla of imperial cruisers.,1.33333333333,0.666666666667,0.333333333333,0.666666666667,1.33333333333,1.33333333333,joy
+8935,5,tell me more about ok,(Frown.) The Eyautan Empire tends to reeducate any readers it finds. Forcibly.,0.666666666667,0.333333333333,1.33333333333,1.0,1.0,1.33333333333,joy
+8935,6,tell me more about ok,"Um, okay. I've got a little girl called Sheba. ...",1.0,1.33333333333,1.0,1.33333333333,1.0,0.333333333333,challenge
+8935,7,tell me more about ok,Then we have a plan. ...,1.0,1.0,1.0,0.666666666667,1.0,1.66666666667,frustration
+8935,8,tell me more about ok,"Thanks. This matters more than... well, do you have children?",1.66666666667,1.33333333333,1.0,0.666666666667,1.0,0.666666666667,sadness
+8935,9,tell me more about no,It's hard to explain. The obligation to someone you don't even always like. ... So...,1.0,1.33333333333,0.666666666667,0.666666666667,1.33333333333,1.33333333333,anger
+8935,10,tell me more about yes,Good. ...,0.333333333333,1.33333333333,1.33333333333,1.33333333333,1.0,1.0,challenge
+8935,11,tell me more about ok,(Frown.) ...,1.0,1.33333333333,1.0,0.666666666667,0.666666666667,1.0,anger
+8935,12,tell me more about ok,Yep. I need you to believe I'm doing my best for Sheba.,1.0,1.33333333333,1.0,0.666666666667,1.33333333333,1.0,challenge
+8935,13,tell me more about ok,I need you to go on thinking that. So Sheba reads it when she looks at you. ... I don't want her to grow up thinking I didn't care about her.,0.333333333333,0.666666666667,1.0,1.0,1.33333333333,1.0,joy
+8935,14,tell me more about ok,I'm glad you understand. ... This is Ty's responsibility. You can tell him that when you see him. ......,1.0,1.33333333333,1.33333333333,0.333333333333,1.0,1.0,anger
+4329,0,That's correct,"(She looks serene.)Pleasure to meet you, citizen. Being Vice Commander of Marginal Station, I can see anyone's personal profile.",0.666666666667,1.33333333333,0.333333333333,1.0,0.666666666667,1.0,challenge
+4329,1,tell me more about yes,...Thanks for not lying. A reader won't usually volunteer who they are. There's something you need to know.,1.0,1.33333333333,1.0,1.0,1.33333333333,1.33333333333,fear
+4329,2,Of course,"Okay. Foolish question, I know, but some people come to the station from the other direction.",1.33333333333,1.66666666667,1.66666666667,1.0,1.0,1.0,anger
+4329,3,What do you know about the empire?,Believe me.... Long range sensors have picked up an entire flotilla of imperial cruisers on the way here.,1.0,0.666666666667,1.0,0.666666666667,1.0,0.0,fear
+4329,4,Oh shit,"Get it together, my rude acquaintance. Marginal Station can't defend itself against an entire flotilla of imperial cruisers.",0.333333333333,1.33333333333,1.0,0.333333333333,0.333333333333,0.666666666667,challenge
+4329,5,What should we do to escape the empire?,Trust me on this.... The Eyautan Empire will forcibly retrain any readers it finds when it gets here.,1.33333333333,2.0,1.66666666667,1.33333333333,1.66666666667,1.0,joy
+4329,6,Let's escape,"In three or four hours, evacuations will begin in earnest. ... I've got a daughter called Sheba. ...",1.66666666667,1.33333333333,1.33333333333,1.66666666667,1.66666666667,1.0,joy
+4329,7,Your daughter?,I was born in Eyautan Empire. ... Could you take her away from here?,0.333333333333,1.33333333333,1.33333333333,0.666666666667,1.0,0.666666666667,joy
+4329,8,But I don't even know you,I read you as a real jerk. In any case...,0.333333333333,1.33333333333,0.666666666667,1.33333333333,0.666666666667,1.0,joy
+5523,0,tell me more about yes,"(She looks serene.)Pleasure to meet you, good citizen. You might be the most important person on Marginal Station right now.",1.66666666667,1.66666666667,0.666666666667,0.666666666667,1.33333333333,1.0,joy
+5523,1,tell me more about yes,...Thanks for not pulling out some unconvincing excuse. A lot of readers try to keep their skills quiet around here. There's something you need to know.,2.0,1.66666666667,1.33333333333,1.0,1.0,0.666666666667,fear
+5523,2,tell me more about yes,"Right. Foolish question, I know, but some people come to the station from the other direction.",1.33333333333,1.66666666667,0.666666666667,1.0,1.0,0.666666666667,joy
+5523,3,tell me more about ok,Yep. The entire flotilla of imperial cruisers will be here in about fourteen hours.,1.0,1.0,0.333333333333,1.0,1.0,0.0,challenge
+5523,4,tell me more about ok,Yep. Marginal Station can't keep out the entire flotilla of imperial cruisers.,1.0,1.0,0.333333333333,1.0,1.0,0.0,joy
+5523,5,that sounds bad,Exactly. ... I have a kid called Sheba. ...,1.0,1.66666666667,1.33333333333,1.0,1.33333333333,1.33333333333,joy
+5523,6,tell me more about ok,Then we have a plan. ...,1.66666666667,1.66666666667,1.33333333333,1.66666666667,1.33333333333,0.666666666667,joy
+5523,7,tell me more about ok,"Thanks. This matters more than... well, do you have children?",2.0,1.66666666667,1.0,1.33333333333,1.0,0.666666666667,joy
+5523,8,tell me more about no,It's hard to explain. The obligation to someone you don't even always like. ... So...,1.0,0.666666666667,1.0,0.666666666667,0.666666666667,1.66666666667,anger
+5523,9,tell me more about yes,Good. ...,1.66666666667,1.33333333333,1.33333333333,1.0,1.0,1.0,sadness
+5523,10,tell me more about ok,(Frown.) ...,0.666666666667,0.666666666667,0.666666666667,0.333333333333,0.666666666667,0.666666666667,joy
+5523,11,tell me more about ok,"Um, okay. I need you to believe I am doing my best for Sheba.",1.33333333333,1.0,0.666666666667,1.0,1.0,0.666666666667,joy
+5523,12,tell me more about ok,I need you to go on thinking that. So she sees it in your head. ... I don't want her to grow up thinking I didn't care about her.,1.33333333333,1.0,0.666666666667,1.33333333333,1.0,0.666666666667,joy
+5523,13,i understand,... This is Ty's responsibility. You can tell him that when you see him. ......,1.66666666667,1.33333333333,1.33333333333,1.0,1.33333333333,1.66666666667,joy
+6143,0,yo what's the time now,"(She looks serene.)Pleasure to meet you, citizen. At my access level, I know everything that happens on Marginal Station.",1.0,2.0,2.0,1.25,1.25,2.0,sadness
+6143,1,yes i do,...Thanks for not bullshitting me. Most readers try to keep their skills quiet around here. I have to tell you something.,0.5,1.25,2.0,1.25,1.75,0.5,joy
+6143,2,no i have no clue at all,You must be new on Marginal Station. The Empire owns a bigger and bigger chunk of the galaxy.,0.5,1.25,2.0,0.75,1.25,2.0,sadness
+6143,3,tell me more about ok,You can smell his stench from lightyears away. They are not our friends.,2.0,1.25,0.75,1.75,1.0,1.25,anger
+6143,4,hm,... Long range sensors have picked up an invading force on the way over here.,1.75,0.75,1.75,1.75,1.5,1.0,anger
+6143,5,ok who is our enemy,Yep. We have enough defenses to keep out pirates. That's not going to help against the Most Noble and Refined Eyautan Empire.,1.0,0.25,1.25,1.0,1.0,0.0,sadness
+7535,0,What ?,"Right, well. Fine. ...",1.0,1.0,1.66666666667,1.66666666667,1.0,1.0,challenge
+7535,1,"No Kara, really I don't understand you","The thing is, citizen, I've got a job for a person who won't mistreat readers. Let's try this question instead.",0.666666666667,1.66666666667,1.66666666667,1.33333333333,1.0,0.333333333333,frustration
+7535,2,I don't agree with you...,"Of course. (She looks disgusted.) You don't like readers. I looked all over this station for someone who might not have that prejudice. You are an unpleasant type, aren't you.",0.0,1.33333333333,1.33333333333,1.66666666667,1.33333333333,0.333333333333,anger
+7535,3,I want ask you something Kara,I've got a trustworthy reason. ... I know this Station is a waystation. But I hoped I could make it something more. But people don't bond around here. I haven't been invited anywhere in years.,0.666666666667,1.66666666667,2.0,1.66666666667,1.0,0.333333333333,challenge
+7535,4,Can I ask you another thing?,"I've got a trustworthy reason, believe me. ... Possibly I can find someone else. I'd be better off sending Sheba away with some friendly mercenary. ......",1.0,1.33333333333,2.0,1.33333333333,1.0,0.333333333333,challenge
+9968,0,Yeah I'm Gordo,"(She looks serene.) Pleasure to see you, good citizen. Being Vice Commander of Marginal Station, I can see anyone's personal profile.",0.333333333333,1.0,1.33333333333,1.33333333333,1.66666666667,1.33333333333,joy
+9968,1,"I could guess, but I'd rather you say it",...Thanks for not lying. Not every reader wants to admit it. There's something important I need to tell you.,0.666666666667,1.0,0.333333333333,1.33333333333,0.666666666667,1.0,challenge
+9968,2,Of course I've heard of them. What have they done now?,"It's hard not to know about them, I suppose.",0.666666666667,1.0,0.666666666667,0.666666666667,0.666666666667,0.666666666667,frustration
+9968,3,What have they done now?,... There is an entire flotilla of imperial cruisers on their way to Marginal Station now.,1.33333333333,1.0,1.33333333333,1.0,1.33333333333,1.0,anger
+9968,4,That's not good!,Agreed. ... Marginal Station can't keep out the entire flotilla of imperial cruisers.,0.666666666667,1.33333333333,0.666666666667,0.666666666667,0.333333333333,1.0,anger
+9968,5,What can I do to help?,Exactly. ... I have a kid named Sheba. ...,1.66666666667,1.66666666667,2.0,1.0,1.33333333333,1.66666666667,sadness
+9968,6,Do you trust me to do that?,"Getting there, I guess. ... But would you take her with you?",0.666666666667,1.33333333333,0.666666666667,1.0,0.666666666667,0.666666666667,challenge
+9968,7,Of course.,I don't want Sheba on Marginal Station when the Empire boards. I'm so glad you can help me. ...,0.666666666667,1.33333333333,0.666666666667,0.333333333333,1.0,1.0,joy
+9968,8,When should I leave?,I don't know quite what you have in mind. ... So...,0.666666666667,0.666666666667,1.33333333333,0.666666666667,0.666666666667,1.0,challenge
+9968,9,I can steal a ship,... Focus. ...,0.333333333333,1.33333333333,1.0,1.0,0.333333333333,0.666666666667,challenge
+9968,10,"tell me more about That would be better, good.",This is not the time for a debate over values. ... ...,1.0,1.0,0.666666666667,1.33333333333,0.666666666667,0.333333333333,anger
+9968,11,I won't let you down.,"I was born in Eyautan Empire. (She looks serene.) Stay alive. Keep her alive. Above all, don't let the Eyautan Empire take her. ......",1.0,0.666666666667,0.666666666667,0.333333333333,0.666666666667,1.0,challenge
+9971,0,tell me more about yes,"(She looks serene.)Pleasure to see you, citizen. I am Kara. Vice Commander here. But what I need is more of a personal favor.",1.0,1.0,1.33333333333,0.666666666667,1.0,2.0,joy
+9971,1,tell me more about yes,...Thanks for not pulling out some excuse. Readers won't usually volunteer who they are. I need to tell you something.,1.33333333333,1.0,1.0,1.0,1.0,1.33333333333,joy
+9971,2,tell me more about no,You must be new on this station. The Empire owns a bigger and bigger chunk of the galaxy.,1.0,0.666666666667,1.66666666667,0.666666666667,1.0,1.33333333333,anger
+9971,3,what is the goal of dominance?,I want you to take my daughter Sheba and go to Castellan Prior.. ... Long range sensors have picked up an Imperial battle group on their way to Marginal Station.,1.66666666667,0.333333333333,1.33333333333,1.33333333333,1.0,1.0,challenge
+9971,4,how would i take her there?,There are a few mercenary ships docked for shore leave. That's not going to protect us from the Empire.,1.33333333333,1.66666666667,1.66666666667,0.666666666667,1.0,1.33333333333,challenge
+9971,5,what can we do to protect us?,... I mentioned I have a daughter. ...,1.0,1.33333333333,1.0,1.0,1.33333333333,1.66666666667,frustration
+9971,6,do I need weapons?,... Would you take her away from here?,1.66666666667,1.0,1.66666666667,0.333333333333,1.66666666667,1.33333333333,fear
+9971,7,tell me more about no,You're heartless. Right.,1.33333333333,0.666666666667,1.33333333333,0.666666666667,0.333333333333,1.0,challenge
+9462,0,tell me more about no,"I've seen your profile data, good citizen. I am Kara. Vice Commander here, but I need to speak to you.",1.66666666667,1.33333333333,2.0,2.0,1.0,1.33333333333,challenge
+9462,1,why ,"The thing is, good citizen, I've got a job for a person who won't mistreat a reader. Let's try this question instead.",0.666666666667,1.33333333333,1.0,0.0,0.666666666667,1.33333333333,joy
+9462,2,i disagree,... I need to tell you something.,0.666666666667,0.333333333333,1.0,1.66666666667,1.33333333333,1.66666666667,challenge
+9462,3,I don't know it,You must be new on this station. The Empire owns a bigger and bigger chunk of the galaxy.,1.33333333333,0.0,1.33333333333,1.0,1.33333333333,1.33333333333,frustration
+9462,4,how do they own it,... The entire flotilla of imperial cruisers will be here in roughly fourteen hours.,1.0,1.0,1.66666666667,1.66666666667,1.66666666667,1.33333333333,challenge
+9462,5,tell me more about cruisers?,"In about fourteen hours, we'll have the Eyautan Empire cracking open Marginal Station like a cask of cheap vodka. ... Marginal Station can't defend itself against an entire flotilla of imperial cruisers.",1.66666666667,1.0,2.0,1.0,1.66666666667,1.0,challenge
+9462,6,can we escape,Anyway. I've got a child named Sheba. ...,0.666666666667,1.0,1.33333333333,0.333333333333,0.666666666667,0.666666666667,frustration
+9462,7,sheba?,... ...,1.33333333333,0.666666666667,1.66666666667,1.66666666667,0.666666666667,1.33333333333,challenge
+9462,8,where do I go>\?,I don't follow. ... So...,1.0,1.0,0.333333333333,0.666666666667,1.0,1.0,frustration
+9462,9,which ship?,A spaceship can come in all sizes around here. We can dock anything shy of a military cruiser. ... Eyes on me. ...,1.33333333333,1.0,1.0,1.0,0.666666666667,1.0,challenge
+9462,10,who is piloting the sip?,I don't get it. ... ...,1.33333333333,0.666666666667,1.0,0.666666666667,1.66666666667,1.33333333333,challenge
+9462,11,who is piloting the ship?,"I don't understand. ... Stay alive. Keep her alive. Above all, don't let the Most Noble and Refined Eyautan Empire of Shoesho and Associated Planets take her. ......",1.0,1.33333333333,1.33333333333,1.33333333333,1.0,1.33333333333,challenge
+3113,0,"Yeah, I'm Gordo","(She looks serene.) Pleasure to meet you, good citizen. I'm Kara. Vice Commander here, but what I need is more of a personal favor.",1.33333333333,1.0,1.66666666667,1.0,1.0,0.666666666667,joy
+3113,1,"No, of course not.","The thing is, citizen, I've got a job for someone who won't mistreat a reader. Let's try this question instead.",0.666666666667,1.33333333333,1.0,1.33333333333,1.33333333333,1.33333333333,anger
+3113,2,tell me more about No,"God. (She looks disgusted.) You don't like readers. I looked all over this station for someone who might not have that prejudice. You are an unpleasant type, aren't you.",1.0,1.33333333333,1.33333333333,1.33333333333,1.33333333333,1.0,anger
+3113,3,I'm a reader,"Right, well. If Marginal were a better place, I'd have someone I trusted with Sheba already.",1.33333333333,1.66666666667,1.33333333333,1.66666666667,1.33333333333,1.0,joy
+3113,4,Who is sheba?,Sheba is my daughter. ... Maybe I can find someone else. God. Even some friendly mercenary might be better. ......,1.0,1.66666666667,1.33333333333,0.666666666667,1.0,1.33333333333,anger
+3064,0,"Yes, can I help you?","(She looks serene.)Pleasure to see you, good citizen. At my access level, I know everything that happens on Marginal Station.",1.5,0.75,0.75,1.0,1.0,1.25,challenge
+3064,1,tell me more about uhhhh..... maybe,"(She looks disgusted.) Ew. Right, if you must play it that way. You are a reader. Am I on the right track?",1.25,1.0,0.75,1.5,1.25,1.25,challenge
+3064,2,tell me more about Perhaps,"(She looks disgusted.) Ew. You're lying, but I can understand why you would. You know... I don't think we have established a strong trust here.",1.25,1.25,1.5,1.5,1.25,1.0,challenge
+3064,3,I want to help you,"Right now I'm hoping to survive the next couple of hours. ... I know Marginal Station is a pit stop. But I hoped I could make it something more. But people don't feel like they owe each other anything. We don't do anniversaries, or weddings for the most part.",1.75,1.5,0.75,1.25,1.0,1.0,joy
+3064,4,Are you alright? how can i help you?,Right now I'm hoping to survive the next couple of hours. ... Possibly I can find someone else. God. Even a nice lady pirate might be better. ......,1.5,1.5,1.5,1.0,1.0,1.25,fear
+1657,0,"No, I am a stupid dog","I've seen your profile data, good citizen. I am Kara. Vice Commander here, but I need a favor.",0.0,1.0,1.0,2.0,0.0,1.0,anger
+1657,1,wtf,"(She looks disgusted.) You're lying, but I can understand why you would. Let's try this question instead.",1.0,2.0,1.0,2.0,1.0,1.0,anger
+1657,2,who are readers,"I don't get it. ... But seriously, are you okay with readers?",0.5,1.0,0.0,0.0,0.0,1.0,challenge
+1657,3,who are reade4rs,"Right, well. I have to tell you something.",1.0,1.5,0.5,0.0,1.5,0.5,challenge
+1657,4,tell me more about no,You must be new on Marginal Station. The Empire owns a bigger and bigger chunk of the galaxy.,1.0,1.5,2.0,0.5,0.5,1.5,joy
+1657,5,and?,... There's an entire flotilla of imperial cruisers heading to Marginal Station now.,0.5,1.0,1.0,0.5,0.5,1.0,joy
+3835,0,"yup, that's me","(She looks serene.)Pleasure to meet you, citizen. At my access level, I know everything that happens on Marginal Station.",2.0,1.5,1.5,2.0,1.25,1.25,boredom
+3835,1,tell me more about Yes,...Thanks for not bullshitting me. Readers will not usually volunteer who they are. I need to tell you something.,1.5,2.0,1.75,1.5,1.0,0.5,challenge
+3835,2,tell me more about No,You must be new on this station. The Empire owns a bigger and bigger chunk of the galaxy.,1.25,1.5,1.25,1.75,1.0,0.75,challenge
+3835,3,What do you wnat to do about it?,"Right this moment, I'm still Vice Commander here. ... There is an Imperial battle group on the way to Marginal now.",1.75,1.75,0.75,1.5,1.5,0.5,challenge
+3835,4,Do we have any defenses?,We have enough defenses to keep out pirates. That's not going to help against the Eyautan Empire.,1.5,1.5,1.0,1.25,1.5,1.0,challenge
+3835,5,"well, what other options do we have?","Right, well. I've got a little girl named Sheba. ...",1.5,1.5,0.75,1.5,1.75,0.75,fear
+3835,6,why not you?,You're heartless. In any case...,0.75,1.5,1.75,1.5,1.0,0.75,sadness
+2301,0,tell me more about Yeah.  And what of it?,"(She looks serene.)Pleasure to see you, good citizen. You might just be my new best friend.",1.33333333333,1.66666666667,1.33333333333,1.33333333333,1.66666666667,1.66666666667,joy
+2301,1,No. Go on.,"The thing is, citizen, I've got a job for someone who won't mistreat a reader. Let's try this question instead.",1.33333333333,1.33333333333,2.0,2.0,1.66666666667,2.0,anger
+2301,2,Not unless there was a great reason.,"God. (She looks disgusted.) You don't like readers. I looked all over this station for someone who might not have that prejudice. You are an unpleasant type, aren't you.",1.33333333333,1.66666666667,1.0,1.33333333333,1.0,1.33333333333,challenge
+2301,3,"Look lady, I might be able to help even if readers aren't my favorite.",... I know Marginal Station is a pit stop. But I hoped I could make it something more. But people don't feel like they owe each other anything. People here don't celebrate holidays.,0.333333333333,1.66666666667,1.66666666667,2.0,1.66666666667,2.0,frustration
+2301,4,tell me more about too bad,I'm uncertain of where to start. ... Possibly I can find someone else. I'd be better off sending Sheba away with Frank the amnesiac bartender. ......,1.33333333333,1.0,1.66666666667,1.33333333333,1.0,1.66666666667,boredom
+5502,0,tell me more about Yes,"(She looks serene.)Pleasure to meet you, citizen. I am Kara. Vice Commander here. But I need to speak to you.",1.0,1.0,1.5,2.0,1.0,1.5,joy
+5502,1,tell me more about Yes,...Thanks for not lying. Readers won't usually volunteer who they are. I have to tell you something.,1.5,1.0,1.0,0.5,1.0,0.5,joy
+5502,2,tell me more about Yes,"Okay. Foolish question, I know, but some people come to Marginal Station from the other direction.",1.5,1.0,2.0,1.0,1.5,2.0,joy
+5502,3,Go ahead and ask me your question,"I've got a satisfying reason, believe me. ... The entire flotilla of imperial cruisers is going to be here in about fourteen hours.",1.5,1.5,1.5,0.5,0.5,2.0,joy
+5502,4,How can I help you?,Marginal Station can't defend itself against an invading force.,0.5,2.0,0.5,1.5,1.0,2.0,joy
+5502,5,How can we get off the station?,I don't know quite what you have in mind. ... The Eyautan Empire tends to offer ideological reorientation to any readers it finds. Forcibly.,1.5,1.5,0.0,0.5,0.5,1.5,joy
+5502,6,We should escape befor they arrive,... I've got a girl named Sheba. ...,1.0,1.5,1.5,0.5,1.0,2.0,joy
+5502,7,How can we get off the station?,I don't know exactly what event you are asking about. ... Could you help me with Sheba?,1.5,1.5,1.5,0.5,0.5,1.5,anger
+5502,8,tell me more about Yes,Then we have a plan. ...,1.0,1.5,1.0,1.5,1.5,1.5,joy
+5502,9,tell me more about Ok,"Thanks. This matters more than... well, do you have children?",1.5,0.5,0.5,1.5,1.5,1.5,joy
+5502,10,no I don't,It's hard to explain. The obligation to someone you don't even always like. ... So...,1.5,1.5,0.5,1.5,1.0,2.0,joy
+5502,11,tell me more about No,There has to be some way to help you escape. ...,1.5,1.5,1.5,0.5,1.5,2.0,joy
+5502,12,Can you lead us to one,"For your own good, among other reasons. ... ...",1.0,1.0,1.0,1.5,1.5,2.0,joy
+5502,13,Should we get your daughter?,"I was born in Eyautan Empire. (She looks serene.) Stay alive. Keep her alive. Above all, don't let the Most Noble and Refined Eyautan Empire of Shoesho and Associated Planets take her. ......",1.5,1.0,1.5,1.5,1.0,1.5,joy
+8703,0,Absolutely,... Okay. I'm Kara. Vice Commander here. But I need to speak to you.,1.33333333333,1.0,2.0,1.66666666667,1.0,1.66666666667,joy
+8703,1,I can,... You are a reader. That true?,1.33333333333,1.33333333333,1.66666666667,1.66666666667,1.0,1.66666666667,anger
+8703,2,tell me more about Yes,...Thanks for not pulling out some unconvincing excuse. Readers will not usually volunteer who they are. I'm going to tell you something.,1.66666666667,0.666666666667,1.0,1.66666666667,1.33333333333,1.33333333333,anger
+8703,3,tell me more about Not at all!!!,Sounds like you are new on this station. The Empire owns a bigger and bigger chunk of the galaxy.,1.33333333333,1.0,1.66666666667,1.33333333333,1.33333333333,0.666666666667,sadness
+8703,4,Sounds evil to me,I know how you feel. ... Long range sensors have picked up an entire flotilla of imperial cruisers on the way to Marginal Station.,1.33333333333,1.66666666667,1.33333333333,1.33333333333,0.666666666667,2.0,fear
+8703,5,Let's get out of here,Marginal Station can't keep out the entire flotilla of imperial cruisers.,1.33333333333,1.66666666667,0.666666666667,1.33333333333,0.666666666667,2.0,anger
+8703,6,We're doomed,Anyway. I've got a girl named Sheba. ...,0.666666666667,0.333333333333,1.33333333333,1.0,1.33333333333,0.333333333333,anger
+8703,7,Ok let's go!,Then we have a plan. ...,0.666666666667,0.666666666667,1.33333333333,1.33333333333,1.33333333333,1.0,anger
+8703,8,tell me more about Sure,I don't understand. (She looks serene.) So...,1.66666666667,0.666666666667,1.66666666667,0.666666666667,1.0,1.33333333333,joy
+8703,9,tell me more about Nope,There has to be some way to help you escape. ...,1.0,1.33333333333,1.33333333333,0.666666666667,1.66666666667,1.33333333333,challenge
+8703,10,Let's go,"... You'll have a few crew members, room for passage...",1.33333333333,0.666666666667,0.333333333333,1.0,1.66666666667,1.33333333333,anger
+8703,11,tell me more about Ok,Yep. ...,0.666666666667,0.333333333333,0.666666666667,1.0,0.333333333333,0.666666666667,joy
+8703,12,It'll work out!,"... Stay alive. Keep her alive. Above all, don't let the Most Noble and Refined Eyautan Empire take her. ......",1.0,0.666666666667,0.666666666667,1.33333333333,0.666666666667,0.666666666667,joy
