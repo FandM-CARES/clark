@@ -30,7 +30,7 @@ class ProcessedData(object):
                     parsed.append(row)
         return parsed
 
-    def split_data(self, datasets, split=.75):
+    def split_data(self, datasets, split=0.75):
         """
         Splits data into training and testing sets 
 
@@ -54,25 +54,3 @@ class ProcessedData(object):
                 else:
                     train.append(row)
         return train, test
-
-    def plotData(self):
-        colors = ["red", "blue", "green", "yellow", "brown", "purple"]
-        i = 0
-        for var in self.dataPoints:
-            sns.distplot(self.dataPoints[var], color=colors[i], label=var)
-            i += 1
-        plt.legend()
-        plt.show()
-
-    def calcSTDData(self):
-        res = []
-        for var in self.dataPoints:
-            res.append([np.mean(self.dataPoints[var]),
-                        np.std(self.dataPoints[var]), var])
-        return res
-
-    def calcBoundsData(self, stdData):
-        for var in stdData:
-            lb = var[0] - (var[1] / 2)
-            ub = var[0] + (var[1] / 2)
-            print(lb, ub, var[2])
