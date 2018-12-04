@@ -6,8 +6,6 @@ stop_words = set(stopwords.words('english'))
 Helper functions for parsing inputs
 """
 
-
-
 def tokenize(row):
     """
     Tokenizes the row exluding .;,:/-_&~

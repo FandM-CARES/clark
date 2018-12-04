@@ -32,7 +32,12 @@ def n_fold_test(data_list, n):
     for var in mean_fscores:
         mean_fscores[var] /= n
 
-    return mean_fscores
+    with open('results/output.csv', 'w') as csv_file:
+        writer = csv.writer(csv_file)
+        for key, value in mean_fscores.items():
+            writer.writerow([key, value])
+    
+    print('Done!')
 
 def train_test_split(data_list, s, show_matrix=False):
     """
@@ -56,4 +61,9 @@ def train_test_split(data_list, s, show_matrix=False):
     if show_matrix:
         clark.confusion_matrix()
     
-    return clark.precisions
+    with open('results/output.csv', 'w') as csv_file:
+        writer = csv.writer(csv_file)
+        for key, value in clark.fscores.items():
+            writer.writerow([key, value])
+    
+    print('Done!')
