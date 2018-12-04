@@ -4,15 +4,12 @@ import numpy as np
 import itertools
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
-import nltk
-from nltk.corpus import stopwords
-stop_words = set(stopwords.words('english'))
+from nlp_helpers import *
 
 class Model(object):
 
     def __init__(self):
-        self.variables = ['Pleasantness', 'Attention', 'Control',
-                          'Certainty', 'Anticipated Effort', 'Responsibililty']
+        self.variables = ['Pleasantness', 'Attention', 'Control', 'Certainty', 'Anticipated Effort', 'Responsibililty']
         self.unigrams = {}
         self.priors = {}
         self.bounds = {}
@@ -68,20 +65,16 @@ class Model(object):
 
         for row in training_set:
             weight = self.numToClassificationWeight(row, variable)
-            res = self.tokenize(row['Player Message'])
+            res = tokenize(row['Player Message'])
             for word in res:
-                if word in stop_words:
-                    continue
-                word = word.lower()
+                if is_stop_word(word): continue
                 if word in words:
                     words[word][weight] += 1
-                    totals = self.allocateClassificationWeightToTotal(
-                        weight, totals)
+                    totals = self.allocateClassificationWeightToTotal(weight, totals)
                 else:
                     words[word] = {'low': 1, 'med': 1, 'high': 1}
                     words[word][weight] += 1
-                    totals = self.allocateClassificationWeightToTotal(
-                        weight, totals)
+                    totals = self.allocateClassificationWeightToTotal(weight, totals)
 
         PPs = {
             'low': float(totals['num_low'])/float(totals['num_low'] + totals['num_med'] + totals['num_high']),
@@ -90,28 +83,6 @@ class Model(object):
         }
 
         return words, totals, PPs
-
-    def tokenize(self, row):
-        """
-        Tokenizes the row exluding .;,:/-_&~
-
-        Parameters:
-        row (string): row of data
-
-        Returns:
-        String: tokenized word
-        """
-
-        stop_characters = ['.',';',':','/','-','_','&','~',',']
-        init_res = nltk.word_tokenize(row)
-        for i, word in enumerate(init_res):
-            if word[0] == "'":
-                init_res[i-1] = init_res[i-1] + init_res[i]
-                del init_res[i]
-            if word in stop_characters:
-                del init_res[i]
-        
-        return init_res
 
     def allocateClassificationWeightToTotal(self, cw, totals):
         """
@@ -261,11 +232,9 @@ class Model(object):
 
         for row in testing_data:
             res = []
-            response = self.tokenize(row['Player Message'])
+            response = tokenize(row['Player Message'])
             for word in response:
-                if word in stop_words:
-                    continue
-                word = word.lower()
+                if is_stop_word(word): continue
                 res.append(word)
             parsed_message = ' '.join(res)
             messages[parsed_message] = {}
@@ -274,8 +243,7 @@ class Model(object):
                 TP_FN[var][weight] += 1
                 self.true[var].append(weight)
                 messages[parsed_message][var] = weight
-                classification = self.classify(
-                    self.unigrams[var], parsed_message, self.priors[var])
+                classification = self.classify(self.unigrams[var], parsed_message, self.priors[var])
                 TP_FP[var][classification] += 1
                 self.pred[var].append(classification)
                 if classification == messages[parsed_message][var]:
@@ -290,8 +258,7 @@ class Model(object):
             self.precisions[var] = float(mean_precision/3)
             self.recalls[var] = float(mean_recall/3)
 
-            self.fscores[var] = (2 * self.precisions[var] * self.recalls[var]
-                                 )/(self.precisions[var] + self.recalls[var])
+            self.fscores[var] = (2 * self.precisions[var] * self.recalls[var])/(self.precisions[var] + self.recalls[var])
 
     def classify(self, trainingDict, content, PPs):
         """
