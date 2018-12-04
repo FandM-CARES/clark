@@ -117,59 +117,41 @@ class Model(object):
         """
 
         def numToCWForPleasantness(row):
-            if float(row['Pleasantness']) <= self.bounds['Pleasantness']['lower']:
-                return 'low'
-            if float(row['Pleasantness']) <= self.bounds['Pleasantness']['upper']:
-                return 'med'
+            if float(row['Pleasantness']) <= self.bounds['Pleasantness']['lower']: return 'low'
+            if float(row['Pleasantness']) <= self.bounds['Pleasantness']['upper']: return 'med'
             return 'high'
 
         def numToCWForAttention(row):
-            if float(row['Attention']) <= self.bounds['Attention']['lower']:
-                return 'low'
-            if float(row['Attention']) <= self.bounds['Attention']['upper']:
-                return 'med'
+            if float(row['Attention']) <= self.bounds['Attention']['lower']: return 'low'
+            if float(row['Attention']) <= self.bounds['Attention']['upper']: return 'med'
             return 'high'
 
         def numToCWForControl(row):
-            if float(row['Control']) <= self.bounds['Control']['lower']:
-                return 'low'
-            if float(row['Control']) <= self.bounds['Control']['upper']:
-                return 'med'
+            if float(row['Control']) <= self.bounds['Control']['lower']: return 'low'
+            if float(row['Control']) <= self.bounds['Control']['upper']: return 'med'
             return 'high'
 
         def numToCWForCertainty(row):
-            if float(row['Certainty']) <= self.bounds['Certainty']['lower']:
-                return 'low'
-            if float(row['Certainty']) <= self.bounds['Certainty']['upper']:
-                return 'med'
+            if float(row['Certainty']) <= self.bounds['Certainty']['lower']: return 'low'
+            if float(row['Certainty']) <= self.bounds['Certainty']['upper']: return 'med'
             return 'high'
 
         def numToCWForAnticipatedEffort(row):
-            if float(row['Anticipated Effort']) <= self.bounds['Anticipated Effort']['lower']:
-                return 'low'
-            if float(row['Anticipated Effort']) <= self.bounds['Anticipated Effort']['upper']:
-                return 'med'
+            if float(row['Anticipated Effort']) <= self.bounds['Anticipated Effort']['lower']: return 'low'
+            if float(row['Anticipated Effort']) <= self.bounds['Anticipated Effort']['upper']: return 'med'
             return 'high'
 
         def numToCWForResponsibility(row):
-            if float(row['Responsibililty']) <= self.bounds['Responsibililty']['lower']:
-                return 'low'
-            if float(row['Responsibililty']) <= self.bounds['Responsibililty']['upper']:
-                return 'med'
+            if float(row['Responsibililty']) <= self.bounds['Responsibililty']['lower']: return 'low'
+            if float(row['Responsibililty']) <= self.bounds['Responsibililty']['upper']: return 'med'
             return 'high'
 
-        if variable == 'Pleasantness':
-            return numToCWForPleasantness(row)
-        if variable == 'Attention':
-            return numToCWForAttention(row)
-        if variable == 'Control':
-            return numToCWForControl(row)
-        if variable == 'Certainty':
-            return numToCWForCertainty(row)
-        if variable == 'Anticipated Effort':
-            return numToCWForAnticipatedEffort(row)
-        if variable == 'Responsibililty':
-            return numToCWForResponsibility(row)
+        if variable == 'Pleasantness': return numToCWForPleasantness(row)
+        if variable == 'Attention': return numToCWForAttention(row)
+        if variable == 'Control': return numToCWForControl(row)
+        if variable == 'Certainty': return numToCWForCertainty(row)
+        if variable == 'Anticipated Effort': return numToCWForAnticipatedEffort(row)
+        if variable == 'Responsibililty': return numToCWForResponsibility(row)
 
     def smooth_values(self, unigrams, variable, totals):
         """
@@ -185,12 +167,9 @@ class Model(object):
         """
 
         for word in unigrams:
-            unigrams[word]['low'] = float(
-                unigrams[word]['low'])/float(totals['num_low'])
-            unigrams[word]['med'] = float(
-                unigrams[word]['med'])/float(totals['num_med'])
-            unigrams[word]['high'] = float(
-                unigrams[word]['high'])/float(totals['num_high'])
+            unigrams[word]['low'] = float(unigrams[word]['low'])/float(totals['num_low'])
+            unigrams[word]['med'] = float(unigrams[word]['med'])/float(totals['num_med'])
+            unigrams[word]['high'] = float(unigrams[word]['high'])/float(totals['num_high'])
 
         return unigrams
 
@@ -258,7 +237,7 @@ class Model(object):
             self.precisions[var] = float(mean_precision/3)
             self.recalls[var] = float(mean_recall/3)
 
-            self.fscores[var] = (2 * self.precisions[var] * self.recalls[var])/(self.precisions[var] + self.recalls[var])
+            self.fscores[var] = float(2) * self.precisions[var] * self.recalls[var]/(self.precisions[var] + self.recalls[var])
 
     def classify(self, trainingDict, content, PPs):
         """
@@ -278,13 +257,13 @@ class Model(object):
 
         for word in content.split():
             if word in trainingDict:
-                sumLow += float(math.log(trainingDict[word]['low'], 10))
-                sumMed += float(math.log(trainingDict[word]['med'], 10))
-                sumHigh += float(math.log(trainingDict[word]['high'], 10))
+                sumLow += float(math.log(trainingDict[word]['low']))
+                sumMed += float(math.log(trainingDict[word]['med']))
+                sumHigh += float(math.log(trainingDict[word]['high']))
 
-        lowProb = math.log(PPs['low'], 10) + sumLow
-        medProb = math.log(PPs['med'], 10) + sumMed
-        highProb = math.log(PPs['high'], 10) + sumHigh
+        lowProb = math.log(PPs['low']) + sumLow
+        medProb = math.log(PPs['med']) + sumMed
+        highProb = math.log(PPs['high']) + sumHigh
 
         maxVal = max([lowProb, medProb, highProb])
         if lowProb == maxVal:
@@ -345,10 +324,13 @@ class Model(object):
         Computes the confusion matrices for each of the variables
 
         """
+
         for var in self.variables:
             cn_matrix = confusion_matrix(self.true[var], self.pred[var])
-            self.plot_confusion_matrix(
-                cn_matrix, ['low', 'med', 'high'], var, normalize)
+            self.plot_confusion_matrix(cn_matrix, ['low', 'med', 'high'], var, normalize)
+            # recalls = np.sum((np.diag(cn_matrix) / np.sum(cn_matrix, axis = 1)) / 3
+            # print(recalls, "recall", var)
+            # print( np.diag(cn_matrix) / np.sum(cn_matrix, axis = 0), "precision", var)
 
     def plot_confusion_matrix(self, cm, classes, title, normalize=False, cmap=plt.cm.Blues):
         """
@@ -377,5 +359,5 @@ class Model(object):
         plt.ylabel('True label')
         plt.xlabel('Predicted label')
         plt.tight_layout()
-        plt.savefig('results/' + title + '.png')
+        plt.savefig('results/confusion_matrices/' + title + '.png')
         plt.close()
