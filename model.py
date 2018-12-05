@@ -4,9 +4,8 @@ import numpy as np
 import itertools
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
-import nltk
-from nltk.corpus import stopwords
-stop_words = set(stopwords.words('english'))
+from nlp_helpers import *
+
 
 class Model(object):
 
@@ -16,9 +15,8 @@ class Model(object):
         self.unigrams = {}
         self.priors = {}
         self.bounds = {}
-        self.precisions = {}
-        self.recalls = {}
-        self.fscores = {}
+        self.micro_fscores = {}
+        self.macro_fscores = {}
         self.true = {}
         self.pred = {}
 
@@ -68,11 +66,10 @@ class Model(object):
 
         for row in training_set:
             weight = self.numToClassificationWeight(row, variable)
-            res = self.tokenize(row['Player Message'])
+            res = tokenize(row['Player Message'])
             for word in res:
-                if word in stop_words:
+                if is_stop_word(word):
                     continue
-                word = word.lower()
                 if word in words:
                     words[word][weight] += 1
                     totals = self.allocateClassificationWeightToTotal(
@@ -90,28 +87,6 @@ class Model(object):
         }
 
         return words, totals, PPs
-
-    def tokenize(self, row):
-        """
-        Tokenizes the row exluding .;,:/-_&~
-
-        Parameters:
-        row (string): row of data
-
-        Returns:
-        String: tokenized word
-        """
-
-        stop_characters = ['.',';',':','/','-','_','&','~',',']
-        init_res = nltk.word_tokenize(row)
-        for i, word in enumerate(init_res):
-            if word[0] == "'":
-                init_res[i-1] = init_res[i-1] + init_res[i]
-                del init_res[i]
-            if word in stop_characters:
-                del init_res[i]
-        
-        return init_res
 
     def allocateClassificationWeightToTotal(self, cw, totals):
         """
@@ -236,62 +211,65 @@ class Model(object):
         total = len(testing_data)
         messages = {}
 
-        TP = {}
-        TP_FP = {}
-        TP_FN = {}
-
         for var in self.variables:
-            TP[var] = {
-                'high': 0,
-                'med': 0,
-                'low': 0
-            }
-            TP_FP[var] = {
-                'high': 0,
-                'med': 0,
-                'low': 0
-            }
-            TP_FN[var] = {
-                'high': 0,
-                'med': 0,
-                'low': 0
-            }
             self.true[var] = []
             self.pred[var] = []
 
         for row in testing_data:
             res = []
-            response = self.tokenize(row['Player Message'])
+            response = tokenize(row['Player Message'])
             for word in response:
-                if word in stop_words:
+                if is_stop_word(word):
                     continue
-                word = word.lower()
                 res.append(word)
             parsed_message = ' '.join(res)
             messages[parsed_message] = {}
             for var in self.variables:
                 weight = self.numToClassificationWeight(row, var)
-                TP_FN[var][weight] += 1
                 self.true[var].append(weight)
                 messages[parsed_message][var] = weight
-                classification = self.classify(
-                    self.unigrams[var], parsed_message, self.priors[var])
-                TP_FP[var][classification] += 1
+                classification = self.classify(self.unigrams[var], parsed_message, self.priors[var])
                 self.pred[var].append(classification)
-                if classification == messages[parsed_message][var]:
-                    TP[var][classification] += 1
+
+        self.calculate_scores()
+    
+    def calculate_scores(self):
+        """
+        Calculates the micro and macro f scores for each variable
+
+        Parameters:
+        None
+
+        Returns:
+        None
+        """
 
         for var in self.variables:
-            mean_precision = 0
-            mean_recall = 0
-            for label in ['high', 'med', 'low']:
-                mean_precision += float(TP[var][label]/TP_FP[var][label])
-                mean_recall += float(TP[var][label]/TP_FN[var][label])
-            self.precisions[var] = float(mean_precision/3)
-            self.recalls[var] = float(mean_recall/3)
+            self.pred[var] = np.asarray(self.pred[var])
+            self.true[var] = np.asarray(self.true[var])
+            
+            TP = np.sum(np.logical_or(np.logical_or(np.logical_and(self.pred[var] == 'low', self.true[var] == 'low'), np.logical_and(
+                    self.pred[var] == 'med', self.true[var] == 'med')), np.logical_and(self.pred[var] == 'high', self.true[var] == 'high')))
+            TP_FP = len(self.pred[var])
+            TP_FN = len(self.true[var])         
+            
+            pi = TP / TP_FP
+            ro = TP / TP_FN
+            self.micro_fscores[var] = 2 * pi * ro / (pi + ro)
 
-            self.fscores[var] = (2 * self.precisions[var] * self.recalls[var]
-                                 )/(self.precisions[var] + self.recalls[var])
+            temp_macro = 0
+            for c in ['high', 'med', 'low']:
+                TP_c = np.sum(np.logical_and(self.pred[var] == c, self.true[var] == c))
+                TP_FP_c = len([x for x in self.pred[var] if x != c])
+                TP_FN_c = len([x for x in self.true[var] if x == c])
+
+                pi_c = TP_c / TP_FP_c
+                ro_c = TP_c / TP_FN_c
+
+                temp_macro += 2 * pi_c * ro_c / (pi_c + ro_c)
+            
+            self.macro_fscores[var] = temp_macro / 3
+
 
     def classify(self, trainingDict, content, PPs):
         """
@@ -311,13 +289,13 @@ class Model(object):
 
         for word in content.split():
             if word in trainingDict:
-                sumLow += float(math.log(trainingDict[word]['low'], 10))
-                sumMed += float(math.log(trainingDict[word]['med'], 10))
-                sumHigh += float(math.log(trainingDict[word]['high'], 10))
+                sumLow += float(math.log(trainingDict[word]['low']))
+                sumMed += float(math.log(trainingDict[word]['med']))
+                sumHigh += float(math.log(trainingDict[word]['high']))
 
-        lowProb = math.log(PPs['low'], 10) + sumLow
-        medProb = math.log(PPs['med'], 10) + sumMed
-        highProb = math.log(PPs['high'], 10) + sumHigh
+        lowProb = math.log(PPs['low']) + sumLow
+        medProb = math.log(PPs['med']) + sumMed
+        highProb = math.log(PPs['high']) + sumHigh
 
         maxVal = max([lowProb, medProb, highProb])
         if lowProb == maxVal:
@@ -362,7 +340,6 @@ class Model(object):
 
         Returns:
         None
-
         """
         std_data = self.calc_std_data(dataPoints)
         for var in std_data:
@@ -374,10 +351,9 @@ class Model(object):
 
     def confusion_matrix(self, normalize=False):
         """
-
         Computes the confusion matrices for each of the variables
-
         """
+
         for var in self.variables:
             cn_matrix = confusion_matrix(self.true[var], self.pred[var])
             self.plot_confusion_matrix(
@@ -404,11 +380,11 @@ class Model(object):
         thresh = cm.max() / 2.
         for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
             plt.text(j, i, format(cm[i, j], fmt),
-                    horizontalalignment="center",
-                    color="white" if cm[i, j] > thresh else "black")
+                     horizontalalignment="center",
+                     color="white" if cm[i, j] > thresh else "black")
 
         plt.ylabel('True label')
         plt.xlabel('Predicted label')
         plt.tight_layout()
-        plt.savefig('results/' + title + '.png')
+        plt.savefig('results/confusion_matrices/' + title + '.png')
         plt.close()

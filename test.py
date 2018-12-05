@@ -20,19 +20,28 @@ def n_fold_test(data_list, n):
 
     mean_fscores = {}
     for var in Model().variables:
-        mean_fscores[var] = 0
+        mean_fscores[var] = [0, 0]
 
     for i, split in enumerate(splits):
         clark = Model()
         clark.train(np.concatenate(splits[:i]+splits[i+1:]))
         clark.test(splits[i])
-        for var in clark.precisions:
-            mean_fscores[var] += clark.fscores[var]    
+        for var in clark.variables:
+            mean_fscores[var][0] += clark.micro_fscores[var]
+            mean_fscores[var][1] += clark.macro_fscores[var]
 
     for var in mean_fscores:
-        mean_fscores[var] /= n
+        mean_fscores[var][0] /= n
+        mean_fscores[var][1] /= n
 
-    return mean_fscores
+    with open('results/output.csv', 'w') as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerow(['Variable', 'Micro F Score', 'Macro F Score'])
+        for key, value in mean_fscores.items():
+            writer.writerow([key, value[0], value[1]])
+
+    print('Done!')
+
 
 def train_test_split(data_list, s, show_matrix=False):
     """
@@ -55,5 +64,16 @@ def train_test_split(data_list, s, show_matrix=False):
 
     if show_matrix:
         clark.confusion_matrix()
-    
-    return clark.precisions
+
+    fscores = {}
+    for var in clark.variables:
+        fscores[var] = [0, 0]
+        fscores[var][0] = clark.micro_fscores[var]
+        fscores[var][1] = clark.macro_fscores[var]
+
+    with open('results/output.csv', 'w') as csv_file:
+        writer = csv.writer(csv_file)
+        for key, value in fscores.items():
+            writer.writerow([key, value[0], value[1]])
+
+    print('Done!')
