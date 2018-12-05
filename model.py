@@ -6,16 +6,17 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from nlp_helpers import *
 
+
 class Model(object):
 
     def __init__(self):
-        self.variables = ['Pleasantness', 'Attention', 'Control', 'Certainty', 'Anticipated Effort', 'Responsibililty']
+        self.variables = ['Pleasantness', 'Attention', 'Control',
+                          'Certainty', 'Anticipated Effort', 'Responsibililty']
         self.unigrams = {}
         self.priors = {}
         self.bounds = {}
-        self.precisions = {}
-        self.recalls = {}
-        self.fscores = {}
+        self.micro_fscores = {}
+        self.macro_fscores = {}
         self.true = {}
         self.pred = {}
 
@@ -67,14 +68,17 @@ class Model(object):
             weight = self.numToClassificationWeight(row, variable)
             res = tokenize(row['Player Message'])
             for word in res:
-                if is_stop_word(word): continue
+                if is_stop_word(word):
+                    continue
                 if word in words:
                     words[word][weight] += 1
-                    totals = self.allocateClassificationWeightToTotal(weight, totals)
+                    totals = self.allocateClassificationWeightToTotal(
+                        weight, totals)
                 else:
                     words[word] = {'low': 1, 'med': 1, 'high': 1}
                     words[word][weight] += 1
-                    totals = self.allocateClassificationWeightToTotal(weight, totals)
+                    totals = self.allocateClassificationWeightToTotal(
+                        weight, totals)
 
         PPs = {
             'low': float(totals['num_low'])/float(totals['num_low'] + totals['num_med'] + totals['num_high']),
@@ -117,41 +121,59 @@ class Model(object):
         """
 
         def numToCWForPleasantness(row):
-            if float(row['Pleasantness']) <= self.bounds['Pleasantness']['lower']: return 'low'
-            if float(row['Pleasantness']) <= self.bounds['Pleasantness']['upper']: return 'med'
+            if float(row['Pleasantness']) <= self.bounds['Pleasantness']['lower']:
+                return 'low'
+            if float(row['Pleasantness']) <= self.bounds['Pleasantness']['upper']:
+                return 'med'
             return 'high'
 
         def numToCWForAttention(row):
-            if float(row['Attention']) <= self.bounds['Attention']['lower']: return 'low'
-            if float(row['Attention']) <= self.bounds['Attention']['upper']: return 'med'
+            if float(row['Attention']) <= self.bounds['Attention']['lower']:
+                return 'low'
+            if float(row['Attention']) <= self.bounds['Attention']['upper']:
+                return 'med'
             return 'high'
 
         def numToCWForControl(row):
-            if float(row['Control']) <= self.bounds['Control']['lower']: return 'low'
-            if float(row['Control']) <= self.bounds['Control']['upper']: return 'med'
+            if float(row['Control']) <= self.bounds['Control']['lower']:
+                return 'low'
+            if float(row['Control']) <= self.bounds['Control']['upper']:
+                return 'med'
             return 'high'
 
         def numToCWForCertainty(row):
-            if float(row['Certainty']) <= self.bounds['Certainty']['lower']: return 'low'
-            if float(row['Certainty']) <= self.bounds['Certainty']['upper']: return 'med'
+            if float(row['Certainty']) <= self.bounds['Certainty']['lower']:
+                return 'low'
+            if float(row['Certainty']) <= self.bounds['Certainty']['upper']:
+                return 'med'
             return 'high'
 
         def numToCWForAnticipatedEffort(row):
-            if float(row['Anticipated Effort']) <= self.bounds['Anticipated Effort']['lower']: return 'low'
-            if float(row['Anticipated Effort']) <= self.bounds['Anticipated Effort']['upper']: return 'med'
+            if float(row['Anticipated Effort']) <= self.bounds['Anticipated Effort']['lower']:
+                return 'low'
+            if float(row['Anticipated Effort']) <= self.bounds['Anticipated Effort']['upper']:
+                return 'med'
             return 'high'
 
         def numToCWForResponsibility(row):
-            if float(row['Responsibililty']) <= self.bounds['Responsibililty']['lower']: return 'low'
-            if float(row['Responsibililty']) <= self.bounds['Responsibililty']['upper']: return 'med'
+            if float(row['Responsibililty']) <= self.bounds['Responsibililty']['lower']:
+                return 'low'
+            if float(row['Responsibililty']) <= self.bounds['Responsibililty']['upper']:
+                return 'med'
             return 'high'
 
-        if variable == 'Pleasantness': return numToCWForPleasantness(row)
-        if variable == 'Attention': return numToCWForAttention(row)
-        if variable == 'Control': return numToCWForControl(row)
-        if variable == 'Certainty': return numToCWForCertainty(row)
-        if variable == 'Anticipated Effort': return numToCWForAnticipatedEffort(row)
-        if variable == 'Responsibililty': return numToCWForResponsibility(row)
+        if variable == 'Pleasantness':
+            return numToCWForPleasantness(row)
+        if variable == 'Attention':
+            return numToCWForAttention(row)
+        if variable == 'Control':
+            return numToCWForControl(row)
+        if variable == 'Certainty':
+            return numToCWForCertainty(row)
+        if variable == 'Anticipated Effort':
+            return numToCWForAnticipatedEffort(row)
+        if variable == 'Responsibililty':
+            return numToCWForResponsibility(row)
 
     def smooth_values(self, unigrams, variable, totals):
         """
@@ -167,9 +189,12 @@ class Model(object):
         """
 
         for word in unigrams:
-            unigrams[word]['low'] = float(unigrams[word]['low'])/float(totals['num_low'])
-            unigrams[word]['med'] = float(unigrams[word]['med'])/float(totals['num_med'])
-            unigrams[word]['high'] = float(unigrams[word]['high'])/float(totals['num_high'])
+            unigrams[word]['low'] = float(
+                unigrams[word]['low'])/float(totals['num_low'])
+            unigrams[word]['med'] = float(
+                unigrams[word]['med'])/float(totals['num_med'])
+            unigrams[word]['high'] = float(
+                unigrams[word]['high'])/float(totals['num_high'])
 
         return unigrams
 
@@ -186,26 +211,7 @@ class Model(object):
         total = len(testing_data)
         messages = {}
 
-        TP = {}
-        TP_FP = {}
-        TP_FN = {}
-
         for var in self.variables:
-            TP[var] = {
-                'high': 0,
-                'med': 0,
-                'low': 0
-            }
-            TP_FP[var] = {
-                'high': 0,
-                'med': 0,
-                'low': 0
-            }
-            TP_FN[var] = {
-                'high': 0,
-                'med': 0,
-                'low': 0
-            }
             self.true[var] = []
             self.pred[var] = []
 
@@ -213,31 +219,57 @@ class Model(object):
             res = []
             response = tokenize(row['Player Message'])
             for word in response:
-                if is_stop_word(word): continue
+                if is_stop_word(word):
+                    continue
                 res.append(word)
             parsed_message = ' '.join(res)
             messages[parsed_message] = {}
             for var in self.variables:
                 weight = self.numToClassificationWeight(row, var)
-                TP_FN[var][weight] += 1
                 self.true[var].append(weight)
                 messages[parsed_message][var] = weight
                 classification = self.classify(self.unigrams[var], parsed_message, self.priors[var])
-                TP_FP[var][classification] += 1
                 self.pred[var].append(classification)
-                if classification == messages[parsed_message][var]:
-                    TP[var][classification] += 1
+
+        self.calculate_scores()
+    
+    def calculate_scores(self):
+        """
+        Calculates the micro and macro f scores for each variable
+
+        Parameters:
+        None
+
+        Returns:
+        None
+        """
 
         for var in self.variables:
-            mean_precision = 0
-            mean_recall = 0
-            for label in ['high', 'med', 'low']:
-                mean_precision += float(TP[var][label]/TP_FP[var][label])
-                mean_recall += float(TP[var][label]/TP_FN[var][label])
-            self.precisions[var] = float(mean_precision/3)
-            self.recalls[var] = float(mean_recall/3)
+            self.pred[var] = np.asarray(self.pred[var])
+            self.true[var] = np.asarray(self.true[var])
+            
+            TP = np.sum(np.logical_or(np.logical_or(np.logical_and(self.pred[var] == 'low', self.true[var] == 'low'), np.logical_and(
+                    self.pred[var] == 'med', self.true[var] == 'med')), np.logical_and(self.pred[var] == 'high', self.true[var] == 'high')))
+            TP_FP = len(self.pred[var])
+            TP_FN = len(self.true[var])         
+            
+            pi = TP / TP_FP
+            ro = TP / TP_FN
+            self.micro_fscores[var] = 2 * pi * ro / (pi + ro)
 
-            self.fscores[var] = float(2) * self.precisions[var] * self.recalls[var]/(self.precisions[var] + self.recalls[var])
+            temp_macro = 0
+            for c in ['high', 'med', 'low']:
+                TP_c = np.sum(np.logical_and(self.pred[var] == c, self.true[var] == c))
+                TP_FP_c = len([x for x in self.pred[var] if x != c])
+                TP_FN_c = len([x for x in self.true[var] if x == c])
+
+                pi_c = TP_c / TP_FP_c
+                ro_c = TP_c / TP_FN_c
+
+                temp_macro += 2 * pi_c * ro_c / (pi_c + ro_c)
+            
+            self.macro_fscores[var] = temp_macro / 3
+
 
     def classify(self, trainingDict, content, PPs):
         """
@@ -308,7 +340,6 @@ class Model(object):
 
         Returns:
         None
-
         """
         std_data = self.calc_std_data(dataPoints)
         for var in std_data:
@@ -320,17 +351,13 @@ class Model(object):
 
     def confusion_matrix(self, normalize=False):
         """
-
         Computes the confusion matrices for each of the variables
-
         """
 
         for var in self.variables:
             cn_matrix = confusion_matrix(self.true[var], self.pred[var])
-            self.plot_confusion_matrix(cn_matrix, ['low', 'med', 'high'], var, normalize)
-            # recalls = np.sum((np.diag(cn_matrix) / np.sum(cn_matrix, axis = 1)) / 3
-            # print(recalls, "recall", var)
-            # print( np.diag(cn_matrix) / np.sum(cn_matrix, axis = 0), "precision", var)
+            self.plot_confusion_matrix(
+                cn_matrix, ['low', 'med', 'high'], var, normalize)
 
     def plot_confusion_matrix(self, cm, classes, title, normalize=False, cmap=plt.cm.Blues):
         """
@@ -353,8 +380,8 @@ class Model(object):
         thresh = cm.max() / 2.
         for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
             plt.text(j, i, format(cm[i, j], fmt),
-                    horizontalalignment="center",
-                    color="white" if cm[i, j] > thresh else "black")
+                     horizontalalignment="center",
+                     color="white" if cm[i, j] > thresh else "black")
 
         plt.ylabel('True label')
         plt.xlabel('Predicted label')
