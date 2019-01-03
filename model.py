@@ -17,6 +17,7 @@ class Model(object):
         self.bounds = {}
         self.micro_fscores = {}
         self.macro_fscores = {}
+        self.vocab = set()
         self.true = {}
         self.pred = {}
 
@@ -68,17 +69,16 @@ class Model(object):
             weight = self.numToClassificationWeight(row, variable)
             res = tokenize(row['Player Message'])
             for word in res:
+                self.vocab.add(word)
                 if is_stop_word(word):
                     continue
                 if word in words:
                     words[word][weight] += 1
-                    totals = self.allocateClassificationWeightToTotal(
-                        weight, totals)
+                    totals = self.allocateClassificationWeightToTotal(weight, totals)
                 else:
                     words[word] = {'low': 1, 'med': 1, 'high': 1}
                     words[word][weight] += 1
-                    totals = self.allocateClassificationWeightToTotal(
-                        weight, totals)
+                    totals = self.allocateClassificationWeightToTotal(weight, totals)
 
         PPs = {
             'low': float(totals['num_low'])/float(totals['num_low'] + totals['num_med'] + totals['num_high']),
@@ -190,11 +190,11 @@ class Model(object):
 
         for word in unigrams:
             unigrams[word]['low'] = float(
-                unigrams[word]['low'])/float(totals['num_low'])
+                unigrams[word]['low'])/float(totals['num_low'] + len(self.vocab))
             unigrams[word]['med'] = float(
-                unigrams[word]['med'])/float(totals['num_med'])
+                unigrams[word]['med'])/float(totals['num_med'] + len(self.vocab))
             unigrams[word]['high'] = float(
-                unigrams[word]['high'])/float(totals['num_high'])
+                unigrams[word]['high'])/float(totals['num_high'] + len(self.vocab))
 
         return unigrams
 
@@ -266,6 +266,7 @@ class Model(object):
                 pi_c = TP_c / TP_FP_c
                 ro_c = TP_c / TP_FN_c
 
+                if pi_c == 0: pi_c = 1
                 temp_macro += 2 * pi_c * ro_c / (pi_c + ro_c)
             
             self.macro_fscores[var] = temp_macro / 3
