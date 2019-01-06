@@ -6,8 +6,211 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from nlp_helpers import *
 
+class Emotion_Model(object):
+    
+    def __init__(self):
+        self.emotions = ['sadness', 'joy', 'fear', 'anger', 'challenge', 'boredom', 'frustration']
+        self.unigrams = {}
+        self.priors = {}
+        self.micro_fscores = 0.0
+        self.macro_fscores = 0.0
+        self.vocab = set()
+        self.true = list()
+        self.pred = list()
+    
+    def train(self, training_data):
+        """
+        Builds a trained Emotions model
 
-class Model(object):
+        Parameters:
+        training_data (array): training data used to train the model
+
+        Returns:
+        Model: a trained model
+        """
+        words = {}
+        totals = {}
+        for emotion in self.emotions:
+            totals[emotion] = 0
+
+        for row in training_data:
+            emotion = row['Emotion']
+            res = tokenize(row['Player Message'])
+            for word in res:
+                self.vocab.add(word)
+                if is_stop_word(word):
+                    continue
+                if word in words:
+                    words[word][emotion] += 1
+                    totals[emotion] += 1
+                else:
+                    words[word] = {}
+                    for emotion in self.emotions:
+                        words[word][emotion] = 1
+                    words[word][emotion] += 1
+                    totals[emotion] += 1
+        
+        sum_totals = sum(totals.values())
+        for emotion in self.emotions:
+            self.priors[emotion] = totals[emotion] / sum_totals
+
+        self.unigrams = self.calculate_probabilities(words, totals)
+
+    def calculate_probabilities(self, words, totals):
+        for word in words:
+            for emotion in self.emotions:
+                words[word][emotion] = float(words[word][emotion])/float(totals[emotion]+len(self.vocab))
+
+        return words
+    
+    def test(self, testing_data):
+        """
+        Tests the precision/recall of the model
+
+        Parameters:
+        testing_data (array): data on which to test the model
+
+        Returns:
+        Null
+        """
+        total = len(testing_data)
+        messages = {}
+
+        for row in testing_data:
+            res = []
+            emotion = row['Emotion']
+            response = tokenize(row['Player Message'])
+            for word in response:
+                if is_stop_word(word):
+                    continue
+                res.append(word)
+            parsed_message = ' '.join(res)
+            messages[parsed_message] = {}
+            self.true.append(emotion)
+            classification = self.classify(self.unigrams, parsed_message, self.priors)
+            self.pred.append(str(classification))
+
+        self.calculate_scores()
+
+    def classify(self, trainingDict, content, priors):
+        """
+        Classifies each message according to the trained model
+
+        Parameters:
+        trainingDict (Object): trained model
+        content (String): message to be tested
+        PPs (Object): priors
+
+        Returns:
+        String: classification according to the trained model
+        """
+
+        sadness = [priors['sadness'], 'sadness']
+        joy = [priors['joy'], 'joy']
+        fear = [priors['fear'], 'fear']
+        challenge = [priors['challenge'], 'challenge']
+        anger = [priors['anger'], 'anger']
+        boredom = [priors['boredom'], 'boredom']
+        frustration = [priors['frustration'], 'frustration']
+            
+        for word in content.split():
+            if word in trainingDict:
+                sadness[0] += float(math.log(trainingDict[word]['sadness']))
+                joy[0] += float(math.log(trainingDict[word]['joy']))
+                fear[0] += float(math.log(trainingDict[word]['fear']))
+                challenge[0] += float(math.log(trainingDict[word]['challenge']))
+                anger[0] += float(math.log(trainingDict[word]['anger']))
+                boredom[0] += float(math.log(trainingDict[word]['boredom']))
+                frustration[0] += float(math.log(trainingDict[word]['frustration']))
+
+        return max([sadness, joy, fear, challenge, anger, boredom, frustration],key=lambda item:item[0])[1]
+
+    def calculate_scores(self):
+        """
+        Calculates the micro and macro f scores for each emotion
+
+        Parameters:
+        None
+
+        Returns:
+        None
+        """
+        self.pred = np.asarray(self.pred)
+        self.true = np.asarray(self.true)
+            
+        TP = np.sum(
+            np.logical_or(
+                np.logical_or(
+                    np.logical_or(
+                        np.logical_or(
+                            np.logical_or(
+                                np.logical_or(np.logical_and(self.pred == 'sadness', self.true == 'sadness'), np.logical_and(self.pred == 'joy', self.true == 'joy')),
+                                np.logical_and(self.pred == 'fear', self.true == 'fear')),
+                            np.logical_and(self.pred == 'anger', self.true == 'anger')),
+                        np.logical_and(self.pred == 'challenge', self.true == 'challenge')),
+                    np.logical_and(self.pred == 'boredom', self.true == 'boredom')),
+                np.logical_and(self.pred == 'frustration', self.true == 'frustration')))
+        TP_FP = len(self.pred)
+        TP_FN = len(self.true)         
+            
+        pi = TP / TP_FP
+        ro = TP / TP_FN
+        self.micro_fscores = 2 * pi * ro / (pi + ro)
+
+        temp_macro = 0
+        for e in self.emotions:
+            TP_e = np.sum(np.logical_and(self.pred == e, self.true == e))
+            TP_FP_e = len([x for x in self.pred if x != e])
+            TP_FN_e= len([x for x in self.true if x == e])
+
+            pi_e = TP_e / TP_FP_e
+            ro_e = TP_e / TP_FN_e
+
+            if pi_e == 0: pi_e = 1
+            temp_macro += 2 * pi_e * ro_e / (pi_e + ro_e)
+        
+        self.macro_fscores = temp_macro / 7
+
+    def confusion_matrix(self, normalize=False):
+        """
+        Computes the confusion matrices for each of the variables
+        """
+
+        cn_matrix = confusion_matrix(self.true, self.pred)
+        self.plot_confusion_matrix(cn_matrix, self.emotions, 'Emotions', normalize)
+
+    def plot_confusion_matrix(self, cm, classes, title, normalize=False, cmap=plt.cm.Blues):
+        """
+        This function prints and plots the confusion matrix.
+        Normalization can be applied by setting `normalize=True`.
+
+        Courtesy of scikit-learn
+        """
+        if normalize:
+            cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+
+        plt.imshow(cm, interpolation='nearest', cmap=cmap)
+        plt.title(title)
+        plt.colorbar()
+        tick_marks = np.arange(len(classes))
+        plt.xticks(tick_marks, classes, rotation=45)
+        plt.yticks(tick_marks, classes)
+
+        fmt = '.2f' if normalize else 'd'
+        thresh = cm.max() / 2.
+        for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+            plt.text(j, i, format(cm[i, j], fmt),
+                     horizontalalignment="center",
+                     color="white" if cm[i, j] > thresh else "black")
+
+        plt.ylabel('True label')
+        plt.xlabel('Predicted label')
+        plt.tight_layout()
+        plt.savefig('results/confusion_matrices/' + title + '.png')
+        plt.close()
+
+
+class CLARK_Model(object):
 
     def __init__(self):
         self.variables = ['Pleasantness', 'Attention', 'Control',
