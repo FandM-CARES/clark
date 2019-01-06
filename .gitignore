@@ -107,4 +107,5 @@ venv.bak/
 .vscode/
 
 # project stuff
-/results
+#/results/confusion_matrices
+.scannerwork/
