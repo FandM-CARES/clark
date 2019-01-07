@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from nlp_helpers import *
 
-class Emotion_Model(object):
+class EmotionModel(object):
     
     def __init__(self):
         self.emotions = ['sadness', 'joy', 'fear', 'anger', 'challenge', 'boredom', 'frustration']
@@ -73,7 +73,6 @@ class Emotion_Model(object):
         Returns:
         Null
         """
-        total = len(testing_data)
         messages = {}
 
         for row in testing_data:
@@ -92,14 +91,14 @@ class Emotion_Model(object):
 
         self.calculate_scores()
 
-    def classify(self, trainingDict, content, priors):
+    def classify(self, training_dict, content, priors):
         """
         Classifies each message according to the trained model
 
         Parameters:
-        trainingDict (Object): trained model
+        training_dict (Object): trained model
         content (String): message to be tested
-        PPs (Object): priors
+        priors (Object): priors
 
         Returns:
         String: classification according to the trained model
@@ -114,14 +113,14 @@ class Emotion_Model(object):
         frustration = [priors['frustration'], 'frustration']
             
         for word in content.split():
-            if word in trainingDict:
-                sadness[0] += float(math.log(trainingDict[word]['sadness']))
-                joy[0] += float(math.log(trainingDict[word]['joy']))
-                fear[0] += float(math.log(trainingDict[word]['fear']))
-                challenge[0] += float(math.log(trainingDict[word]['challenge']))
-                anger[0] += float(math.log(trainingDict[word]['anger']))
-                boredom[0] += float(math.log(trainingDict[word]['boredom']))
-                frustration[0] += float(math.log(trainingDict[word]['frustration']))
+            if word in training_dict:
+                sadness[0] += float(math.log(training_dict[word]['sadness']))
+                joy[0] += float(math.log(training_dict[word]['joy']))
+                fear[0] += float(math.log(training_dict[word]['fear']))
+                challenge[0] += float(math.log(training_dict[word]['challenge']))
+                anger[0] += float(math.log(training_dict[word]['anger']))
+                boredom[0] += float(math.log(training_dict[word]['boredom']))
+                frustration[0] += float(math.log(training_dict[word]['frustration']))
 
         return max([sadness, joy, fear, challenge, anger, boredom, frustration],key=lambda item:item[0])[1]
 
@@ -138,7 +137,7 @@ class Emotion_Model(object):
         self.pred = np.asarray(self.pred)
         self.true = np.asarray(self.true)
             
-        TP = np.sum(
+        tp = np.sum(
             np.logical_or(
                 np.logical_or(
                     np.logical_or(
@@ -150,21 +149,21 @@ class Emotion_Model(object):
                         np.logical_and(self.pred == 'challenge', self.true == 'challenge')),
                     np.logical_and(self.pred == 'boredom', self.true == 'boredom')),
                 np.logical_and(self.pred == 'frustration', self.true == 'frustration')))
-        TP_FP = len(self.pred)
-        TP_FN = len(self.true)         
+        tp_fp = len(self.pred)
+        tp_fn = len(self.true)         
             
-        pi = TP / TP_FP
-        ro = TP / TP_FN
+        pi = tp / tp_fp
+        ro = tp / tp_fn
         self.micro_fscores = 2 * pi * ro / (pi + ro)
 
         temp_macro = 0
         for e in self.emotions:
-            TP_e = np.sum(np.logical_and(self.pred == e, self.true == e))
-            TP_FP_e = len([x for x in self.pred if x != e])
-            TP_FN_e= len([x for x in self.true if x == e])
+            tp_e = np.sum(np.logical_and(self.pred == e, self.true == e))
+            tp_fp_e = len([x for x in self.pred if x != e])
+            tp_fn_e= len([x for x in self.true if x == e])
 
-            pi_e = TP_e / TP_FP_e
-            ro_e = TP_e / TP_FN_e
+            pi_e = tp_e / tp_fp_e
+            ro_e = tp_e / tp_fn_e
 
             if pi_e == 0: pi_e = 1
             temp_macro += 2 * pi_e * ro_e / (pi_e + ro_e)
@@ -210,7 +209,7 @@ class Emotion_Model(object):
         plt.close()
 
 
-class CLARK_Model(object):
+class ClarkModel(object):
 
     def __init__(self):
         self.variables = ['Pleasantness', 'Attention', 'Control',
@@ -236,11 +235,11 @@ class CLARK_Model(object):
         """
 
         for var in self.variables:
-            unigrams, totals, PPs = self.train_by_variable(training_data, var)
-            self.priors[var] = PPs
+            unigrams, totals, priors = self.train_by_variable(training_data, var)
+            self.priors[var] = priors
             self.unigrams[var] = self.smooth_values(unigrams, var, totals)
 
-    def train_by_variable(self, training_set, variable, dataPoints={}):
+    def train_by_variable(self, training_set, variable, data_points={}):
         """
         Calculates the counts for each unigram and priors for each classification
 
@@ -261,15 +260,15 @@ class CLARK_Model(object):
             'num_high': 0
         }
 
-        dataPoints[variable] = []
+        data_points[variable] = []
 
         for row in training_set:
-            dataPoints[variable].append(float(row[variable]))
+            data_points[variable].append(float(row[variable]))
 
-        self.calc_bounds_data(dataPoints)
+        self.calc_bounds_data(data_points)
 
         for row in training_set:
-            weight = self.numToClassificationWeight(row, variable)
+            weight = self.num_to_weight(row, variable)
             res = tokenize(row['Player Message'])
             for word in res:
                 self.vocab.add(word)
@@ -277,21 +276,21 @@ class CLARK_Model(object):
                     continue
                 if word in words:
                     words[word][weight] += 1
-                    totals = self.allocateClassificationWeightToTotal(weight, totals)
+                    totals = self.add_weight_to_total(weight, totals)
                 else:
                     words[word] = {'low': 1, 'med': 1, 'high': 1}
                     words[word][weight] += 1
-                    totals = self.allocateClassificationWeightToTotal(weight, totals)
+                    totals = self.add_weight_to_total(weight, totals)
 
-        PPs = {
+        priors = {
             'low': float(totals['num_low'])/float(totals['num_low'] + totals['num_med'] + totals['num_high']),
             'med': float(totals['num_med'])/float(totals['num_low'] + totals['num_med'] + totals['num_high']),
             'high': float(totals['num_high'])/float(totals['num_low'] + totals['num_med'] + totals['num_high'])
         }
 
-        return words, totals, PPs
+        return words, totals, priors
 
-    def allocateClassificationWeightToTotal(self, cw, totals):
+    def add_weight_to_total(self, cw, totals):
         """
         Updates the totals
 
@@ -311,7 +310,7 @@ class CLARK_Model(object):
             totals['num_high'] += 1
         return totals
 
-    def numToClassificationWeight(self, row, variable):
+    def num_to_weight(self, row, variable):
         """
         Converts number values to a classification weighting
 
@@ -323,42 +322,42 @@ class CLARK_Model(object):
         String: classification weight
         """
 
-        def numToCWForPleasantness(row):
+        def num_to_weight_pleasantness(row):
             if float(row['Pleasantness']) <= self.bounds['Pleasantness']['lower']:
                 return 'low'
             if float(row['Pleasantness']) <= self.bounds['Pleasantness']['upper']:
                 return 'med'
             return 'high'
 
-        def numToCWForAttention(row):
+        def num_to_weight_attention(row):
             if float(row['Attention']) <= self.bounds['Attention']['lower']:
                 return 'low'
             if float(row['Attention']) <= self.bounds['Attention']['upper']:
                 return 'med'
             return 'high'
 
-        def numToCWForControl(row):
+        def num_to_weight_control(row):
             if float(row['Control']) <= self.bounds['Control']['lower']:
                 return 'low'
             if float(row['Control']) <= self.bounds['Control']['upper']:
                 return 'med'
             return 'high'
 
-        def numToCWForCertainty(row):
+        def num_to_weight_certainty(row):
             if float(row['Certainty']) <= self.bounds['Certainty']['lower']:
                 return 'low'
             if float(row['Certainty']) <= self.bounds['Certainty']['upper']:
                 return 'med'
             return 'high'
 
-        def numToCWForAnticipatedEffort(row):
+        def num_to_weight_anticipated_effort(row):
             if float(row['Anticipated Effort']) <= self.bounds['Anticipated Effort']['lower']:
                 return 'low'
             if float(row['Anticipated Effort']) <= self.bounds['Anticipated Effort']['upper']:
                 return 'med'
             return 'high'
 
-        def numToCWForResponsibility(row):
+        def num_to_weight_responsibility(row):
             if float(row['Responsibililty']) <= self.bounds['Responsibililty']['lower']:
                 return 'low'
             if float(row['Responsibililty']) <= self.bounds['Responsibililty']['upper']:
@@ -366,17 +365,17 @@ class CLARK_Model(object):
             return 'high'
 
         if variable == 'Pleasantness':
-            return numToCWForPleasantness(row)
+            return num_to_weight_pleasantness(row)
         if variable == 'Attention':
-            return numToCWForAttention(row)
+            return num_to_weight_attention(row)
         if variable == 'Control':
-            return numToCWForControl(row)
+            return num_to_weight_control(row)
         if variable == 'Certainty':
-            return numToCWForCertainty(row)
+            return num_to_weight_certainty(row)
         if variable == 'Anticipated Effort':
-            return numToCWForAnticipatedEffort(row)
+            return num_to_weight_anticipated_effort(row)
         if variable == 'Responsibililty':
-            return numToCWForResponsibility(row)
+            return num_to_weight_responsibility(row)
 
     def smooth_values(self, unigrams, variable, totals):
         """
@@ -411,7 +410,6 @@ class CLARK_Model(object):
         Returns:
         Null
         """
-        total = len(testing_data)
         messages = {}
 
         for var in self.variables:
@@ -428,7 +426,7 @@ class CLARK_Model(object):
             parsed_message = ' '.join(res)
             messages[parsed_message] = {}
             for var in self.variables:
-                weight = self.numToClassificationWeight(row, var)
+                weight = self.num_to_weight(row, var)
                 self.true[var].append(weight)
                 messages[parsed_message][var] = weight
                 classification = self.classify(self.unigrams[var], parsed_message, self.priors[var])
@@ -451,23 +449,23 @@ class CLARK_Model(object):
             self.pred[var] = np.asarray(self.pred[var])
             self.true[var] = np.asarray(self.true[var])
             
-            TP = np.sum(np.logical_or(np.logical_or(np.logical_and(self.pred[var] == 'low', self.true[var] == 'low'), np.logical_and(
+            tp = np.sum(np.logical_or(np.logical_or(np.logical_and(self.pred[var] == 'low', self.true[var] == 'low'), np.logical_and(
                     self.pred[var] == 'med', self.true[var] == 'med')), np.logical_and(self.pred[var] == 'high', self.true[var] == 'high')))
-            TP_FP = len(self.pred[var])
-            TP_FN = len(self.true[var])         
+            tp_fp = len(self.pred[var])
+            tp_fn = len(self.true[var])         
             
-            pi = TP / TP_FP
-            ro = TP / TP_FN
+            pi = tp / tp_fp
+            ro = tp / tp_fn
             self.micro_fscores[var] = 2 * pi * ro / (pi + ro)
 
             temp_macro = 0
             for c in ['high', 'med', 'low']:
-                TP_c = np.sum(np.logical_and(self.pred[var] == c, self.true[var] == c))
-                TP_FP_c = len([x for x in self.pred[var] if x != c])
-                TP_FN_c = len([x for x in self.true[var] if x == c])
+                tp_c = np.sum(np.logical_and(self.pred[var] == c, self.true[var] == c))
+                tp_fp_c = len([x for x in self.pred[var] if x != c])
+                tp_fn_c = len([x for x in self.true[var] if x == c])
 
-                pi_c = TP_c / TP_FP_c
-                ro_c = TP_c / TP_FN_c
+                pi_c = tp_c / tp_fp_c
+                ro_c = tp_c / tp_fn_c
 
                 if pi_c == 0: pi_c = 1
                 temp_macro += 2 * pi_c * ro_c / (pi_c + ro_c)
@@ -475,77 +473,68 @@ class CLARK_Model(object):
             self.macro_fscores[var] = temp_macro / 3
 
 
-    def classify(self, trainingDict, content, PPs):
+    def classify(self, training_dict, content, priors):
         """
         Classifies each message according to the trained model
 
         Parameters:
-        trainingDict (Object): trained model
+        training_dict (Object): trained model
         content (String): message to be tested
-        PPs (Object): priors
+        priors (Object): priors
 
         Returns:
         String: classification according to the trained model
         """
-        sumLow = float(0)
-        sumMed = float(0)
-        sumHigh = float(0)
+        sum_low = float(0)
+        sum_med = float(0)
+        sum_high = float(0)
 
         for word in content.split():
-            if word in trainingDict:
-                sumLow += float(math.log(trainingDict[word]['low']))
-                sumMed += float(math.log(trainingDict[word]['med']))
-                sumHigh += float(math.log(trainingDict[word]['high']))
+            if word in training_dict:
+                sum_low += float(math.log(training_dict[word]['low']))
+                sum_med += float(math.log(training_dict[word]['med']))
+                sum_high += float(math.log(training_dict[word]['high']))
 
-        lowProb = math.log(PPs['low']) + sumLow
-        medProb = math.log(PPs['med']) + sumMed
-        highProb = math.log(PPs['high']) + sumHigh
+        low_prob = math.log(priors['low']) + sum_low
+        med_prob = math.log(priors['med']) + sum_med
+        high_prob = math.log(priors['high']) + sum_high
 
-        maxVal = max([lowProb, medProb, highProb])
-        if lowProb == maxVal:
+        max_val = max([low_prob, med_prob, high_prob])
+        if low_prob == max_val:
             return 'low'
-        if medProb == maxVal:
+        if med_prob == max_val:
             return 'med'
         else:
             return 'high'
 
-    # def plotData(self):
-    #     colors = ["red", "blue", "green", "yellow", "brown", "purple"]
-    #     i = 0
-    #     for var in self.dataPoints:
-    #         sns.distplot(self.dataPoints[var], color=colors[i], label=var)
-    #         i += 1
-    #     plt.legend()
-    #     plt.show()
-
-    def calc_std_data(self, dataPoints):
+    def calc_std_data(self, data_points):
         """
 
         Calculates the standard deviation of the data points
 
         Parameters:
-        dataPoints (object): data points for each variable
+        data_points (object): data points for each variable
 
         Returns:
         Array: standard deviations for the variable
         """
         res = []
-        for var in dataPoints:
-            res.append([np.mean(dataPoints[var]),
-                        np.std(dataPoints[var]), var])
+        for var in data_points:
+            res.append([np.mean(data_points[var]),
+                        np.std(data_points[var]), var])
         return res
 
-    def calc_bounds_data(self, dataPoints):
+    def calc_bounds_data(self, data_points):
         """
         Calculates the upper and lower bounds of the classification based on the data provided
 
         Parameters:
-        dataPoints (Object): contains training data points for each variable
+        data_points (Object): contains training data points for each variable
 
         Returns:
         None
         """
-        std_data = self.calc_std_data(dataPoints)
+        std_data = self.calc_std_data(data_points)
         for var in std_data:
             lb = var[0] - (var[1] / 2)
             ub = var[0] + (var[1] / 2)
