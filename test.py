@@ -23,11 +23,11 @@ def n_fold_test(data_list, n, c_e):
 
     if c_e == 0:
         mean_fscores = {}
-        for var in CLARK_Model().variables:
+        for var in ClarkModel().variables:
             mean_fscores[var] = [0, 0]
 
         for i, split in enumerate(splits):
-            clark = CLARK_Model()
+            clark = ClarkModel()
             clark.train(np.concatenate(splits[:i]+splits[i+1:]))
             clark.test(splits[i])
             for var in clark.variables:
@@ -51,7 +51,7 @@ def n_fold_test(data_list, n, c_e):
         mean_fscores = [0, 0]
 
         for i, split in enumerate(splits):
-            em_model = Emotion_Model()
+            em_model = EmotionModel()
             em_model.train(np.concatenate(splits[:i]+splits[i+1:]))
             em_model.test(splits[i])
 
@@ -84,7 +84,7 @@ def train_test_split(data_list, s, c_e, show_matrix=False):
     np.random.shuffle(np_data)
     training_data, testing_data = data.split_data([data.data], s)
     if c_e == 0:
-        clark = CLARK_Model()
+        clark = ClarkModel()
         clark.train(training_data)
         clark.test(testing_data)
 
@@ -105,7 +105,7 @@ def train_test_split(data_list, s, c_e, show_matrix=False):
         print('CLARK Model Done!')
     
     else:
-        em_model = Emotion_Model()
+        em_model = EmotionModel()
         em_model.train(training_data)
         em_model.test(testing_data)
 
