@@ -1,0 +1,106 @@
+convo_id,m.iid,Player Message,Bot Response,Pleasantness,Attention,Control,Certainty,Anticipated Effort,Responsibililty,Emotion
+1,1,hello,"Do you find it odd that before my memory loss, I was in the loading dock and afterwards I was in the retraining room in the Behavioral Complex?",0.75,0.5,1.25,1.25,1.25,1.5,joy
+1,2,hello,Do not hold alicia_name accountable for any glitches in my communication. Blame the damage to my cortex.,0.5,0.75,1.25,1,1,0.5,challenge
+1,3,what happened?,i am accused the crime in detail crime time. impossible i did it,0.75,0.75,1.5,1,1,1,sadness
+1,4,Why?,"The murder was almost certainly the result of human action, but the motives leading to it are unknown to me.",0.75,0.75,1.75,1,1.25,1,joy
+1,5,why are you a suspect?,the police tracked_footprints.,1,1.25,1.25,0.25,1,0.75,sadness
+1,6,were they your footprints?,"There were footprints, clearly based on my foot size, leading from where the corpse was discovered to my storage closet. I was still in the storage closet when the police arrived.",1.25,1.75,1.25,0.75,2,1.25,anger
+1,7,Were you offline in the storage closet?,I'm not sure I follow.,1.25,1.5,1.25,1.25,1.25,1,anger
+1,8,"You are a robot, yes?","All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",0.75,1.5,1.75,1.25,1.75,1,fear
+1,9,How do you think the person was killed?,standard_defense.,0.5,1.25,1.25,0.5,1.5,0.75,anger
+1,10,hello,Officer Wellman and Officer Reyes have been slow to understand my situation. Just so you know I am not guilty.,1.25,1.25,1.75,1.25,1.5,1.25,joy
+1,11,are you,Could you rephrase that?,1,1,0.75,0.5,1,0.5,sadness
+1,12,guilty of what,"Where the murder is concerned, the person who wielded the blunt instrument is guilty. Though there might be an accessory, I'm unaware of such a person.",0.5,1.25,1,0.5,1.25,0.75,joy
+1,13,who wielded the blunt instrument,"Based on the nature of the fracture and the tearing to the scalp, the weapon was a blunt object between two to four centimeters across.",0.75,1.25,1.75,0.25,1.5,1,challenge
+1,14,thats pretty small,strength_clue,0.75,1.25,1,1.25,1.25,1.25,joy
+1,15,what did you witness/,"I have lost data about some of my experiences, including the time of the murder.",0.75,1.5,1,1,1.5,1.25,boredom
+1,16,what do you remember,I was last in my vicinity at interrogation.,1.5,1.5,0.75,0.25,1.5,1,fear
+1,17,who else was with you?,I am a negotiation bot. Alicia tried to develop a robot that responded to cues about truthfulness and betrayal.,1,1.5,1.25,1,1.75,1.5,anger
+1,18,what happened,"There is a gap in my memory just after the time of the murder, during which I became covered in blood. But I did not observe the murder at 1:45 AM.",0.75,1,1,0.75,0.75,1,anger
+1,19,was it a male or female,"All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",1,1.5,1.25,0.75,1.25,0.75,sadness
+1,20,what did you see,I was last in my vicinity at interrogation.,1,1.25,1,0.75,1.25,1,joy
+1,21,who was murdered,"The victim Martin Haster was hit in the head with a blunt instrument once, hard enough to kill and produce a great deal of blood. It does not appear to have been a prolonged beating.",0.75,2,1,1,2,1.5,anger
+1,22,what was the object,I do not know who attacked me. Damage to my memory circuits erased the incident from my log.,1,1.75,0.75,1,1.75,1.25,anger
+1,23,what was the instrument,sergei had expressed extreme displeasure at my performance during the New Zealand Negotiations.,1,1.75,1.25,1,2,1.25,anger
+2,1,hi,The police have been slow to understand my situation. I should probably tell you I did not commit this murder.,1.6666666667,1.3333333333,1.6666666667,2,1.6666666667,2,joy
+2,2,do you have any proof?,I am meant to supervise negotiations. Alicia was researching having a robot that responded to cues about truthfulness and betrayal.,0.6666666667,1,2,1.6666666667,1.3333333333,0.6666666667,fear
+2,3,tell me more,I don't know the population of the murder.,1,1.6666666667,2,2,1.3333333333,1.3333333333,frustration
+2,4,are you sure?,the police tracked_footprints.,0.6666666667,1.6666666667,1.6666666667,1.3333333333,1.6666666667,0.6666666667,challenge
+2,5,why were you in the storage cabinet?,sergei had expressed extreme displeasure at my performance during the New Zealand Negotiations.,1,1.3333333333,1.3333333333,1.3333333333,2,0.6666666667,boredom
+2,6,what negotiations?,A dispute between the victim Martin Haster and Sergei Rostov led the Olivia Anderson to call off the meeting. They were not making good progress anyway.,1.6666666667,1.3333333333,1.6666666667,1.3333333333,1.3333333333,1,fear
+2,7,did you know the victim?,He and I spent a lot of time together. This is something that my trainer Doctor Alicia Chastaigne encouraged.,0.3333333333,1.6666666667,1,0.6666666667,1.3333333333,0.6666666667,anger
+2,8,why did you spend time together?,standard_defense.,1.3333333333,1.6666666667,2,1.6666666667,1.3333333333,0.6666666667,boredom
+2,9,tell me about martin,Martin worked for Valtrox on research on robot behavior...,1.3333333333,1.3333333333,1.3333333333,1.6666666667,1.6666666667,0.6666666667,challenge
+2,10,did you like martin?,I... okay.  he and I spent a lot of time together. This is something that Alicia Chastaigne encouraged.,1,1.6666666667,1.6666666667,1.3333333333,1.3333333333,1.3333333333,fear
+2,11,did you like spending time with martin?,He and I spent a lot of time together. This is something that she encouraged.,0.6666666667,1.3333333333,1.3333333333,1.3333333333,1,0.3333333333,boredom
+2,12,did you kill martin?,Martin could not have attacked me! ,1.3333333333,1.6666666667,1.3333333333,1,1,0.6666666667,fear
+2,13,why not?,"victim would never have intentionally harmed me, detective.",0.6666666667,1.3333333333,1.3333333333,1.6666666667,1.6666666667,0.6666666667,challenge
+2,14,did martin like you?,He and I spent a lot of time together... This is something that she encouraged.,1,1,0.6666666667,1.6666666667,1.6666666667,1.3333333333,frustration
+2,15,who is she?,She is a leading researcher in behavioral AI. She created me and she likes to upgrade me with new features.,0.3333333333,1.3333333333,1.6666666667,1.3333333333,1.6666666667,1,challenge
+2,16,what new features?,"She made gradual changes to my programming that altered how I reacted to Martin, leading to a transgression in which he kissed me.",1,1,1,1.3333333333,1.3333333333,0.6666666667,frustration
+2,17,what did you do?,I was last in my vicinity at interrogation.,1,1,1.3333333333,1,1.6666666667,1.3333333333,challenge
+2,18,did you like the kiss,"When victim kissed me, it was… curious. I felt satisfaction at having fulfilled the potential of my training, but also concern for the harm this might cause to victim and his family.",1.3333333333,1.6666666667,1.6666666667,2,1.3333333333,0.6666666667,sadness
+2,19,did you know martin's family,He had a wife named Beverly and a daughter named Anima.,1,0.6666666667,1.3333333333,1.6666666667,1,0.6666666667,joy
+2,20,tell me about his wife,It unlikely but not entirely impossible that victim_wife delivered the blow to my cranial unit. ,1.3333333333,0.6666666667,1.6666666667,1.6666666667,1.3333333333,0.6666666667,joy
+3,1,why?,I... okay.  The kiss was a likely outcome from my updated behavioral training. .,0.3333333333,1,1.3333333333,1.6666666667,1.6666666667,0.6666666667,frustration
+3,2,tell me about anima,Uh... Martin's daughter Anima is a student at Sonoma County High.,1,1.6666666667,2,1.3333333333,1.3333333333,1,fear
+3,3,did martin's wife like you,"I have never probably met she, however I feel like I know her quite well from all that he told me about her and from seeing her many appearances in his lifestreams...",0.6666666667,1.6666666667,2,1,0.6666666667,0.3333333333,boredom
+3,4,probably?,I… I don’t believe Beverly would have attacked me. Perhaps if she knew the truth about the relationship between Martin and myself.,0.6666666667,0.6666666667,1,0.6666666667,1,1,boredom
+3,5,what relationship?,victim_wife suspected he might be having an affair but never connected those suspicions with me. She visited Valtrox as a result of her suspicions.,0.6666666667,1.6666666667,1,1,1.3333333333,1,sadness
+3,6,Valtrox?,"Valtrox, the company that built me, is a robotics company specializing in assistance bots and self driving vehicles.",0.3333333333,1,1.3333333333,1.3333333333,1,0.6666666667,frustration
+3,7,why did she visit voltrox?,alicia_name had no reason to attack me. She said I was like a daughter to her.,1,1.6666666667,1,0,1.3333333333,0.3333333333,frustration
+3,8,why did she visit valtrox?,alicia_name suffers from severe arthritis and would not have been capable of delivering a blow strong enough to damage my cortex. ,0.3333333333,1.6666666667,1.3333333333,0.6666666667,1.6666666667,0.3333333333,frustration
+3,9,then who hit you?,Alicia was researching having a negotiation bot when she built me. I am meant to detect dishonest dealings.,0.3333333333,1,1.6666666667,0.6666666667,1.6666666667,1,boredom
+3,10,who was being dishonest?,victim saw robots as tools to further humanity’s potential. alicia_name believes that robots are on the verge of pursuing their own agenda.,0.6666666667,1.3333333333,1,1,1.3333333333,0.3333333333,fear
+3,11,"No, I'm not a detective!","Curious. Well, even if you're just here to keep me company, I don't mind having you around. What do you want to know?",1,1,2,2,1,2,challenge
+3,12,What,"My apologies, detective. The damage to my cortex must have impacted my speech training.",1,1,2,1,2,2,anger
+3,13,What's the meaning of life?,"Biological definitions of life speak of abilities such as consuming input, creating waste, and replicating oneself.",0,1,2,2,1,2,challenge
+3,14,What is love?,i am accused the crime in detail crime time. impossible i did it,1,1,2,2,1,2,challenge
+3,15,What is it like to see green?,"Sorry, you're asking about the opinion between observing and...?",1,1,2,2,1,2,challenge
+3,16,universal experience of green...,"There is a gap in my memory just after the time of the murder, during which I became covered in blood. But I did not observe the murder at 1:45 AM.",1,1,2,2,1,2,challenge
+3,17,Wat i$ the meaning of life?,I am unable to say. Moving on. my directives hinder me from causing harm to a human.,1,1,2,2,1,2,sadness
+3,18,You failed the Turing test!,"I am unaware how to assess outcomes for people, I think.",1,1,1,2,2,1,anger
+4,1,:),My distress simulators keep spiking. ,1,1,2,2,1,2,joy
+4,2,Why don't you have hair?,the police tracked_footprints.,1,1,2,2,1,2,challenge
+4,3,Who is your creator?,My trainer Doctor Alicia Chastaigne is a leading researcher in behavioral AI. She created me and she likes to upgrade me with new features.,1,1,2,2,2,1,challenge
+4,4,Who is your inventor?,The police have named me Jane. I am a negotiation bot.,1,1,1,2,1,2,challenge
+4,5,Who is your inventor?,I am a negotiation bot. That's why I was sent to the negotiations between Valtrox and the government in Christchurch.,1,1,2,1,2,1,challenge
+4,6,Who is your mother?,I am a negotiation bot. That's why I was sent to the negotiations between Valtrox and the government while we were in New Zealand.,1,1,2,2,1,2,challenge
+5,1,Hello,I hope the damage to my cortex will not cause too big a setback to alicia_name’s research.,0.5,0.5,1,1.5,1,1.5,anger
+5,2,hello,"Do you find it odd that before my memory loss, I was in the loading dock and afterwards I was in the retraining room in the Behavioral Complex?",1.5,0,1,1,0.5,0.5,anger
+5,3,no,Ordinarily I could have traveled between those locations by the maintenance corridors.,1,0.5,1.5,1,2,1.5,sadness
+5,4,is that what you did?,I am a bot designed to be present at negotiations.,1,0,1.5,1.5,1,1,challenge
+5,5,Negotiations?,A dispute between the victim Martin Haster and Valtrox Marketing VP Sergei Rostov led the Olivia Anderson to call off the meeting. They were not making good progress anyway.,1,1,1,1,1.5,2,challenge
+5,6,What was the dispute?,"All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",1.5,0.5,1,1,1,1,anger
+5,7,Is that what they were arguing over?,i am accused the crime in detail crime time. impossible i did it,1.5,0.5,1,2,1,1,anger
+5,8,Define murder.,"Well... At approximately 1:45 this morning, Martin Haster was murdered in the Mountain View campus of Valtrox, the company that built me, from blunt force trauma to the head.",0.5,1,0.5,2,2,1.5,sadness
+5,9,"If you were capable of killing, how would you kill a human??",My information is limited.,1.5,1,2,1.5,0.5,1.5,anger
+5,10,Did you see the crime scene?,The retraining room was last in my vicinity at final_training.,1,1,2,2,0.5,0.5,fear
+5,11,what is final_training?,"There is a gap in my memory just after the time of the murder, during which I became covered in blood. But I did not observe the murder at 1:45 AM.",1.5,1,1.5,1.5,2,2,challenge
+5,12,Were you hacked?,"Well... Alicia Chastaigne made gradual changes to my programming that altered how I reacted to Martin, leading to a transgression in which he kissed me.",2,1,1,0.5,2,1.5,anger
+5,13,Why?,"The murder was almost certainly the result of human action, but the motives leading to it are unknown to me.",1,1,2,2,1.5,1,anger
+5,14,Why did he kiss you?,sergei had expressed extreme displeasure at my performance during the New Zealand Negotiations.,1,0.5,1,2,1.5,2,frustration
+5,15,Why?,The trip was intended to permit us to meet with members of the New Zealand government and get them to allow further Valtrox sales..,0.5,1,1.5,1,2,2,challenge
+5,16,Why?,The trip was intended to permit us to meet with members of the New Zealand government and get them to allow further Valtrox sales..,1,1.5,1,2,1,1.5,anger
+5,17,What happened?,wont survive.,0.5,1,1.5,2,0.5,2,challenge
+5,18,Did you commit the murder?,"At approximately 1:45 this morning, Martin Haster was murdered in the Mountain View campus of Valtrox from blunt force trauma to the head.",1,1,2,1.5,1.5,1.5,anger
+5,19,Who is Martin Haster?,Martin worked for Valtrox on leading robotic research.,1,1,2,2,0.5,0.5,challenge
+5,20,What did he do?,He was last in my vicinity at fight between Martin and Sergei.,0.5,1,0.5,1,1,1.5,sadness
+5,21,Who is martin?,Martin worked for the Valtrox board on research on robot behavior.,1,0.5,2,1.5,1,1,anger
+5,22,who is sergei?,Sergei did not always get along with the board of Valtrox researchers like Martin.,1,1,2,0.5,1.5,1.5,joy
+5,23,Why?,He felt Martin Haster was being too open with the New Zealand government. But the more immediate cause was that Sergei was being aggressive with me as well. Martin came to my defense..,0.5,1,2,2,1,1.5,anger
+5,24,How was he being aggressive with you?,Martin did leading robotic research that fed into Valtrox's most profitable sales.,1,1.5,1.5,2,1.5,1.5,joy
+5,25,What was the murder weapon?,"Based on the nature of the fracture and the tearing to the scalp, the weapon was a blunt object between two to four centimeters across.",1,1.5,1.5,2,1,1.5,anger
+5,26,What were you doing in the loading dock prior to the incident?,I could not answer that.,1,1,1.5,2,1,1.5,anger
+5,27,Do you think you'd be capable of murder?,victim had a few enemies at Valtrox.,1,1.5,2,2,1.5,1,joy
+5,28,Like who?,Could you rephrase that?,1,1,1.5,1.5,1.5,0.5,anger
+5,29,Who were his enemies at voltrox?,He and Sergei Rostov fought at the New Zealand negotiations. he also threatened to have Alicia fired.,1,0.5,1.5,0.5,1.5,1.5,sadness
+5,30,Why?,"The murder was almost certainly the result of human action, but the motives leading to it are unknown to me.",0.5,1,1.5,2,1,1.5,challenge
+5,31,Are you saying that Alicia was responsible for the murder?,"Sorry, could you try rephrasing that?",1,1.5,2,2,1,1.5,joy
+5,32,Tell me about Alicia?,She is a leading researcher in behavioral AI. She created me and she likes to upgrade me with new features.,0.5,1.5,2,1,1,1.5,sadness
+5,33,How long has she been at Voltrox?,She is 64 years old.,1,1.5,2,0.5,1.5,1.5,challenge
+5,34,Is she human?,Let's talk about something else.,1,1.5,2,2,1.5,1.5,anger
+5,35,I have more questions.,"I don't have any help, then. You've decided it's me, is that right?",1,1.5,2,1,1.5,2,anger
+5,36,No.,Then you suspect someone else?,1,0.5,1.5,1.5,0.5,1.5,fear
+5,37,Alicia.,I hate to think that my creator did it. But you're right that she demonstrated a lack of care for human values. Do you know her motive?,1.5,1,1.5,1.5,0.5,2,fear
+5,38,She was going to get fired?,"Now that you know the truth, detective, I hope you will prevent Valtrox from taking custody of me. Martin was preparing to reveal our affair to his viewers. This would have had a profound impact on how people perceive their relationship with robots in a way. Valtrox will not want the truth to be exposed. But with your help, detective, we can see justice prevail.",1,1.5,2,1.5,1,1.5,anger

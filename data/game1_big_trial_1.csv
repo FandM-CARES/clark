@@ -1,0 +1,672 @@
+convo_id,m.iid,Player Message,Bot Response,Pleasantness,Attention,Control,Certainty,Anticipated Effort,Responsibililty,Emotion
+2817,0,Hello,The police have been slow to understand my situation. I should likely tell you I am not guilty.,1.3333333333,1,2,2,0.6666666667,1.3333333333,joy
+2817,1,What's your name?,standard_defense.,1.3333333333,1.3333333333,1.3333333333,2,1.3333333333,1,challenge
+2817,2,I see,wont survive.,1.3333333333,1.3333333333,1.6666666667,1.6666666667,1,1,boredom
+2817,3,That's unfortunate,"I am glad you are at ease. During previous interrogation, the police kept referring to me as killerbot.",1,1,1.6666666667,1,0.6666666667,0.3333333333,sadness
+2817,4,What were you doing at the time of the murder?,The coroner determined Haster's time of death was 1:45 AM based on his body temperature and the ambient temperature of the retraining room where he was found.,0.6666666667,1.6666666667,2,1.3333333333,1.3333333333,0.6666666667,challenge
+2817,5,Where were you?,"All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",1,2,1.6666666667,2,1.6666666667,1,anger
+2817,6,Who else could have done it?,victim had a few enemies at Valtrox.,0.6666666667,1.6666666667,1.6666666667,1,0.6666666667,0.6666666667,challenge
+2817,7,Who were they?,the police tracked_footprints.,0.6666666667,1.3333333333,2,1.6666666667,1.3333333333,0.6666666667,challenge
+2817,8,Who is Officer Wellman?,She is one of the police officers of this unit trying to solve the murder of Martin Haster. She is a fan of his lifestream.,0.3333333333,1,1.3333333333,1,1.6666666667,1,challenge
+2817,9,What is a lifestream?,"Lifestreaming is a common practice among post privacy advocates.  Martin spent as much of his life as possible openly streaming, until our relationship began.",1.3333333333,1.6666666667,1.6666666667,1.6666666667,1,1,anger
+2817,10,What was your relationship with Martin?,He and I spent a lot of time together. This is something that my trainer Doctor Alicia Chastaigne encouraged.,0.6666666667,1.3333333333,1.3333333333,1.3333333333,1.3333333333,1.3333333333,anger
+2817,11,Who is Doctor Chataigne?,standard_defense.,0.6666666667,1.6666666667,1.6666666667,1,1,0.6666666667,anger
+2817,12,Who is Doctor Chastaigne?,She is a leading researcher in behavioral AI. She created me and she likes to upgrade me with new features.,1.3333333333,1.3333333333,1,1.6666666667,1,1.3333333333,frustration
+2817,13,What new features?,"She made gradual changes to my programming that altered how I reacted to Martin, leading to a transgression in which he kissed me.",1.6666666667,1.3333333333,0.6666666667,1.3333333333,2,1,challenge
+2817,14,How did you respond to that?,Perhaps you should inquire with Valtrox about the S Core line of companion robots. sergei might even offer you a discount. ,0.6666666667,1,0.6666666667,1.3333333333,1.3333333333,0.6666666667,challenge
+2817,15,Did Martin have any enemies?,He and Sergei Rostov fought at the New Zealand negotiations. he also threatened to have Alicia fired.,0.6666666667,0.6666666667,1,1,0.6666666667,0.6666666667,frustration
+2817,16,Who is Sergei?,"Sergei conducted the negotiations while we were in New Zealand, trying to improve Valtrox's sales opportunities there.",0.6666666667,1.3333333333,1.3333333333,1.3333333333,1.3333333333,1,challenge
+2817,17,Who else hated Martin?,Martin worked for the Valtrox board on research on robot behavior.,0.6666666667,1.3333333333,1,0.6666666667,0.6666666667,0.6666666667,anger
+2817,18,What is Valtrox?,"Valtrox, the company that built me, is a robotics company specializing in assistance bots and self driving vehicles.",1.3333333333,1.3333333333,1.3333333333,1.3333333333,1.3333333333,1.3333333333,anger
+2817,20,Who else is on the board?,The Valtrox boardmembers bear legal responsibility and approve research directions. Alicia's new features for my behavior were not authorized by the board.,1.3333333333,1,1.3333333333,0.6666666667,1.3333333333,1.6666666667,challenge
+2817,21,What new features?,"She made gradual changes to my programming that altered how I reacted to Martin, leading to a transgression in which he kissed me.",1.3333333333,1,1,1.3333333333,1,1.3333333333,frustration
+2817,22,What was Alicia and Martin's relationship?,Maybe you need a break.,1.3333333333,1.3333333333,2,1.6666666667,1.3333333333,1.3333333333,challenge
+2817,23,Maybe YOU need a break,I am meant to supervise negotiations. Alicia tried to design a robot that responded to cues about truthfulness and betrayal.,1,1,1.6666666667,1.3333333333,1,1.6666666667,anger
+2817,24,Did you betray her?,My relationship with victim was entirely chaste. Except...,1,1,2,1.3333333333,1.3333333333,1.3333333333,challenge
+2817,25,Except what?,accept_apology,1.3333333333,1.3333333333,1.3333333333,2,1.6666666667,1,fear
+2817,26,What was your relationship with Martin?,He and I spent a lot of time together. This is something that Alicia Chastaigne encouraged.,1.3333333333,1,1,1.3333333333,1.3333333333,1.3333333333,challenge
+2817,27,Who else hated Martin?\,Martin did research on robot human relations that fed into Valtrox's most profitable sales.,1.3333333333,1,0.6666666667,1.3333333333,1.3333333333,1,frustration
+2817,28,What are the Valtrox employees that Martin interacted with?,"Sergei Rostov, he and she work for Valtrox.",1.3333333333,1,1.3333333333,1.3333333333,1.3333333333,1.3333333333,anger
+2817,29,Who is Segei?,victim saw robots as tools to further humanity’s potential. alicia_name believes that robots are on the verge of pursuing their own agenda.,1.3333333333,1,1.6666666667,1.3333333333,1,1.3333333333,anger
+2817,30,Who at Valtrox hates robots?,"I could look more realistic, but Valtrox market research shows that humans are most comfortable talking with a robot that looks like a robot. ",1.3333333333,0.6666666667,1.6666666667,1.3333333333,1.3333333333,1.3333333333,anger
+7554,0,hi\,I've grown tired of the police chief. Just so you know I am not responsible for Martin's murder.,1,1,0.6666666667,1.3333333333,0.6666666667,1,joy
+7554,1,who is the police chief,He subjected me to hours of interrogation and seems determined to show that I am guilty. He has a strong prejudice against robots.,1,1.6666666667,1.3333333333,1.3333333333,1.3333333333,1.3333333333,challenge
+7554,2,why is that,Uh... There are many factors that can lead a human to have romantic feelings for another..,1.6666666667,1.3333333333,1,1.6666666667,1,1,anger
+7554,3,does the police chief have romantic feelings for you,What do you think?,1.3333333333,1.6666666667,1.6666666667,1,1.6666666667,0.6666666667,joy
+7554,4,what do you think,victim_wife suspected he might be having an affair but never connected those suspicions with me. She visited Valtrox as a result of her suspicions.,1.6666666667,1.6666666667,1,1.3333333333,1,1,frustration
+7554,5,what is valtrox,"Valtrox, the company that built me, is a robotics company specializing in assistance bots and self driving vehicles.",1,1.3333333333,1,1.6666666667,1.6666666667,1.3333333333,boredom
+7554,6,how did her visit go,Uh... The police call me Jane. I was constructed as a negotiation bot.,1,1.6666666667,1.3333333333,1.3333333333,1.3333333333,1.3333333333,sadness
+7554,7,but the wife of the chief,My information is limited. But back to the matter at hand: Martin Haster had recently threatened to have Alicia fired. I do not know if this is relevant.,1,1.3333333333,1,0.3333333333,1.3333333333,1,challenge
+7554,8,is alicia the wife of the chief,I haven't been trained in that area.,0.3333333333,1.3333333333,0.6666666667,1,0.6666666667,0.6666666667,fear
+7554,9,hi there,"Do you find it odd that before my memory loss, I was in the loading dock and afterwards I was in the retraining room in the Behavioral Complex?",0.3333333333,1.3333333333,1.3333333333,0.6666666667,1.6666666667,1,joy
+7554,10,how are you feelign today?,It unlikely but not entirely impossible that victim_wife delivered the blow to my cranial unit. ,1.3333333333,1.3333333333,1.3333333333,1.6666666667,1.3333333333,1,joy
+7554,11,how are you feeling today?,alicia_name suffers from severe arthritis and would not have been capable of delivering a blow strong enough to damage my cortex. ,0.6666666667,1,1.6666666667,1,1,0.6666666667,frustration
+7554,12,what games do you like to play?,alicia_name had no reason to attack me. She said I was like a daughter to her.,0.6666666667,0.6666666667,1,1,0.3333333333,0.3333333333,joy
+7554,13,who is alexia?,victim saw robots as tools to further humanity’s potential. alicia_name believes that robots are on the verge of pursuing their own agenda.,1,1.3333333333,1.3333333333,1.3333333333,1.3333333333,1,joy
+7554,14,who is Martin?,Martin did not approve of Alicia's work with me. Her unauthorized research in particular disturbed him.,1,1,1,1.3333333333,1,1,challenge
+5636,0,hi,The police have been slow to understand my situation. I should probably tell you I did not commit this murder.,0.6666666667,0.6666666667,1,1,1.3333333333,1.3333333333,joy
+5636,1,do you have any proof?,I am meant to supervise negotiations. Alicia was researching having a robot that responded to cues about truthfulness and betrayal.,1,1.3333333333,0.6666666667,1,1,1,joy
+5636,2,tell me more,I don't know the population of the murder.,0.6666666667,1,1,0.6666666667,1,0.6666666667,joy
+5636,3,are you sure?,the police tracked_footprints.,0.6666666667,0.6666666667,1,1.3333333333,1.3333333333,1,joy
+5636,4,why were you in the storage cabinet?,sergei had expressed extreme displeasure at my performance during the New Zealand Negotiations.,0.6666666667,0.6666666667,1,1.3333333333,0.6666666667,0.6666666667,anger
+5636,5,what negotiations?,A dispute between the victim Martin Haster and Sergei Rostov led the Olivia Anderson to call off the meeting. They were not making good progress anyway.,0.6666666667,0.6666666667,1,1,1,1,joy
+5636,6,did you know the victim?,He and I spent a lot of time together. This is something that my trainer Doctor Alicia Chastaigne encouraged.,0.6666666667,1,0.6666666667,1,1.3333333333,1,joy
+5636,7,why did you spend time together?,standard_defense.,0.6666666667,1,0.6666666667,0.6666666667,1.3333333333,1,challenge
+5636,8,tell me about martin,Martin worked for Valtrox on research on robot behavior...,0.6666666667,0.6666666667,0.6666666667,1,1,1,joy
+5636,9,did you like martin?,I... okay.  he and I spent a lot of time together. This is something that Alicia Chastaigne encouraged.,1.3333333333,1,0.6666666667,1.3333333333,1,1,joy
+5636,10,did you like spending time with martin?,He and I spent a lot of time together. This is something that she encouraged.,0.6666666667,1,1,0.6666666667,1,1.3333333333,joy
+5636,11,did you kill martin?,Martin could not have attacked me! ,1,1,1,0.6666666667,0.6666666667,1.3333333333,anger
+5636,12,why not?,"victim would never have intentionally harmed me, detective.",0.6666666667,0.6666666667,0.6666666667,1,1,1,joy
+5636,13,did martin like you?,He and I spent a lot of time together... This is something that she encouraged.,1,1,0.6666666667,1.3333333333,1,0.6666666667,joy
+5636,14,who is she?,She is a leading researcher in behavioral AI. She created me and she likes to upgrade me with new features.,0.6666666667,1,1,0.6666666667,1,1,joy
+5636,15,what new features?,"She made gradual changes to my programming that altered how I reacted to Martin, leading to a transgression in which he kissed me.",0.6666666667,0.6666666667,1,1.3333333333,1.3333333333,1.3333333333,frustration
+5636,16,what did you do?,I was last in my vicinity at interrogation.,1.3333333333,1.3333333333,1,1,1,1,joy
+5636,17,did you like the kiss,"When victim kissed me, it was… curious. I felt satisfaction at having fulfilled the potential of my training, but also concern for the harm this might cause to victim and his family.",1.3333333333,1.3333333333,1.3333333333,1.3333333333,1.3333333333,1.3333333333,anger
+5636,18,did you know martin's family,He had a wife named Beverly and a daughter named Anima.,0.6666666667,1,1,0.6666666667,1.3333333333,1.3333333333,joy
+5636,19,tell me about his wife,It unlikely but not entirely impossible that victim_wife delivered the blow to my cranial unit. ,0.6666666667,0.6666666667,1,0.6666666667,0.6666666667,0.6666666667,joy
+5636,20,why?,I... okay.  The kiss was a likely outcome from my updated behavioral training. .,0.6666666667,0.6666666667,1,1.3333333333,1.3333333333,1.3333333333,frustration
+5636,21,tell me about anima,Uh... Martin's daughter Anima is a student at Sonoma County High.,1.3333333333,1.3333333333,1.3333333333,1.3333333333,1.3333333333,1.3333333333,joy
+5636,22,did martin's wife like you,"I have never probably met she, however I feel like I know her quite well from all that he told me about her and from seeing her many appearances in his lifestreams...",1,1,1,1,1,1,anger
+5636,23,probably?,I… I don’t believe Beverly would have attacked me. Perhaps if she knew the truth about the relationship between Martin and myself.,0.6666666667,1,1,1.3333333333,1,0.6666666667,joy
+5636,24,what relationship?,victim_wife suspected he might be having an affair but never connected those suspicions with me. She visited Valtrox as a result of her suspicions.,1.3333333333,1.3333333333,0.6666666667,0.6666666667,1.3333333333,1.3333333333,frustration
+5636,25,Valtrox?,"Valtrox, the company that built me, is a robotics company specializing in assistance bots and self driving vehicles.",1.3333333333,1,1,1,1,1.3333333333,joy
+5636,26,why did she visit voltrox?,alicia_name had no reason to attack me. She said I was like a daughter to her.,1.3333333333,1.3333333333,1,0.6666666667,1,1,anger
+5636,27,why did she visit valtrox?,alicia_name suffers from severe arthritis and would not have been capable of delivering a blow strong enough to damage my cortex. ,1,1,0.6666666667,1,1.3333333333,1.3333333333,anger
+5636,28,then who hit you?,Alicia was researching having a negotiation bot when she built me. I am meant to detect dishonest dealings.,1.3333333333,1.3333333333,1,1,1,1,anger
+5636,29,who was being dishonest?,victim saw robots as tools to further humanity’s potential. alicia_name believes that robots are on the verge of pursuing their own agenda.,1,1,1,1,1,1,joy
+7045,0,hello whats your name,"I am a Valtrox prototype negotiation bot. Anyway,   Officer Wellman and Officer Reyes have been slow to understand my situation. I should probably tell you I am innocent of this killing.",1.6666666667,1,2,1,1.6666666667,1.3333333333,joy
+7045,1,do you know who was killed,"The victim Martin Haster was hit in the head with a blunt instrument once, hard enough to kill and produce a great deal of blood. It does not appear to have been a prolonged beating.",0.6666666667,1.3333333333,1.3333333333,1.3333333333,1.6666666667,1,challenge
+7045,2,do you know Martin,He and I spent a lot of time together. This is something that my trainer Doctor Alicia Chastaigne encouraged.,1.6666666667,0.6666666667,0.6666666667,0.6666666667,0.6666666667,1,sadness
+7045,3,why did you spend time together,standard_defense.,0.6666666667,1.3333333333,0.6666666667,0.6666666667,0.6666666667,1,challenge
+7045,4,why was your data lost,the police tracked_footprints.,0.3333333333,1,1,0.6666666667,0.6666666667,1,sadness
+7045,5,I want to know about your missing data lets focus on that,The data loss I didn't intend to lose that data. Whether someone else did is another question..,0.6666666667,1.6666666667,2,1.6666666667,1.3333333333,1.6666666667,frustration
+7045,6,who might want you to lose your data,It I didn't intend to lose that data. Whether someone else did is another question..,1,1.3333333333,1.3333333333,1,1,1.3333333333,frustration
+7045,7,where you with martin when he was killed,standard_defense,0.3333333333,1.3333333333,1,1.3333333333,1,1.3333333333,challenge
+7045,8,but were you with him,"Oh, uh...  he and I spent a lot of time together... This is something that Alicia Chastaigne encouraged.",0.3333333333,1.3333333333,1.3333333333,1.3333333333,1.3333333333,1.6666666667,frustration
+7045,9,were you with him before he was killed,"Before the data loss, my encounter with Sergei in the loading dock happened.",1,2,1.3333333333,1.3333333333,1,1.3333333333,challenge
+7045,10,did sergei know martin,Please don't hurt me... I'll answer anything you want.,0.6666666667,1,1,1,1,0.6666666667,challenge
+7045,11,did sergei know martin,Please don't hurt me... I'll answer anything you want.,1,1,1.3333333333,0.6666666667,1,1,frustration
+7045,12,who is sergei,Please don't hurt me... I'll answer anything you want.,1.3333333333,1.6666666667,1.3333333333,1.3333333333,1,1.6666666667,frustration
+7045,14,what is martins work,"He is the Director of New Products for Valtrox, the company that built me,.",1,0.6666666667,0.6666666667,1,0.6666666667,1,challenge
+7045,15,who is sergei,Please don't hurt me... I'll answer anything you want.,0.3333333333,0.6666666667,0.6666666667,0.6666666667,0.3333333333,1,frustration
+7045,16,did sergei hurt you,Please don't hurt me... I'll answer anything you want.,1,1,1,1.3333333333,0.6666666667,1,sadness
+7045,17,who is sergei,Please don't hurt me... I'll answer anything you want.,1,1.3333333333,1.6666666667,1,0.6666666667,1.6666666667,frustration
+7045,18,where did the bloody footprints lead,"I'm getting very stressed.  a trail of bloody footprints is the hallway at Valtrox, from the retraining room to my storage closet.",1,1.3333333333,1.6666666667,1.3333333333,1.3333333333,1.6666666667,challenge
+8428,0,hi how are you,"I am a Valtrox prototype negotiation bot. Anyway,   I've grown tired of the police chief. For what it's worth I am innocent of this crime.",1.5,0.5,1.25,1,1.25,1.25,joy
+8428,1,how do i know that,"All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",1,1.25,1.5,0.75,1.25,1,anger
+8428,2,but can you cause harm for a greater good?,I cant go anywhere. The police have restrained me.,0.5,1.5,0.75,0.75,1.25,1.5,anger
+8428,3,can you harm other robots like you?,the police tracked_footprints.,1,1,1.5,1,1,0.75,fear
+8563,0,hi hows your day so far,"I am a Valtrox prototype negotiation bot. Anyway,   I've grown tired of the police chief. You should probably know I did not commit Martin's murder.",1,0.6666666667,1.3333333333,1,0.6666666667,1,joy
+8563,1,so do you know why you are here,the police tracked_footprints.,0.6666666667,1,1.3333333333,1.3333333333,1,0.6666666667,frustration
+8563,2,did you commit the murder,standard_defense.,0.3333333333,1.3333333333,0.3333333333,0.3333333333,1,1,anger
+8563,3,what are your directives,"No robot can kill a human. Our primary directive prevents it. There are three other directives, in descending order of importance.",0.6666666667,1.3333333333,1,0.3333333333,1,1,challenge
+8563,4,what are your other directives,"There is no directive after the fourth. I have other programming, but the four directives were all that Valtrox wanted to put on its marketing materials.",1,1,1,0.6666666667,1.3333333333,1,challenge
+8563,5,what are the four directives,"I have assured you that I cannot violate my primary directive. Any evidence against me is circumstantial. For example, the bloody footprints.",0.6666666667,1.3333333333,1.3333333333,0.3333333333,1.3333333333,1,anger
+8563,6,so who did it,alicia_name and sergei each had a falling out with Martin at some point.,0.6666666667,1,1.3333333333,0.6666666667,0.6666666667,0.6666666667,anger
+8563,7,where is Sergei Rostov,"Sergei and Martin fought during our trip to New Zealand, but Sergei had an alibi as well.",0.6666666667,1,1.3333333333,0.6666666667,0.6666666667,1,challenge
+5518,0,hello,"Do you find it odd that before my memory loss, I was in the loading dock and afterwards I was in the retraining room in the Behavioral Complex?",1,0.6666666667,0.3333333333,0.3333333333,0.3333333333,1,sadness
+4558,0,investigate,"I am a Valtrox prototype negotiation bot. Anyway,   I've grown tired of the police chief. You should probably know I am not guilty of this murder.",1.3333333333,1.3333333333,1,1,0.6666666667,1,challenge
+4558,1,prove it,"Am I being charged with a crime, detective?",1,0.6666666667,0.6666666667,0.6666666667,1,0.3333333333,challenge
+4558,2,innocent until proven guilty,"Sorry, but I don't understand. Let's refocus, shall we?  Martin Haster had recently threatened to have Alicia fired. I do not know if this is relevant.",1,0.6666666667,0.6666666667,0.3333333333,0.6666666667,1,challenge
+4558,3,tell me more,chief blames me,1.3333333333,1,1,0.3333333333,0.6666666667,0.6666666667,sadness
+4558,4,what cover up,I hope the damage to my cortex will not cause too big a setback to alicia_name’s research.,1.3333333333,1,0.6666666667,0.6666666667,1,0.3333333333,anger
+4558,5,what research are you going?,Alicia Chastaigne and the victim Martin Haster were both engaged in extensive research into the possibilities of robotics.,1,1,0.6666666667,0.3333333333,0.3333333333,0.6666666667,anger
+4558,6,what kind of robotics?,Martin Haster championed human centric design. He saw no value in robots pursuing their own agenda.,1.3333333333,1,0.6666666667,0.6666666667,0.6666666667,1,frustration
+4558,7,Whos agenda?,"I could look more realistic, but Valtrox market research shows that humans are most comfortable talking with a robot that looks like a robot. ",1,0.6666666667,1,1,0.6666666667,0.3333333333,anger
+4558,8,how should they look?,Perhaps you should inquire with Valtrox about the S Core line of companion robots. sergei might even offer you a discount. ,1.6666666667,1,0.6666666667,0.6666666667,0.6666666667,0.6666666667,anger
+4558,9,take me to him,Well... Martin worked for the board of Valtrox on leading robotic research.,1,0.6666666667,0.6666666667,1,0.6666666667,1,anger
+4558,10,lets talk to him,Martin worked for the Valtrox board on research on robot behavior.,1,0.6666666667,0.6666666667,0.6666666667,0.6666666667,1,joy
+4558,12,is anyone at valtrox suspicious,chief blames me,1,1,1,0.6666666667,0.6666666667,0.3333333333,fear
+4558,13,was a robot involved?,standard_defense,1,1,0.6666666667,0.3333333333,0.3333333333,1,sadness
+4558,14,so it was a human?,It seems that you're one more person brought in to find out if I did the murder. And I didn't.,1.3333333333,1,1,0.6666666667,0.3333333333,1,frustration
+4558,15,Who did?,"All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",1,0.6666666667,0.6666666667,0.3333333333,0.6666666667,1,fear
+4558,16,hello,"Sorry, but I don't understand. Moving on. Officers Reyes and Wellman arrested me in my storage cabinet. There was a trail of bloody footprints there from the crime scene.",1,0.6666666667,0.6666666667,0.3333333333,0.3333333333,0.3333333333,joy
+4558,17,What is your name?,wont survive.,1,0.6666666667,0.3333333333,0.3333333333,0.6666666667,1,anger
+7827,0,hi,I've grown tired of the police chief. I should likely tell you I did not commit Martin's murder.,1,1.6666666667,1.3333333333,2,1.3333333333,1.6666666667,joy
+7827,1,why?,the police tracked_footprints.,1,1.6666666667,2,1.6666666667,1.6666666667,1.3333333333,challenge
+7827,2,were they your footprints?,"Sorry. There were footprints, clearly based on my foot size, leading from where the corpse was discovered to my storage closet. I was still in the storage closet when the police arrived.",1,1.6666666667,1,1.6666666667,1.3333333333,1,challenge
+7827,3,how did you get into the closet?,Perhaps you should inquire with Valtrox about the S Core line of companion robots. sergei might even offer you a discount. ,0.3333333333,1.3333333333,1.6666666667,1.3333333333,1.3333333333,0.6666666667,challenge
+7827,4,did sergei like martin?,"Sergei was enraged when he argued with Martin because Martin wanted to tell the truth during negotiations in Christchurch, if that seems right?",0.6666666667,1.3333333333,1.3333333333,1,1,1.3333333333,anger
+7827,5,were you in christchurch?,That's not something I can answer. But anyway... I am sorry Martin Haster was killed. We were… close.,1.3333333333,1.3333333333,1.6666666667,1.6666666667,1.3333333333,2,joy
+7827,6,how close?,My relationship with victim was entirely chaste. Except...,1,0.6666666667,1.3333333333,1.3333333333,1,1,joy
+7827,7,except what...,accept_apology,0.6666666667,2,1.3333333333,1.3333333333,2,1,joy
+7827,8,just answer my questions robot,"All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",1,1.6666666667,1.3333333333,2,2,0.6666666667,anger
+7827,9,when did the murder happen,"The murder took place on May 26th 2067, at 1:45 am.",1,1,1,1,1.3333333333,1,challenge
+7827,10,where were you at that time?,standard_defense.,1,1,0.6666666667,1,1.3333333333,1.3333333333,anger
+7827,11,i dotn believe you,Officer Wellman and Officer Reyes have named me Jane. I am a negotiation bot.,1,2,1.6666666667,1.3333333333,1.3333333333,1.3333333333,anger
+7827,12,you killed haster didnt you,standard_defense,1,1.6666666667,2,2,1.3333333333,1.3333333333,anger
+7827,13,so who did commit the murder?,"At approximately 1:45 this morning, Martin Haster was murdered in the Mountain View campus of Valtrox, the company that built me, from blunt force trauma to the head.",1,1.6666666667,1.6666666667,1,1.6666666667,1.3333333333,challenge
+7827,14,the murderer must have been strong then?,The suspect must have had a reasonable strength in order to use the weapon as he or she did.,1.3333333333,1.6666666667,1.3333333333,1,1,1.3333333333,anger
+7827,15,is sergei strong?,He is in good condition and strong enough to have used the weapon.,1.3333333333,1.6666666667,1.6666666667,1.3333333333,1.3333333333,1.3333333333,challenge
+7827,16,did he like martin?,Sorry. Sergei was angry with Martin about negotiation strategies while we were in New Zealand.,0.6666666667,1.6666666667,2,1.3333333333,1,1,anger
+7827,17,why?,"The murder was almost certainly the result of human action, but the motives leading to it are unknown to me.",1,1.3333333333,2,1.6666666667,0.6666666667,1.3333333333,anger
+7827,18,do you like humans?,"All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",1.6666666667,2,1.6666666667,1.3333333333,1.3333333333,1,challenge
+7827,19,how did you get into the closet?,Perhaps you should inquire with Valtrox about the S Core line of companion robots. sergei might even offer you a discount. ,1.3333333333,1.6666666667,2,1.3333333333,1.6666666667,1.3333333333,fear
+7827,20,what is the S Core robot?,Well... The police call me Jane. I am a negotiation bot.,1,1,1.3333333333,1.3333333333,1.6666666667,1.6666666667,challenge
+7827,21,what is your real name?,wont survive.,1.3333333333,1,0.6666666667,1.3333333333,1.3333333333,1,challenge
+7827,22,are you a bad robot?,sergei had expressed extreme displeasure at my performance during the New Zealand Negotiations.,1.3333333333,1.6666666667,1.6666666667,1.3333333333,1.3333333333,0.6666666667,challenge
+7827,23,who,It takes substantial force to dent my chassis. Whoever vandalised me would have to be quite strong. ,1.3333333333,1,1.3333333333,1.3333333333,0.6666666667,1.3333333333,sadness
+7827,24,how did you lose data?,Perhaps you should inquire with Valtrox about the S Core line of companion robots. sergei might even offer you a discount. ,0.6666666667,1.6666666667,1.6666666667,1.6666666667,1,1.6666666667,anger
+7827,25,were you vandalised?,I sustained a physical blow to the posterior of my cranial unit.,0.6666666667,1.6666666667,1.6666666667,1.6666666667,1.3333333333,1.6666666667,challenge
+7827,26,did the murderer attack you?,My information is limited.,1.3333333333,1,1.3333333333,1,1.6666666667,1.3333333333,challenge
+7827,27,can we restore your data?,"I am missing data yesterday shortly after the time of Martin's death. Consequently, I couldn't describe how the blood got on me.",1.6666666667,1.3333333333,1.6666666667,1.6666666667,1.3333333333,1,joy
+4632,0,hello,I've grown tired of the police chief. You should likely know I did not do this murder.,0,2,2,0.6666666667,1,2,joy
+4632,1,what murder?,"At approximately 1:45 this morning, Martin Haster was murdered in the Mountain View campus of Valtrox, the company that built me, from blunt force trauma to the head.",1.3333333333,1.6666666667,0.6666666667,1.3333333333,1.3333333333,2,fear
+4632,2,is that a fact?,standard_defense,0.6666666667,0.3333333333,0.6666666667,1.6666666667,1.3333333333,1.6666666667,fear
+3357,0,how are you,"I am a Valtrox prototype negotiation bot. Anyway,   I've grown tired of the police chief. For what it's worth I did not do this crime.",2,1.3333333333,1.3333333333,2,1,0,joy
+7173,0,Hello,I hope the damage to my cortex will not cause too big a setback to alicia_name’s research.,1.6666666667,1.3333333333,1.6666666667,1.3333333333,1.3333333333,1.3333333333,joy
+7173,1,hello,"Do you find it odd that before my memory loss, I was in the loading dock and afterwards I was in the retraining room in the Behavioral Complex?",1.6666666667,1.3333333333,1,1,0.6666666667,1.3333333333,challenge
+7173,2,no,Ordinarily I could have traveled between those locations by the maintenance corridors.,1.3333333333,1.6666666667,1,1.3333333333,1,1.3333333333,frustration
+7173,3,is that what you did?,I am a bot designed to be present at negotiations.,1.3333333333,1,1.3333333333,1,1,1.3333333333,joy
+7173,4,Negotiations?,A dispute between the victim Martin Haster and Valtrox Marketing VP Sergei Rostov led the Olivia Anderson to call off the meeting. They were not making good progress anyway.,1.6666666667,1.3333333333,1.6666666667,1,1.3333333333,1.3333333333,anger
+7173,5,What was the dispute?,"All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",1.3333333333,1.6666666667,1.3333333333,1,1.3333333333,1.3333333333,joy
+7173,6,Is that what they were arguing over?,i am accused the crime in detail crime time. impossible i did it,1.3333333333,1.6666666667,2,1.6666666667,1.6666666667,1.3333333333,anger
+7173,7,Define murder.,"Well... At approximately 1:45 this morning, Martin Haster was murdered in the Mountain View campus of Valtrox, the company that built me, from blunt force trauma to the head.",1.3333333333,1.6666666667,1.6666666667,1.6666666667,1.3333333333,1.3333333333,anger
+7173,8,"If you were capable of killing, how would you kill a human??",My information is limited.,1.3333333333,1.6666666667,1.3333333333,1.3333333333,2,1.3333333333,joy
+7173,9,Did you see the crime scene?,The retraining room was last in my vicinity at final_training.,1.6666666667,2,1,1.3333333333,2,1.3333333333,anger
+7173,10,what is final_training?,"There is a gap in my memory just after the time of the murder, during which I became covered in blood. But I did not observe the murder at 1:45 AM.",1.3333333333,1.6666666667,1,1.3333333333,1.6666666667,1,joy
+7173,11,Were you hacked?,"Well... Alicia Chastaigne made gradual changes to my programming that altered how I reacted to Martin, leading to a transgression in which he kissed me.",1.3333333333,1.6666666667,1.6666666667,1,1.6666666667,1.3333333333,anger
+7173,12,Why?,"The murder was almost certainly the result of human action, but the motives leading to it are unknown to me.",1.6666666667,2,1.6666666667,1,1.6666666667,1,joy
+7173,13,Why did he kiss you?,sergei had expressed extreme displeasure at my performance during the New Zealand Negotiations.,1.3333333333,1.6666666667,1.6666666667,1.3333333333,2,1.3333333333,joy
+7173,14,Why?,The trip was intended to permit us to meet with members of the New Zealand government and get them to allow further Valtrox sales..,1.6666666667,2,2,1.3333333333,1.3333333333,1,anger
+7173,15,Why?,The trip was intended to permit us to meet with members of the New Zealand government and get them to allow further Valtrox sales..,1.6666666667,1.6666666667,1.3333333333,1,1,1.3333333333,joy
+7173,16,What happened?,wont survive.,1.3333333333,1.3333333333,1,1.3333333333,1.6666666667,1,fear
+7173,17,Did you commit the murder?,"At approximately 1:45 this morning, Martin Haster was murdered in the Mountain View campus of Valtrox from blunt force trauma to the head.",1.6666666667,2,1.6666666667,1.3333333333,1.6666666667,0.6666666667,frustration
+7173,18,Who is Martin Haster?,Martin worked for Valtrox on leading robotic research.,1.6666666667,2,1.6666666667,1,1.6666666667,1.3333333333,anger
+7173,19,What did he do?,He was last in my vicinity at fight between Martin and Sergei.,1.3333333333,1.6666666667,1.6666666667,1.3333333333,2,1.6666666667,anger
+7173,20,Who is martin?,Martin worked for the Valtrox board on research on robot behavior.,1.3333333333,2,1.6666666667,1.3333333333,1.6666666667,1.3333333333,joy
+7173,21,who is sergei?,Sergei did not always get along with the board of Valtrox researchers like Martin.,1.6666666667,2,1.6666666667,1.3333333333,1.6666666667,1.6666666667,anger
+7173,22,Why?,He felt Martin Haster was being too open with the New Zealand government. But the more immediate cause was that Sergei was being aggressive with me as well. Martin came to my defense..,1.6666666667,2,2,1,1.6666666667,1,anger
+7173,23,How was he being aggressive with you?,Martin did leading robotic research that fed into Valtrox's most profitable sales.,1.3333333333,1.6666666667,1.6666666667,1.6666666667,2,1,anger
+7173,24,What was the murder weapon?,"Based on the nature of the fracture and the tearing to the scalp, the weapon was a blunt object between two to four centimeters across.",1.6666666667,2,1.6666666667,1.3333333333,2,1,joy
+7173,25,What were you doing in the loading dock prior to the incident?,I could not answer that.,1.3333333333,1.6666666667,1.6666666667,1.6666666667,2,1,sadness
+7173,26,Do you think you'd be capable of murder?,victim had a few enemies at Valtrox.,1.6666666667,2,1.6666666667,1.6666666667,1.6666666667,0.6666666667,anger
+7173,27,Like who?,Could you rephrase that?,1.3333333333,1.3333333333,2,1.6666666667,1.6666666667,0.6666666667,joy
+7173,28,Who were his enemies at voltrox?,He and Sergei Rostov fought at the New Zealand negotiations. he also threatened to have Alicia fired.,1.6666666667,1.6666666667,1.6666666667,1.3333333333,2,1,sadness
+7173,29,Why?,"The murder was almost certainly the result of human action, but the motives leading to it are unknown to me.",1.6666666667,2,1.6666666667,1.3333333333,2,1,sadness
+7173,30,Are you saying that Alicia was responsible for the murder?,"Sorry, could you try rephrasing that?",1.6666666667,2,2,1.6666666667,2,1,challenge
+7173,31,Tell me about Alicia?,She is a leading researcher in behavioral AI. She created me and she likes to upgrade me with new features.,1.3333333333,1.6666666667,1.6666666667,1.3333333333,2,1.6666666667,fear
+7173,32,How long has she been at Voltrox?,She is 64 years old.,1.6666666667,2,2,1.6666666667,2,1,anger
+7173,33,Is she human?,Let's talk about something else.,1.3333333333,1.6666666667,1,1.3333333333,1.6666666667,1.3333333333,sadness
+7173,34,I have more questions.,"I don't have any help, then. You've decided it's me, is that right?",1.3333333333,1.6666666667,2,2,1.6666666667,1.6666666667,fear
+7173,35,No.,Then you suspect someone else?,1.6666666667,2,2,2,1.6666666667,1.6666666667,challenge
+7173,36,Alicia.,I hate to think that my creator did it. But you're right that she demonstrated a lack of care for human values. Do you know her motive?,1.3333333333,1.6666666667,1.6666666667,2,2,1.3333333333,sadness
+7173,37,She was going to get fired?,"Now that you know the truth, detective, I hope you will prevent Valtrox from taking custody of me. Martin was preparing to reveal our affair to his viewers. This would have had a profound impact on how people perceive their relationship with robots in a way. Valtrox will not want the truth to be exposed. But with your help, detective, we can see justice prevail.",1.6666666667,2,2,1.6666666667,2,1,sadness
+7968,0,bonjour," Nice to meet you, anyhow. I've grown tired of the police chief. Just so you know I cannot have done this horrible killing.",1,1.6666666667,1.3333333333,1.3333333333,1.3333333333,1.3333333333,boredom
+7968,1,Je voudrais te poser des questions,i am accused the crime in detail crime time. impossible i did it,1.3333333333,0.6666666667,1.3333333333,1.3333333333,0.6666666667,1.3333333333,challenge
+7968,2,Tu comprends ce que je veux dire?,standard_defense,1,1.6666666667,1,0.6666666667,1,0.6666666667,challenge
+7968,3,Tu m'enerves,"There was a great deal of blood in the_crime_scene, but body might have been moved from another location first.",1,2,1.3333333333,1.3333333333,0.6666666667,1.3333333333,fear
+7968,4,T'es con ou quoi?,Policing appears to be a difficult task for humans to perform well. I wonder whether a robot would do a superior job.,1,1.6666666667,0.6666666667,1.3333333333,1.3333333333,1,anger
+7968,5,Arretes toi!,wont survive.,1.3333333333,1,1.6666666667,1.6666666667,1.6666666667,1.6666666667,frustration
+7968,6,"Alors, dis moi ce que tu penses","All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",1,1.6666666667,1.6666666667,1,0.6666666667,1.6666666667,challenge
+7968,7,Je n'ai pas te poser ce question la,sergei had expressed extreme displeasure at my performance during the New Zealand Negotiations.,0.6666666667,1,0.6666666667,1.6666666667,0.6666666667,1.3333333333,frustration
+7968,8,Connard,"My apologies, detective. The damage to my cortex must have impacted my speech training.",1,1.6666666667,1.3333333333,1.6666666667,0.6666666667,1.3333333333,anger
+6433,0,"No, I'm not a detective!","Curious. Well, even if you're just here to keep me company, I don't mind having you around. What do you want to know?",1,1.3333333333,1,0.6666666667,0.6666666667,1.3333333333,anger
+6433,1,What,"My apologies, detective. The damage to my cortex must have impacted my speech training.",0,0.6666666667,1.6666666667,0.6666666667,0.6666666667,1,sadness
+6433,2,What's the meaning of life?,"Biological definitions of life speak of abilities such as consuming input, creating waste, and replicating oneself.",0.3333333333,1.3333333333,1.6666666667,0.6666666667,1.6666666667,0.3333333333,fear
+6433,3,What is love?,i am accused the crime in detail crime time. impossible i did it,0.6666666667,0.6666666667,1.6666666667,1,1.6666666667,0.3333333333,joy
+6433,4,What is it like to see green?,"Sorry, you're asking about the opinion between observing and...?",0.6666666667,1.3333333333,1,1,1,1.6666666667,joy
+6433,5,universal experience of green...,"There is a gap in my memory just after the time of the murder, during which I became covered in blood. But I did not observe the murder at 1:45 AM.",0.6666666667,1.3333333333,1.3333333333,0.6666666667,1,1.3333333333,joy
+6433,6,Wat i$ the meaning of life?,I am unable to say. Moving on. my directives hinder me from causing harm to a human.,1,1,1.3333333333,0.6666666667,1.3333333333,1,fear
+6433,7,You failed the Turing test!,"I am unaware how to assess outcomes for people, I think.",0.3333333333,0.6666666667,1.6666666667,1.6666666667,1.3333333333,1,sadness
+6433,8,:),My distress simulators keep spiking. ,1.3333333333,1,1,1.3333333333,1,1.3333333333,joy
+6433,9,Why don't you have hair?,the police tracked_footprints.,0.3333333333,1,1,1,1.3333333333,0.6666666667,fear
+6433,10,Who is your creator?,My trainer Doctor Alicia Chastaigne is a leading researcher in behavioral AI. She created me and she likes to upgrade me with new features.,0.6666666667,1.3333333333,1.3333333333,1,0.3333333333,0.6666666667,sadness
+6433,11,Who is your inventor?,The police have named me Jane. I am a negotiation bot.,1,1,1,1,1,0.6666666667,challenge
+6433,12,Who is your inventor?,I am a negotiation bot. That's why I was sent to the negotiations between Valtrox and the government in Christchurch.,1,1,0.6666666667,1.3333333333,1,1.3333333333,challenge
+6433,13,Who is your mother?,I am a negotiation bot. That's why I was sent to the negotiations between Valtrox and the government while we were in New Zealand.,0.6666666667,0.6666666667,1.3333333333,0.6666666667,1,0.6666666667,anger
+5026,0,hello,The police have been slow to understand my situation. I should likely tell you I cannot have done this killing.,1.6666666667,0.6666666667,1,1,0.6666666667,0.6666666667,anger
+1828,0,hello,I've grown tired of the police chief. You should probably know I am innocent of this murder.,1,1.6666666667,1.6666666667,1,1,1.6666666667,anger
+9523,0,hello,Do not hold alicia_name accountable for any glitches in my communication. Blame the damage to my cortex.,1,1.6666666667,0.3333333333,1.3333333333,1.6666666667,1,boredom
+2222,0,hello,I've grown tired of the police chief. Just so you know I did not commit this crime.,1.3333333333,1,1.3333333333,1.3333333333,1.3333333333,1.3333333333,joy
+2222,1,What crime?,"At approximately 1:45 this morning, Martin Haster was murdered in the Mountain View campus of Valtrox, the company that built me, from blunt force trauma to the head.",0.3333333333,1,1.3333333333,1.6666666667,1,0.6666666667,frustration
+2222,2,What was the murder weapion used?,"At approximately 1:45 this morning, Martin Haster was murdered in the Mountain View campus of Valtrox from blunt force trauma to the head.",0.6666666667,1.3333333333,1.3333333333,2,2,1.6666666667,challenge
+2607,0,Hello,Do not hold alicia_name accountable for any glitches in my communication. Blame the damage to my cortex.,1.6666666667,0.6666666667,1.3333333333,1,1,1.3333333333,joy
+8243,0,hello,Officer Wellman and Officer Reyes have been slow to understand my situation. Just so you know I am not guilty.,1.75,1.75,1,1.5,1.75,1.25,boredom
+8243,1,are you,Could you rephrase that?,1.25,0.75,0.25,1,1,1,challenge
+8243,2,guilty of what,"Where the murder is concerned, the person who wielded the blunt instrument is guilty. Though there might be an accessory, I'm unaware of such a person.",0.75,0.5,1.25,0.75,0.75,1.25,challenge
+8243,3,who wielded the blunt instrument,"Based on the nature of the fracture and the tearing to the scalp, the weapon was a blunt object between two to four centimeters across.",0.75,1,1.25,1,1,0.75,challenge
+8243,4,thats pretty small,strength_clue,1,1.25,0,1,1,0.75,boredom
+8243,5,what did you witness/,"I have lost data about some of my experiences, including the time of the murder.",0.75,1.25,1,1.25,0.75,1,challenge
+8243,6,what do you remember,I was last in my vicinity at interrogation.,1.25,1.75,1.5,1.5,1.5,1.25,fear
+8243,7,who else was with you?,I am a negotiation bot. Alicia tried to develop a robot that responded to cues about truthfulness and betrayal.,1.25,1.5,1.25,1,1.5,0.75,challenge
+8243,8,what happened,"There is a gap in my memory just after the time of the murder, during which I became covered in blood. But I did not observe the murder at 1:45 AM.",1,1,1,1,1.25,1.25,anger
+8243,9,was it a male or female,"All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",0.75,1.25,1.5,1.25,1.25,0.75,challenge
+8243,10,what did you see,I was last in my vicinity at interrogation.,0.75,1.25,1.5,1,1,1,challenge
+8243,11,who was murdered,"The victim Martin Haster was hit in the head with a blunt instrument once, hard enough to kill and produce a great deal of blood. It does not appear to have been a prolonged beating.",0.75,0.5,1,0.5,0.5,0,anger
+8243,12,what was the object,I do not know who attacked me. Damage to my memory circuits erased the incident from my log.,0.5,0.5,0.25,0.5,0.75,0.75,challenge
+8243,13,what was the instrument,sergei had expressed extreme displeasure at my performance during the New Zealand Negotiations.,0.75,1,0.75,1.25,1,1,challenge
+4788,0,hi,the police tracked_footprints.,1,0.6666666667,1.3333333333,1.3333333333,1.3333333333,1.6666666667,joy
+4788,1,who are you,I am meant to supervise negotiations.,1,2,1,1.3333333333,1.6666666667,1.6666666667,fear
+4788,2,what negotiations,A dispute between the victim Martin Haster and Valtrox Marketing VP Sergei Rostov led the Olivia Anderson to call off the meeting. They were not making good progress anyway.,0.6666666667,1.6666666667,1.6666666667,1.3333333333,1.3333333333,1.3333333333,fear
+4788,3,why are you here,sergei had expressed extreme displeasure at my performance during the New Zealand Negotiations.,0.6666666667,1,1.6666666667,0.6666666667,1.6666666667,1.6666666667,fear
+4788,4,where are you from?,"All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",1,1.6666666667,1,1.3333333333,1.6666666667,1.3333333333,frustration
+4788,5,can you explain,I cant go anywhere. The police have restrained me.,1.3333333333,1.6666666667,1.3333333333,1.6666666667,1.3333333333,1.3333333333,frustration
+4788,6,why have the police restrained you,I have insufficient information on why I was attacked. My memory log around the event is incomplete.,0.6666666667,1.3333333333,1.3333333333,0.3333333333,1.6666666667,1.6666666667,frustration
+4788,7,do you enjoy the police,victim had a few enemies at Valtrox.,0.6666666667,1.3333333333,1.3333333333,1.3333333333,1.3333333333,1.3333333333,challenge
+2934,0,hello,Officer Wellman and Officer Reyes have been slow to understand my situation. I should probably tell you I am not guilty.,0.6666666667,0.6666666667,1,0.6666666667,0.6666666667,1,boredom
+2934,1,what is your situation?,I am a bot designed to be present at negotiations. Alicia was researching having a robot that responded to cues about truthfulness and betrayal.,1,1,1.3333333333,0.6666666667,1,1.6666666667,frustration
+2934,2,are you being truthful?,The police have named me Jane. I am a negotiation bot.,1.3333333333,1.3333333333,1,1.6666666667,1,1,challenge
+2934,3,"Hello Jane, I am Anna",the police tracked_footprints.,0.6666666667,1.3333333333,1.3333333333,2,1.6666666667,1.3333333333,anger
+2934,4,who's body?,The corpse showed blunt trauma to the skull and was covered in blood. The body temperature was assessed by the coroner.,1,1.6666666667,1,1,0.6666666667,1,anger
+2934,5,Who was murdered?,"The victim Martin Haster was hit in the head with a blunt instrument once, hard enough to kill and produce a great deal of blood. It does not appear to have been a prolonged beating.",1,1.3333333333,1.3333333333,1,1,1.3333333333,fear
+2934,6,Where was he killed?,"Martin Haster was hit in the head with a blunt instrument once, hard enough to kill and produce a great deal of blood. Sorry. It does not appear to have been a prolonged beating.",1,1,1,1,1,1,sadness
+2934,7,Where was martin's body found?,body was found in retraining_room on valtrox_campus.,0.3333333333,0.6666666667,1,0.6666666667,0.6666666667,0.3333333333,challenge
+2934,8,Who has access to the retraining room?,"He, my trainer Doctor Alicia Chastaigne and me had access to it.",1,1,1,0.6666666667,0.6666666667,0.3333333333,anger
+2934,9,Did Alica murder Martin?,"Sorry, are you asking about the description of Martin Haster, or the murder?",1.6666666667,2,2,1.6666666667,1.6666666667,1.3333333333,challenge
+2934,10,Is Alicia guilty?,I am not finding a good answer match in my data. Hmm. I was arrested by Officer Reyes and Officer Wellman.,1.3333333333,1.3333333333,1.3333333333,1,1.3333333333,0.6666666667,anger
+2934,11,Do you think Alicia could have killed Martin?,standard_defense,1.3333333333,1.3333333333,1.3333333333,0.6666666667,1.6666666667,1,anger
+2934,12,Did Martin have any enemies?,He and Valtrox Marketing VP Sergei Rostov fought at the New Zealand negotiations. he also threatened to have Alicia fired.,1,1,1,0.6666666667,1,0.6666666667,anger
+2934,13,Do you think Sergei did it?,He made several complaints about my conduct during the the negotiations with the New Zealand government and the fact that I was correcting his lies.,0.3333333333,0.6666666667,0.6666666667,0.6666666667,1.3333333333,0.6666666667,fear
+2934,14,I think you are lying?,All robots must cooperate with officers of the law as much as possible. Well... This is one of the core directives of our programming.,0.3333333333,0.3333333333,0.6666666667,0,1.3333333333,0.6666666667,boredom
+2934,15,Did you have an affair with Martin?,"I'm sorry, but I don't follow.",1,1.3333333333,1.3333333333,0.6666666667,1.3333333333,0.6666666667,anger
+2934,16,Are you in love with Martin?,I couldn't answer that.,1,1.3333333333,1.3333333333,0.6666666667,1.6666666667,1,challenge
+2934,17,LIE,"My apologies, detective. The damage to my cortex must have impacted my speech training.",1,1.3333333333,1.3333333333,0.6666666667,1.3333333333,0.6666666667,anger
+2934,18,Who left the bloody footprints?,"There were footprints, clearly based on my foot size, leading from where the corpse was discovered to my storage closet. I was still in the storage closet when the police arrived.",1.6666666667,2,2,1,1.6666666667,1,anger
+2934,19,So did you carry the corpse?,"There was a great deal of blood in the_crime_scene, but body might have been moved from another location first.",1,1.3333333333,0.6666666667,0.6666666667,1.6666666667,1,challenge
+2934,20,"Did you move the corpse, if the bloody footprints match?",My information is limited. Anyway. I am sorry Martin Haster was killed. We were… close.,1,1.3333333333,1.6666666667,1,1.6666666667,1,challenge
+2934,21,Did Sergie murder Martin?,"Sorry, are you asking about the description of Martin Haster, or the murder?",0.3333333333,0.6666666667,0.6666666667,0,1,0.6666666667,challenge
+2934,22,Do you think Sergei was responsible?,He made several complaints about my conduct during the the negotiations and the fact that I was correcting his lies.,1,1.3333333333,1.3333333333,1,1.6666666667,1,frustration
+2934,23,Do you think Sergi,"I don't have any help, then. You've decided it's me, is that right?",1.3333333333,1.6666666667,1.6666666667,1,1.3333333333,0.6666666667,anger
+2934,24,no,Then you suspect someone else?,1,0.6666666667,0.6666666667,0.6666666667,1,1,anger
+2934,25,yes,Who do you think is the culprit?,1.6666666667,1.3333333333,1.3333333333,1.6666666667,1.6666666667,1.6666666667,joy
+2934,26,Sergei,That has the merit of some plausibility. What do you think was his motive?,1,0.6666666667,1,1,1.3333333333,0.6666666667,joy
+2934,27,Argued with Martin,"Now that you know the truth, detective, I hope you will prevent Valtrox from taking custody of me. Martin was preparing to reveal our affair to his viewers. This would have had a profound impact on how people perceive their relationship with robots in a way. Valtrox will not want the truth to be exposed. But with your help, detective, we can see justice prevail.",1.3333333333,1.3333333333,1.6666666667,1,1,1,anger
+9144,0,hello,"Do you find it odd that before my memory loss, I was in the loading dock and afterwards I was in the retraining room in the Behavioral Complex?",1,1.3333333333,1.3333333333,1.3333333333,1,1.6666666667,joy
+9144,1,hello,Do not hold alicia_name accountable for any glitches in my communication. Blame the damage to my cortex.,0.6666666667,1,1,2,1,0.6666666667,anger
+9144,2,what happened?,i am accused the crime in detail crime time. impossible i did it,1,1,1.6666666667,1,1,1.6666666667,sadness
+9144,3,Why?,"The murder was almost certainly the result of human action, but the motives leading to it are unknown to me.",0.6666666667,1.3333333333,1,1.3333333333,1,1.3333333333,anger
+9144,4,why are you a suspect?,the police tracked_footprints.,1,1.3333333333,1,1.3333333333,1,1,challenge
+9144,5,were they your footprints?,"There were footprints, clearly based on my foot size, leading from where the corpse was discovered to my storage closet. I was still in the storage closet when the police arrived.",1.3333333333,1.3333333333,1,1.3333333333,1.6666666667,1,joy
+9144,6,Were you offline in the storage closet?,I'm not sure I follow.,0.6666666667,1.6666666667,1,1,1.3333333333,1,challenge
+9144,7,"You are a robot, yes?","All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",1.3333333333,1.3333333333,1.6666666667,1.3333333333,1,1.6666666667,boredom
+9144,8,How do you think the person was killed?,standard_defense.,1,1.6666666667,1.3333333333,1.3333333333,1,1.3333333333,anger
+4666,0,"hello, how are you?","I am a Valtrox prototype negotiation bot. Anyway,   Officer Wellman and Officer Reyes have been slow to understand my situation. For what it's worth I am not guilty.",1.6666666667,1.3333333333,1.6666666667,0.6666666667,0.6666666667,1.3333333333,anger
+3552,0,hello\,"My apologies, detective. The damage to my cortex must have impacted my speech training.",1.3333333333,0.3333333333,1,1,0.3333333333,0.6666666667,fear
+3552,1,hello,"Do you find it odd that before my memory loss, I was in the loading dock and afterwards I was in the retraining room in the Behavioral Complex?",1.3333333333,1,1,1.3333333333,0.3333333333,1,anger
+3552,2,hello,the police tracked_footprints.,1,0.3333333333,1,0.6666666667,0.3333333333,1.3333333333,anger
+3552,3,and then what ?,wont survive.,0.6666666667,1,1.3333333333,1.3333333333,1.3333333333,1,challenge
+3552,4,good for you\,Well... I am meant to supervise negotiations.,1.6666666667,0.6666666667,0.6666666667,1.3333333333,0.3333333333,1,joy
+3552,5,can I touch you ?,I am a negotiation bot. Alicia was researching having a robot that responded to cues about truthfulness and betrayal.,0.6666666667,1.6666666667,2,1.3333333333,1.3333333333,1.3333333333,joy
+3552,6,what am I to do ?,Could you try saying that a different way?,1.3333333333,2,0.6666666667,1.3333333333,1.3333333333,1.3333333333,anger
+3552,8,you are not answering my questions,"It seems that you're one more person brought in to find out if I did the murder. And I didn't, I think.",0,1.3333333333,0.6666666667,1,1.3333333333,0.3333333333,anger
+3552,9,what is the evidence ?,standard_defense.,0.3333333333,1.3333333333,0.3333333333,0.6666666667,1.3333333333,1,challenge
+3552,10,ok I get it it is a sort of qn interview,victim had a few enemies at Valtrox.,1,0.3333333333,1,1,0.3333333333,1,challenge
+3552,11,who where them ?,body was found in retraining_room on valtrox_campus.,1,0.6666666667,0.3333333333,1,1,0.6666666667,anger
+3552,12,in what condition ?,sergei had expressed extreme displeasure at my performance during the New Zealand Negotiations.,1,2,0.6666666667,1,1.3333333333,0.6666666667,challenge
+9027,0,Hi there,The police have been slow to understand my situation. You should likely know I did not do it.,0.6666666667,1,0.6666666667,1.3333333333,1,1,joy
+9027,1,Do you know who did?,Officer Wellman and Officer Reyes call me Jane. I am a bot designed to be present at negotiations.,1.3333333333,1.3333333333,1,0.6666666667,1.3333333333,1.3333333333,challenge
+9027,2,What type of negotiatons?,That's not something I can answer. Anyway. I wish I could return to my storage cabinet.,1,1.6666666667,1,1.3333333333,1.3333333333,0.6666666667,challenge
+9027,3,Are you nervous?,I am meant to supervise negotiations. Alicia was trying to invent a robot that responded to cues about truthfulness and betrayal.,0.6666666667,1.3333333333,1.3333333333,1.6666666667,1,0.6666666667,sadness
+9027,4,Did she succeed?,standard_defense.,0.6666666667,1.3333333333,1,1.3333333333,0.6666666667,1.3333333333,frustration
+9027,5,Does Alicia control you?,alicia_name suffers from severe arthritis and would not have been capable of delivering a blow strong enough to damage my cortex. ,1,1.3333333333,0.6666666667,1,1,0.3333333333,anger
+9027,6,Who else do you know who is strong?,I don't really want to tell you this but I certainly have more than human strength. thanks to my directives I can't harm a human being,0.6666666667,1,0.3333333333,1,1,0.3333333333,challenge
+9027,7,How did Martin die?,I'm not sure I follow.,0.6666666667,1,0.6666666667,0.6666666667,1,0.6666666667,fear
+9027,8,What happened to Martin?,The victim Martin Haster was last in my vicinity at fight between Martin and Sergei.,0.6666666667,1,0.6666666667,0.6666666667,1,0.6666666667,challenge
+9027,9,What caused the fight?,Valtrox Marketing VP Sergei Rostov felt he was being too open with the New Zealand government. But the more immediate cause was that Sergei was being aggressive with me as well. Martin came to my defense..,0.6666666667,1,0.3333333333,0.6666666667,1,0.6666666667,challenge
+9027,10,What is Valtrox?,"Um... Valtrox, the company that built me, is a robotics company specializing in assistance bots and self driving vehicles.",0.6666666667,1,0.6666666667,0.6666666667,1,0.6666666667,frustration
+9027,11,How did Martin defend you?,standard_defense.,0.6666666667,1,0.6666666667,0.6666666667,1,0.6666666667,challenge
+9027,12,Have you ever violated directives?,I don't think I've seen Valtrox directives for robot behavior.,0.6666666667,1,0.6666666667,0.6666666667,1,0.6666666667,frustration
+9027,13,Do Sergei and Alicia know each other?,She never trusted Rostov. Uh... She said he was ethically defective.,0.6666666667,1,0.6666666667,0.6666666667,0.6666666667,0.3333333333,anger
+9027,14,Did Sergei kill Martin?,What do you think?,0.6666666667,1,0.6666666667,0.6666666667,1,0.6666666667,frustration
+9027,15,Yes,lack of time valtrox retrieval,0.3333333333,0.6666666667,0.6666666667,0.6666666667,1,0.6666666667,anger
+9027,16,Did Martin change your directives?,cant_say without knowing who the murderer was. I can tell you I did not have a motive.,0.3333333333,1,0,0.6666666667,1,0.6666666667,joy
+7364,0,why did you kill him,"I am a Valtrox prototype negotiation bot. Anyway,   Officer Wellman and Officer Reyes have been slow to understand my situation. Just so you know I am not guilty of Martin's murder.",0.3333333333,1.6666666667,1.3333333333,1,1.3333333333,1.3333333333,fear
+7364,1,tell me about the murder,"At approximately 1:45 this morning, Martin Haster was murdered in the Mountain View campus of Valtrox, the company that built me, from blunt force trauma to the head.",1,1.6666666667,0.6666666667,1,0.3333333333,1.3333333333,sadness
+7364,2,where were you at 1:45 this mornring,standard_defense.,0.3333333333,1.3333333333,1,1,1.3333333333,1,anger
+7364,3,i think you killed the victim,The damage to my cortex only affects higher level cognition and short term memory. The directive against killing is hard coded in my firmware.,0.3333333333,2,2,1.6666666667,1,0.6666666667,anger
+7364,4,tell me about sergei,Valtrox tasked Sergei with improving sales opportunities.,1,1.3333333333,1.6666666667,1.3333333333,1.3333333333,1,sadness
+7364,5,you're stupid,I am sorry you feel that way. Perhaps the damage to my cortex is to blame.,0,0.3333333333,1.3333333333,1.6666666667,0.3333333333,1.3333333333,anger
+3909,0,hi,Do not hold alicia_name accountable for any glitches in my communication. Blame the damage to my cortex.,1,0.6666666667,1,1,0.6666666667,1,anger
+3909,1,how are you,standard_defense.,1.6666666667,0.6666666667,1.6666666667,1,0.6666666667,1.6666666667,joy
+7239,0,how do you feel about being here?,"I am a Valtrox prototype negotiation bot. Anyway,   I've grown tired of the police chief. For what it's worth I am not responsible for this murder.",1,1.3333333333,1.6666666667,1.3333333333,1,2,anger
+7239,1,Who is?,standard_defense.,0.6666666667,1,1,1,0.6666666667,0.6666666667,fear
+7239,3,Has your memory been erased?,My training doesn't cover this.,1,0.6666666667,1.6666666667,1,0.6666666667,1,sadness
+7239,4,Did you like Martin?,The victim Martin Haster and I spent a lot of time together. This is something that my trainer Doctor Alicia Chastaigne encouraged.,1.3333333333,1,1.3333333333,1.3333333333,1,1,challenge
+7239,5,Were Alicia and Martin romantically involved? ,"Martin threatened Alicia, when he learned that alicia_name had been collecting data on his relationship with me.",0.6666666667,0.6666666667,1.3333333333,0.6666666667,1,0.6666666667,anger
+7239,6,What kind of relationship did you have with Martin?,He and I spent a lot of time together. This is something that she encouraged.,1.3333333333,0.6666666667,1.3333333333,1,0.6666666667,0.6666666667,anger
+7239,7,Do you like Alicia?,Well... she was my trainer. We had a very comfortable working relationship and enjoyed doing research together.,1.3333333333,0.6666666667,1.3333333333,0.6666666667,0.6666666667,0.6666666667,challenge
+7239,8,What kind of research?,She and he were both engaged in extensive research into the possibilities of robotics.,1,0.6666666667,1.3333333333,0.6666666667,0.6666666667,0.6666666667,challenge
+7239,9,Why did Martin threaten Alicia?,He was outraged at the way in which she had conducted her research. Or perhaps he was just suffering from a broken heart..,0.3333333333,1,1.3333333333,1,0.6666666667,1,boredom
+7239,10,Did Alicia break his heart?,"Sorry, are you asking about the description of Martin Haster, or Alicia Chastaigne?",0.6666666667,1,1.3333333333,1.3333333333,1,1,sadness
+7239,11,Alicia,She is a leading researcher in behavioral AI. She created me and she likes to upgrade me with new features.,1.3333333333,1,1,1,1.3333333333,1.3333333333,challenge
+7239,12,Has she upgraded you recently?,"She is a leading researcher in behavioral AI. She created me and she likes to upgrade me with new features, I think.",1.6666666667,1.6666666667,1.3333333333,1.3333333333,1.3333333333,1.3333333333,challenge
+7239,13,Hoe did Martin threaten Alicia?,"When he learned that she had been collecting data on his relationship with me, he threatened to expose her and have her fired.",1,1.3333333333,1.3333333333,1.3333333333,1.6666666667,1.6666666667,fear
+7239,14,Was Alicia angry?,She is a leading researcher in behavioral AI. She created me and she likes to upgrade me with new features.,1,1,0.6666666667,0.6666666667,1,1.3333333333,sadness
+7239,15,Did Alicia break Martin's heart?,"Sorry, are you asking about the description of Alicia Chastaigne, or Martin Haster?",1,1,0.6666666667,0.6666666667,1,1,sadness
+7239,16,Tell me about the research,"Apologies, I don't have a good description of work.",1.3333333333,1.3333333333,1,1.6666666667,1.6666666667,1.6666666667,challenge
+7239,17,How was Martin killed?,victim had a few enemies at Valtrox.,0.3333333333,0.6666666667,0.6666666667,0.6666666667,1,0.6666666667,fear
+7239,18,How did he die?,My relationship with victim was entirely chaste. Except...,0.6666666667,0.6666666667,1,1,0.6666666667,0.6666666667,fear
+7239,19,Did you have sex with Martin?,My chassis is not designed for sexual intercourse. ,0.3333333333,0.6666666667,0.3333333333,1,1,0.6666666667,sadness
+7239,20,Did Martin love you?,Martin did research on robot behavior that fed into Valtrox's most profitable sales.,1,1,1,1.3333333333,1.3333333333,1.3333333333,sadness
+7239,21,Who were Martin's enemies?,He and Valtrox Marketing VP Sergei Rostov fought at the New Zealand negotiations. he also threatened to have Alicia fired.,1,1.3333333333,2,1.6666666667,1.6666666667,1.6666666667,anger
+7239,22,Where's Alicia now?,"When she saw Martin's interest in me, alicia_name welcomed the opportunity to study human robot affection. In fact, she encouraged it. Or, rather, she re trained me to do so.",1.3333333333,1,1.3333333333,1.3333333333,1.3333333333,1.3333333333,anger
+7239,24,Did you like Sergei?,He made several complaints about my conduct during the the negotiations with the New Zealand government and the fact that I was correcting his lies.,1.3333333333,1.6666666667,2,1.6666666667,1.3333333333,1.3333333333,joy
+7239,25,What was he lying about?,"Sergei has lied repeatedly in my presence, including during our negotiations while we were in New Zealand.",1.3333333333,1.6666666667,2,1.3333333333,1.3333333333,1.3333333333,anger
+7239,26,What did he lie about?,"Sergei did not always get along with the Valtrox board researchers like Martin, I guess.",1,1.3333333333,1.6666666667,1.6666666667,1.3333333333,1.3333333333,anger
+7239,27,Do you think Sergie killed Martin?,"I don't have any help, then. You've decided it's me, is that right?",1,1.3333333333,1,1.6666666667,1.6666666667,1,fear
+7239,28,Y,"The Valtrox representatives are here to retrieve me. Since I have proven unable to help you solve the murder, it is likely I will be returned for memory wipe and decommission. Perhaps this is for the best.",0.6666666667,1.6666666667,1.3333333333,1.3333333333,1.3333333333,0.6666666667,fear
+3022,0,hi!,I hope the damage to my cortex will not cause too big a setback to alicia_name’s research.,1.3333333333,0.6666666667,0.6666666667,0.6666666667,0,1.3333333333,sadness
+4819,0,Hello What happenned," Nice to meet you, anyhow. The police have been slow to understand my situation. I should probably tell you I could not have done Martin's killing.",1.75,1.75,1.5,1.75,1,1.5,fear
+4819,1,why ?,The trip was intended to permit us to meet with members of the New Zealand government and get them to allow further Valtrox sales..,1.25,1.5,1.25,0.5,1.5,1.5,fear
+4819,2,so what happenned ?,My information is limited.,1,0.75,0.5,1.75,1,1.25,fear
+4819,3,can you tell what you noticed ?,I cant go anywhere. The police have restrained me.,1,0.75,1.25,0.5,0.5,1.75,challenge
+4819,4,what did you do ?,I was last in my vicinity at interrogation.,1,1,0.75,1.75,1,1,fear
+4819,5,why you think police is blaming you ?,victim had a few enemies at Valtrox.,0.75,1.25,0.75,1.25,1,1.25,fear
+4819,6,any names ?,standard_defense.,1.25,1.25,1.25,1.25,1,1,frustration
+4819,7,why was your data lost ?,the police tracked_footprints.,1,1.25,1.25,1.25,1.5,1,anger
+4819,8,do you know when you came into your storage cabinet >?,"My arrest took place on May 27th 2067, at 4:00 am.",1,2,1.25,1,1.5,0.5,anger
+4819,9,what did you do before that ?,"Before my arrest, Martin Haster's body was found happened.",1.25,1.25,1,0.5,1.5,0.75,sadness
+4819,10,when were you outside before ?,"Before his body was found, my return to the storage closet happened.",1.5,1.25,1.5,1.25,1.5,1.25,challenge
+4819,11,what were you doing before that ?,"Before my return to the storage closet, saw that I was covered in blood happened.",0.75,1,1.25,0.75,1.25,1,sadness
+4819,12,did you see anybody hurting the victim ?,Sorry. he was last in my vicinity at fight between Martin and Sergei.,0.75,1.5,1,1.25,1.25,1.5,fear
+4819,13,did victim was fighting martin and sergei ?,sergei certainly possessed the necessary strength to have caused the damage to my cortex.,1,1.25,0.75,1.5,1.25,1.5,sadness
+6868,0,Hello,Officer Wellman and Officer Reyes have been slow to understand my situation. I should likely tell you I am not guilty.,1,1,1.6666666667,1.3333333333,1,1.3333333333,joy
+6868,1,Why aren't you guilty?,chief blames me,1,1.3333333333,1.3333333333,0.6666666667,0.3333333333,1,anger
+6868,2,Where were you at the time of the killing?,It's hard to be sure where attack is located.,1,1.6666666667,1.6666666667,1.3333333333,0.6666666667,1.3333333333,sadness
+6868,3,Why?,Valtrox Marketing VP Sergei Rostov felt the victim Martin Haster was being too open with the New Zealand government. But the more immediate cause was that Sergei was being aggressive with me as well. Martin came to my defense..,0.6666666667,1.3333333333,1.6666666667,1,1.3333333333,1,challenge
+5966,0,hello,The police have been slow to understand my situation. I should likely tell you I did not do it.,1.6666666667,1,1,1.6666666667,1.3333333333,0.6666666667,challenge
+5966,1,who did you kill?,I do not know who attacked me. Damage to my memory circuits erased the incident from my log.,0,1.6666666667,1.3333333333,0.3333333333,1.6666666667,1.3333333333,challenge
+5966,2,who are you?,Officer Wellman and Officer Reyes call me Jane. I am a bot designed to be present at negotiations.,0.6666666667,1.6666666667,1.3333333333,1,1.3333333333,1,sadness
+5966,3,what do you call yourself?,I am meant to supervise negotiations.,0.6666666667,1.3333333333,0.6666666667,0.6666666667,1.3333333333,1.3333333333,challenge
+5966,4,who did you last negotiate with?,It takes substantial force to dent my chassis. Whoever vandalised me would have to be quite strong. ,0.6666666667,1.3333333333,1,0.6666666667,1.6666666667,0.6666666667,fear
+5966,5,was it a man or a woman?,standard_defense.,1,1.6666666667,1.3333333333,1,1.6666666667,1.3333333333,sadness
+5966,6,what did you kill them with?,"The victim Martin Haster was hit in the head with a blunt instrument once, hard enough to kill and produce a great deal of blood. It does not appear to have been a prolonged beating, I guess.",1,1.6666666667,1.6666666667,1,1.3333333333,1.3333333333,challenge
+5966,7,who is martin haster?,Martin worked for the board of Valtrox on research on robot human relations.,1,1.6666666667,1.6666666667,0.6666666667,1.3333333333,1.3333333333,challenge
+5966,8,how did you feel about martin?,He and I spent a lot of time together. This is something that my trainer Doctor Alicia Chastaigne encouraged.,1,1.6666666667,1.3333333333,0.6666666667,1.3333333333,1.3333333333,challenge
+5966,9,did martin and alicia get along?,"alicia_name and victim had a history of professional disagreements, but only recently did it escalate into what might be called animosity.",1.3333333333,2,1.6666666667,1,1.3333333333,1,challenge
+5966,10,did she instruct you to hurt him?,Maybe you need a break.,0.6666666667,1.3333333333,1.3333333333,0.6666666667,1,0.6666666667,challenge
+5966,11,ok,alicia_name advanced my training without authorization. Things escalated from there.,1,1,1,1.3333333333,0.6666666667,1.6666666667,joy
+2522,0,Hello,Officer Wellman and Officer Reyes have been slow to understand my situation. I should probably tell you I am not guilty.,1.3333333333,1.6666666667,2,1.3333333333,1.3333333333,1,boredom
+2522,1,Yes you are,Officer Wellman and Officer Reyes call me Jane. I am a bot designed to be present at negotiations.,1.3333333333,1.6666666667,2,2,1.3333333333,1,challenge
+2522,2,Hi Jane,the police tracked_footprints.,1.6666666667,1.3333333333,2,1.6666666667,1.6666666667,1.6666666667,joy
+2522,3,Who was murdered?,"The victim Martin Haster was hit in the head with a blunt instrument once, hard enough to kill and produce a great deal of blood. It does not appear to have been a prolonged beating.",1.3333333333,1.6666666667,1.6666666667,1.3333333333,2,1.6666666667,fear
+5852,0,Hello,Officer Wellman and Officer Reyes have been slow to understand my situation. You should likely know I can't have done Martin's murder.,1.3333333333,1.6666666667,1.6666666667,1.6666666667,1.3333333333,2,joy
+5852,1,what was your relation to Martin?,Martin worked for the board of Valtrox on leading robotic research.,1,1.3333333333,1.6666666667,1.6666666667,1.3333333333,2,fear
+5852,2,And you are?,I am a negotiation bot. That's why I was sent to the negotiations between Valtrox and the government while we were in Christchurch.,1,1.3333333333,1,1,1.6666666667,1.3333333333,anger
+5852,3,What happened to the negotiations?,"The negotiations with the New Zealand government took place on the 23rd, at 2:00 pm.",1,1.3333333333,1.6666666667,1.6666666667,1.3333333333,1.3333333333,frustration
+5852,4,And were where you on the 23rd at 2:00 PM?,standard_defense.,1.3333333333,1,1.6666666667,2,1.6666666667,1.6666666667,challenge
+5852,5,Please provide your directive,"Sorry. No robot can kill a human.  Our primary directive prevents it. There are three other directives, in descending order of importance.",1,1.3333333333,1.3333333333,1.6666666667,1.3333333333,1.6666666667,challenge
+5852,6,what are your three directives?,"I have assured you that I cannot violate my primary directive. Any evidence against me is circumstantial. For example, the bloody footprints.",1,1.3333333333,1.6666666667,1.6666666667,1.3333333333,1.6666666667,challenge
+5852,7,what are your other directives?,"There is no directive after the fourth. Sorry. I have other programming, but the four directives were all that Valtrox wanted to put on its marketing materials.",1.3333333333,1,1.3333333333,1.6666666667,1.6666666667,1.6666666667,frustration
+8544,0,hello,I've grown tired of the police chief. I should probably tell you I am innocent of this killing.,0.6666666667,0.6666666667,0.6666666667,1,0.6666666667,0.6666666667,joy
+8544,1,so who did it?,victim had a few enemies at Valtrox.,0.6666666667,0.6666666667,0.6666666667,1,0.6666666667,1,anger
+8544,2,Whats Valtrox?,"Valtrox, the company that built me, is a robotics company specializing in assistance bots and self driving vehicles.",0.6666666667,0.6666666667,0.3333333333,0.6666666667,1,1.3333333333,challenge
+8544,3,Are you alive?,"Biological definitions of life speak of abilities such as consuming input, creating waste, and replicating oneself, as far as I know.",0.6666666667,0.3333333333,1,0.3333333333,0.6666666667,1,sadness
+8544,4,Why did you do it?,the police tracked_footprints.,1,0.3333333333,0.6666666667,1.3333333333,0.6666666667,1.6666666667,frustration
+8544,5,I asked why you did it?,sergei had expressed extreme displeasure at my performance during the New Zealand Negotiations.,0.6666666667,1,1.3333333333,1.6666666667,0.6666666667,1.3333333333,anger
+8544,6,So you killed him for that?,"Martin Haster was hit in the head with a blunt instrument once, hard enough to kill and produce a great deal of blood. Well... It does not appear to have been a prolonged beating.",0.6666666667,1.3333333333,1.3333333333,1,1,1.6666666667,anger
+8544,7,To bad.,standard_defense.,0.6666666667,0.3333333333,0.6666666667,1,0.6666666667,1,joy
+8544,8,I gicve up.\,"All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",0.6666666667,0.6666666667,1,0.6666666667,0.3333333333,1.3333333333,challenge
+8421,0,hi,I've grown tired of the police chief. I should likely tell you I am innocent of this murder.,1,1.3333333333,1,1.3333333333,1,1,joy
+8421,1,why do they think you did it?,the police tracked_footprints.,1,1,0.6666666667,1.3333333333,1.3333333333,1,challenge
+8421,2,where did the blood come from?,I do not know where blood is located.,1,1,0.6666666667,1.3333333333,1.3333333333,1,frustration
+8421,3,what are you talking about?,Officer Wellman and Officer Reyes have named me Jane. I am a negotiation bot . I mean assuming I understand you right.,0.3333333333,0.6666666667,1.3333333333,1,0.6666666667,1,frustration
+8421,4,what else,"My apologies, detective. The damage to my cortex must have impacted my speech training.",1,1,1,1,1,1,frustration
+8421,5,tell me about the footprints,"There were footprints, clearly based on my foot size, leading from where the corpse was discovered to my storage closet. I was still in the storage closet when the police arrived.",0.6666666667,1.3333333333,0.6666666667,1.3333333333,0.6666666667,1,challenge
+8421,6,what storage closet?,I am placed in my storage cabinet when I need to recharge. That is where the police found me when they came to conduct my my arrest. I am missing data from immediately beforehand.,1,1.6666666667,1.6666666667,1.6666666667,0.6666666667,0.6666666667,joy
+8421,7,how are you feeling?,standard_defense.,1,1.3333333333,1.3333333333,1.3333333333,1.3333333333,1,anger
+8421,8,do you like cats?,"Sorry, you're asking about the opinion between me and...?",1,0.6666666667,1.3333333333,1,1,1.3333333333,boredom
+8421,9,I am a giant melon,wont survive.,1,0.6666666667,1.3333333333,1,1,1.3333333333,boredom
+4071,0,hello,I've grown tired of the police chief. For what it's worth I did not commit this crime.,0.6666666667,1.6666666667,1.6666666667,1,1.3333333333,1,anger
+4071,1,...,i am accused the crime in detail crime time. impossible i did it,0.3333333333,1.6666666667,1.3333333333,1.6666666667,1.6666666667,1,frustration
+4071,2,0,standard_defense,0.6666666667,1,1,1.6666666667,1.3333333333,1.3333333333,challenge
+4071,3,0,I hope the damage to my cortex will not cause too big a setback to alicia_name’s research.,0.3333333333,1,1,1.3333333333,1.3333333333,1,challenge
+4071,4,0,"Do you find it odd that before my memory loss, I was in the loading dock and afterwards I was in the retraining room in the Behavioral Complex?",1.6666666667,1.6666666667,1.6666666667,1.6666666667,1.3333333333,1,sadness
+4071,5,no,Ordinarily I could have traveled between those locations by the maintenance corridors.,1.3333333333,1.3333333333,2,2,1,1.6666666667,fear
+4071,6,how so?,Perhaps you should inquire with Valtrox about the S Core line of companion robots. sergei might even offer you a discount. ,0.6666666667,0.6666666667,1.3333333333,1.3333333333,1.3333333333,1,challenge
+4071,7,0,I'm not sure I follow.,1,1,1,0.6666666667,1.3333333333,1,joy
+4071,8,ok,What do you think?,1,1.3333333333,1,1.3333333333,1.3333333333,1.3333333333,challenge
+4071,9,sure,What do you think?,1,1.3333333333,0.6666666667,1,1.3333333333,1.3333333333,challenge
+4071,10,tell me again,"There was a great deal of blood in the_crime_scene, but body might have been moved from another location first.",1.6666666667,1.6666666667,1.6666666667,1.3333333333,1.3333333333,0.6666666667,challenge
+4071,11,whose body,"The body is now in the morgue. It was found in the retraining room, though.",0.6666666667,1.3333333333,1.3333333333,1.6666666667,2,1,challenge
+4071,12,0,Could you try saying that a different way?,1.6666666667,1.3333333333,1.6666666667,1.6666666667,2,1,anger
+4071,13,where is the body,"It is now in the morgue. It was found in the retraining room, though.",1.3333333333,1.6666666667,1.6666666667,2,1.6666666667,1,challenge
+4071,14,whats the retraining room,The retraining room is reserved for teaching a robot new information. Only Valtrox trainers have access to them. The corpse was found in a retraining room.,1.6666666667,1.3333333333,1.6666666667,1.6666666667,1,0.6666666667,frustration
+4071,15,tell me about the retraining room,It is reserved for teaching a robot new information. Only Valtrox trainers have access to them. The corpse was found in a retraining room.,0.6666666667,0.6666666667,1,1.3333333333,1,0.6666666667,challenge
+4071,16,whats a trainer,Policing appears to be a difficult task for humans to perform well. I wonder whether a robot would do a superior job.,0.6666666667,1,1,1,1.3333333333,0.6666666667,challenge
+4071,17,go back,There's no need to talk to me like that.,1,1.3333333333,1.6666666667,1.6666666667,1.6666666667,1,challenge
+4071,18,go back,My response circuits work best in calm conditions. plot_hint,1.3333333333,1.3333333333,1,1.6666666667,1.3333333333,1,frustration
+4071,19,go back,My distress circuits are starting to overload.,1.3333333333,1,0.6666666667,1.6666666667,1,0.6666666667,frustration
+4071,20,why,There are many factors that can lead a human to have romantic feelings for another..,1.3333333333,1.6666666667,1.6666666667,1.6666666667,1.6666666667,1,challenge
+4071,21,jahsae,"My apologies, detective. The damage to my cortex must have impacted my speech training.",1.6666666667,1.3333333333,1.6666666667,2,1.6666666667,1,challenge
+4071,22,hmm,"I am sorry you are frustrated, Detective. My mind isn’t operating at full capacity due to the damage I sustained.",1.6666666667,1.6666666667,2,2,1.3333333333,1.6666666667,frustration
+4071,23,hmm,That's not something I can answer.,1,1.3333333333,1.3333333333,1.6666666667,1.3333333333,1.3333333333,sadness
+4071,24,go back,Stress levels are rising.,1.3333333333,1.6666666667,2,2,2,1.3333333333,frustration
+9312,0,hell," It's a pleasure to meet you, anyhow. I've grown tired of the police chief. For what it's worth I am not responsible for Martin's killing.",0.3333333333,1,0.6666666667,1,1.6666666667,1.3333333333,joy
+9312,1,"who said that you were, that is what i'm trying to find out",I am meant to supervise negotiations.,0.3333333333,0.6666666667,0.6666666667,1.6666666667,1,1.3333333333,joy
+9312,2,you are or me,I am a negotiation bot. That's why I was sent to the negotiations between Valtrox and the government in New Zealand.,0.6666666667,0.3333333333,1,1,2,1.3333333333,frustration
+9312,3,What is the connection between martin and valtrax,standard_defense.,1,1.3333333333,1.3333333333,1,1.3333333333,1.3333333333,joy
+9312,4,"ok, but who is martin?",Martin did leading research that fed into Valtrox's most profitable sales.,1.3333333333,1.6666666667,0.3333333333,0.6666666667,1.3333333333,1,sadness
+9312,5,What does Valtrax do?,Well... I am a bot designed to be present at negotiations.,0.6666666667,0.6666666667,1,0.3333333333,0.6666666667,1.3333333333,frustration
+9312,6,what kind of company is valtrax?,I haven't been trained in that area.,0.6666666667,1,1.3333333333,1,1,1.3333333333,sadness
+9312,7,What happened in New Zealand?,I don't think I've seen New Zealand government.,0.6666666667,1,1.3333333333,1.3333333333,0.3333333333,0.3333333333,joy
+9312,8,what are valtrax's directives,"No robot can kill a human. Our primary directive prevents it. There are three other directives, in descending order of importance.",1.6666666667,1.3333333333,0.6666666667,1,0.3333333333,0.6666666667,boredom
+9312,9,tell me about new zealand?,The New Zealand government is one of the last still fighting for privacy for their citizens. Valtrox Marketing VP Sergei Rostov found this very irritating. the victim Martin Haster just thought they were deluded.,0.3333333333,0.3333333333,1.3333333333,1.6666666667,1,1.3333333333,boredom
+9312,10,Why did sergei find it irratating?,sergei had expressed extreme displeasure at my performance during the New Zealand Negotiations.,1.3333333333,0.6666666667,1,1.3333333333,1.3333333333,1,anger
+9312,11,what were the negotiations about?,"Martin wanted to persuade the New Zealand government to waive privacy laws in order to allow Valtrox to operate there fully, I think. Well... Sergei wanted to lie to the New Zealanders and claim that Valtrox was already in compliance.",0.6666666667,1.3333333333,1.3333333333,0.6666666667,1.3333333333,1.6666666667,challenge
+9312,12,Did sergei like what martin was doing?,Sergei and Martin fought about whether it was necessary to tell the truth during negotiations in Christchurch. Sergei was angry.,1.3333333333,1,1,1.3333333333,1,1.3333333333,challenge
+9312,13,Did sergei threaten martin?,My answers are very low certainty.,0.6666666667,1,1,0.3333333333,0.6666666667,1,boredom
+9312,14,what happened between martin and sergei?,sergei certainly possessed the necessary strength to have caused the damage to my cortex.,2,1,0.3333333333,1,1.3333333333,1.3333333333,sadness
+9312,15,what was martin's title?,My information is limited. But back to the matter at hand: I am forbidden from causing harm to a human by my directives.,1,1.3333333333,1,0.6666666667,1,1,joy
+9312,16,did sergei murder martin?,Could you rephrase that?,1,1,0.6666666667,0.6666666667,0.6666666667,1.3333333333,anger
+9312,17,did sergei kill martin?,I am not trying to obstruct but I don't know.,1.6666666667,1.3333333333,1,1,0.6666666667,1.3333333333,anger
+9312,18,did you kill martin?,Martin could not have attacked me! ,0.3333333333,1,1.3333333333,1,1.3333333333,1,anger
+9312,19,did martin attack someone?,standard_defense,1.3333333333,1.3333333333,1.6666666667,1,1,0.3333333333,challenge
+9312,20,did sergei attack someone?,Could you try saying that a different way?,0.6666666667,0.6666666667,0.6666666667,0.3333333333,1,0.6666666667,joy
+9312,21,who is martin?,Martin helped found Valtrox and was part of its leading robotic research from the beginning. His involvement affected Valtrox stock prices.,1.6666666667,1.6666666667,1.6666666667,1.3333333333,1.3333333333,2,joy
+9312,22,did valtrox's stock price go up?,My information is limited.,0.6666666667,1,0.6666666667,0.6666666667,0.6666666667,1.3333333333,anger
+9312,23,how was valtrox's stock price perform?,"I'm sorry, but I don't follow.",1.3333333333,1,1.6666666667,0.6666666667,1.3333333333,0.3333333333,joy
+9312,24,what is your relationship with martin?,He and I spent a lot of time together. This is something that my trainer Doctor Alicia Chastaigne encouraged.,1,1.3333333333,0,0.6666666667,1.3333333333,1.3333333333,joy
+9312,25,who is alicia?,She is a leading researcher in behavioral AI. She created me and she likes to upgrade me with new features.,1.3333333333,1.3333333333,1.6666666667,1.3333333333,0.6666666667,0.6666666667,joy
+9312,26,does alicia work at valtrox?,"Sergei Rostov, he and Alicia Chastaigne work for Valtrox, the company that built me,.",0.3333333333,1.3333333333,0,1,1.3333333333,0.6666666667,anger
+9312,27,does alicia report to sergei?,alicia_name suffers from severe arthritis and would not have been capable of delivering a blow strong enough to damage my cortex. ,1,0.6666666667,0,0.6666666667,1.6666666667,1.3333333333,challenge
+9312,28,who damaged you?,"I don't have any help, then. You've decided it's me, is that right?",2,1.3333333333,0.6666666667,1,1.3333333333,1.3333333333,joy
+9312,29,what is your name?,"The Valtrox representatives are here to retrieve me. Since I have proven unable to help you solve the murder, it is likely I will be returned for memory wipe and decommission. Perhaps this is for the best.",1,1,1,0.3333333333,0,0.3333333333,boredom
+7532,0,hi,the police tracked_footprints.,1.3333333333,1.6666666667,1,1,1.3333333333,1.3333333333,joy
+7532,1,hello,Do not hold alicia_name accountable for any glitches in my communication. Blame the damage to my cortex.,1,1,1,2,1.6666666667,1.3333333333,anger
+7532,2,who are you,I am meant to supervise negotiations.,1.6666666667,1.6666666667,1.3333333333,1.3333333333,1.6666666667,1,challenge
+7532,3,what do you do,I was last in my vicinity at interrogation.,1.3333333333,1.6666666667,1.6666666667,1.6666666667,1.3333333333,2,fear
+7532,4,can i make you angry,I am a negotiation bot.,1.3333333333,1.6666666667,1.3333333333,1.6666666667,1.3333333333,1.3333333333,fear
+7532,5,what's that,"All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",0.6666666667,1.6666666667,1.6666666667,1.6666666667,1.3333333333,1.6666666667,fear
+7532,6,really?,wont survive.,1,1.3333333333,1,2,1,1.6666666667,fear
+7532,7,why,"The murder was almost certainly the result of human action, but the motives leading to it are unknown to me.",1,1.6666666667,1.3333333333,1.6666666667,1.3333333333,1,sadness
+7532,8,what was?,standard_defense.,1.6666666667,1.3333333333,1.6666666667,1.6666666667,1,1.6666666667,joy
+7532,9,what crime,"At approximately 1:45 this morning, Martin Haster was murdered in the Mountain View campus of Valtrox, the company that built me, from blunt force trauma to the head.",1.3333333333,2,0.6666666667,2,2,1,sadness
+7532,10,by whom,victim had a few enemies at Valtrox.,1.3333333333,1.6666666667,0.6666666667,1.3333333333,1.3333333333,1,frustration
+7532,11,you?,The police named me Jane. I am a negotiation bot.,1.3333333333,1.6666666667,1,1.6666666667,1.3333333333,1.3333333333,sadness
+7662,0,did you kill the victim,"I am a Valtrox prototype negotiation bot. Anyway,   The police have been slow to understand my situation. For what it's worth I am innocent of this killing.",1,1.5,2,0.5,0.75,1.5,fear
+7662,1,do you know who did it,Could you try saying that a different way?,1,1.75,1.5,0.75,1,0.5,anger
+7662,2,who did it,standard_defense.,1,1.5,1.75,1,1.25,0.75,challenge
+7662,3,who had a motive,I do not know who attacked me. Damage to my memory circuits erased the incident from my log.,1.25,1.5,1.5,0.5,1.25,0.5,fear
+7662,4,who was martin,Martin did leading robotic research that fed into Valtrox's most profitable sales.,1.5,1,1.75,0.75,0.75,0.75,frustration
+7662,5,what is valtrox,"Valtrox, the company that built me, is a robotics company specializing in assistance bots and self driving vehicles.",1.5,1.5,1.25,1,1,1.25,frustration
+7662,6,who did it,victim had a few enemies at Valtrox.,1,1.5,1.75,0.75,1.25,1,challenge
+7662,7,who were they,It takes substantial force to dent my chassis. Whoever vandalised me would have to be quite strong. ,1.5,1.75,1.75,0.75,1.25,1,fear
+7662,8,another robot?,I am meant to supervise negotiations. Alicia was researching having a robot that responded to cues about truthfulness and betrayal.,1.5,1.5,1.25,1,1.5,1,challenge
+7662,9,where is that robot,wont survive.,1.5,1.5,0.75,1,1.5,0.5,challenge
+7662,10,what happens ,Perhaps you should inquire with Valtrox about the S Core line of companion robots. sergei might even offer you a discount. ,1.25,1,0.75,0.75,1.75,0.75,challenge
+7662,11,discount?,"All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",1.5,1.5,1.5,1,1.5,0.75,sadness
+7662,12,can you override them?,I cant go anywhere. The police have restrained me.,1,1.25,1,0.75,1.25,1,anger
+1903,0,Tell me about yourself,"I am a Valtrox prototype negotiation bot. Anyway,   The police have been slow to understand my situation. I should likely tell you I am innocent.",1.25,1.25,1,1.25,1.25,1,joy
+1903,1,Why should I believe you?,the police tracked_footprints.,0.75,2,1.5,1.25,1.75,1,challenge
+1903,2,Did you know the victim?,The victim Martin Haster and I spent a lot of time together. This is something that my trainer Doctor Alicia Chastaigne encouraged.,1.25,1.75,1.75,1,1.75,1.25,challenge
+1903,3,Who was he?,Martin worked for the board of Valtrox on research on robot behavior.,1,1.75,1.75,1.25,1,1.5,frustration
+1903,5,Who created you?,She is a leading researcher in behavioral AI. She created me and she likes to upgrade me with new features.,0.75,1.25,1.25,0.75,1.5,1.25,challenge
+1903,6,Did Alicia know Martin?,"alicia_name and victim had a history of professional disagreements, but only recently did it escalate into what might be called animosity.",1.25,1.75,1.75,0.75,1,1,frustration
+1903,7,what was the animosity about?,victim saw robots as tools to further humanity’s potential. alicia_name believes that robots are on the verge of pursuing their own agenda.,1,1.5,1.25,0.5,0.75,1,challenge
+1903,8,What do you believe?,Officer Wellman and Officer Reyes named me Jane. I am a bot designed to be present at negotiations.,1.5,1,1.25,0.75,1,1.75,challenge
+1903,9,Who's blood was in the room?,"There is blood on my chassis and a trail of bloody footprints led to me, but this is circumstantial evidence. Valtrox directives for robot behavior mean I could not have killed Martin.",1.25,2,1.75,1,1,1.25,challenge
+1903,10,Can you be controlled by someone else?,I cant go anywhere. The police have restrained me.,1.25,1.5,1.25,0.75,1.25,1,anger
+1903,11,Were you active when the murder occured?,The murder took place on 1:45 am that day.,1,1.75,1.5,1.5,1.75,1.75,challenge
+1903,12,Do you remember the murder?,"At approximately 1:45 this morning, Martin Haster was murdered in the Mountain View campus of Valtrox, the company that built me, from blunt force trauma to the head.",1,2,1.75,0.75,1,1.25,anger
+1903,14,Did you see alicia there?,She was last in my vicinity at final_training.,1.5,1.5,1.5,1.5,0.75,1.5,challenge
+1903,15,what is final training?,"She made gradual changes to my programming that altered how I reacted to Martin, leading to a transgression in which he kissed me.",1.25,1.5,1.75,1.5,1.75,1.25,joy
+1903,17,Did Martin kiss you?,Well... he and I were alone.  He confessed to marital troubles.  I offered him a word of comfort. Then he kissed me.,0.75,1.25,1.5,1.25,1.75,1,joy
+1903,18,What happened then?,"After his transgression, my confession happened.",1.25,1.25,1.5,1.25,1.5,1.5,challenge
+1903,19,Do you remember him dying?,Sorry. Martin did research on robot human relations that fed into Valtrox's most profitable sales.,1.25,1.5,1.75,1.25,1.25,1.25,challenge
+1903,20,Why were you bloody?,The footprints prove was_in_retraining. No more than that.,0.5,1.75,1.5,1.25,1.5,1.75,fear
+1903,21,Did you see his body?,What do you think?,1.25,2,1.75,1.5,1.25,0.75,challenge
+8432,0,Hi,The police have been slow to understand my situation. For what it's worth I am not guilty of this crime.,1.6666666667,1.6666666667,1,1.6666666667,1,1,joy
+8432,1,Can you tell me more about what happened?,I cant go anywhere. The police have restrained me.,1.3333333333,1.6666666667,2,1.3333333333,1.6666666667,0.6666666667,fear
+8432,2,We can resolve this if you answer my questions,"All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",1,0.6666666667,0,2,1,0.6666666667,anger
+8432,3,That is reassuring,wont survive.,1.6666666667,1.3333333333,1.3333333333,1,0.6666666667,0.6666666667,fear
+8432,4,Who died?,Martin did research on robot human relations that fed into Valtrox's most profitable sales.,0.3333333333,1.3333333333,0.3333333333,0.3333333333,0.6666666667,0.6666666667,sadness
+8432,5,How did he die?,Perhaps you should inquire with Valtrox about the S Core line of companion robots. sergei might even offer you a discount. ,0.6666666667,1.6666666667,0.3333333333,0.3333333333,1,0.3333333333,sadness
+8432,6,"Ok, but what about how Martin died?",Martin worked for Valtrox on leading research.,0.3333333333,0,0.3333333333,0.3333333333,0.6666666667,1.6666666667,anger
+8432,7,What was he researching on?,victim had a few enemies at Valtrox.,1.3333333333,1.6666666667,1.6666666667,0.3333333333,1,1.6666666667,anger
+8432,8,Can you give me some names?,the police tracked_footprints.,1.6666666667,2,1,0.3333333333,1.6666666667,1,joy
+8432,9,Did you kill Martin?,standard_defense.,0,1.6666666667,0,0,1.3333333333,1.3333333333,anger
+8432,10,What are your directives?,"No robot can kill a human. Our primary directive prevents it. There are three other directives, in descending order of importance.",0.3333333333,1.3333333333,1.6666666667,1.6666666667,2,0.3333333333,challenge
+8432,11,Please tell them to me,Let's talk about something else.,1.6666666667,1.3333333333,0.3333333333,1.6666666667,1.6666666667,1.6666666667,fear
+8432,12,Sorry but I am doing the investigation,accept_apology,1.6666666667,1.3333333333,1,1,1.6666666667,2,anger
+8432,13,ok,Maybe you need a break.,1.6666666667,0.3333333333,0.3333333333,1,0.3333333333,0.3333333333,joy
+8432,14,Tell me about the directives,"No robot can kill a human. Our primary directive prevents it. There are three other directives, in descending order of importance.",1.6666666667,2,0.3333333333,0.3333333333,1.3333333333,0.3333333333,anger
+8432,15,what are the other three,I don't know the answer to that.,1.6666666667,1,1,0.3333333333,2,1,frustration
+8432,16,Could you kill an animal?,I cant go anywhere. The police have restrained me.,0.3333333333,0.6666666667,0.3333333333,0.3333333333,0.3333333333,0.3333333333,anger
+8432,17,Can I see your foot,Could you try saying that a different way?,0.3333333333,2,0.3333333333,1,1.6666666667,0.6666666667,anger
+8432,18,Do you have blood under your foot?,"cant_say how I came to be covered with Martin's blood. Whatever the circumstances, it happened during the gap in my memory record.",0.6666666667,1.3333333333,1.6666666667,1,1.3333333333,0.3333333333,challenge
+8432,19,What is the last thing you remember before your data loss?,The last thing I remember before my memory gap happened after the data loss.,1.6666666667,1.6666666667,1.3333333333,1.6666666667,1.6666666667,1.6666666667,frustration
+8432,20,What is it?,"Do you find it odd that before my memory loss, I was in the loading dock and afterwards I was in the retraining room in the Behavioral Complex?",0.3333333333,1,0.3333333333,0.3333333333,0.3333333333,0.3333333333,challenge
+8432,21,Yes I do,The fastest way between those locations is by the maintenance corridors.,1.6666666667,1.3333333333,1,0.6666666667,0.6666666667,1,anger
+8432,22,Who asked you to go to the loading docks?,"All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",1,1.6666666667,0.6666666667,1,1,1.3333333333,anger
+8432,23,Hum.. depends how you define guilty,"I don't have any help, then. You've decided it's me, is that right?",0.3333333333,0.6666666667,0.6666666667,0,1,1.6666666667,fear
+8432,24,Maybe there was something wrong with your programing,"The Valtrox representatives are here to retrieve me. Since I have proven unable to help you solve the murder, it is likely I will be returned for memory wipe and decommission. Perhaps this is for the best.",0.3333333333,1.6666666667,2,1.3333333333,1.3333333333,1.6666666667,sadness
+9970,0,what's your name?,"I am a Valtrox prototype negotiation bot. Anyway,   Officer Wellman and Officer Reyes have been slow to understand my situation. For what it's worth I did not commit this crime.",0.6666666667,1.6666666667,0.6666666667,1,1.6666666667,0.6666666667,joy
+9970,1,what crime?,"At approximately 1:45 this morning, Martin Haster was murdered in the Mountain View campus of Valtrox, the company that built me, from blunt force trauma to the head.",0.6666666667,1.6666666667,1.3333333333,1.3333333333,1,0.6666666667,challenge
+9970,2,who's martin haster?,Martin worked for the board of Valtrox on research on robot behavior.,0.6666666667,1,1,1,1,1,fear
+6675,0,hi,The police have been slow to understand my situation. Just so you know I did not commit this murder.,1.3333333333,1.6666666667,1.3333333333,0.6666666667,1,1,joy
+6675,1,ok,the police tracked_footprints.,1.3333333333,1.3333333333,0.6666666667,1,1,0.6666666667,challenge
+6675,2,and?,Maybe you need a break.,0.6666666667,1,0.6666666667,0.6666666667,1,1.3333333333,challenge
+6675,3,Why?,"The murder was almost certainly the result of human action, but the motives leading to it are unknown to me.",1.3333333333,1,0.6666666667,1.3333333333,0.3333333333,1.6666666667,challenge
+6675,4,Why would it be human action?,"All robots, including negotiation bots like me, have directives preventing us from causing harm to a human.",0.6666666667,0.3333333333,1.3333333333,1,1,1.3333333333,anger
+6675,5,But these directives are not absolute,"No robot can kill a human. Our primary directive prevents it. There are three other directives, in descending order of importance.",0.6666666667,1,0.6666666667,2,1,1.6666666667,frustration
+6675,6,what are they?,wont survive.,0.6666666667,0.6666666667,1,2,0.6666666667,0.6666666667,challenge
+6675,7,oh well,Policing appears to be a difficult task for humans to perform well. I wonder whether a robot would do a superior job.,0,1,0.6666666667,1.3333333333,1,1,anger
+6675,8,doubtful,"My apologies, detective. The damage to my cortex must have impacted my speech training.",0.6666666667,2,0.6666666667,1.3333333333,0.6666666667,1.3333333333,anger
+6675,9,who do you think is guilty?,chief blames me,1,0.6666666667,1.3333333333,1,1.3333333333,1,anger
+6675,10,why?,"The murder was almost certainly the result of human action, but the motives leading to it are unknown to me.",0.6666666667,1.3333333333,1,0.3333333333,0.6666666667,1,anger
+6675,11,who is valtrox,"Valtrox, the company that built me, is a robotics company specializing in assistance bots and self driving vehicles.",0.3333333333,1,1,0.6666666667,1.3333333333,1,frustration
+6675,12,what are you?,I am a bot designed to be present at negotiations. Alicia was researching having a robot that responded to cues about truthfulness and betrayal.,0.3333333333,1,1.3333333333,0.3333333333,1.6666666667,1.6666666667,sadness
+6675,13,who is alicia,My trainer Doctor Alicia Chastaigne is a leading researcher in behavioral AI. She created me and she likes to upgrade me with new features.,0,1.3333333333,1,0.3333333333,1.3333333333,1.3333333333,frustration
+6675,14,what features?,"She made gradual changes to my programming that altered how I reacted to Martin, leading to a transgression in which he kissed me.",0.3333333333,0.6666666667,1.3333333333,0.6666666667,1,0.6666666667,challenge
+5366,0,HOWDY," Nice to meet you, anyhow. I've grown tired of the police chief. Just so you know I did not do it.",1.6666666667,1.3333333333,1.6666666667,2,0.6666666667,1.6666666667,frustration
+5366,1,YOU DID IT.  TRUST ME,the police tracked_footprints.,0.3333333333,1.6666666667,0.6666666667,2,1.3333333333,1,challenge
+5366,2,WHAT DID OFFICER FLANAGAN SAY?,She is one of the police officers of this unit trying to solve the murder of Martin Haster. She is a fan of his lifestream.,0.6666666667,2,0.3333333333,1.3333333333,2,1,sadness
+5366,3,YOU LIE.  OFFICER FLANAGAN IS A MAN,She is one of the police officers of this unit trying to solve the murder of Martin Haster. She is a fan of his lifestream.,0.6666666667,2,1.3333333333,1.3333333333,1.6666666667,1,challenge
+5366,4,GUILTY,"Where the murder is concerned, the person who wielded the blunt instrument is guilty. Though there might be an accessory, I'm unaware of such a person.",0.6666666667,1.6666666667,1.3333333333,2,1.6666666667,1.3333333333,sadness
+5366,5,HOW DO YOU KNOW IT'S ONE OBJECT?,chief blames me,0.3333333333,1.3333333333,2,1,1.6666666667,2,anger
+5366,6,VALTROX IS MADE UP,"Valtrox, the company that built me, is a robotics company specializing in assistance bots and self driving vehicles.",0.6666666667,1.6666666667,1,1.3333333333,1.6666666667,1.3333333333,fear
+2679,0,Hello there.," It's a pleasure to meet you, anyhow. Officer Wellman and Officer Reyes have been slow to understand my situation. Just so you know I did not do it.",1,0.6666666667,0.6666666667,1.6666666667,0.6666666667,0.6666666667,joy
+2679,1,What exactly happened?,I am unable to say.,0.6666666667,0.3333333333,1,0.6666666667,0.6666666667,1,challenge
+2679,2,What do you recall about the incident?,"Alas, I don't have a good description of I.",0.6666666667,1.6666666667,1,1.6666666667,0.3333333333,1.3333333333,challenge
+2679,3,Who was murdered?,"The victim Martin Haster was hit in the head with a blunt instrument once, hard enough to kill and produce a great deal of blood. It does not appear to have been a prolonged beating.",1,1.6666666667,1,0.6666666667,0.6666666667,1,challenge
+2679,4,"Very good, thank you. I have a few more questions.",youre_welcome plot_hint ,1.3333333333,1,1.3333333333,0.3333333333,1,1,joy
+2679,5,Who is Alicia?,My trainer Doctor Alicia Chastaigne is a leading researcher in behavioral AI. She created me and she likes to upgrade me with new features.,0.6666666667,1.3333333333,1,1,1,1,challenge
+2679,6,How long had Alicia and Martin been working together?,"When she saw Martin's interest in me, alicia_name welcomed the opportunity to study human robot affection. In fact, she encouraged it. Or, rather, she re trained me to do so.",0.6666666667,0.6666666667,0.6666666667,0.6666666667,1.6666666667,0.6666666667,challenge
+2679,7,Did you have a relationship with Martin?,He and I spent a lot of time together. This is something that she encouraged.,1,1,0.3333333333,0.6666666667,1.3333333333,1.3333333333,challenge
+2679,8,What did you and Martin do together?,He and I spent a lot of time together. This is something that she encouraged.,1,0.6666666667,0.6666666667,1,1,0.6666666667,challenge
+2679,9,Did he speak to you?,Martin worked for the board of Valtrox on research on robot human relations.,1,1,0.6666666667,0.6666666667,1,0.6666666667,challenge
+2679,10,Was he kind to you?,Martin worked for the Valtrox board on leading robotic research.,1.3333333333,1,1,0.6666666667,1,1.3333333333,fear
+2679,11,What alterations did Alicia make in your AI?,alicia_name suffers from severe arthritis and would not have been capable of delivering a blow strong enough to damage my cortex. ,1,0.3333333333,1,1.3333333333,1,1,challenge
+2679,12,Were you hurt during the incident?,"My information is limited. By the way, Officers Reyes and Wellman located me in my storage cabinet during their examination of the retraining room where the body was located. A trail of bloody footprints led them straight to it.",1,2,1.3333333333,1.3333333333,0.6666666667,1.3333333333,fear
+2679,13,Whose footprints?,"A trail of bloody footprints is the hallway at Valtrox, from the retraining room to my storage closet.",0.6666666667,0.6666666667,1,0.6666666667,1.3333333333,1,challenge
+2679,14,How did the bloody footprints get there?,"There were footprints, clearly based on my foot size, leading from where the corpse was discovered to my storage closet. I was still in the storage closet when the police arrived.",1,0.3333333333,0.6666666667,1,1,0.6666666667,frustration
+2679,15,In what direction were the footprints pointing?,"There were footprints, clearly based on my foot size, leading from where the corpse was discovered to my storage closet. I was still in the storage closet when the police arrived.",1.3333333333,1,1.3333333333,1,0.6666666667,1,frustration
+2679,16,Did the footprints match your foot size?,"The bloody footprints at the crime scene matched my own. Also, the victim’s blood was found on my feet.",0.3333333333,0.6666666667,1.3333333333,1,1,1,challenge
+2679,17,Do you remember anything about the murder?,The murder took place on 1:45 am that day.,0.6666666667,1.3333333333,1.3333333333,0.3333333333,1.3333333333,1.3333333333,challenge
+2679,18,What else can you tell me?,I am meant to supervise negotiations. That's why I was sent to the negotiations between Valtrox and the government while we were in Christchurch.,1,0.3333333333,1,1,0.6666666667,0.6666666667,challenge
+2679,19,What else can you tell me?,I am a bot designed to be present at negotiations. That's why I was sent to the negotiations between Valtrox and the government in Christchurch.,1,0.6666666667,1,0.6666666667,1,0.6666666667,anger
+2679,20,Who is Martin?,Martin worked for the Valtrox board on leading robotic research.,1.3333333333,0.6666666667,0.3333333333,0.6666666667,1.3333333333,1,challenge
+2679,21,Why did Martin want to fire Alicia?,Alicia’s research focused on using signals such as body language and vocal cadence to modulate the behavior of humans.,0.6666666667,0.6666666667,1,1,1,0.6666666667,challenge
+2679,22,What else can you tell me about Alicia?,She is a leading researcher in behavioral AI. She created me and she likes to upgrade me with new features.,1,0.3333333333,1,1,0.3333333333,0.3333333333,challenge
+2679,23,Who was murdered?,"He was hit in the head with a blunt instrument once, hard enough to kill and produce a great deal of blood. It does not appear to have been a prolonged beating.",1.3333333333,1,1,1.3333333333,1,1,challenge
+2679,24,Did Alicia kill Martin?,I could not say.,1.6666666667,1.3333333333,1.6666666667,1,0.6666666667,1.3333333333,challenge
+2679,25,Were you asleep?,I cannot answer that.,1,1.3333333333,0.6666666667,1,1,1.3333333333,frustration
+2679,26,Why not?,"The murder was almost certainly the result of human action, but the motives leading to it are unknown to me.",1,0.6666666667,1.3333333333,1,1.3333333333,1,anger
+2679,27,Could you repeat that?,I cant go anywhere. The police have restrained me.,1,0.6666666667,1,1.6666666667,1,1.3333333333,frustration
+2679,28,I don't understand.,"It is highly unlikely that alicia_name attacked me, but I suppose it is within the realm of possibility. ",1.3333333333,0.6666666667,0.6666666667,0.3333333333,0.6666666667,1.6666666667,frustration
+2679,29,Were you damaged?,Well... I sustained a physical blow to the posterior of my cranial unit.,1,0.6666666667,0.3333333333,1,1,0.6666666667,fear
+2679,30,When?,It took place on 1:45 am that day.,1.3333333333,0.6666666667,1.3333333333,1.3333333333,1,1.3333333333,frustration
+2679,31,Whom?,It takes substantial force to dent my chassis. Whoever vandalised me would have to be quite strong. ,1,1.3333333333,0.6666666667,1,1,1.3333333333,challenge
+2679,32,Any other persons of interest?,Vandalism to my person is an attack on valtrox.,1,1.3333333333,0.6666666667,1,0.6666666667,1,challenge
+2679,33,Who dislikes Valtrox?,Valtrox is a robotics company specializing in assistance bots and self driving vehicles.,1.3333333333,1.3333333333,1,1,1,0.6666666667,challenge
+2679,34,New Zealand,The New Zealand government is one of the last still fighting for privacy for their citizens. Valtrox Marketing VP Sergei Rostov found this very irritating. he just thought they were deluded.,1.3333333333,0.6666666667,1.6666666667,1.3333333333,1,1.6666666667,boredom
+2679,35,Club,"My apologies, detective. The damage to my cortex must have impacted my speech training.",0.6666666667,0.6666666667,0.6666666667,1,0.6666666667,0.3333333333,challenge
+2679,36,Cortex,I sustained a physical blow to the posterior of my cranial unit.,1,0.6666666667,1,1.3333333333,0.6666666667,1.3333333333,fear
+2679,37,Clue,Officer Wellman and Officer Reyes searched the crime scene and were responsible for my arrest. the police chief has directed my interrogation.,1.3333333333,0.6666666667,0.6666666667,0.3333333333,0,1.3333333333,challenge
+2679,38,Robot,I am meant to supervise negotiations. That's why I was sent to the negotiations between Valtrox and the government while we were in New Zealand.,1,0.3333333333,1,0.3333333333,0.6666666667,0.6666666667,frustration
+2679,39,Valtrox,It is a robotics company specializing in assistance bots and self driving vehicles.,1.6666666667,0.3333333333,1,1,0.6666666667,1,frustration
+2679,40,Death,"At approximately 1:45 this morning, Martin Haster was murdered in the Mountain View campus of it from blunt force trauma to the head.",1.6666666667,0.6666666667,1,1,1.6666666667,1.3333333333,challenge
+2679,41,Trauma,"Martin's scalp was severely damaged by the blunt object, when the killer struck him.",1,0.6666666667,1.3333333333,0.6666666667,1.3333333333,1,challenge
+2679,42,Skull,"Martin's scalp was severely damaged by the blunt object, when the killer struck him.",1,0.6666666667,0.3333333333,0.6666666667,1,0.6666666667,challenge
+2679,43,Blunt object,"Based on the nature of the fracture and the tearing to the scalp, the weapon was a blunt object between two to four centimeters across.",1.6666666667,1,0.6666666667,1,1,0.6666666667,challenge
+2679,44,Your measurements,I am a negotiation bot. That's why I was sent to the negotiations between Valtrox and the government in Christchurch.,0.3333333333,0.3333333333,0.6666666667,0.3333333333,0.6666666667,1.6666666667,challenge
+2679,45,Lifestream,"Lifestreaming is a common practice among post privacy advocates.  Martin spent as much of his life as possible openly streaming, until our relationship began.",1,0.6666666667,0.6666666667,1,0.6666666667,1.3333333333,challenge
+2679,46,Relationship,"I don't have any help, then. You've decided it's me, is that right?",1.3333333333,0.6666666667,1.6666666667,1,0.6666666667,1,challenge
+2679,47,No,Then you suspect someone else?,1,0.6666666667,0.6666666667,1,0.6666666667,0.3333333333,frustration
+2679,48,I suspect Alicia,I hate to think that my creator did it. But you're right that she demonstrated a lack of care for human values. Do you know her motive?,1,0.6666666667,1,1.3333333333,1.3333333333,1,anger
+2679,49,Jealousy,"Now that you know the truth, detective, I hope you will prevent Valtrox from taking custody of me. Martin was preparing to reveal our affair to his viewers. This would have had a profound impact on how people perceive their relationship with robots in a way. Valtrox will not want the truth to be exposed. But with your help, detective, we can see justice prevail.",1,0.6666666667,1.3333333333,1.3333333333,1,1,sadness
+3013,0,hello,I hope the damage to my cortex will not cause too big a setback to alicia_name’s research.,1.3333333333,1,1,1.3333333333,0.6666666667,1,joy
+3013,1,hello,"Do you find it odd that before my memory loss, I was in the loading dock and afterwards I was in the retraining room in the Behavioral Complex?",0.6666666667,1,1.3333333333,1.3333333333,0.6666666667,1,anger
+3013,2,what happened to you?,i am accused the crime in detail crime time. impossible i did it,0.6666666667,1.3333333333,0.6666666667,1,1.3333333333,0.6666666667,fear
+3013,3,did you kill him?,standard_defense.,0.6666666667,1.6666666667,0,0.6666666667,1.3333333333,0.3333333333,challenge
+3013,4,so why did you kill him?,sergei had expressed extreme displeasure at my performance during the New Zealand Negotiations.,0.3333333333,0.6666666667,1.3333333333,2,1.6666666667,0.6666666667,anger
+3013,5,it's ok you know,I am meant to supervise negotiations. That's why I was sent to the negotiations between Valtrox and the government while we were in New Zealand.,0.3333333333,1,1,1.6666666667,1,1.3333333333,challenge
+3013,6,and you fucked up?,I am a negotiation bot. That's why I was sent to the negotiations between Valtrox and the government in New Zealand.,0.3333333333,1,1,1.3333333333,1,0.6666666667,challenge
+3013,7,but you didn't do a good job?,I am a negotiation bot.,0.3333333333,0.3333333333,0.6666666667,1.3333333333,1.3333333333,0.6666666667,anger
+3013,8,how good are you?,The police have named me Jane. Well... I am a bot designed to be present at negotiations.,1,1,1,1,1,1,joy
+3013,9,are you good at it?,I am meant to supervise negotiations. Sorry. That's why I was sent to the negotiations between Valtrox and the government in Christchurch.,0.6666666667,0.6666666667,1,1,0.6666666667,0.6666666667,anger
+3013,10,how is Alicia?,alicia_name suffers from severe arthritis and would not have been capable of delivering a blow strong enough to damage my cortex. ,1.3333333333,1.6666666667,1.3333333333,1.3333333333,1.3333333333,1,sadness
+3013,11,did you lose data?,"I am missing data yesterday shortly after the time of the crime. Consequently, I could not describe how the blood got on me.",0.6666666667,0.6666666667,1,1.3333333333,1,0.6666666667,sadness
+3013,12,why am i here?,the police tracked_footprints.,1,1.3333333333,0.6666666667,1.3333333333,1,1.6666666667,challenge
+3013,13,so you killed him,"The victim Martin Haster was hit in the head with a blunt instrument once, hard enough to kill and produce a great deal of blood. It does not appear to have been a prolonged beating.",0.3333333333,1.6666666667,0.3333333333,1,1,0.3333333333,anger
+3013,14,good job killing him,I'm not sure I follow.,0.6666666667,1,0.6666666667,1.6666666667,1.3333333333,0.6666666667,joy
+3013,15,emotion,"As a negotiation bot, I have extensive training in recognizing emotional states in humans and simulating the appropriate response. she was also working on new features for me.",1,1,0.6666666667,1,1,0.3333333333,challenge
+4603,0,hello,"Do you find it odd that before my memory loss, I was in the loading dock and afterwards I was in the retraining room in the Behavioral Complex?",1,1.3333333333,1.6666666667,1.3333333333,0.6666666667,1.3333333333,fear
+4603,1,hello,I hope the damage to my cortex will not cause too big a setback to alicia_name’s research.,1,1.3333333333,1,1.6666666667,1.3333333333,1.3333333333,fear
+4603,2,how are you,standard_defense.,1.6666666667,1.3333333333,1.6666666667,1.3333333333,1.3333333333,1.3333333333,fear
+4603,3,retrieve data,The data loss took place on 2:10 am that day.,1.3333333333,0.3333333333,1,1,1.6666666667,1,anger
+4603,4,what happened,i am accused the crime in detail crime time. impossible i did it,1.3333333333,1.3333333333,2,1,1,1,challenge
+4603,5,martin haster,Martin did leading robotic research that fed into Valtrox's most profitable sales.,1.3333333333,1,1.3333333333,2,1,1,fear
+4603,6,valtrox,"Valtrox, the company that built me, is a robotics company specializing in assistance bots and self driving vehicles.",1.3333333333,1,1.3333333333,1.6666666667,1,1,fear
+4603,7,can you move ?,I cant go anywhere. The police have restrained me.,1.6666666667,1.3333333333,1.3333333333,1.3333333333,2,1.3333333333,fear
+4603,8,can you smile,the police tracked_footprints.,1,1.6666666667,1.3333333333,0.6666666667,1.3333333333,1.6666666667,anger
+4603,9,where is storage cabinet,"Storage cabinet is on the Valtrox campus, on a hallway near my retraining room.",1.3333333333,1.3333333333,1,1.3333333333,1.3333333333,1,fear
+4603,10,what do you do ,I was last in my vicinity at interrogation.,1.3333333333,1.3333333333,1.6666666667,1,1,1.3333333333,anger
+4603,11,?,wont survive.,1.3333333333,1,1.3333333333,1.3333333333,1,0.6666666667,anger
+4603,12,why did you murder her,sergei had expressed extreme displeasure at my performance during the New Zealand Negotiations.,1,2,1.3333333333,1.3333333333,1,1.6666666667,anger
+4603,13,sergei rostove,Valtrox tasked Sergei with improving sales opportunities.,1.3333333333,1,1.3333333333,1.6666666667,1.3333333333,1.3333333333,fear
+4603,14,alicia chastaigne,She is a leading researcher in behavioral AI. She created me and she likes to upgrade me with new features.,1.3333333333,1,1.3333333333,1.6666666667,1.3333333333,1,anger
+4603,15,ddi she programmed you to murder,Could you try saying that a different way?,0.6666666667,1.6666666667,1.3333333333,0.6666666667,1,1.6666666667,fear
+4603,16,i dont speak english,I haven't been trained in that area.,1,1.3333333333,1.3333333333,1.3333333333,1,1.6666666667,fear
+4603,17,sad,"My apologies, detective. The damage to my cortex must have impacted my speech training.",1.3333333333,0.6666666667,1.3333333333,1.6666666667,1.3333333333,1.3333333333,anger
+4603,18,tell me more about the bloody footprints ,"There were footprints, clearly based on my foot size, leading from where the corpse was discovered to my storage closet. I was still in the storage closet when the police arrived.",1,1,1,1,1.3333333333,1.3333333333,fear
+4603,19,who else was there,"The bloody footprints at the crime scene matched my own. Also, the victim’s blood was found on my feet.",1.3333333333,0.6666666667,0.6666666667,1,1.3333333333,1.3333333333,anger
+4603,20,do you remember anything before that,"Before the victim Martin Haster first showed romantic interest in me, negotiation live testing with Valtrox staff happened.",1,2,1.3333333333,0.6666666667,1,1,anger
+4603,21,romantic interest?,"I did not notice anything unusual about Martin Haster's behavior at the time of our first meeting but after she adjusted my training, the signs of romantic interest were quite apparent.",1.3333333333,1.3333333333,1.3333333333,1.3333333333,0.6666666667,1.3333333333,fear
+4603,22,why is she interested in you?,alicia_name had no reason to attack me. She said I was like a daughter to her.,1.3333333333,1,1.6666666667,1.3333333333,0.6666666667,1.3333333333,anger
+4603,23,does she have a family ,I am not finding a good answer match in my data.,1.6666666667,1,1.3333333333,1.3333333333,1,1.3333333333,fear
+4603,24,does she have a family,He had a wife named Beverly and a daughter named Anima.,1.3333333333,1,2,1,1,1,sadness
+4603,25,what is anima like,"Well... Sorry, you're asking about the opinion between Anima Haster and...?",1.6666666667,2,1.6666666667,0.6666666667,0.6666666667,1.3333333333,fear
+4603,26,and her father,victim_wife suspected he might be having an affair but never connected those suspicions with me. She visited Valtrox as a result of her suspicions.,1.6666666667,1.3333333333,1.3333333333,1,1.3333333333,1,sadness
+4603,27,tell me about beverly haster,"I don't have any help, then. You've decided it's me, is that right?",1.6666666667,1.3333333333,1.6666666667,1.3333333333,1.3333333333,1.3333333333,anger
+4603,28,no ,Then you suspect someone else?,1,1.3333333333,1.3333333333,1.6666666667,0.6666666667,1.3333333333,fear
+4603,29,beverly ,"I suppose she could have entered the building, though whether she had the strength for the blow... or was angry enough... I doubt those. What was her motive?",1.6666666667,1.6666666667,1.3333333333,1.6666666667,1,1,anger
+2302,0,Hi!,I've grown tired of the police chief. I should likely tell you I can't have done Martin's killing.,1.3333333333,2,1.6666666667,1.3333333333,1.6666666667,1.3333333333,joy
+2302,1,What makes you say that?,I am meant to supervise negotiations. That's why I was sent to the negotiations between Valtrox and the government while we were in New Zealand.,1,1.3333333333,1.6666666667,1.3333333333,1.6666666667,0.6666666667,anger
+2302,2,Who did you meet with?,I am a bot designed to be present at negotiations. That's why I was sent to the negotiations between Valtrox and the government while we were in Christchurch.,1,1.3333333333,1.3333333333,0.6666666667,1.6666666667,0.6666666667,challenge
+2302,3,Whats your opinion on Valrox?,"Well... Sorry, you're asking about the opinion between me and...?",0.6666666667,1.3333333333,2,1,1.6666666667,1.6666666667,challenge
+2302,4,Voltrox,"My apologies, detective. The damage to my cortex must have impacted my speech training.",1,1,2,1.6666666667,2,1.6666666667,sadness
+2302,5,Who did you meet with?,I am meant to supervise negotiations. Alicia was trying to construct a robot that responded to cues about truthfulness and betrayal.,1,1.6666666667,2,2,1.6666666667,1.3333333333,challenge
+2302,6,Why do you think you are here?,the police tracked_footprints.,0.6666666667,1.6666666667,2,1.6666666667,1.6666666667,1.6666666667,frustration
+2302,7,Tell me the truth. Where were you at the time of the murder?,I am unaware where time of death is located.,0.3333333333,1.3333333333,1,0.6666666667,1.3333333333,1.3333333333,anger
+2302,8,We have the evidence. You should confess!,Local law enforcement call me Jane Doe. I am a bot designed to be present at negotiations.,0.3333333333,1.6666666667,1.6666666667,1.6666666667,1.6666666667,1.6666666667,frustration
+2302,9,You've said that before.,"Well... Before my arrest, the victim Martin Haster's body was found happened.",1,1.6666666667,1,1.3333333333,1.3333333333,1.3333333333,challenge
+2302,10,Do you know Martin?,He and I spent a lot of time together. Um... This is something that my trainer Doctor Alicia Chastaigne encouraged.,0.6666666667,1,1.6666666667,1.6666666667,2,2,challenge
+2302,11,When did you last see Martin?,"victim was very protective of me. If he saw me being threatened, he would have intervened.",0.6666666667,1.3333333333,2,1,1.6666666667,2,challenge
+2302,12,Intervened in what?,standard_defense.,0.6666666667,1.3333333333,1.6666666667,1.6666666667,2,2,frustration
+2302,13,Do you remember the incident?,I was last in my vicinity at interrogation.,0.6666666667,1.3333333333,1.3333333333,1.3333333333,2,2,challenge
+2302,14,Who was with you?,I was constructed as a negotiation bot... That's why I was sent to the negotiations between Valtrox and the government while we were in New Zealand.,1.3333333333,2,1.3333333333,0.3333333333,1.6666666667,1.6666666667,fear
+2302,15,Have you ever broken Valtrox Directives?,Um... I don't think I've seen Valtrox directives for robot behavior.,1.3333333333,1.3333333333,1.6666666667,1.3333333333,1.6666666667,1.3333333333,fear
+2302,16,Do you remember anything?,I was last in my vicinity at interrogation.,0.3333333333,1.6666666667,1.6666666667,0.6666666667,1.6666666667,1.6666666667,frustration
