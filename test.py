@@ -97,7 +97,7 @@ def train_test_split(data_list, s, c_e, show_matrix=False):
             fscores[var][0] = clark.micro_fscores[var]
             fscores[var][1] = clark.macro_fscores[var]
 
-        with open('results/output.csv', 'w') as csv_file:
+        with open('results/CLARK_results.csv', 'w') as csv_file:
             writer = csv.writer(csv_file)
             for key, value in fscores.items():
                 writer.writerow([key, value[0], value[1]])
