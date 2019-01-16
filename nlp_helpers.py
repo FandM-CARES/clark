@@ -8,7 +8,7 @@ Helper functions for parsing inputs
 
 def tokenize(row):
     """
-    Tokenizes the row exluding .;,:/-_&~
+    Tokenizes the row exluding .;,:/-_&~ and removes stop words
 
     Parameters:
     row (string): row of data
@@ -74,6 +74,8 @@ def tokenize(row):
             del init_res[i]
             continue
         if word in bad_characters:
+            del init_res[i]
+        if is_stop_word(word):
             del init_res[i]         
     
     return init_res

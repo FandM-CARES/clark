@@ -99,6 +99,7 @@ def train_test_split(data_list, s, c_e, show_matrix=False):
 
         with open('results/CLARK_results.csv', 'w') as csv_file:
             writer = csv.writer(csv_file)
+            writer.writerow(['Variable', 'Micro F Score', 'Macro F Score'])
             for key, value in fscores.items():
                 writer.writerow([key, value[0], value[1]])
 
