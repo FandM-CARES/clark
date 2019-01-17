@@ -188,6 +188,7 @@ class ClarkModel(object):
         self.vocab = set()
         self.true = {}
         self.pred = {}
+        self.version = 1 # unigrams = 0, bigrams = 1, both = 2
 
     def train(self, training_data):
         """
@@ -235,12 +236,9 @@ class ClarkModel(object):
 
         for row in training_set:
             weight = self.num_to_weight(row, variable)
-            res = tokenize(row['Player Message'])
-            for i, word in enumerate(res):
-                temp_bigram = word + res[i+1] if i + 1 < len(res) else ""
+            parsed_message, message = tokenize(row['Player Message'], self.version)
+            for i, word in enumerate(parsed_message):
                 self.vocab.add(word)
-                if temp_bigram != "": self.vocab.add(temp_bigram) 
-
                 if word in words:
                     words[word][weight] += 1
                     totals = self.add_weight_to_total(weight, totals)
@@ -248,15 +246,6 @@ class ClarkModel(object):
                     words[word] = self.initialize_av_weights()
                     words[word][weight] += 1
                     totals = self.add_weight_to_total(weight, totals)
-                
-                if temp_bigram in words:
-                    words[temp_bigram][weight] += 1
-                    totals = self.add_weight_to_total(weight, totals)
-                elif temp_bigram != "":
-                    words[temp_bigram] = self.initialize_av_weights()
-                    words[temp_bigram][weight] += 1
-                    totals = self.add_weight_to_total(weight, totals)
-                   
                     
         priors = {
             'low': float(totals['num_low'])/float(totals['num_low'] + totals['num_med'] + totals['num_high']),
@@ -396,16 +385,12 @@ class ClarkModel(object):
             self.pred[var] = []
 
         for row in testing_data:
-            res = []
-            response = tokenize(row['Player Message'])
-            for word in response:
-                res.append(word)
-            parsed_message = ' '.join(res)
-            messages[parsed_message] = {}
+            parsed_message, message = tokenize(row['Player Message'], self.version)
+            messages[message] = {}
             for var in self.variables:
                 weight = self.num_to_weight(row, var)
                 self.true[var].append(weight)
-                messages[parsed_message][var] = weight
+                messages[message][var] = weight
                 classification = self.classify(self.ngrams[var], parsed_message, self.priors[var])
                 self.pred[var].append(classification)
 
@@ -466,17 +451,11 @@ class ClarkModel(object):
         sum_med = float(0)
         sum_high = float(0)
 
-        res = content.split()
-        for i, word in enumerate(res):
+        for i, word in enumerate(content):
             if word in training_dict:
                 sum_low += float(math.log(training_dict[word]['low']))
                 sum_med += float(math.log(training_dict[word]['med']))
                 sum_high += float(math.log(training_dict[word]['high']))
-            temp_bigram = word + res[i + 1] if i + 1 < len(res) else ''
-            if temp_bigram in training_dict and temp_bigram != '':
-                sum_low += float(math.log(training_dict[temp_bigram]['low']))
-                sum_med += float(math.log(training_dict[temp_bigram]['med']))
-                sum_high += float(math.log(training_dict[temp_bigram]['high']))
 
         low_prob = math.log(priors['low']) + sum_low
         med_prob = math.log(priors['med']) + sum_med
