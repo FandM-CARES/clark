@@ -54,7 +54,7 @@ def tokenize(row, ngram=0):
         return [" ".join(x) for x in list(nltk.bigrams(temp_ret))], row  
     
     if ngram == 2:
-        return temp_ret + [" ".join(x) for x in list(nltk.bigrams(temp_ret))], row
+        return [x for x in temp_ret if not is_stop_word(x)] + [" ".join(x) for x in list(nltk.bigrams(temp_ret))], row
         
 
 def is_stop_word(word):
