@@ -11,13 +11,14 @@ class EmotionModel(object):
     
     def __init__(self):
         self.emotions = ['sadness', 'joy', 'fear', 'anger', 'challenge', 'boredom', 'frustration']
-        self.unigrams = {}
+        self.ngrams = {}
         self.priors = {}
         self.micro_fscores = 0.0
         self.macro_fscores = 0.0
         self.vocab = set()
         self.true = list()
         self.pred = list()
+        self.version = 2 # 0 - unigrams, 1 - bigrams, 2, both
     
     def train(self, training_data):
         """
@@ -36,11 +37,9 @@ class EmotionModel(object):
 
         for row in training_data:
             emotion = row['Emotion']
-            res = tokenize(row['Player Message'])
+            res, message = tokenize(row['Player Message'], self.version)
             for word in res:
                 self.vocab.add(word)
-                if is_stop_word(word):
-                    continue
                 if word in words:
                     words[word][emotion] += 1
                     totals[emotion] += 1
@@ -55,7 +54,7 @@ class EmotionModel(object):
         for emotion in self.emotions:
             self.priors[emotion] = totals[emotion] / sum_totals
 
-        self.unigrams = self.calculate_probabilities(words, totals)
+        self.ngrams = self.calculate_probabilities(words, totals)
 
     def calculate_probabilities(self, words, totals):
         for word in words:
@@ -77,17 +76,11 @@ class EmotionModel(object):
         messages = {}
 
         for row in testing_data:
-            res = []
             emotion = row['Emotion']
-            response = tokenize(row['Player Message'])
-            for word in response:
-                if is_stop_word(word):
-                    continue
-                res.append(word)
-            parsed_message = ' '.join(res)
-            messages[parsed_message] = {}
+            parsed_message, message = tokenize(row['Player Message'], self.version)
+            messages[message] = {}
             self.true.append(emotion)
-            classification = self.classify(self.unigrams, parsed_message, self.priors)
+            classification = self.classify(self.ngrams, parsed_message, self.priors)
             self.pred.append(str(classification))
 
         self.calculate_scores()
@@ -113,7 +106,7 @@ class EmotionModel(object):
         boredom = [priors['boredom'], 'boredom']
         frustration = [priors['frustration'], 'frustration']
             
-        for word in content.split():
+        for word in content:
             if word in training_dict:
                 sadness[0] += float(math.log(training_dict[word]['sadness']))
                 joy[0] += float(math.log(training_dict[word]['joy']))
@@ -184,7 +177,7 @@ class ClarkModel(object):
     def __init__(self):
         self.variables = ['Pleasantness', 'Attention', 'Control',
                           'Certainty', 'Anticipated Effort', 'Responsibililty']
-        self.unigrams = {}
+        self.ngrams = {}
         self.priors = {}
         self.bounds = {}
         self.micro_fscores = {}
@@ -192,6 +185,7 @@ class ClarkModel(object):
         self.vocab = set()
         self.true = {}
         self.pred = {}
+        self.version = 0 # unigrams = 0, bigrams = 1, both = 2
 
     def train(self, training_data):
         """
@@ -205,9 +199,9 @@ class ClarkModel(object):
         """
 
         for var in self.variables:
-            unigrams, totals, priors = self.train_by_variable(training_data, var)
+            ngrams, totals, priors = self.train_by_variable(training_data, var)
             self.priors[var] = priors
-            self.unigrams[var] = self.smooth_values(unigrams, var, totals)
+            self.ngrams[var] = self.smooth_values(ngrams, var, totals)
 
     def train_by_variable(self, training_set, variable, data_points={}):
         """
@@ -218,7 +212,7 @@ class ClarkModel(object):
         variable (string): variable in use in training
 
         Returns:
-        Object: unigrams with associated counts
+        Object: ngrams with associated counts
         Object: sums for each classification
         Object: priors for each classification
         """
@@ -239,19 +233,17 @@ class ClarkModel(object):
 
         for row in training_set:
             weight = self.num_to_weight(row, variable)
-            res = tokenize(row['Player Message'])
-            for word in res:
+            parsed_message, message = tokenize(row['Player Message'], self.version)
+            for i, word in enumerate(parsed_message):
                 self.vocab.add(word)
-                if is_stop_word(word):
-                    continue
                 if word in words:
                     words[word][weight] += 1
                     totals = self.add_weight_to_total(weight, totals)
                 else:
-                    words[word] = {'low': 1, 'med': 1, 'high': 1}
+                    words[word] = self.initialize_av_weights()
                     words[word][weight] += 1
                     totals = self.add_weight_to_total(weight, totals)
-
+                    
         priors = {
             'low': float(totals['num_low'])/float(totals['num_low'] + totals['num_med'] + totals['num_high']),
             'med': float(totals['num_med'])/float(totals['num_low'] + totals['num_med'] + totals['num_high']),
@@ -259,6 +251,9 @@ class ClarkModel(object):
         }
 
         return words, totals, priors
+
+    def initialize_av_weights(self):
+        return {'low': 1, 'med': 1, 'high': 1}
 
     def add_weight_to_total(self, cw, totals):
         """
@@ -347,28 +342,28 @@ class ClarkModel(object):
         if variable == 'Responsibililty':
             return num_to_weight_responsibility(row)
 
-    def smooth_values(self, unigrams, variable, totals):
+    def smooth_values(self, ngrams, variable, totals):
         """
         Performs smoothing on unigram values
 
         Parameters:
-        unigrams (object): unigrams with associated counts in training data
+        ngrams (object): ngrams with associated counts in training data
         variable (string): the variable associated with the unigram values
         totals (object): total number of low, med, and high classifications for the variable
 
         Returns:
-        Object: smoothed values for the unigrams
+        Object: smoothed values for the ngrams
         """
 
-        for word in unigrams:
-            unigrams[word]['low'] = float(
-                unigrams[word]['low'])/float(totals['num_low'] + len(self.vocab))
-            unigrams[word]['med'] = float(
-                unigrams[word]['med'])/float(totals['num_med'] + len(self.vocab))
-            unigrams[word]['high'] = float(
-                unigrams[word]['high'])/float(totals['num_high'] + len(self.vocab))
+        for word in ngrams:
+            ngrams[word]['low'] = float(
+                ngrams[word]['low'])/float(totals['num_low'] + len(self.vocab))
+            ngrams[word]['med'] = float(
+                ngrams[word]['med'])/float(totals['num_med'] + len(self.vocab))
+            ngrams[word]['high'] = float(
+                ngrams[word]['high'])/float(totals['num_high'] + len(self.vocab))
 
-        return unigrams
+        return ngrams
 
     def test(self, testing_data):
         """
@@ -387,19 +382,13 @@ class ClarkModel(object):
             self.pred[var] = []
 
         for row in testing_data:
-            res = []
-            response = tokenize(row['Player Message'])
-            for word in response:
-                if is_stop_word(word):
-                    continue
-                res.append(word)
-            parsed_message = ' '.join(res)
-            messages[parsed_message] = {}
+            parsed_message, message = tokenize(row['Player Message'], self.version)
+            messages[message] = {}
             for var in self.variables:
                 weight = self.num_to_weight(row, var)
                 self.true[var].append(weight)
-                messages[parsed_message][var] = weight
-                classification = self.classify(self.unigrams[var], parsed_message, self.priors[var])
+                messages[message][var] = weight
+                classification = self.classify(self.ngrams[var], parsed_message, self.priors[var])
                 self.pred[var].append(classification)
 
         self.calculate_scores()
@@ -455,27 +444,19 @@ class ClarkModel(object):
         Returns:
         String: classification according to the trained model
         """
-        sum_low = float(0)
-        sum_med = float(0)
-        sum_high = float(0)
 
-        for word in content.split():
+        low = [priors['low'], 'low']
+        med = [priors['med'], 'med']
+        high = [priors['high'], 'high']
+
+        for word in content:
             if word in training_dict:
-                sum_low += float(math.log(training_dict[word]['low']))
-                sum_med += float(math.log(training_dict[word]['med']))
-                sum_high += float(math.log(training_dict[word]['high']))
+                low[0] += float(math.log(training_dict[word]['low']))
+                med[0] += float(math.log(training_dict[word]['med']))
+                high[0] += float(math.log(training_dict[word]['high']))
 
-        low_prob = math.log(priors['low']) + sum_low
-        med_prob = math.log(priors['med']) + sum_med
-        high_prob = math.log(priors['high']) + sum_high
-
-        max_val = max([low_prob, med_prob, high_prob])
-        if low_prob == max_val:
-            return 'low'
-        if med_prob == max_val:
-            return 'med'
-        else:
-            return 'high'
+        return max([low, med, high],key=lambda item:item[0])[1]
+        
 
     def calc_std_data(self, data_points):
         """

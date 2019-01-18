@@ -6,12 +6,16 @@ stop_words = set(stopwords.words('english'))
 Helper functions for parsing inputs
 """
 
-def tokenize(row):
+def tokenize(row, ngram=0):
     """
-    Tokenizes the row exluding .;,:/-_&~
+    Tokenizes the row exluding .;,:/-_&~ and removes stop words
 
     Parameters:
     row (string): row of data
+    ngram (integer): specifies which kind(s) of ngrams to use
+    - 0 : unigrams
+    - 1 : bigrams
+    - 2 : unigrams and bigrams
 
     Returns:
     String: tokenized word
@@ -19,64 +23,39 @@ def tokenize(row):
 
     bad_characters = ['.',';',':','/','-','_','&','~',',', '\\']
     contractions_dict = {
-        "are not": "aren't",
-        "cannot": "can't",
-        "can not": "can't",
-        "could have": "could've",
-        "did not": "didn't",
-        "does not": "doesn't",
-        "do not": "don't",
-        "going to": "gonna",
-        "have not": "haven't",
-        "he would": "he'd",
-        "he has": "he's",
-        "he is": "he's",
-        "how did": "how'd",
-        "how are": "how're",
-        "how is": "how's",
-        "i would": "i'd",
-        "i will": "i'll",
-        "i am ": "i'm",
-        "i have": "i've",
-        "is not": "isn't",
-        "it is": "it's",
-        "let us": "let's",
-        "she would": "she'd",
-        "she has": "she's",
-        "she is": "she's",
-        "someone is": "someone's",
-        "that is": "that's",
-        "there is": "there's",
-        "we would": "we'd",
-        "we are": "we're",
-        "we have": "we've",
-        "what is": "what's",
-        "when is": "when's",
-        "where is": "where's",
-        "who would": "who'd",
-        "will not": "won't",
-        "you would": "you'd",
-        "you are": "you're",
-        "you have": "you've"
+        "'s": "is",
+        "'d": "did",
+        "'re": "are",
+        "'ve": "have",
+        "n't": "not",
+        "'m": "am",
     }
 
     init_res = nltk.word_tokenize(row)
     for i, word in enumerate(init_res):
         init_res[i] = word.lower()
-        if i+1 < len(init_res):
-            pot_contraction = init_res[i] + " " + init_res[i+1]
-            if (pot_contraction in contractions_dict):
-                init_res[i] = contractions_dict[pot_contraction]
-                del init_res[i+1]
-                continue
-        if word[0] == "'":
-            init_res[i-1] = init_res[i-1] + init_res[i]
-            del init_res[i]
-            continue
+        if word in contractions_dict:
+            init_res[i] = contractions_dict[word]
         if word in bad_characters:
-            del init_res[i]         
+            init_res[i] = ""
+        if ngram == 0:
+            if is_stop_word(word):
+                init_res[i] = ""
     
-    return init_res
+    temp_ret = [x for x in init_res if x != ""]
+    
+    if len(temp_ret) == 0:
+        return [], ""
+
+    if ngram == 0: 
+        return temp_ret, row
+    
+    if ngram == 1: 
+        return [" ".join(x) for x in list(nltk.bigrams(temp_ret))], row  
+    
+    if ngram == 2:
+        return temp_ret + [" ".join(x) for x in list(nltk.bigrams(temp_ret))], row
+        
 
 def is_stop_word(word):
     """
