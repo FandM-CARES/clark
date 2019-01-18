@@ -44,12 +44,18 @@ def tokenize(row, ngram=0):
     
     temp_ret = [x for x in init_res if x != ""]
     
-    if ngram == 0: return temp_ret, row
-    
-    if len(temp_ret) != 0: 
-        return [" ".join(x) for x in list(nltk.bigrams(temp_ret))], row  
-    else: 
+    if len(temp_ret) == 0:
         return [], ""
+
+    if ngram == 0: 
+        return temp_ret, row
+    
+    if ngram == 1: 
+        return [" ".join(x) for x in list(nltk.bigrams(temp_ret))], row  
+    
+    if ngram == 2:
+        return temp_ret + [" ".join(x) for x in list(nltk.bigrams(temp_ret))], row
+        
 
 def is_stop_word(word):
     """
