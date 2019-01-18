@@ -185,7 +185,7 @@ class ClarkModel(object):
         self.vocab = set()
         self.true = {}
         self.pred = {}
-        self.version = 0 # unigrams = 0, bigrams = 1, both = 2
+        self.version = 1 # unigrams = 0, bigrams = 1, both = 2
 
     def train(self, training_data):
         """
