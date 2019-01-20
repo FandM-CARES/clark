@@ -21,7 +21,7 @@ def tokenize(row, ngram=0):
     String: tokenized word
     """
 
-    bad_characters = ['.',';',':','/','-','_','&','~',',', '\\']
+    bad_characters = ['.','-','_','&','~',',', '\\']
     contractions_dict = {
         "'s": "is",
         "'d": "did",

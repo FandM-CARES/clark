@@ -48,23 +48,24 @@ def n_fold_test(data_list, n, c_e):
 
     else:
         
-        mean_fscores = [0, 0]
+        #mean_fscores = [0, 0]
 
         for i, split in enumerate(splits):
             em_model = EmotionModel()
             em_model.train(np.concatenate(splits[:i]+splits[i+1:]))
             em_model.test(splits[i])
+            print("-----------------------------------")
 
-            mean_fscores[0] += em_model.micro_fscores
-            mean_fscores[1] += em_model.macro_fscores
+            #mean_fscores[0] += em_model.micro_fscores
+            #mean_fscores[1] += em_model.macro_fscores
 
-        mean_fscores[0] /= n
-        mean_fscores[1] /= n
+        #mean_fscores[0] /= n
+        #mean_fscores[1] /= n
 
-        with open('results/Emotion_results.csv', 'w') as csv_file:
-            writer = csv.writer(csv_file)
-            writer.writerow(['Micro F Score', 'Macro F Score'])
-            writer.writerow([mean_fscores[0], mean_fscores[1]])
+        #with open('results/Emotion_results.csv', 'w') as csv_file:
+        #    writer = csv.writer(csv_file)
+        #    writer.writerow(['Micro F Score', 'Macro F Score'])
+        #    writer.writerow([mean_fscores[0], mean_fscores[1]])
         
         print('Emotions Model Done!')
 
@@ -113,9 +114,25 @@ def train_test_split(data_list, s, c_e, show_matrix=False):
         if show_matrix:
             em_model.confusion_matrix()
         
-        with open('results/Emotion_results.csv', 'w') as csv_file:
-            writer = csv.writer(csv_file)
-            writer.writerow(['Micro F Score', 'Macro F Score'])
-            writer.writerow([em_model.micro_fscores, em_model.macro_fscores])
-        
         print('Emotions Model Done!')
+
+
+label2emotion = {0:"others", 1:"happy", 2: "sad", 3:"angry"}
+
+def run_full_test(training_data_list, testing_data_list):
+    training_data = np.asarray(ProcessedData(training_data_list).data)
+    testing_data = np.asarray(ProcessedData(testing_data_list).data)
+
+    em_model = EmotionModel()
+    em_model.train(training_data)
+    em_model.test(testing_data)
+
+    predictions = np.argmax(em_model.pred, axis=1)
+
+    with io.open("test.txt", "w", encoding="utf8") as fout:
+        fout.write('\t'.join(["id", "turn1", "turn2", "turn3", "label"]) + '\n')        
+        with io.open("data/testwithoutlabels.txt", encoding="utf8") as fin:
+            fin.readline()
+            for lineNum, line in enumerate(fin):
+                fout.write('\t'.join(line.strip().split('\t')[:4]) + '\t')
+                fout.write(label2emotion[predictions[lineNum]] + '\n')
