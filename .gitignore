@@ -109,3 +109,4 @@ venv.bak/
 # project stuff
 #/results/confusion_matrices
 .scannerwork/
+glove.6B.100d.txt
