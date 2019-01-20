@@ -108,5 +108,6 @@ venv.bak/
 
 # project stuff
 #/results/confusion_matrices
+data/
 .scannerwork/
 glove.6B.100d.txt
