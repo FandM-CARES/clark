@@ -26,7 +26,7 @@ class EmotionModel(object):
         }
         self.version = 2 # 0 - unigrams, 1 - bigrams, 2, both
         self.bag_of_words = 0 # 0 is off, 1 is on
-        self.weighting_method = 0 # 0 is off, 1 is on
+        self.weighting_method = 1 # 0 is off, 1 is on
     
     def train(self, training_data):
         """
@@ -89,11 +89,11 @@ class EmotionModel(object):
         Null
         """
 
-        old_priors = self.priors
+        u_priors = dict(self.priors)
 
         for row in testing_data:
-            #emotion = row['label']
-            #self.true.append(self.emotion2encoding[emotion])
+            emotion = row['label']
+            self.true.append(self.emotion2encoding[emotion])
 
             if self.bag_of_words == 1:
                 parsed_message = tokenize(row['turn1'], self.version)[0] + tokenize(row['turn2'], self.version)[0] + tokenize(row['turn3'], self.version)[0]
@@ -101,22 +101,27 @@ class EmotionModel(object):
                 parsed_message = tokenize(row['turn3'], self.version)[0]
             
             if self.weighting_method == 1:
+                p_classification = self.normalize(np.asarray(self.classify(self.ngrams, parsed_message, u_priors, True)))
+                for i, e in enumerate(self.emotions):
+                    u_priors[e] = p_classification[i]
+
                 parsed_message = tokenize(row['turn1'], self.version)[0]
-                classification = self.normalize(np.asarray(self.classify(self.ngrams, parsed_message, self.priors, True)))
-                for i, emotion in enumerate(self.emotions):
-                    self.priors[emotion] = classification[i]
+                classification = self.normalize(np.asarray(self.classify(self.ngrams, parsed_message, u_priors, True)))
+                for i, e in enumerate(self.emotions):
+                    u_priors[e] = classification[i]
                 
-                parsed_message = tokenize(row['turn2'], self.version)[0]
-                classification = self.normalize(np.asarray(self.classify(self.ngrams, parsed_message, self.priors, True)))
-                for i, emotion in enumerate(self.emotions):
-                    self.priors[emotion] = classification[i]
-        
-            classification = self.classify(self.ngrams, parsed_message, self.priors)
+                if np.argmax(p_classification) == np.argmax(classification):
+                    self.pred.append(classification)
+                    continue
+                else:
+                    parsed_message = tokenize(row['turn2'], self.version)[0]
+                    classification = self.classify(self.ngrams, parsed_message, u_priors)
+            else:
+                classification = self.classify(self.ngrams, parsed_message, u_priors)
+            
             self.pred.append(classification)
 
-            self.priors = old_priors # reset the old priors
-
-        #getMetrics(np.array(self.pred), np.array(self.true))
+        getMetrics(np.array(self.pred), np.array(self.true))
 
 
     def confidence(self, raw_results):
@@ -151,20 +156,18 @@ class EmotionModel(object):
         String: classification according to the trained model
         """
 
-        others = [self.kl(content, 'others', priors), [1,0,0,0]] #[math.log(priors['others']), [1,0,0,0]]
-        happy = [self.kl(content, 'happy', priors), [0,1,0,0]] #[math.log(priors['happy']), [0,1,0,0]]
-        sad = [self.kl(content, 'sad', priors), [0,0,1,0]] # [math.log(priors['sad']), [0,0,1,0]]
-        angry = [self.kl(content, 'angry', priors), [0,0,0,1]] #[math.log(priors['angry']), [0,0,0,1]]
-             
+        others = [math.log(priors['others']), [1,0,0,0]]
+        happy = [math.log(priors['happy']), [0,1,0,0]]
+        sad = [math.log(priors['sad']), [0,0,1,0]]
+        angry = [math.log(priors['angry']), [0,0,0,1]]
+        
         for word in content:
             if word in training_dict:
-                p_w_d = sum(c == word for c in content)/len(content)
-                
-                others[0] -= math.log(p_w_d) - math.log(training_dict[word]['others'])
-                happy[0] -= math.log(p_w_d) - math.log(training_dict[word]['happy'])
-                sad[0] -= math.log(p_w_d) - math.log(training_dict[word]['sad'])
-                angry[0] -= math.log(p_w_d) - math.log(training_dict[word]['angry'])
-                     
+                others[0] += float(math.log(training_dict[word]['others']))
+                happy[0] += float(math.log(training_dict[word]['happy']))
+                sad[0] += float(math.log(training_dict[word]['sad'])) 
+                angry[0] += float(math.log(training_dict[word]['angry']))
+                   
         if return_raw: return [others[0], happy[0], sad[0], angry[0]]
 
         return max([others, happy, sad, angry],key=lambda item:item[0])[1]

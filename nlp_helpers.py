@@ -22,20 +22,10 @@ def tokenize(row, ngram=0):
     """
 
     bad_characters = ['.','-','_','&','~',',', '\\']
-    contractions_dict = {
-        "'s": "is",
-        "'d": "did",
-        "'re": "are",
-        "'ve": "have",
-        "n't": "not",
-        "'m": "am",
-    }
 
-    init_res = nltk.word_tokenize(row)
+    init_res = nltk.tokenize.casual.casual_tokenize(row)
     for i, word in enumerate(init_res):
         init_res[i] = word.lower()
-        if word in contractions_dict:
-            init_res[i] = contractions_dict[word]
         if word in bad_characters:
             init_res[i] = ""
         if ngram == 0:

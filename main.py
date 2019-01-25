@@ -17,5 +17,5 @@ with open('data/testwithoutlabels.txt', 'r') as in_file:
         writer.writerows(lines)
 
 #train_test_split(['data/train.csv'], 0.85, 1, False)
-#n_fold_test(['data/train.csv'],10, 1)
-run_full_test(['data/train.csv'], ['data/testwithoutlabels.csv'])
+n_fold_test(['data/train.csv'],10, 1)
+#run_full_test(['data/train.csv'], ['data/testwithoutlabels.csv'])
