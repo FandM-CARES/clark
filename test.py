@@ -16,8 +16,16 @@ def n_fold_test(data_list, n, c_e):
     Object: Mean fscores over all the tests for each AV
     """
 
-    data = ProcessedData(data_list)
+    data = ProcessedData(data_list, 20000)
     np_data = np.asarray(data.data)
+    with open('data/train_20000.txt', 'w') as outfile:
+        outfile.write("id turn1 turn2 turn3 label\n")
+        for i,e in enumerate(np_data):
+            outfile.write(str(i)+"\t")
+            vals = list(e.values())
+            all_values = "\t".join(vals[1:])
+            outfile.write(all_values+"\n")
+
     np.random.shuffle(np_data)
     splits = np.array_split(np_data, n)
 
@@ -50,11 +58,24 @@ def n_fold_test(data_list, n, c_e):
         
         #mean_fscores = [0, 0]
 
+        mean = {'accuracy':0., 'microPrecision':0., 'microRecall':0., 'microF1':0.}
+
         for i, split in enumerate(splits):
             em_model = EmotionModel()
             em_model.train(np.concatenate(splits[:i]+splits[i+1:]))
-            em_model.test(splits[i])
-            print("-----------------------------------")
+            results = em_model.test(splits[i])
+            mean['accuracy'] += results[0]
+            mean['microPrecision'] += results[1]
+            mean['microRecall'] += results[2]
+            mean['microF1'] += results[3]
+
+        for k in mean:
+            mean[k] /= 10
+
+        print("--------------")
+        print(mean)                
+
+            
 
             #mean_fscores[0] += em_model.micro_fscores
             #mean_fscores[1] += em_model.macro_fscores
@@ -129,7 +150,7 @@ def run_full_test(training_data_list, testing_data_list):
 
     predictions = np.argmax(em_model.pred, axis=1)
 
-    with io.open("test.txt", "w", encoding="utf8") as fout:
+    with io.open("test_clark.txt", "w", encoding="utf8") as fout:
         fout.write('\t'.join(["id", "turn1", "turn2", "turn3", "label"]) + '\n')        
         with io.open("data/testwithoutlabels.txt", encoding="utf8") as fin:
             fin.readline()

@@ -22,3 +22,5 @@ activate kerasEnv
 (kerasEnv) python baseline.py -config /path/to/configFile
 ```
 NOTE: All above Instructions are tested on WINDOWS machines. 
+
+## remove stop words and then get top
