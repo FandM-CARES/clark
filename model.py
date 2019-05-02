@@ -1,6 +1,7 @@
 import math
 import re
 import numpy as np
+np.seterr(all='raise')
 import itertools
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
@@ -175,10 +176,11 @@ class EmotionModel(object):
 class ClarkModel(object):
 
     def __init__(self):
-        self.variables = ['Pleasantness', 'Attention', 'Control',
-                          'Certainty', 'Anticipated Effort', 'Responsibililty']
+        self.variables = ['pleasantness', 'attention', 'control',
+                          'certainty', 'anticipated_effort', 'responsibility']
         self.ngrams = {}
         self.priors = {}
+        self.map_to_description = ['low','med','high']
         self.bounds = {}
         self.micro_fscores = {}
         self.macro_fscores = {}
@@ -227,22 +229,24 @@ class ClarkModel(object):
         data_points[variable] = []
 
         for row in training_set:
-            data_points[variable].append(float(row[variable]))
+            for turn in ['turn1', 'turn2', 'turn3']:
+                data_points[variable].append(float(row[turn][variable]))
 
-        self.calc_bounds_data(data_points)
+        # self.calc_bounds_data(data_points)
 
         for row in training_set:
-            weight = self.num_to_weight(row, variable)
-            parsed_message, message = tokenize(row['Player Message'], self.version)
-            for i, word in enumerate(parsed_message):
-                self.vocab.add(word)
-                if word in words:
-                    words[word][weight] += 1
-                    totals = self.add_weight_to_total(weight, totals)
-                else:
-                    words[word] = self.initialize_av_weights()
-                    words[word][weight] += 1
-                    totals = self.add_weight_to_total(weight, totals)
+            for turn in ['turn1','turn2','turn3']:
+                weight = self.map_to_description[int(row[turn][variable])]
+                parsed_message, message = tokenize(row[turn]['text'], self.version)
+                for i, word in enumerate(parsed_message):
+                    self.vocab.add(word)
+                    if word in words:
+                        words[word][weight] += 1
+                        totals = self.add_weight_to_total(weight, totals)
+                    else:
+                        words[word] = self.initialize_av_weights()
+                        words[word][weight] += 1
+                        totals = self.add_weight_to_total(weight, totals)
                     
         priors = {
             'low': float(totals['num_low'])/float(totals['num_low'] + totals['num_med'] + totals['num_high']),
@@ -274,73 +278,6 @@ class ClarkModel(object):
         elif cw == 'high':
             totals['num_high'] += 1
         return totals
-
-    def num_to_weight(self, row, variable):
-        """
-        Converts number values to a classification weighting
-
-        Parameters:
-        row (array): row of data contianing variables
-        variable (string): the variable to look at
-
-        Returns:
-        String: classification weight
-        """
-
-        def num_to_weight_pleasantness(row):
-            if float(row['Pleasantness']) <= self.bounds['Pleasantness']['lower']:
-                return 'low'
-            if float(row['Pleasantness']) <= self.bounds['Pleasantness']['upper']:
-                return 'med'
-            return 'high'
-
-        def num_to_weight_attention(row):
-            if float(row['Attention']) <= self.bounds['Attention']['lower']:
-                return 'low'
-            if float(row['Attention']) <= self.bounds['Attention']['upper']:
-                return 'med'
-            return 'high'
-
-        def num_to_weight_control(row):
-            if float(row['Control']) <= self.bounds['Control']['lower']:
-                return 'low'
-            if float(row['Control']) <= self.bounds['Control']['upper']:
-                return 'med'
-            return 'high'
-
-        def num_to_weight_certainty(row):
-            if float(row['Certainty']) <= self.bounds['Certainty']['lower']:
-                return 'low'
-            if float(row['Certainty']) <= self.bounds['Certainty']['upper']:
-                return 'med'
-            return 'high'
-
-        def num_to_weight_anticipated_effort(row):
-            if float(row['Anticipated Effort']) <= self.bounds['Anticipated Effort']['lower']:
-                return 'low'
-            if float(row['Anticipated Effort']) <= self.bounds['Anticipated Effort']['upper']:
-                return 'med'
-            return 'high'
-
-        def num_to_weight_responsibility(row):
-            if float(row['Responsibililty']) <= self.bounds['Responsibililty']['lower']:
-                return 'low'
-            if float(row['Responsibililty']) <= self.bounds['Responsibililty']['upper']:
-                return 'med'
-            return 'high'
-
-        if variable == 'Pleasantness':
-            return num_to_weight_pleasantness(row)
-        if variable == 'Attention':
-            return num_to_weight_attention(row)
-        if variable == 'Control':
-            return num_to_weight_control(row)
-        if variable == 'Certainty':
-            return num_to_weight_certainty(row)
-        if variable == 'Anticipated Effort':
-            return num_to_weight_anticipated_effort(row)
-        if variable == 'Responsibililty':
-            return num_to_weight_responsibility(row)
 
     def smooth_values(self, ngrams, variable, totals):
         """
@@ -382,14 +319,15 @@ class ClarkModel(object):
             self.pred[var] = []
 
         for row in testing_data:
-            parsed_message, message = tokenize(row['Player Message'], self.version)
-            messages[message] = {}
-            for var in self.variables:
-                weight = self.num_to_weight(row, var)
-                self.true[var].append(weight)
-                messages[message][var] = weight
-                classification = self.classify(self.ngrams[var], parsed_message, self.priors[var])
-                self.pred[var].append(classification)
+            for turn in ['turn1','turn2','turn3']:
+                parsed_message, message = tokenize(row[turn]['text'], self.version)
+                messages[message] = {}
+                for var in self.variables:
+                    weight = self.map_to_description[int(row[turn][var])]
+                    self.true[var].append(weight)
+                    messages[message][var] = weight
+                    classification = self.classify(self.ngrams[var], parsed_message, self.priors[var])
+                    self.pred[var].append(classification)
 
         self.calculate_scores()
     
@@ -411,11 +349,20 @@ class ClarkModel(object):
             tp = np.sum(np.logical_or(np.logical_or(np.logical_and(self.pred[var] == 'low', self.true[var] == 'low'), np.logical_and(
                     self.pred[var] == 'med', self.true[var] == 'med')), np.logical_and(self.pred[var] == 'high', self.true[var] == 'high')))
             tp_fp = len(self.pred[var])
-            tp_fn = len(self.true[var])         
+            tp_fn = len(self.true[var])   
+
+            # if tp_fp == 0: tp_fp = 1
+            # if tp_fn == 0: tp_fn = 1      
             
             pi = tp / tp_fp
             ro = tp / tp_fn
-            self.micro_fscores[var] = 2 * pi * ro / (pi + ro)
+
+            # if pi == 0: pi = 1
+            # if ro == 0: ro = 1
+            try:
+                self.micro_fscores[var] = 2 * pi * ro / (pi + ro)
+            except:
+                self.micro_fscores[var] = 0.0
 
             temp_macro = 0
             for c in ['high', 'med', 'low']:
@@ -423,11 +370,27 @@ class ClarkModel(object):
                 tp_fp_c = len([x for x in self.pred[var] if x != c])
                 tp_fn_c = len([x for x in self.true[var] if x == c])
 
-                pi_c = tp_c / tp_fp_c
-                ro_c = tp_c / tp_fn_c
+                # if tp_fp_c == 0: tp_fp_c = 1
+                # if tp_fn_c == 0: tp_fn_c = 1
 
-                if pi_c == 0: pi_c = 1
-                temp_macro += 2 * pi_c * ro_c / (pi_c + ro_c)
+                try:
+                    pi_c = tp_c / tp_fp_c
+                except:
+                    pi_c = 0.0
+                
+                try:
+                    ro_c = tp_c / tp_fn_c
+                except:
+                    ro_c = 0.0
+
+                # if pi_c == 0: pi_c = 1
+                # if ro_c == 0: ro_c = 1
+
+                try:
+                    temp_macro += 2 * pi_c * ro_c / (pi_c + ro_c)
+                except:
+                    temp_macro += 0.0
+                
             
             self.macro_fscores[var] = temp_macro / 3
 

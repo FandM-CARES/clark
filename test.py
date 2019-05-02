@@ -2,7 +2,6 @@ from model import *
 from process_data import *
 import numpy as np
 
-
 def n_fold_test(data_list, n, c_e):
     """
     Performs an n fold test on the provided data
@@ -16,7 +15,7 @@ def n_fold_test(data_list, n, c_e):
     Object: Mean fscores over all the tests for each AV
     """
 
-    data = ProcessedData(data_list)
+    data = ProcessedData(data_list, c_e)
     np_data = np.asarray(data.data)
     np.random.shuffle(np_data)
     splits = np.array_split(np_data, n)

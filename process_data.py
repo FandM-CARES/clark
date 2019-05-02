@@ -5,23 +5,47 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from scipy import stats
 import math
+import json
 
 class ProcessedData(object):
 
-    def __init__(self, datasets):
+    def __init__(self, datasets, c_e):
+        self.convos = json.load(open('data/all_convos.json'))
         self.data = self.parse_data(datasets)
+        self.c_e = c_e
 
-    def parse_data(self, datasets):
+    def parse_data(self, datasets, file_type='json'):
         """
-        Opens CSV fles and parses the data into a multidimensional array
+        Opens fles and parses the data into a multidimensional array
 
         Parameters:
         datasets (array): array of links to datasets to be parsed
 
         Returns:
-        Array: parsed CSV files
+        Array: parsed files
         """
-
+        if file_type == 'json':
+            return self.parse_json(datasets)
+        else:
+            return self.parse_csv(datasets)
+    
+    def parse_json(self, datasets):
+        parsed = []
+        for dset in datasets:
+            with open(dset) as rawData:
+                data = json.load(rawData)
+                for val in data:
+                    for conv in self.convos:
+                        if conv['id'] == val['id']:
+                            val['turn1']['text'] = conv['turn1']
+                            val['turn2']['text'] = conv['turn2']
+                            val['turn3']['text'] = conv['turn3']
+                            parsed.append(val)
+                            continue
+        return parsed
+                    
+            
+    def parse_csv(self, datasets):
         parsed = []
         for dset in datasets:
             with open(dset) as rawData:
@@ -29,6 +53,7 @@ class ProcessedData(object):
                 for i, row in enumerate(csv_reader):
                     parsed.append(row)
         return parsed
+
 
     def split_data(self, datasets, split=0.75):
         """
