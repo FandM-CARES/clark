@@ -37,19 +37,20 @@ class EmotionModel(object):
             totals[emotion] = 0
 
         for row in training_data:
-            emotion = row['Emotion']
-            res, message = tokenize(row['Player Message'], self.version)
-            for word in res:
-                self.vocab.add(word)
-                if word in words:
-                    words[word][emotion] += 1
-                    totals[emotion] += 1
-                else:
-                    words[word] = {}
-                    for emotion in self.emotions:
-                        words[word][emotion] = 1
-                    words[word][emotion] += 1
-                    totals[emotion] += 1
+            for turn in ['turn1', 'turn2', 'turn3']:
+                emotion = row[turn]['emotion']
+                res, message = tokenize(row[turn]['text'], self.version)
+                for word in res:
+                    self.vocab.add(word)
+                    if word in words:
+                        words[word][emotion] += 1
+                        totals[emotion] += 1
+                    else:
+                        words[word] = {}
+                        for emotion in self.emotions:
+                            words[word][emotion] = 1
+                        words[word][emotion] += 1
+                        totals[emotion] += 1
         
         sum_totals = sum(totals.values())
         for emotion in self.emotions:
@@ -77,12 +78,13 @@ class EmotionModel(object):
         messages = {}
 
         for row in testing_data:
-            emotion = row['Emotion']
-            parsed_message, message = tokenize(row['Player Message'], self.version)
-            messages[message] = {}
-            self.true.append(emotion)
-            classification = self.classify(self.ngrams, parsed_message, self.priors)
-            self.pred.append(str(classification))
+            for turn in ['turn1', 'turn2', 'turn3']:
+                emotion = row[turn]['emotion']
+                parsed_message, message = tokenize(row[turn]['text'], self.version)
+                messages[message] = {}
+                self.true.append(emotion)
+                classification = self.classify(self.ngrams, parsed_message, self.priors)
+                self.pred.append(str(classification))
 
         self.calculate_scores()
 
@@ -149,7 +151,10 @@ class EmotionModel(object):
             
         pi = tp / tp_fp
         ro = tp / tp_fn
-        self.micro_fscores = 2 * pi * ro / (pi + ro)
+        try:
+            self.micro_fscores = 2 * pi * ro / (pi + ro)
+        except:
+            self.micro_fscores = 0.0
 
         temp_macro = 0
         for e in self.emotions:
@@ -157,11 +162,20 @@ class EmotionModel(object):
             tp_fp_e = len([x for x in self.pred if x != e])
             tp_fn_e= len([x for x in self.true if x == e])
 
-            pi_e = tp_e / tp_fp_e
-            ro_e = tp_e / tp_fn_e
+            try:
+                pi_e = tp_e / tp_fp_e
+            except:
+                pi_e = 0.0
+            
+            try:
+                ro_e = tp_e / tp_fn_e
+            except:
+                ro_e = 0.0
 
-            if pi_e == 0: pi_e = 1
-            temp_macro += 2 * pi_e * ro_e / (pi_e + ro_e)
+            try:
+                temp_macro += 2 * pi_e * ro_e / (pi_e + ro_e)
+            except:
+                temp_macro += 0.0
         
         self.macro_fscores = temp_macro / 7
 
@@ -187,7 +201,7 @@ class ClarkModel(object):
         self.vocab = set()
         self.true = {}
         self.pred = {}
-        self.version = 1 # unigrams = 0, bigrams = 1, both = 2
+        self.version = 2 # unigrams = 0, bigrams = 1, both = 2
 
     def train(self, training_data):
         """
@@ -349,16 +363,11 @@ class ClarkModel(object):
             tp = np.sum(np.logical_or(np.logical_or(np.logical_and(self.pred[var] == 'low', self.true[var] == 'low'), np.logical_and(
                     self.pred[var] == 'med', self.true[var] == 'med')), np.logical_and(self.pred[var] == 'high', self.true[var] == 'high')))
             tp_fp = len(self.pred[var])
-            tp_fn = len(self.true[var])   
-
-            # if tp_fp == 0: tp_fp = 1
-            # if tp_fn == 0: tp_fn = 1      
+            tp_fn = len(self.true[var])      
             
             pi = tp / tp_fp
             ro = tp / tp_fn
 
-            # if pi == 0: pi = 1
-            # if ro == 0: ro = 1
             try:
                 self.micro_fscores[var] = 2 * pi * ro / (pi + ro)
             except:
@@ -370,9 +379,6 @@ class ClarkModel(object):
                 tp_fp_c = len([x for x in self.pred[var] if x != c])
                 tp_fn_c = len([x for x in self.true[var] if x == c])
 
-                # if tp_fp_c == 0: tp_fp_c = 1
-                # if tp_fn_c == 0: tp_fn_c = 1
-
                 try:
                     pi_c = tp_c / tp_fp_c
                 except:
@@ -382,9 +388,6 @@ class ClarkModel(object):
                     ro_c = tp_c / tp_fn_c
                 except:
                     ro_c = 0.0
-
-                # if pi_c == 0: pi_c = 1
-                # if ro_c == 0: ro_c = 1
 
                 try:
                     temp_macro += 2 * pi_c * ro_c / (pi_c + ro_c)
