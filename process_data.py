@@ -37,9 +37,9 @@ class ProcessedData(object):
                 for val in data:
                     for conv in self.convos:
                         if conv['id'] == val['id']:
-                            val['turn1']['text'] = conv['turn1']
-                            val['turn2']['text'] = conv['turn2']
-                            val['turn3']['text'] = conv['turn3']
+                            val['turn1']['text'] = str(conv['turn1'])
+                            val['turn2']['text'] = str(conv['turn2'])
+                            val['turn3']['text'] = str(conv['turn3'])
                             parsed.append(val)
                             continue
         return parsed

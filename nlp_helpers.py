@@ -21,21 +21,13 @@ def tokenize(row, ngram=0):
     String: tokenized word
     """
 
-    bad_characters = ['.',';',':','/','-','_','&','~',',', '\\']
-    contractions_dict = {
-        "'s": "is",
-        "'d": "did",
-        "'re": "are",
-        "'ve": "have",
-        "n't": "not",
-        "'m": "am",
-    }
-
-    init_res = nltk.word_tokenize(row)
+    bad_characters = ['.','-','_','&','~',',','\\']
+    
+    if row == 24:
+        print(hi)
+    init_res = nltk.tokenize.casual.casual_tokenize(row)
     for i, word in enumerate(init_res):
         init_res[i] = word.lower()
-        if word in contractions_dict:
-            init_res[i] = contractions_dict[word]
         if word in bad_characters:
             init_res[i] = ""
         if ngram == 0:
@@ -55,7 +47,6 @@ def tokenize(row, ngram=0):
     
     if ngram == 2:
         return [x for x in temp_ret if not is_stop_word(x)] + [" ".join(x) for x in list(nltk.bigrams(temp_ret))], row
-        
 
 def is_stop_word(word):
     """
