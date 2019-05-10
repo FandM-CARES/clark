@@ -259,8 +259,6 @@ class ClarkModel(object):
             for turn in ['turn1', 'turn2', 'turn3']:
                 data_points[variable].append(float(row[turn][variable]))
 
-        # self.calc_bounds_data(data_points)
-
         for row in training_set:
             for turn in ['turn1','turn2','turn3']:
                 weight = self.variable_dimensions[int(row[turn][variable])]
@@ -367,6 +365,33 @@ class ClarkModel(object):
                 self.pred[var].append(classification)
 
         self.calculate_scores()
+
+    def classify(self, training_dict, content, priors, raw=True):
+        """
+        Classifies each message according to the trained model
+
+        Parameters:
+        training_dict (Object): trained model
+        content (String): message to be tested
+        priors (Object): priors
+
+        Returns:
+        String: classification according to the trained model
+        """
+
+        low = [priors['low'], 'low']
+        med = [priors['med'], 'med']
+        high = [priors['high'], 'high']
+
+        for word in content:
+            if word in training_dict:
+                low[0] += float(math.log(training_dict[word]['low']))
+                med[0] += float(math.log(training_dict[word]['med']))
+                high[0] += float(math.log(training_dict[word]['high']))
+
+        if raw: return list(map(lambda x: x[0], [low, med, high]))
+
+        return max([low, med, high],key=lambda item:item[0])[1]
     
     def calculate_scores(self):
         """
@@ -419,71 +444,7 @@ class ClarkModel(object):
                 
             
             self.macro_fscores[var] = temp_macro / 3
-
-
-    def classify(self, training_dict, content, priors, raw=True):
-        """
-        Classifies each message according to the trained model
-
-        Parameters:
-        training_dict (Object): trained model
-        content (String): message to be tested
-        priors (Object): priors
-
-        Returns:
-        String: classification according to the trained model
-        """
-
-        low = [priors['low'], 'low']
-        med = [priors['med'], 'med']
-        high = [priors['high'], 'high']
-
-        for word in content:
-            if word in training_dict:
-                low[0] += float(math.log(training_dict[word]['low']))
-                med[0] += float(math.log(training_dict[word]['med']))
-                high[0] += float(math.log(training_dict[word]['high']))
-
-        if raw: return list(map(lambda x: x[0], [low, med, high]))
-
-        return max([low, med, high],key=lambda item:item[0])[1]
-        
-
-    def calc_std_data(self, data_points):
-        """
-
-        Calculates the standard deviation of the data points
-
-        Parameters:
-        data_points (object): data points for each variable
-
-        Returns:
-        Array: standard deviations for the variable
-        """
-        res = []
-        for var in data_points:
-            res.append([np.mean(data_points[var]),
-                        np.std(data_points[var]), var])
-        return res
-
-    def calc_bounds_data(self, data_points):
-        """
-        Calculates the upper and lower bounds of the classification based on the data provided
-
-        Parameters:
-        data_points (Object): contains training data points for each variable
-
-        Returns:
-        None
-        """
-        std_data = self.calc_std_data(data_points)
-        for var in std_data:
-            lb = var[0] - (var[1] / 2)
-            ub = var[0] + (var[1] / 2)
-            self.bounds[var[2]] = {}
-            self.bounds[var[2]]['upper'] = ub
-            self.bounds[var[2]]['lower'] = lb
-
+    
     def confusion_matrix(self, normalize=False):
         """
         Computes the confusion matrices for each of the variables
