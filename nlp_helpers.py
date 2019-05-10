@@ -6,6 +6,9 @@ stop_words = set(stopwords.words('english'))
 Helper functions for parsing inputs
 """
 
+def flatten(l):
+    return [item for sublist in l for item in sublist]
+
 def tokenize(row, ngram=0):
     """
     Tokenizes the row exluding .;,:/-_&~ and removes stop words

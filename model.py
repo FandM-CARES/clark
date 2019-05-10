@@ -64,7 +64,7 @@ class EmotionModel(object):
                 words[word][emotion] = float(words[word][emotion])/float(totals[emotion]+len(self.vocab))
 
         return words
-    
+
     def test(self, testing_data):
         """
         Tests the precision/recall of the model
@@ -75,20 +75,38 @@ class EmotionModel(object):
         Returns:
         Null
         """
-        messages = {}
 
         for row in testing_data:
-            for turn in ['turn1', 'turn2', 'turn3']:
-                emotion = row[turn]['emotion']
-                parsed_message, message = tokenize(row[turn]['text'], self.version)
-                messages[message] = {}
-                self.true.append(emotion)
-                classification = self.classify(self.ngrams, parsed_message, self.priors)
-                self.pred.append(str(classification))
+            u_priors = dict(self.priors)
+
+            parsed_message = flatten([tokenize(row[turn]['text'])[0] for turn in ['turn1', 'turn2', 'turn3']])
+            classification = self.normalize(self.classify(self.ngrams, parsed_message, u_priors))
+            for i, e in enumerate(self.emotions):
+                u_priors[e] = classification[i]
+
+            parsed_message, _ = tokenize(row['turn1']['text'], self.version)
+            classification = self.normalize(self.classify(self.ngrams, parsed_message, u_priors))
+            for i, e in enumerate(self.emotions):
+                u_priors[e] = classification[i]
+            
+            emotion = row['turn3']['emotion']
+            self.true.append(emotion)
+
+            parsed_message, message = tokenize(row['turn3']['text'], self.version)
+            classification = self.classify(self.ngrams, parsed_message, u_priors, False)
+            
+            self.pred.append(str(classification))
 
         self.calculate_scores()
 
-    def classify(self, training_dict, content, priors):
+    def normalize(self, arr):
+        """
+        Normalizes between 0.1 and 1.0
+        """
+        a = 0.9 * (arr - np.min(arr))/np.ptp(arr) + 0.1
+        return a/a.sum(0)
+
+    def classify(self, training_dict, content, priors, raw=True):
         """
         Classifies each message according to the trained model
 
@@ -118,6 +136,8 @@ class EmotionModel(object):
                 anger[0] += float(math.log(training_dict[word]['anger']))
                 boredom[0] += float(math.log(training_dict[word]['boredom']))
                 frustration[0] += float(math.log(training_dict[word]['frustration']))
+
+        if raw: return list(map(lambda x: x[0], [sadness, joy, fear, challenge, anger, boredom, frustration]))
 
         return max([sadness, joy, fear, challenge, anger, boredom, frustration],key=lambda item:item[0])[1]
 
@@ -194,7 +214,7 @@ class ClarkModel(object):
                           'certainty', 'anticipated_effort', 'responsibility']
         self.ngrams = {}
         self.priors = {}
-        self.map_to_description = ['low','med','high']
+        self.variable_dimensions = ['low','med','high']
         self.bounds = {}
         self.micro_fscores = {}
         self.macro_fscores = {}
@@ -250,7 +270,7 @@ class ClarkModel(object):
 
         for row in training_set:
             for turn in ['turn1','turn2','turn3']:
-                weight = self.map_to_description[int(row[turn][variable])]
+                weight = self.variable_dimensions[int(row[turn][variable])]
                 parsed_message, message = tokenize(row[turn]['text'], self.version)
                 for i, word in enumerate(parsed_message):
                     self.vocab.add(word)
@@ -326,22 +346,32 @@ class ClarkModel(object):
         Returns:
         Null
         """
-        messages = {}
 
         for var in self.variables:
             self.true[var] = []
             self.pred[var] = []
 
         for row in testing_data:
-            for turn in ['turn1','turn2','turn3']:
-                parsed_message, message = tokenize(row[turn]['text'], self.version)
-                messages[message] = {}
-                for var in self.variables:
-                    weight = self.map_to_description[int(row[turn][var])]
-                    self.true[var].append(weight)
-                    messages[message][var] = weight
-                    classification = self.classify(self.ngrams[var], parsed_message, self.priors[var])
-                    self.pred[var].append(classification)
+            u_priors = dict(self.priors)
+
+            parsed_message = flatten([tokenize(row[turn]['text'])[0] for turn in ['turn1', 'turn2', 'turn3']])
+            for var in self.variables:
+                classification = self.classify(self.ngrams[var], parsed_message, u_priors[var])
+                for i,e in enumerate(self.variable_dimensions):
+                    u_priors[var][e] = classification[i]
+
+            parsed_message, _ = tokenize(row['turn1']['text'])
+            for var in self.variables:
+                classification = self.classify(self.ngrams[var], parsed_message, u_priors[var])
+                for i,e in enumerate(self.variable_dimensions):
+                    u_priors[var][e] = classification[i]
+
+            parsed_message, _ = tokenize(row['turn3']['text'])
+            for var in self.variables:
+                weight = self.variable_dimensions[int(row['turn3'][var])]
+                self.true[var].append(weight)
+                classification = self.classify(self.ngrams[var], parsed_message, u_priors[var], False)
+                self.pred[var].append(classification)
 
         self.calculate_scores()
     
@@ -398,7 +428,7 @@ class ClarkModel(object):
             self.macro_fscores[var] = temp_macro / 3
 
 
-    def classify(self, training_dict, content, priors):
+    def classify(self, training_dict, content, priors, raw=True):
         """
         Classifies each message according to the trained model
 
@@ -420,6 +450,8 @@ class ClarkModel(object):
                 low[0] += float(math.log(training_dict[word]['low']))
                 med[0] += float(math.log(training_dict[word]['med']))
                 high[0] += float(math.log(training_dict[word]['high']))
+
+        if raw: return list(map(lambda x: x[0], [low, med, high]))
 
         return max([low, med, high],key=lambda item:item[0])[1]
         

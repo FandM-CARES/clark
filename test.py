@@ -78,7 +78,7 @@ def train_test_split(data_list, s, c_e, show_matrix=False):
     Returns:
     Object: FScore results for each AV
     """
-    data = ProcessedData(data_list)
+    data = ProcessedData(data_list, c_e)
     np_data = np.asarray(data.data)
     np.random.shuffle(np_data)
     training_data, testing_data = data.split_data([data.data], s)
