@@ -80,12 +80,12 @@ class EmotionModel(object):
             u_priors = dict(self.priors)
 
             parsed_message = flatten([tokenize(row[turn]['text'])[0] for turn in ['turn1', 'turn2', 'turn3']])
-            classification = self.normalize(self.classify(self.ngrams, parsed_message, u_priors))
+            classification = self.classify(self.ngrams, parsed_message, u_priors)
             for i, e in enumerate(self.emotions):
                 u_priors[e] = classification[i]
 
             parsed_message, _ = tokenize(row['turn1']['text'], self.version)
-            classification = self.normalize(self.classify(self.ngrams, parsed_message, u_priors))
+            classification = self.classify(self.ngrams, parsed_message, u_priors)
             for i, e in enumerate(self.emotions):
                 u_priors[e] = classification[i]
             
@@ -98,13 +98,6 @@ class EmotionModel(object):
             self.pred.append(str(classification))
 
         self.calculate_scores()
-
-    def normalize(self, arr):
-        """
-        Normalizes between 0.1 and 1.0
-        """
-        a = 0.9 * (arr - np.min(arr))/np.ptp(arr) + 0.1
-        return a/a.sum(0)
 
     def classify(self, training_dict, content, priors, raw=True):
         """
