@@ -9,7 +9,26 @@ Helper functions for parsing inputs
 def flatten(l):
     return [item for sublist in l for item in sublist]
 
-def tokenize(row, ngram=0):
+def determine_tense(tagged_tuple):
+    tag = tagged_tuple[1]
+    if tag in ["VBG", "VBP", "VBZ"]:
+        return "present"
+    elif tag in ["VBD", "VBN"]:
+        return "past"
+    elif tag in ["MD"]:
+        return "future"
+    return ""
+
+def parts_of_speech(tokenized_res):
+    return nltk.pos_tag(tokenized_res)
+
+def tokenize(row):
+    t = nltk.tokenize.casual.casual_tokenize(row)
+    if '' in t:
+        print('hi')
+    return list(filter(lambda x: x != '', t))
+
+def ngrams_and_remove_stop_words(init_res, ngram):
     """
     Tokenizes the row exluding .;,:/-_&~ and removes stop words
 
@@ -24,32 +43,31 @@ def tokenize(row, ngram=0):
     String: tokenized word
     """
 
+    res = list(init_res)
+
     bad_characters = ['.','-','_','&','~',',','\\']
     
-    if row == 24:
-        print(hi)
-    init_res = nltk.tokenize.casual.casual_tokenize(row)
-    for i, word in enumerate(init_res):
-        init_res[i] = word.lower()
+    for i, word in enumerate(res):
+        res[i] = word.lower()
         if word in bad_characters:
-            init_res[i] = ""
+            res[i] = ""
         if ngram == 0:
             if is_stop_word(word):
-                init_res[i] = ""
+                res[i] = ""
     
-    temp_ret = [x for x in init_res if x != ""]
+    temp_ret = [x for x in res if x != ""]
     
     if len(temp_ret) == 0:
-        return [], ""
+        return []
 
     if ngram == 0: 
-        return temp_ret, row
+        return temp_ret
     
     if ngram == 1: 
-        return [" ".join(x) for x in list(nltk.bigrams(temp_ret))], row  
+        return [" ".join(x) for x in list(nltk.bigrams(temp_ret))] 
     
     if ngram == 2:
-        return [x for x in temp_ret if not is_stop_word(x)] + [" ".join(x) for x in list(nltk.bigrams(temp_ret))], row
+        return [x for x in temp_ret if not is_stop_word(x)] + [" ".join(x) for x in list(nltk.bigrams(temp_ret))]
 
 def is_stop_word(word):
     """

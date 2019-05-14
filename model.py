@@ -16,11 +16,19 @@ class EmotionModel(object):
         self.priors = {}
         self.micro_fscores = 0.0
         self.macro_fscores = 0.0
-        self.vocab = set()
         self.true = list()
         self.pred = list()
+        self.tense = self.__init_tense()
+        # self.pronouns = {}
         self.version = 2 # 0 - unigrams, 1 - bigrams, 2, both
     
+    def __init_tense(self):
+        return {
+            'past': {emotion: 1 for emotion in self.emotions},
+            'present': {emotion: 1 for emotion in self.emotions},
+            'future': {emotion: 1 for emotion in self.emotions}
+        }
+
     def train(self, training_data):
         """
         Builds a trained Emotions model
@@ -32,38 +40,52 @@ class EmotionModel(object):
         Model: a trained model
         """
         words = {}
-        totals = {}
-        for emotion in self.emotions:
-            totals[emotion] = 0
+        words_vocab = set()
+        tense_vocab = set()
+        words_totals = {emotion:0 for emotion in self.emotions}
+        tense_totals = {emotion:0 for emotion in self.emotions}
 
         for row in training_data:
             for turn in ['turn1', 'turn2', 'turn3']:
                 emotion = row[turn]['emotion']
-                res, message = tokenize(row[turn]['text'], self.version)
+                tokenized_res = tokenize(row[turn]['text'])
+                
+                pos = parts_of_speech(tokenized_res)
+                for p in pos:
+                    p_tense = determine_tense(p)
+                    if p_tense != "": 
+                        tense_vocab.add(p_tense[0])
+                        self.tense[p_tense][emotion] += 1
+                        tense_totals[emotion] += 1
+    
+                res = ngrams_and_remove_stop_words(tokenized_res, self.version)
+                
                 for word in res:
-                    self.vocab.add(word)
+                    words_vocab.add(word)
                     if word in words:
                         words[word][emotion] += 1
-                        totals[emotion] += 1
+                        words_totals[emotion] += 1
                     else:
-                        words[word] = {}
-                        for emotion in self.emotions:
-                            words[word][emotion] = 1
+                        words[word] = {emotion:1 for emotion in self.emotions}
                         words[word][emotion] += 1
-                        totals[emotion] += 1
+                        words_totals[emotion] += 1
         
-        sum_totals = sum(totals.values())
+        sum_totals = sum(words_totals.values())
         for emotion in self.emotions:
-            self.priors[emotion] = totals[emotion] / sum_totals
+            self.priors[emotion] = words_totals[emotion] / sum_totals
 
-        self.ngrams = self.calculate_probabilities(words, totals)
+        self.__calculate_probabilities(words, words_totals, words_vocab, tense_totals, tense_vocab)
 
-    def calculate_probabilities(self, words, totals):
+    def __calculate_probabilities(self, words, words_totals, words_vocab, tense_totals, tense_vocab):
         for word in words:
             for emotion in self.emotions:
-                words[word][emotion] = float(words[word][emotion])/float(totals[emotion]+len(self.vocab))
+                words[word][emotion] = float(words[word][emotion])/float(words_totals[emotion]+len(words_vocab))
+        
+        self.ngrams = words
 
-        return words
+        for tense in self.tense:
+            for emotion in self.emotions:
+                self.tense[tense][emotion] = float(self.tense[tense][emotion])/float(tense_totals[emotion]+len(tense_vocab))
 
     def test(self, testing_data):
         """
@@ -79,27 +101,33 @@ class EmotionModel(object):
         for row in testing_data:
             u_priors = dict(self.priors)
 
-            parsed_message = flatten([tokenize(row[turn]['text'])[0] for turn in ['turn1', 'turn2', 'turn3']])
-            classification = self.classify(self.ngrams, parsed_message, u_priors)
+            tokenized_turn1 = tokenize(row['turn1']['text'])
+            tokenized_turn2 = tokenize(row['turn2']['text'])
+            tokenized_turn3 = tokenize(row['turn3']['text'])
+
+            conv = tokenized_turn1 + tokenized_turn2 + tokenized_turn3
+
+            parsed_message = flatten([ngrams_and_remove_stop_words(x, self.version) for x in [tokenized_turn1, tokenized_turn2, tokenized_turn3]])
+            classification = self.__classify(self.ngrams, parsed_message, conv, u_priors)
             for i, e in enumerate(self.emotions):
                 u_priors[e] = classification[i]
 
-            parsed_message, _ = tokenize(row['turn1']['text'], self.version)
-            classification = self.classify(self.ngrams, parsed_message, u_priors)
+            parsed_message = ngrams_and_remove_stop_words(tokenized_turn1, self.version)
+            classification = self.__classify(self.ngrams, parsed_message, tokenized_turn1, u_priors)
             for i, e in enumerate(self.emotions):
                 u_priors[e] = classification[i]
             
             emotion = row['turn3']['emotion']
             self.true.append(emotion)
 
-            parsed_message, message = tokenize(row['turn3']['text'], self.version)
-            classification = self.classify(self.ngrams, parsed_message, u_priors, False)
+            parsed_message = ngrams_and_remove_stop_words(tokenized_turn3, self.version)
+            classification = self.__classify(self.ngrams, parsed_message, tokenized_turn3, u_priors, False)
             
             self.pred.append(str(classification))
 
-        self.calculate_scores()
+        self.__calculate_scores()
 
-    def classify(self, training_dict, content, priors, raw=True):
+    def __classify(self, training_dict, content, tokenized_content, priors, raw=True):
         """
         Classifies each message according to the trained model
 
@@ -119,7 +147,20 @@ class EmotionModel(object):
         anger = [priors['anger'], 'anger']
         boredom = [priors['boredom'], 'boredom']
         frustration = [priors['frustration'], 'frustration']
-            
+        
+        pos = parts_of_speech(tokenized_content)
+        for p in pos:
+            tense = determine_tense(p)
+            if tense in self.tense:
+                sadness[0] += float(math.log(self.tense[tense]['sadness']))
+                joy[0] += float(math.log(self.tense[tense]['joy']))
+                fear[0] += float(math.log(self.tense[tense]['fear']))
+                challenge[0] += float(math.log(self.tense[tense]['challenge']))
+                anger[0] += float(math.log(self.tense[tense]['anger']))
+                boredom[0] += float(math.log(self.tense[tense]['boredom']))
+                frustration[0] += float(math.log(self.tense[tense]['frustration']))
+
+
         for word in content:
             if word in training_dict:
                 sadness[0] += float(math.log(training_dict[word]['sadness']))
@@ -134,7 +175,7 @@ class EmotionModel(object):
 
         return max([sadness, joy, fear, challenge, anger, boredom, frustration],key=lambda item:item[0])[1]
 
-    def calculate_scores(self):
+    def __calculate_scores(self):
         """
         Calculates the micro and macro f scores for each emotion
 
@@ -262,7 +303,7 @@ class ClarkModel(object):
         for row in training_set:
             for turn in ['turn1','turn2','turn3']:
                 weight = self.variable_dimensions[int(row[turn][variable])]
-                parsed_message, message = tokenize(row[turn]['text'], self.version)
+                parsed_message = tokenize(row[turn]['text'], self.version)
                 for i, word in enumerate(parsed_message):
                     self.vocab.add(word)
                     if word in words:
@@ -345,19 +386,19 @@ class ClarkModel(object):
         for row in testing_data:
             u_priors = dict(self.priors)
 
-            parsed_message = flatten([tokenize(row[turn]['text'])[0] for turn in ['turn1', 'turn2', 'turn3']])
+            parsed_message = flatten([tokenize(row[turn]['text']) for turn in ['turn1', 'turn2', 'turn3']])
             for var in self.variables:
                 classification = self.classify(self.ngrams[var], parsed_message, u_priors[var])
                 for i,e in enumerate(self.variable_dimensions):
                     u_priors[var][e] = classification[i]
 
-            parsed_message, _ = tokenize(row['turn1']['text'])
+            parsed_message = tokenize(row['turn1']['text'])
             for var in self.variables:
                 classification = self.classify(self.ngrams[var], parsed_message, u_priors[var])
                 for i,e in enumerate(self.variable_dimensions):
                     u_priors[var][e] = classification[i]
 
-            parsed_message, _ = tokenize(row['turn3']['text'])
+            parsed_message = tokenize(row['turn3']['text'])
             for var in self.variables:
                 weight = self.variable_dimensions[int(row['turn3'][var])]
                 self.true[var].append(weight)
