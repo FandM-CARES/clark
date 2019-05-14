@@ -23,10 +23,7 @@ def parts_of_speech(tokenized_res):
     return nltk.pos_tag(tokenized_res)
 
 def tokenize(row):
-    t = nltk.tokenize.casual.casual_tokenize(row)
-    if '' in t:
-        print('hi')
-    return list(filter(lambda x: x != '', t))
+    return nltk.tokenize.casual.casual_tokenize(row)
 
 def ngrams_and_remove_stop_words(init_res, ngram):
     """

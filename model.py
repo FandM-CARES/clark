@@ -77,6 +77,10 @@ class EmotionModel(object):
         self.__calculate_probabilities(words, words_totals, words_vocab, tense_totals, tense_vocab)
 
     def __calculate_probabilities(self, words, words_totals, words_vocab, tense_totals, tense_vocab):
+        """
+        TODO
+        """
+
         for word in words:
             for emotion in self.emotions:
                 words[word][emotion] = float(words[word][emotion])/float(words_totals[emotion]+len(words_vocab))
@@ -159,7 +163,6 @@ class EmotionModel(object):
                 anger[0] += float(math.log(self.tense[tense]['anger']))
                 boredom[0] += float(math.log(self.tense[tense]['boredom']))
                 frustration[0] += float(math.log(self.tense[tense]['frustration']))
-
 
         for word in content:
             if word in training_dict:
