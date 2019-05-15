@@ -1,9 +1,6 @@
 import math
-import re
 import numpy as np
 np.seterr(all='raise')
-import itertools
-import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from nlp_helpers import *
 from graphing_helpers import *

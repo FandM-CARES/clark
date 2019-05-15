@@ -1,9 +1,6 @@
-import math
-import re
 import numpy as np
 import itertools
 import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix
 
 def plot_confusion_matrix(cm, classes, title, normalize=False, cmap=plt.cm.Blues):
         """
