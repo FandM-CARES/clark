@@ -1,4 +1,5 @@
-from model import *
+from emotion_model import EmotionModel
+from CLARK_model import ClarkModel
 from process_data import *
 import numpy as np
 
