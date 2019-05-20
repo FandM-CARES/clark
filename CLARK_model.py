@@ -1,6 +1,9 @@
 import math
 import numpy as np
 np.seterr(all='raise')
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier 
+from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 from nlp_helpers import *
 from graphing_helpers import *
@@ -10,18 +13,19 @@ class ClarkModel(object):
     def __init__(self):
         self.variables = ['pleasantness', 'attention', 'control',
                           'certainty', 'anticipated_effort', 'responsibility']
+        self.emotions = ['sadness', 'joy', 'fear', 'anger', 'challenge', 'boredom', 'frustration']
         self.ngrams = {}
+        self.decision_tree = None
         self.priors = {}
         self.variable_dimensions = ['low','med','high']
-        # self.bounds = {}
-        self.micro_fscores = {}
-        self.macro_fscores = {}
-        self.true = {}
-        self.pred = {}
+        self.micro_fscores = 0.0
+        self.macro_fscores = 0.0
+        self.true = []
+        self.pred = []
         self.version = 2 # unigrams = 0, bigrams = 1, both = 2
 
     def train(self, training_data):
-        """
+        '''
         Builds a trained CLARK model
 
         Parameters:
@@ -29,7 +33,8 @@ class ClarkModel(object):
 
         Returns:
         Model: a trained model
-        """
+        '''
+        dt = self.__build_decision_tree(training_data)
 
         for var in self.variables:
             ngrams, totals, var_priors, vocab = self.__train_by_variable(training_data, var)
@@ -37,7 +42,7 @@ class ClarkModel(object):
             self.ngrams[var] = self.__smooth_values(ngrams, var, totals, vocab)
 
     def __train_by_variable(self, training_set, variable, data_points={}):
-        """
+        '''
         Calculates the counts for each unigram and priors for each classification
 
         Parameters:
@@ -48,7 +53,7 @@ class ClarkModel(object):
         Object: ngrams with associated counts
         Object: sums for each classification
         Object: priors for each classification
-        """
+        '''
 
         words = {}
         totals = {dim:1 for dim in self.variable_dimensions}
@@ -56,7 +61,7 @@ class ClarkModel(object):
 
         for row in training_set:
             for turn in ['turn1','turn2','turn3']:
-                weight = self.variable_dimensions[int(row[turn][variable])]
+                weight = self.variable_dimensions[int(row[turn]['appraisals'][variable])]
                 
                 tokenized_res = tokenize(row[turn]['text'])
                 
@@ -80,7 +85,7 @@ class ClarkModel(object):
         return {dim:1 for dim in self.variable_dimensions}
 
     def __smooth_values(self, ngrams, variable, totals, vocab):
-        """
+        '''
         Performs smoothing on unigram values
 
         Parameters:
@@ -90,7 +95,7 @@ class ClarkModel(object):
 
         Returns:
         Object: smoothed values for the ngrams
-        """
+        '''
 
         len_vocab = len(vocab)
 
@@ -101,7 +106,7 @@ class ClarkModel(object):
         return ngrams
 
     def test(self, testing_data):
-        """
+        '''
         Tests the precision/recall of the model
 
         Parameters:
@@ -109,11 +114,11 @@ class ClarkModel(object):
 
         Returns:
         Null
-        """
+        '''
 
-        for var in self.variables:
-            self.true[var] = []
-            self.pred[var] = []
+        # for var in self.variables:
+        #     self.true[var] = []
+        #     self.pred[var] = []
 
         for row in testing_data:
             u_priors = dict(self.priors)
@@ -137,16 +142,21 @@ class ClarkModel(object):
                     u_priors[var][e] = classification[i]
 
             parsed_message = ngrams_and_remove_stop_words(tokenized_turn3, self.version)
+            var_classification = {dim:'' for dim in self.variables}
             for var in self.variables:
-                weight = self.variable_dimensions[int(row['turn3'][var])]
-                self.true[var].append(weight)
-                classification = self.__classify(self.ngrams[var], parsed_message, u_priors[var], False)
-                self.pred[var].append(classification)
+                # weight = self.variable_dimensions[int(row['turn3'][var])]
+                # self.true[var].append(weight)
+                var_classification[var] = self.__classify(self.ngrams[var], parsed_message, u_priors[var], False)
+                # self.pred[var].append(classification)
+            
+            self.true.append(row['turn3']['emotion'])
+            emo_class = self.__map_to_emotion(var_classification)
+            self.pred.append(emo_class[0])
 
-        self.calculate_scores()
+        self.__calculate_scores()
 
     def __classify(self, training_dict, content, priors, raw=True):
-        """
+        '''
         Classifies each message according to the trained model
 
         Parameters:
@@ -156,7 +166,7 @@ class ClarkModel(object):
 
         Returns:
         String: classification according to the trained model
-        """
+        '''
 
         low = [priors['low'], 'low']
         med = [priors['med'], 'med']
@@ -171,10 +181,46 @@ class ClarkModel(object):
         if raw: return list(map(lambda x: x[0], [low, med, high]))
 
         return max([low, med, high],key=lambda item:item[0])[1]
-    
-    def calculate_scores(self):
+
+    def __build_decision_tree(self, data):
+        X = [list(d['turn3']['appraisals'].values()) for d in data]
+        y = [em['turn3']['emotion'] for em in data]
+
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.0, random_state=1) 
+        
+        clf = DecisionTreeClassifier(criterion="entropy", max_depth=3)
+
+        clf = clf.fit(X_train,y_train)
+        self.decision_tree = clf
+
+
+    def __map_to_emotion(self, vars):
+        
+        v = [self.variable_dimensions.index(x) for x in list(vars.values())]
+        return self.decision_tree.predict(np.asarray(v).reshape(1,-1))
+        # if vars['pleasantness'] == 'high' and vars['anticipated_effort'] != 'high':
+        #     return 'joy'
+        # if vars['pleasantness'] == 'low':
+        #     if vars['control'] == 'high':
+        #         if vars['certainty'] == 'med':
+        #             return 'sadness'
+        #     if vars['control'] == 'low':
+        #         if vars['responsibility'] == 'low':
+        #             return 'anger'
+        #     if vars['attention'] != 'low':
+        #         return 'frustration'
+        # if vars['pleasantness'] != 'high':
+        #     if vars['anticipated_effort'] == 'low':
+        #         if vars['attention'] == 'low':
+        #             return 'boredom'
+        #     if vars['anticipated_effort'] == 'high':
+        #         return 'challenge'
+        #     if vars['certainty'] == 'low':
+        #         return 'fear'
+
+    def __calculate_scores(self):
         """
-        Calculates the micro and macro f scores for each variable
+        Calculates the micro and macro f scores for each emotion
 
         Parameters:
         None
@@ -182,53 +228,119 @@ class ClarkModel(object):
         Returns:
         None
         """
+        self.pred = np.asarray(self.pred)
+        self.true = np.asarray(self.true)
+            
+        tp = np.sum(
+            np.logical_or(
+                np.logical_or(
+                    np.logical_or(
+                        np.logical_or(
+                            np.logical_or(
+                                np.logical_or(np.logical_and(self.pred == 'sadness', self.true == 'sadness'), np.logical_and(self.pred == 'joy', self.true == 'joy')),
+                                np.logical_and(self.pred == 'fear', self.true == 'fear')),
+                            np.logical_and(self.pred == 'anger', self.true == 'anger')),
+                        np.logical_and(self.pred == 'challenge', self.true == 'challenge')),
+                    np.logical_and(self.pred == 'boredom', self.true == 'boredom')),
+                np.logical_and(self.pred == 'frustration', self.true == 'frustration')))
+        tp_fp = len(self.pred)
+        tp_fn = len(self.true)         
+            
+        pi = tp / tp_fp
+        ro = tp / tp_fn
+        try:
+            self.micro_fscores = 2 * pi * ro / (pi + ro)
+        except:
+            self.micro_fscores = 0.0
 
-        for var in self.variables:
-            self.pred[var] = np.asarray(self.pred[var])
-            self.true[var] = np.asarray(self.true[var])
-            
-            tp = np.sum(np.logical_or(np.logical_or(np.logical_and(self.pred[var] == 'low', self.true[var] == 'low'), np.logical_and(
-                    self.pred[var] == 'med', self.true[var] == 'med')), np.logical_and(self.pred[var] == 'high', self.true[var] == 'high')))
-            tp_fp = len(self.pred[var])
-            tp_fn = len(self.true[var])      
-            
-            pi = tp / tp_fp
-            ro = tp / tp_fn
+        temp_macro = 0
+        for e in self.emotions:
+            tp_e = np.sum(np.logical_and(self.pred == e, self.true == e))
+            tp_fp_e = len([x for x in self.pred if x != e])
+            tp_fn_e= len([x for x in self.true if x == e])
 
             try:
-                self.micro_fscores[var] = 2 * pi * ro / (pi + ro)
+                pi_e = tp_e / tp_fp_e
             except:
-                self.micro_fscores[var] = 0.0
-
-            temp_macro = 0
-            for c in ['high', 'med', 'low']:
-                tp_c = np.sum(np.logical_and(self.pred[var] == c, self.true[var] == c))
-                tp_fp_c = len([x for x in self.pred[var] if x != c])
-                tp_fn_c = len([x for x in self.true[var] if x == c])
-
-                try:
-                    pi_c = tp_c / tp_fp_c
-                except:
-                    pi_c = 0.0
-                
-                try:
-                    ro_c = tp_c / tp_fn_c
-                except:
-                    ro_c = 0.0
-
-                try:
-                    temp_macro += 2 * pi_c * ro_c / (pi_c + ro_c)
-                except:
-                    temp_macro += 0.0
-                
+                pi_e = 0.0
             
-            self.macro_fscores[var] = temp_macro / 3
-    
+            try:
+                ro_e = tp_e / tp_fn_e
+            except:
+                ro_e = 0.0
+
+            try:
+                temp_macro += 2 * pi_e * ro_e / (pi_e + ro_e)
+            except:
+                temp_macro += 0.0
+        
+        self.macro_fscores = temp_macro / 7
+
     def confusion_matrix(self, normalize=False):
         """
         Computes the confusion matrices for each of the variables
         """
 
-        for var in self.variables:
-            cn_matrix = confusion_matrix(self.true[var], self.pred[var])
-            plot_confusion_matrix(cn_matrix, ['low', 'med', 'high'], var, normalize)
+        cn_matrix = confusion_matrix(self.true, self.pred)
+        plot_confusion_matrix(cn_matrix, self.emotions, 'AV->Emotions', normalize)
+
+    # def calculate_scores(self):
+    #     '''
+    #     Calculates the micro and macro f scores for each variable
+
+    #     Parameters:
+    #     None
+
+    #     Returns:
+    #     None
+    #     '''
+
+    #     for var in self.variables:
+    #         self.pred[var] = np.asarray(self.pred[var])
+    #         self.true[var] = np.asarray(self.true[var])
+            
+    #         tp = np.sum(np.logical_or(np.logical_or(np.logical_and(self.pred[var] == 'low', self.true[var] == 'low'), np.logical_and(
+    #                 self.pred[var] == 'med', self.true[var] == 'med')), np.logical_and(self.pred[var] == 'high', self.true[var] == 'high')))
+    #         tp_fp = len(self.pred[var])
+    #         tp_fn = len(self.true[var])      
+            
+    #         pi = tp / tp_fp
+    #         ro = tp / tp_fn
+
+    #         try:
+    #             self.micro_fscores[var] = 2 * pi * ro / (pi + ro)
+    #         except:
+    #             self.micro_fscores[var] = 0.0
+
+    #         temp_macro = 0
+    #         for c in ['high', 'med', 'low']:
+    #             tp_c = np.sum(np.logical_and(self.pred[var] == c, self.true[var] == c))
+    #             tp_fp_c = len([x for x in self.pred[var] if x != c])
+    #             tp_fn_c = len([x for x in self.true[var] if x == c])
+
+    #             try:
+    #                 pi_c = tp_c / tp_fp_c
+    #             except:
+    #                 pi_c = 0.0
+                
+    #             try:
+    #                 ro_c = tp_c / tp_fn_c
+    #             except:
+    #                 ro_c = 0.0
+
+    #             try:
+    #                 temp_macro += 2 * pi_c * ro_c / (pi_c + ro_c)
+    #             except:
+    #                 temp_macro += 0.0
+                
+            
+    #         self.macro_fscores[var] = temp_macro / 3
+    
+    # def confusion_matrix(self, normalize=False):
+    #     '''
+    #     Computes the confusion matrices for each of the variables
+    #     '''
+
+    #     for var in self.variables:
+    #         cn_matrix = confusion_matrix(self.true[var], self.pred[var])
+    #         plot_confusion_matrix(cn_matrix, ['low', 'med', 'high'], var, normalize)

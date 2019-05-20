@@ -151,17 +151,17 @@ class EmotionModel(object):
         boredom = [priors['boredom'], 'boredom']
         frustration = [priors['frustration'], 'frustration']
         
-        # pos = parts_of_speech(tokenized_content)
-        # for p in pos:
-        #     tense = determine_tense(p)
-        #     if tense in self.tense:
-        #         sadness[0] += float(math.log(self.tense[tense]['sadness']))
-        #         joy[0] += float(math.log(self.tense[tense]['joy']))
-        #         fear[0] += float(math.log(self.tense[tense]['fear']))
-        #         challenge[0] += float(math.log(self.tense[tense]['challenge']))
-        #         anger[0] += float(math.log(self.tense[tense]['anger']))
-        #         boredom[0] += float(math.log(self.tense[tense]['boredom']))
-        #         frustration[0] += float(math.log(self.tense[tense]['frustration']))
+        pos = parts_of_speech(tokenized_content)
+        for p in pos:
+            tense = determine_tense(p)
+            if tense in self.tense:
+                sadness[0] += float(math.log(self.tense[tense]['sadness']))
+                joy[0] += float(math.log(self.tense[tense]['joy']))
+                fear[0] += float(math.log(self.tense[tense]['fear']))
+                challenge[0] += float(math.log(self.tense[tense]['challenge']))
+                anger[0] += float(math.log(self.tense[tense]['anger']))
+                boredom[0] += float(math.log(self.tense[tense]['boredom']))
+                frustration[0] += float(math.log(self.tense[tense]['frustration']))
 
         for word in content:
             if word in training_dict:
