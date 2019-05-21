@@ -3,7 +3,7 @@ import numpy as np
 np.seterr(all='raise')
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier 
-from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix
 from nlp_helpers import *
 from graphing_helpers import *
@@ -15,7 +15,7 @@ class ClarkModel(object):
                           'certainty', 'anticipated_effort', 'responsibility']
         self.emotions = ['sadness', 'joy', 'fear', 'anger', 'challenge', 'boredom', 'frustration']
         self.ngrams = {}
-        self.decision_tree = None
+        self.av2e_model = None
         self.priors = {}
         self.variable_dimensions = ['low','med','high']
         self.micro_fscores = 0.0
@@ -34,7 +34,7 @@ class ClarkModel(object):
         Returns:
         Model: a trained model
         '''
-        dt = self.__build_decision_tree(training_data)
+        self.__build_av2e_model(training_data)
 
         for var in self.variables:
             ngrams, totals, var_priors, vocab = self.__train_by_variable(training_data, var)
@@ -182,41 +182,18 @@ class ClarkModel(object):
         a = 0.9 * (arr - np.min(arr))/np.ptp(arr) + 0.1
         return a/a.sum(0)
 
-    def __build_decision_tree(self, data):
+    def __build_av2e_model(self, data):
         X = [list(d['turn3']['appraisals'].values()) for d in data]
-        y = [em['turn3']['emotion'] for em in data]
+        y = [em['turn3']['emotion'] for em in data]      
 
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.0, random_state=1) 
-        
-        clf = DecisionTreeClassifier(criterion="entropy", max_depth=3)
+        rf = RandomForestClassifier(n_estimators=10)
+        rf = rf.fit(X,y)
 
-        clf = clf.fit(X_train,y_train)
-        self.decision_tree = clf
-
+        self.av2e_model = rf
 
     def __map_to_emotion(self, vars):
-        
         v = [self.variable_dimensions.index(x) for x in list(vars.values())]
-        return self.decision_tree.predict(np.asarray(v).reshape(1,-1))
-        # if vars['pleasantness'] == 'high' and vars['anticipated_effort'] != 'high':
-        #     return 'joy'
-        # if vars['pleasantness'] == 'low':
-        #     if vars['control'] == 'high':
-        #         if vars['certainty'] == 'med':
-        #             return 'sadness'
-        #     if vars['control'] == 'low':
-        #         if vars['responsibility'] == 'low':
-        #             return 'anger'
-        #     if vars['attention'] != 'low':
-        #         return 'frustration'
-        # if vars['pleasantness'] != 'high':
-        #     if vars['anticipated_effort'] == 'low':
-        #         if vars['attention'] == 'low':
-        #             return 'boredom'
-        #     if vars['anticipated_effort'] == 'high':
-        #         return 'challenge'
-        #     if vars['certainty'] == 'low':
-        #         return 'fear'
+        return self.av2e_model.predict(np.asarray(v).reshape(1,-1))
 
     def __calculate_scores(self):
         """

@@ -91,23 +91,27 @@ def n_fold_test(data_list, n, c_e):
         print('AV Model Done!')
     
     else:
-        mean_fscores = [0, 0]
+        models = ['DT', 'NB', 'CNB', 'RF']
+        mean_fscores = {m:[0.0, 0.0] for m in models}
 
         for i, split in enumerate(splits):
             av2e_model = AVtoEmotionModel()
             av2e_model.train(np.concatenate(splits[:i]+splits[i+1:]))
             av2e_model.test(splits[i])
 
-            mean_fscores[0] += av2e_model.micro_fscores
-            mean_fscores[1] += av2e_model.macro_fscores
-
-        mean_fscores[0] /= n
-        mean_fscores[1] /= n
+            for m in models:
+                mean_fscores[m][0] += av2e_model.micro_fscores[m]
+                mean_fscores[m][1] += av2e_model.macro_fscores[m]
+        
+        for m in models:
+            mean_fscores[m][0] /= n
+            mean_fscores[m][1] /= n
 
         with open('results/AV2E_results.csv', 'w') as csv_file:
             writer = csv.writer(csv_file)
-            writer.writerow(['Micro F Score', 'Macro F Score'])
-            writer.writerow([mean_fscores[0], mean_fscores[1]])
+            writer.writerow(['Model', 'Micro F Score', 'Macro F Score'])
+            for m in models:
+                writer.writerow([m, mean_fscores[m][0], mean_fscores[m][1]])
         
         print('AV2E Model Done!')
 
