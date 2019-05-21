@@ -1,6 +1,7 @@
 from emotion_model import EmotionModel
 from CLARK_model import ClarkModel
-from AV_Model import AVModel
+from AV_model import AVModel
+from AV_to_Emotion_model import AVtoEmotionModel
 from process_data import *
 import numpy as np
 
@@ -64,7 +65,7 @@ def n_fold_test(data_list, n, c_e):
         
         print('Emotions Model Done!')
     
-    else:
+    elif c_e == 2:
         mean_fscores = {}
         for var in AVModel().variables:
             mean_fscores[var] = [0, 0]
@@ -88,6 +89,28 @@ def n_fold_test(data_list, n, c_e):
                 writer.writerow([key, value[0], value[1]])
 
         print('AV Model Done!')
+    
+    else:
+        mean_fscores = [0, 0]
+
+        for i, split in enumerate(splits):
+            av2e_model = AVtoEmotionModel()
+            av2e_model.train(np.concatenate(splits[:i]+splits[i+1:]))
+            av2e_model.test(splits[i])
+
+            mean_fscores[0] += av2e_model.micro_fscores
+            mean_fscores[1] += av2e_model.macro_fscores
+
+        mean_fscores[0] /= n
+        mean_fscores[1] /= n
+
+        with open('results/AV2E_results.csv', 'w') as csv_file:
+            writer = csv.writer(csv_file)
+            writer.writerow(['Micro F Score', 'Macro F Score'])
+            writer.writerow([mean_fscores[0], mean_fscores[1]])
+        
+        print('AV2E Model Done!')
+
 
 
 def train_test_split(data_list, s, c_e, show_matrix=False):

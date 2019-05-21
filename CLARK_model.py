@@ -282,4 +282,4 @@ class ClarkModel(object):
         """
 
         cn_matrix = confusion_matrix(self.true, self.pred)
-        plot_confusion_matrix(cn_matrix, self.emotions, 'AV->Emotions', normalize)
+        plot_confusion_matrix(cn_matrix, self.emotions, 'CLARK Emotions', normalize)
