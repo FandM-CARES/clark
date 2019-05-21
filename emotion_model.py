@@ -111,12 +111,12 @@ class EmotionModel(object):
             conv = tokenized_turn1 + tokenized_turn2 + tokenized_turn3
 
             parsed_message = flatten([ngrams_and_remove_stop_words(x, self.version) for x in [tokenized_turn1, tokenized_turn2, tokenized_turn3]])
-            classification = self.__classify(self.ngrams, parsed_message, conv, u_priors)
+            classification = self.__normalize(self.__classify(self.ngrams, parsed_message, conv, u_priors))
             for i, e in enumerate(self.emotions):
                 u_priors[e] = classification[i]
 
             parsed_message = ngrams_and_remove_stop_words(tokenized_turn1, self.version)
-            classification = self.__classify(self.ngrams, parsed_message, tokenized_turn1, u_priors)
+            classification = self.__normalize(self.__classify(self.ngrams, parsed_message, tokenized_turn1, u_priors))
             for i, e in enumerate(self.emotions):
                 u_priors[e] = classification[i]
             
@@ -143,13 +143,13 @@ class EmotionModel(object):
         String: classification according to the trained model
         """
 
-        sadness = [priors['sadness'], 'sadness']
-        joy = [priors['joy'], 'joy']
-        fear = [priors['fear'], 'fear']
-        challenge = [priors['challenge'], 'challenge']
-        anger = [priors['anger'], 'anger']
-        boredom = [priors['boredom'], 'boredom']
-        frustration = [priors['frustration'], 'frustration']
+        sadness = [math.log(priors['sadness']), 'sadness']
+        joy = [math.log(priors['joy']), 'joy']
+        fear = [math.log(priors['fear']), 'fear']
+        challenge = [math.log(priors['challenge']), 'challenge']
+        anger = [math.log(priors['anger']), 'anger']
+        boredom = [math.log(priors['boredom']), 'boredom']
+        frustration = [math.log(priors['frustration']), 'frustration']
         
         pos = parts_of_speech(tokenized_content)
         for p in pos:
@@ -176,6 +176,13 @@ class EmotionModel(object):
         if raw: return list(map(lambda x: x[0], [sadness, joy, fear, challenge, anger, boredom, frustration]))
 
         return max([sadness, joy, fear, challenge, anger, boredom, frustration],key=lambda item:item[0])[1]
+
+    def __normalize(self, arr):
+        """
+        Normalizes between 0.1 and 1.0
+        """
+        a = 0.9 * (arr - np.min(arr))/np.ptp(arr) + 0.1
+        return a/a.sum(0)
 
     def __calculate_scores(self):
         """
