@@ -44,7 +44,7 @@ class EmotionModel(object):
 
         for row in training_data:
             for turn in ['turn1', 'turn2', 'turn3']:
-                emotion = row[turn]['emotion']
+                true_emotion = row[turn]['emotion']
                 tokenized_res = tokenize(row[turn]['text'])
                 
                 pos = parts_of_speech(tokenized_res)
@@ -52,24 +52,23 @@ class EmotionModel(object):
                     p_tense = determine_tense(p)
                     if p_tense != "": 
                         tense_vocab.add(p_tense[0])
-                        self.tense[p_tense][emotion] += 1
-                        tense_totals[emotion] += 1
+                        self.tense[p_tense][true_emotion] += 1
+                        tense_totals[true_emotion] += 1
     
                 res = ngrams_and_remove_stop_words(tokenized_res, self.version)
                 
                 for word in res:
                     words_vocab.add(word)
                     if word in words:
-                        words[word][emotion] += 1
-                        words_totals[emotion] += 1
+                        words[word][true_emotion] += 1
+                        words_totals[true_emotion] += 1
                     else:
                         words[word] = {emotion:1 for emotion in self.emotions}
-                        words[word][emotion] += 1
-                        words_totals[emotion] += 1
+                        words[word][true_emotion] += 1
+                        words_totals[true_emotion] += 1
         
         sum_totals = sum(words_totals.values())
-        for emotion in self.emotions:
-            self.priors[emotion] = float(words_totals[emotion]) / float(sum_totals)
+        self.priors = {emotion: float(words_totals[emotion]) / float(sum_totals) for emotion in self.emotions}
 
         self.__calculate_probabilities(words, words_totals, words_vocab, tense_totals, tense_vocab)
 

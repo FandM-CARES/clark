@@ -1,7 +1,7 @@
-from emotion_model import EmotionModel
-from CLARK_model import ClarkModel
-from AV_model import AVModel
-from AV_to_Emotion_model import AVtoEmotionModel
+from models.emotion_model import EmotionModel
+from models.CLARK_model import ClarkModel
+from models.AV_model import AVModel
+from models.AV_to_Emotion_model import AVtoEmotionModel
 from process_data import *
 import numpy as np
 

@@ -16,12 +16,19 @@ class AVModel(object):
         self.ngrams = {}
         self.priors = {}
         self.variable_dimensions = ['low','med','high']
-        # self.bounds = {}
         self.micro_fscores = {}
         self.macro_fscores = {}
+        self.tense = {var:self.__init_tense() for var in self.variables}
         self.true = {}
         self.pred = {}
         self.version = 2 # unigrams = 0, bigrams = 1, both = 2
+    
+    def __init_tense(self):
+        return {
+            'past': {dim: 1 for dim in self.variable_dimensions},
+            'present': {dim: 1 for dim in self.variable_dimensions},
+            'future': {dim: 1 for dim in self.variable_dimensions}
+        }
 
     def train(self, training_data):
         """
@@ -35,10 +42,8 @@ class AVModel(object):
         """
 
         for var in self.variables:
-            ngrams, totals, var_priors, vocab = self.__train_by_variable(training_data, var)
-            self.priors[var] = var_priors
-            self.ngrams[var] = self.__smooth_values(ngrams, var, totals, vocab)
-
+            self.__train_by_variable(training_data, var)
+            
     def __train_by_variable(self, training_set, variable, data_points={}):
         """
         Calculates the counts for each unigram and priors for each classification
@@ -54,53 +59,61 @@ class AVModel(object):
         """
 
         words = {}
-        totals = {dim:1 for dim in self.variable_dimensions}
-        vocab = set()
+        words_totals = {dim:0 for dim in self.variable_dimensions}
+        tense_totals = {dim:0 for dim in self.variable_dimensions}
+        words_vocab = set()
+        tense_vocab = set()
 
         for row in training_set:
             for turn in ['turn1','turn2','turn3']:
-                weight = self.variable_dimensions[int(row[turn]['appraisals'][variable])]                
+                true_dim = self.variable_dimensions[int(row[turn]['appraisals'][variable])]                
                 tokenized_res = tokenize(row[turn]['text'])
                 
+                pos = parts_of_speech(tokenized_res)
+                for p in pos:
+                    p_tense = determine_tense(p)
+                    if p_tense != "": 
+                        tense_vocab.add(p_tense[0])
+                        self.tense[variable][p_tense][true_dim] += 1
+                        tense_totals[true_dim] += 1
+
                 res = ngrams_and_remove_stop_words(tokenized_res, self.version)
                 for word in res:
-                    vocab.add(word)
+                    words_vocab.add(word)
                     if word in words:
-                        words[word][weight] += 1
-                        totals[weight] += 1
+                        words[word][true_dim] += 1
+                        words_totals[true_dim] += 1
                     else:
                         words[word] = self.__initialize_av_weights()
-                        words[word][weight] += 1
-                        totals[weight] += 1
+                        words[word][true_dim] += 1
+                        words_totals[true_dim] += 1
                 
-        denom = sum(totals.values())
-        priors = {dim:float(totals[dim])/float(denom) for dim in self.variable_dimensions}
+        denom = sum(words_totals.values())
+        self.priors[variable] = {dim:float(words_totals[dim])/float(denom) for dim in self.variable_dimensions}
+        
+        self.__calculate_probabilities(words, words_totals, words_vocab, tense_totals, tense_vocab, variable)
 
-        return words, totals, priors, vocab
 
     def __initialize_av_weights(self):
         return {dim:1 for dim in self.variable_dimensions}
 
-    def __smooth_values(self, ngrams, variable, totals, vocab):
+    def __calculate_probabilities(self, words, words_totals, words_vocab, tense_totals, tense_vocab, curr_var):
         """
-        Performs smoothing on unigram values
-
-        Parameters:
-        ngrams (object): ngrams with associated counts in training data
-        variable (string): the variable associated with the unigram values
-        totals (object): total number of low, med, and high classifications for the variable
-
-        Returns:
-        Object: smoothed values for the ngrams
+        TODO
         """
 
-        len_vocab = len(vocab)
+        len_vocab = len(words_vocab)
 
-        for word in ngrams:
+        for word in words:
             for dim in self.variable_dimensions:
-                ngrams[word][dim] = float(ngrams[word][dim])/float(totals[dim] + len_vocab)
+                words[word][dim] = float(words[word][dim])/float(words_totals[dim] + len_vocab)
 
-        return ngrams
+        self.ngrams[curr_var] = words
+
+        for tense in ['past','present','future']:
+            for dim in self.variable_dimensions:
+                self.tense[curr_var][tense][dim] = float(self.tense[curr_var][tense][dim])/float(tense_totals[dim]+len(tense_vocab))
+
 
     def test(self, testing_data):
         """
@@ -128,13 +141,13 @@ class AVModel(object):
 
             parsed_message = flatten([ngrams_and_remove_stop_words(x, self.version) for x in [tokenized_turn1, tokenized_turn2, tokenized_turn3]])
             for var in self.variables:
-                classification = self.__normalize(self.__classify(self.ngrams[var], parsed_message, u_priors[var]))
+                classification = self.__normalize(self.__classify(self.ngrams[var], parsed_message, conv, u_priors[var], var))
                 for i,e in enumerate(self.variable_dimensions):
                     u_priors[var][e] = classification[i]
 
             parsed_message = ngrams_and_remove_stop_words(tokenized_turn1, self.version)
             for var in self.variables:
-                classification = self.__normalize(self.__classify(self.ngrams[var], parsed_message, u_priors[var]))
+                classification = self.__normalize(self.__classify(self.ngrams[var], parsed_message, tokenized_turn1, u_priors[var], var))
                 for i,e in enumerate(self.variable_dimensions):
                     u_priors[var][e] = classification[i]
 
@@ -142,12 +155,12 @@ class AVModel(object):
             for var in self.variables:
                 weight = self.variable_dimensions[int(row['turn3']['appraisals'][var])]
                 self.true[var].append(weight)
-                classification = self.__classify(self.ngrams[var], parsed_message, u_priors[var], False)
+                classification = self.__classify(self.ngrams[var], parsed_message, tokenized_turn3, u_priors[var], var, False)
                 self.pred[var].append(classification)
 
         self.calculate_scores()
 
-    def __classify(self, training_dict, content, priors, raw=True):
+    def __classify(self, training_dict, content, tokenized_content, priors, curr_var, raw=True):
         """
         Classifies each message according to the trained model
 
@@ -163,6 +176,14 @@ class AVModel(object):
         low = [math.log(priors['low']), 'low']
         med = [math.log(priors['med']), 'med']
         high = [math.log(priors['high']), 'high']
+
+        pos = parts_of_speech(tokenized_content)
+        for p in pos:
+            tense = determine_tense(p)
+            if tense in self.tense[curr_var]:
+                low[0] += float(math.log(self.tense[curr_var][tense]['low']))
+                med[0] += float(math.log(self.tense[curr_var][tense]['med']))
+                high[0] += float(math.log(self.tense[curr_var][tense]['high']))
 
         for word in content:
             if word in training_dict:
