@@ -109,3 +109,5 @@ venv.bak/
 # project stuff
 #/results/confusion_matrices
 .scannerwork/
+
+.DS_Store

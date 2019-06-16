@@ -1,6 +1,10 @@
 from test import *
-import os
 
-data_list = ['data/' + x for x in os.listdir('data')]
-train_test_split(data_list, 0.85, 0, True)
-#n_fold_test(data_list,10, 0)
+newest_file = 'data/combined_061419.json'
+
+# train_test_split([newest_file], 0.75, 0, True)
+
+# n_fold_test([newest_file],10, 3) #AV2E
+n_fold_test([newest_file],10, 2) #AV
+n_fold_test([newest_file],10, 1) #Emotions
+# n_fold_test([newest_file],10, 0) #CLARK

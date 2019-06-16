@@ -6,7 +6,41 @@ stop_words = set(stopwords.words('english'))
 Helper functions for parsing inputs
 """
 
-def tokenize(row, ngram=0):
+def flatten(l):
+    return [item for sublist in l for item in sublist]
+
+def determine_tense(tagged_tuple):
+    tag = tagged_tuple[1]
+    if tag in ["VBG", "VBP", "VBZ"]:
+        return "present"
+    elif tag in ["VBD", "VBN"]:
+        return "past"
+    elif tag in ["MD"]:
+        return "future"
+    return ""
+
+def determine_pronoun(tagged_tuple):
+    tag = tagged_tuple[1]
+    if tag in ["WP", "WP$", "PRP", "PRP$"]:
+        obj = tagged_tuple[0].lower()
+        if obj in ["i", "me", "my", "mine", "myself", "we", "us", "our", "ours", "ourselves"]:
+            return "first"
+        elif obj in ["you", "your", "yours", "yourself", "yourselves"]:
+            return "second"
+        elif obj in ["he", "his", "him", "himself", "her", "hers", "she", "herself", "they", "them", "their", "theirs", "themselves", "it", "its", "itself"]:
+            return "third"
+        else:
+            return ""
+    else:
+        return ""
+
+def parts_of_speech(tokenized_res):
+    return nltk.pos_tag(tokenized_res)
+
+def tokenize(row):
+    return nltk.tokenize.casual.casual_tokenize(row)
+
+def ngrams_and_remove_stop_words(init_res, ngram):
     """
     Tokenizes the row exluding .;,:/-_&~ and removes stop words
 
@@ -21,41 +55,31 @@ def tokenize(row, ngram=0):
     String: tokenized word
     """
 
-    bad_characters = ['.',';',':','/','-','_','&','~',',', '\\']
-    contractions_dict = {
-        "'s": "is",
-        "'d": "did",
-        "'re": "are",
-        "'ve": "have",
-        "n't": "not",
-        "'m": "am",
-    }
+    res = list(init_res)
 
-    init_res = nltk.word_tokenize(row)
-    for i, word in enumerate(init_res):
-        init_res[i] = word.lower()
-        if word in contractions_dict:
-            init_res[i] = contractions_dict[word]
+    bad_characters = ['.','-','_','&','~',',','\\']
+        
+    for i, word in enumerate(res):
+        res[i] = word.lower()
         if word in bad_characters:
-            init_res[i] = ""
+            res[i] = ""
         if ngram == 0:
             if is_stop_word(word):
-                init_res[i] = ""
+                res[i] = ""
     
-    temp_ret = [x for x in init_res if x != ""]
+    temp_ret = [x for x in res if x != ""]
     
     if len(temp_ret) == 0:
-        return [], ""
+        return []
 
     if ngram == 0: 
-        return temp_ret, row
+        return temp_ret
     
     if ngram == 1: 
-        return [" ".join(x) for x in list(nltk.bigrams(temp_ret))], row  
+        return [" ".join(x) for x in list(nltk.bigrams(temp_ret))] 
     
     if ngram == 2:
-        return [x for x in temp_ret if not is_stop_word(x)] + [" ".join(x) for x in list(nltk.bigrams(temp_ret))], row
-        
+        return [x for x in temp_ret if not is_stop_word(x)] + [" ".join(x) for x in list(nltk.bigrams(temp_ret))]
 
 def is_stop_word(word):
     """
