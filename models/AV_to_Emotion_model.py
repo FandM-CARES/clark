@@ -51,6 +51,7 @@ class AVtoEmotionModel(object):
         rf = rf.fit(X,y)
         self.RF = rf
         
+        
     def test(self, data):
         X = [list(d['turn3']['appraisals'].values()) for d in data]
         y = [em['turn3']['emotion'] for em in data]

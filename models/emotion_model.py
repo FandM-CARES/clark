@@ -3,7 +3,7 @@ import numpy as np
 np.seterr(all='raise')
 from sklearn.metrics import confusion_matrix
 from nlp_helpers import *
-from graphing_helpers import *
+from graphing_helpers import plot_confusion_matrix
 
 class EmotionModel(object):
     
@@ -16,7 +16,7 @@ class EmotionModel(object):
         self.true = list()
         self.pred = list()
         self.tense = self.__init_tense()
-        # self.pronouns = {}
+        self.pronouns = self.__init_pronouns()
         self.version = 2 # 0 - unigrams, 1 - bigrams, 2, both
     
     def __init_tense(self):
@@ -25,7 +25,14 @@ class EmotionModel(object):
             'present': {emotion: 1 for emotion in self.emotions},
             'future': {emotion: 1 for emotion in self.emotions}
         }
-
+    
+    def __init_pronouns(self):
+        return {
+            'first': {emotion: 1 for emotion in self.emotions},
+            'second': {emotion: 1 for emotion in self.emotions},
+            'third': {emotion: 1 for emotion in self.emotions}
+        }
+    
     def train(self, training_data):
         """
         Builds a trained Emotions model
@@ -39,8 +46,10 @@ class EmotionModel(object):
         words = {}
         words_vocab = set()
         tense_vocab = set()
+        pronoun_vocab = set()
         words_totals = {emotion:0 for emotion in self.emotions}
         tense_totals = {emotion:0 for emotion in self.emotions}
+        pronoun_totals = {emotion:0 for emotion in self.emotions}
 
         for row in training_data:
             for turn in ['turn1', 'turn2', 'turn3']:
@@ -50,11 +59,16 @@ class EmotionModel(object):
                 pos = parts_of_speech(tokenized_res)
                 for p in pos:
                     p_tense = determine_tense(p)
+                    p_pronoun = determine_pronoun(p)
                     if p_tense != "": 
-                        tense_vocab.add(p_tense[0])
+                        tense_vocab.add(p_tense)
                         self.tense[p_tense][true_emotion] += 1
                         tense_totals[true_emotion] += 1
-    
+                    if p_pronoun != "":
+                        pronoun_vocab.add(p_pronoun)
+                        self.pronouns[p_pronoun][true_emotion] += 1
+                        pronoun_totals[true_emotion] += 1
+
                 res = ngrams_and_remove_stop_words(tokenized_res, self.version)
                 
                 for word in res:
@@ -70,9 +84,9 @@ class EmotionModel(object):
         sum_totals = sum(words_totals.values())
         self.priors = {emotion: float(words_totals[emotion]) / float(sum_totals) for emotion in self.emotions}
 
-        self.__calculate_probabilities(words, words_totals, words_vocab, tense_totals, tense_vocab)
+        self.__calculate_probabilities(words, words_totals, words_vocab, tense_totals, tense_vocab, pronoun_totals, pronoun_vocab)
 
-    def __calculate_probabilities(self, words, words_totals, words_vocab, tense_totals, tense_vocab):
+    def __calculate_probabilities(self, words, words_totals, words_vocab, tense_totals, tense_vocab, pronoun_totals, pronoun_vocab):
         """
         TODO
         """
@@ -88,6 +102,11 @@ class EmotionModel(object):
         for tense in self.tense:
             for emotion in self.emotions:
                 self.tense[tense][emotion] = float(self.tense[tense][emotion])/float(tense_totals[emotion]+len(tense_vocab))
+        
+        for pronoun in self.pronouns:
+            for emotion in self.emotions:
+                self.pronouns[pronoun][emotion] = float(self.pronouns[pronoun][emotion])/float(pronoun_totals[emotion]+len(pronoun_vocab))
+
 
     def test(self, testing_data):
         """
@@ -153,6 +172,8 @@ class EmotionModel(object):
         pos = parts_of_speech(tokenized_content)
         for p in pos:
             tense = determine_tense(p)
+            pronoun = determine_pronoun(p)
+            
             if tense in self.tense:
                 sadness[0] += float(math.log(self.tense[tense]['sadness']))
                 joy[0] += float(math.log(self.tense[tense]['joy']))
@@ -161,6 +182,15 @@ class EmotionModel(object):
                 anger[0] += float(math.log(self.tense[tense]['anger']))
                 boredom[0] += float(math.log(self.tense[tense]['boredom']))
                 frustration[0] += float(math.log(self.tense[tense]['frustration']))
+            
+            if pronoun in self.pronouns:
+                sadness[0] += float(math.log(self.pronouns[pronoun]['sadness']))
+                joy[0] += float(math.log(self.pronouns[pronoun]['joy']))
+                fear[0] += float(math.log(self.pronouns[pronoun]['fear']))
+                challenge[0] += float(math.log(self.pronouns[pronoun]['challenge']))
+                anger[0] += float(math.log(self.pronouns[pronoun]['anger']))
+                boredom[0] += float(math.log(self.pronouns[pronoun]['boredom']))
+                frustration[0] += float(math.log(self.pronouns[pronoun]['frustration']))
 
         for word in content:
             if word in training_dict:

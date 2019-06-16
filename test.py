@@ -4,6 +4,7 @@ from models.AV_model import AVModel
 from models.AV_to_Emotion_model import AVtoEmotionModel
 from process_data import *
 import numpy as np
+from graphing_helpers import plot_ellsworth_figs
 
 def n_fold_test(data_list, n, c_e):
     """
@@ -22,6 +23,8 @@ def n_fold_test(data_list, n, c_e):
     np_data = np.asarray(data.data)
     np.random.shuffle(np_data)
     splits = np.array_split(np_data, n)
+
+    # plot_ellsworth_figs(np_data)
 
     if c_e == 0:
         mean_fscores = [0, 0]
@@ -74,6 +77,7 @@ def n_fold_test(data_list, n, c_e):
             av = AVModel()
             av.train(np.concatenate(splits[:i]+splits[i+1:]))
             av.test(splits[i])
+
             for var in av.variables:
                 mean_fscores[var][0] += av.micro_fscores[var]
                 mean_fscores[var][1] += av.macro_fscores[var]

@@ -19,6 +19,21 @@ def determine_tense(tagged_tuple):
         return "future"
     return ""
 
+def determine_pronoun(tagged_tuple):
+    tag = tagged_tuple[1]
+    if tag in ["WP", "WP$", "PRP", "PRP$"]:
+        obj = tagged_tuple[0].lower()
+        if obj in ["i", "me", "my", "mine", "myself", "we", "us", "our", "ours", "ourselves"]:
+            return "first"
+        elif obj in ["you", "your", "yours", "yourself", "yourselves"]:
+            return "second"
+        elif obj in ["he", "his", "him", "himself", "her", "hers", "she", "herself", "they", "them", "their", "theirs", "themselves", "it", "its", "itself"]:
+            return "third"
+        else:
+            return ""
+    else:
+        return ""
+
 def parts_of_speech(tokenized_res):
     return nltk.pos_tag(tokenized_res)
 
@@ -43,7 +58,7 @@ def ngrams_and_remove_stop_words(init_res, ngram):
     res = list(init_res)
 
     bad_characters = ['.','-','_','&','~',',','\\']
-    
+        
     for i, word in enumerate(res):
         res[i] = word.lower()
         if word in bad_characters:

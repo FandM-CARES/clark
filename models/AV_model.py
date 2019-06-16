@@ -19,6 +19,7 @@ class AVModel(object):
         self.micro_fscores = {}
         self.macro_fscores = {}
         self.tense = {var:self.__init_tense() for var in self.variables}
+        self.pronouns = {var:self.__init_pronouns() for var in self.variables}
         self.true = {}
         self.pred = {}
         self.version = 2 # unigrams = 0, bigrams = 1, both = 2
@@ -28,6 +29,13 @@ class AVModel(object):
             'past': {dim: 1 for dim in self.variable_dimensions},
             'present': {dim: 1 for dim in self.variable_dimensions},
             'future': {dim: 1 for dim in self.variable_dimensions}
+        }
+    
+    def __init_pronouns(self):
+        return {
+            'first': {dim: 1 for dim in self.variable_dimensions},
+            'second': {dim: 1 for dim in self.variable_dimensions},
+            'third': {dim: 1 for dim in self.variable_dimensions}
         }
 
     def train(self, training_data):
@@ -61,8 +69,10 @@ class AVModel(object):
         words = {}
         words_totals = {dim:0 for dim in self.variable_dimensions}
         tense_totals = {dim:0 for dim in self.variable_dimensions}
+        pronoun_totals = {dim:0 for dim in self.variable_dimensions}
         words_vocab = set()
         tense_vocab = set()
+        pronoun_vocab = set()
 
         for row in training_set:
             for turn in ['turn1','turn2','turn3']:
@@ -72,10 +82,15 @@ class AVModel(object):
                 pos = parts_of_speech(tokenized_res)
                 for p in pos:
                     p_tense = determine_tense(p)
+                    p_pronoun = determine_pronoun(p)
                     if p_tense != "": 
-                        tense_vocab.add(p_tense[0])
+                        tense_vocab.add(p_tense)
                         self.tense[variable][p_tense][true_dim] += 1
                         tense_totals[true_dim] += 1
+                    if p_pronoun != "":
+                        pronoun_vocab.add(p_pronoun)
+                        self.pronouns[variable][p_pronoun][true_dim] += 1
+                        pronoun_totals[true_dim] += 1
 
                 res = ngrams_and_remove_stop_words(tokenized_res, self.version)
                 for word in res:
@@ -91,13 +106,13 @@ class AVModel(object):
         denom = sum(words_totals.values())
         self.priors[variable] = {dim:float(words_totals[dim])/float(denom) for dim in self.variable_dimensions}
         
-        self.__calculate_probabilities(words, words_totals, words_vocab, tense_totals, tense_vocab, variable)
+        self.__calculate_probabilities(words, words_totals, words_vocab, tense_totals, tense_vocab, pronoun_totals, pronoun_vocab, variable)
 
 
     def __initialize_av_weights(self):
         return {dim:1 for dim in self.variable_dimensions}
 
-    def __calculate_probabilities(self, words, words_totals, words_vocab, tense_totals, tense_vocab, curr_var):
+    def __calculate_probabilities(self, words, words_totals, words_vocab, tense_totals, tense_vocab, pronoun_totals, pronoun_vocab, curr_var):
         """
         TODO
         """
@@ -113,6 +128,10 @@ class AVModel(object):
         for tense in ['past','present','future']:
             for dim in self.variable_dimensions:
                 self.tense[curr_var][tense][dim] = float(self.tense[curr_var][tense][dim])/float(tense_totals[dim]+len(tense_vocab))
+
+        for pronoun in ['first','second','third']:
+            for dim in self.variable_dimensions:
+                self.pronouns[curr_var][pronoun][dim] = float(self.pronouns[curr_var][pronoun][dim])/float(pronoun_totals[dim]+len(pronoun_vocab))
 
 
     def test(self, testing_data):
@@ -180,10 +199,17 @@ class AVModel(object):
         pos = parts_of_speech(tokenized_content)
         for p in pos:
             tense = determine_tense(p)
+            pronoun = determine_pronoun(p)
+
             if tense in self.tense[curr_var]:
                 low[0] += float(math.log(self.tense[curr_var][tense]['low']))
                 med[0] += float(math.log(self.tense[curr_var][tense]['med']))
                 high[0] += float(math.log(self.tense[curr_var][tense]['high']))
+
+            if tense in self.pronouns[curr_var]:
+                low[0] += float(math.log(self.pronouns[curr_var][pronoun]['low']))
+                med[0] += float(math.log(self.pronouns[curr_var][pronoun]['med']))
+                high[0] += float(math.log(self.pronouns[curr_var][pronoun]['high']))
 
         for word in content:
             if word in training_dict:
