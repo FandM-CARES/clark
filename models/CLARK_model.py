@@ -20,12 +20,28 @@ class ClarkModel(object):
         self.variable_dimensions = ['low','med','high']
         self.micro_fscores = 0.0
         self.macro_fscores = 0.0
+        self.tense = {var:self.__init_tense() for var in self.variables}
+        self.pronouns = {var:self.__init_pronouns() for var in self.variables}
         self.true = []
         self.pred = []
         self.version = 2 # unigrams = 0, bigrams = 1, both = 2
+    
+    def __init_tense(self):
+        return {
+            'past': {dim: 1 for dim in self.variable_dimensions},
+            'present': {dim: 1 for dim in self.variable_dimensions},
+            'future': {dim: 1 for dim in self.variable_dimensions}
+        }
+    
+    def __init_pronouns(self):
+        return {
+            'first': {dim: 1 for dim in self.variable_dimensions},
+            'second': {dim: 1 for dim in self.variable_dimensions},
+            'third': {dim: 1 for dim in self.variable_dimensions}
+        }
 
     def train(self, training_data):
-        '''
+        """
         Builds a trained CLARK model
 
         Parameters:
@@ -33,16 +49,14 @@ class ClarkModel(object):
 
         Returns:
         Model: a trained model
-        '''
+        """
         self.__build_av2e_model(training_data)
 
         for var in self.variables:
-            ngrams, totals, var_priors, vocab = self.__train_by_variable(training_data, var)
-            self.priors[var] = var_priors
-            self.ngrams[var] = self.__smooth_values(ngrams, var, totals, vocab)
-
+            self.__train_by_variable(training_data, var)
+            
     def __train_by_variable(self, training_set, variable, data_points={}):
-        '''
+        """
         Calculates the counts for each unigram and priors for each classification
 
         Parameters:
@@ -53,57 +67,74 @@ class ClarkModel(object):
         Object: ngrams with associated counts
         Object: sums for each classification
         Object: priors for each classification
-        '''
+        """
 
         words = {}
-        totals = {dim:1 for dim in self.variable_dimensions}
-        vocab = set()
+        words_totals = {dim:0 for dim in self.variable_dimensions}
+        tense_totals = {dim:0 for dim in self.variable_dimensions}
+        pronoun_totals = {dim:0 for dim in self.variable_dimensions}
+        words_vocab = set()
+        tense_vocab = set()
+        pronoun_vocab = set()
 
         for row in training_set:
             for turn in ['turn1','turn2','turn3']:
-                weight = self.variable_dimensions[int(row[turn]['appraisals'][variable])]
-                
+                true_dim = self.variable_dimensions[int(row[turn]['appraisals'][variable])]                
                 tokenized_res = tokenize(row[turn]['text'])
                 
+                pos = parts_of_speech(tokenized_res)
+                for p in pos:
+                    p_tense = determine_tense(p)
+                    p_pronoun = determine_pronoun(p)
+                    if p_tense != "": 
+                        tense_vocab.add(p_tense)
+                        self.tense[variable][p_tense][true_dim] += 1
+                        tense_totals[true_dim] += 1
+                    if p_pronoun != "":
+                        pronoun_vocab.add(p_pronoun)
+                        self.pronouns[variable][p_pronoun][true_dim] += 1
+                        pronoun_totals[true_dim] += 1
+
                 res = ngrams_and_remove_stop_words(tokenized_res, self.version)
                 for word in res:
-                    vocab.add(word)
+                    words_vocab.add(word)
                     if word in words:
-                        words[word][weight] += 1
-                        totals[weight] += 1
+                        words[word][true_dim] += 1
+                        words_totals[true_dim] += 1
                     else:
                         words[word] = self.__initialize_av_weights()
-                        words[word][weight] += 1
-                        totals[weight] += 1
+                        words[word][true_dim] += 1
+                        words_totals[true_dim] += 1
                 
-        denom = sum(totals.values())
-        priors = {dim:float(totals[dim])/float(denom) for dim in self.variable_dimensions}
+        denom = sum(words_totals.values())
+        self.priors[variable] = {dim:float(words_totals[dim])/float(denom) for dim in self.variable_dimensions}
+        
+        self.__calculate_probabilities(words, words_totals, words_vocab, tense_totals, tense_vocab, pronoun_totals, pronoun_vocab, variable)
 
-        return words, totals, priors, vocab
 
     def __initialize_av_weights(self):
         return {dim:1 for dim in self.variable_dimensions}
 
-    def __smooth_values(self, ngrams, variable, totals, vocab):
-        '''
-        Performs smoothing on unigram values
+    def __calculate_probabilities(self, words, words_totals, words_vocab, tense_totals, tense_vocab, pronoun_totals, pronoun_vocab, curr_var):
+        """
+        TODO
+        """
 
-        Parameters:
-        ngrams (object): ngrams with associated counts in training data
-        variable (string): the variable associated with the unigram values
-        totals (object): total number of low, med, and high classifications for the variable
+        len_vocab = len(words_vocab)
 
-        Returns:
-        Object: smoothed values for the ngrams
-        '''
-
-        len_vocab = len(vocab)
-
-        for word in ngrams:
+        for word in words:
             for dim in self.variable_dimensions:
-                ngrams[word][dim] = float(ngrams[word][dim])/float(totals[dim] + len_vocab)
+                words[word][dim] = float(words[word][dim])/float(words_totals[dim] + len_vocab)
 
-        return ngrams
+        self.ngrams[curr_var] = words
+
+        for tense in ['past','present','future']:
+            for dim in self.variable_dimensions:
+                self.tense[curr_var][tense][dim] = float(self.tense[curr_var][tense][dim])/float(tense_totals[dim]+len(tense_vocab))
+
+        for pronoun in ['first','second','third']:
+            for dim in self.variable_dimensions:
+                self.pronouns[curr_var][pronoun][dim] = float(self.pronouns[curr_var][pronoun][dim])/float(pronoun_totals[dim]+len(pronoun_vocab))
 
     def test(self, testing_data):
         '''
@@ -127,29 +158,29 @@ class ClarkModel(object):
 
             parsed_message = flatten([ngrams_and_remove_stop_words(x, self.version) for x in [tokenized_turn1, tokenized_turn2, tokenized_turn3]])
             for var in self.variables:
-                classification = self.__normalize(self.__classify(self.ngrams[var], parsed_message, u_priors[var]))
+                classification = self.__normalize(self.__classify(self.ngrams[var], parsed_message, conv, u_priors[var], var))
                 for i,e in enumerate(self.variable_dimensions):
                     u_priors[var][e] = classification[i]
 
             parsed_message = ngrams_and_remove_stop_words(tokenized_turn1, self.version)
             for var in self.variables:
-                classification = self.__normalize(self.__classify(self.ngrams[var], parsed_message, u_priors[var]))
+                classification = self.__normalize(self.__classify(self.ngrams[var], parsed_message, tokenized_turn1, u_priors[var], var))
                 for i,e in enumerate(self.variable_dimensions):
                     u_priors[var][e] = classification[i]
 
             parsed_message = ngrams_and_remove_stop_words(tokenized_turn3, self.version)
             var_classification = {dim:'' for dim in self.variables}
             for var in self.variables:
-                var_classification[var] = self.__classify(self.ngrams[var], parsed_message, u_priors[var], False)
+                var_classification[var] = self.__classify(self.ngrams[var], parsed_message, tokenized_turn3, u_priors[var], var, False)
             
             self.true.append(row['turn3']['emotion'])
             emo_class = self.__map_to_emotion(var_classification)
             self.pred.append(emo_class[0])
 
         self.__calculate_scores()
-
-    def __classify(self, training_dict, content, priors, raw=True):
-        '''
+    
+    def __classify(self, training_dict, content, tokenized_content, priors, curr_var, raw=True):
+        """
         Classifies each message according to the trained model
 
         Parameters:
@@ -159,11 +190,26 @@ class ClarkModel(object):
 
         Returns:
         String: classification according to the trained model
-        '''
+        """
 
         low = [math.log(priors['low']), 'low']
         med = [math.log(priors['med']), 'med']
         high = [math.log(priors['high']), 'high']
+
+        pos = parts_of_speech(tokenized_content)
+        for p in pos:
+            tense = determine_tense(p)
+            pronoun = determine_pronoun(p)
+
+            if tense in self.tense[curr_var]:
+                low[0] += float(math.log(self.tense[curr_var][tense]['low']))
+                med[0] += float(math.log(self.tense[curr_var][tense]['med']))
+                high[0] += float(math.log(self.tense[curr_var][tense]['high']))
+
+            if tense in self.pronouns[curr_var]:
+                low[0] += float(math.log(self.pronouns[curr_var][pronoun]['low']))
+                med[0] += float(math.log(self.pronouns[curr_var][pronoun]['med']))
+                high[0] += float(math.log(self.pronouns[curr_var][pronoun]['high']))
 
         for word in content:
             if word in training_dict:
@@ -174,7 +220,7 @@ class ClarkModel(object):
         if raw: return list(map(lambda x: x[0], [low, med, high]))
 
         return max([low, med, high],key=lambda item:item[0])[1]
-
+    
     def __normalize(self, arr):
         """
         Normalizes between 0.1 and 1.0
