@@ -1,7 +1,7 @@
 from graphing_helpers import *
 from nlp_helpers import *
 from sklearn.metrics import confusion_matrix
-from base.base_emotion_model import BaseEmotionModel
+from models.base.base_emotion_model import BaseEmotionModel
 import matplotlib.pyplot as plt
 import itertools
 import math

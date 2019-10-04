@@ -1,41 +1,41 @@
-from sklearn.tree import DecisionTreeClassifier
-from graphing_helpers import *
-from nlp_helpers import *
-from sklearn.metrics import confusion_matrix
-from sklearn.ensemble import RandomForestClassifier
-import pandas as pd
 import math
+
 import numpy as np
+from sklearn.metrics import confusion_matrix
+
+from graphing_helpers import plot_confusion_matrix
+from models.base.base_emotion_model import BaseEmotionModel
+from nlp_helpers import (determine_pronoun, determine_tense, flatten,
+                         ngrams_and_remove_stop_words, normalize,
+                         parts_of_speech, tokenize)
+
 np.seterr(all="raise")
 
 
-class ClarkModel(object):
+class ClarkModel(BaseEmotionModel):
+    """
+    """
 
-    def __init__(self):
-        self.variables = ["pleasantness", "attention", "control",
-                          "certainty", "anticipated_effort", "responsibility"]
-        self.emotions = ["sadness", "joy", "fear",
-                         "anger", "challenge", "boredom", "frustration"]
+    def __init__(self, av2e_classifier, ngram_choice):
+        super().__init__()
         self.ngrams = {}
-        self.av2e_model = None
+        self.av2e_classifier = av2e_classifier
         self.priors = {}
         self.variable_dimensions = ["low", "med", "high"]
         self.micro_fscores = 0.0
         self.macro_fscores = 0.0
         self.tense = {var: self.__init_tense() for var in self.variables}
         self.pronouns = {var: self.__init_pronouns() for var in self.variables}
-        self.true = []
-        self.pred = []
-        self.version = 2  # unigrams = 0, bigrams = 1, both = 2
+        self.ngram_choice = ngram_choice
 
-    def __init_tense(self):
+    def __init_tense(self) -> dict:
         return {
             "past": {dim: 1 for dim in self.variable_dimensions},
             "present": {dim: 1 for dim in self.variable_dimensions},
             "future": {dim: 1 for dim in self.variable_dimensions}
         }
 
-    def __init_pronouns(self):
+    def __init_pronouns(self) -> dict:
         return {
             "first": {dim: 1 for dim in self.variable_dimensions},
             "second": {dim: 1 for dim in self.variable_dimensions},
@@ -43,21 +43,12 @@ class ClarkModel(object):
         }
 
     def train(self, training_data):
-        """
-        Builds a trained CLARK model
-
-        Parameters:
-        training_data (array): training data used to train the model
-
-        Returns:
-        Model: a trained model
-        """
-        self.__build_av2e_model(training_data)
+        self.__build_av2e_classifier(training_data)
 
         for var in self.variables:
             self.__train_by_variable(training_data, var)
 
-    def __train_by_variable(self, training_set, variable, data_points={}):
+    def __train_by_variable(self, training_set, variable):
         """
         Calculates the counts for each unigram and priors for each classification
 
@@ -98,7 +89,8 @@ class ClarkModel(object):
                         self.pronouns[variable][p_pronoun][true_dim] += 1
                         pronoun_totals[true_dim] += 1
 
-                res = ngrams_and_remove_stop_words(tokenized_res, self.version)
+                res = ngrams_and_remove_stop_words(
+                    tokenized_res, self.ngram_choice)
                 for word in res:
                     words_vocab.add(word)
                     if word in words:
@@ -163,24 +155,24 @@ class ClarkModel(object):
 
             conv = tokenized_turn1 + tokenized_turn2 + tokenized_turn3
 
-            parsed_message = flatten([ngrams_and_remove_stop_words(x, self.version) for x in [
+            parsed_message = flatten([ngrams_and_remove_stop_words(x, self.ngram_choice) for x in [
                                      tokenized_turn1, tokenized_turn2, tokenized_turn3]])
             for var in self.variables:
-                classification = self.__normalize(self.__classify(
+                classification = normalize(self.__classify(
                     self.ngrams[var], parsed_message, conv, u_priors[var], var))
                 for i, e in enumerate(self.variable_dimensions):
                     u_priors[var][e] = classification[i]
 
             parsed_message = ngrams_and_remove_stop_words(
-                tokenized_turn1, self.version)
+                tokenized_turn1, self.ngram_choice)
             for var in self.variables:
-                classification = self.__normalize(self.__classify(
+                classification = normalize(self.__classify(
                     self.ngrams[var], parsed_message, tokenized_turn1, u_priors[var], var))
                 for i, e in enumerate(self.variable_dimensions):
                     u_priors[var][e] = classification[i]
 
             parsed_message = ngrams_and_remove_stop_words(
-                tokenized_turn3, self.version)
+                tokenized_turn3, self.ngram_choice)
             var_classification = {dim: "" for dim in self.variables}
             for var in self.variables:
                 var_classification[var] = self.__classify(
@@ -238,25 +230,16 @@ class ClarkModel(object):
 
         return max([low, med, high], key=lambda item: item[0])[1]
 
-    def __normalize(self, arr):
-        """
-        Normalizes between 0.1 and 1.0
-        """
-        a = 0.9 * (arr - np.min(arr))/np.ptp(arr) + 0.1
-        return a/a.sum(0)
-
-    def __build_av2e_model(self, data):
+    def __build_av2e_classifier(self, data):
         X = [list(d["turn3"]["appraisals"].values()) for d in data]
         y = [em["turn3"]["emotion"] for em in data]
 
-        rf = RandomForestClassifier(n_estimators=10)
-        rf = rf.fit(X, y)
+        self.av2e_classifier = self.av2e_classifier.fit(X, y)
 
-        self.av2e_model = rf
-
-    def __map_to_emotion(self, vars):
-        v = [self.variable_dimensions.index(x) for x in list(vars.values())]
-        return self.av2e_model.predict(np.asarray(v).reshape(1, -1))
+    def __map_to_emotion(self, variables):
+        v = [self.variable_dimensions.index(x)
+             for x in list(variables.values())]
+        return self.av2e_classifier.predict(np.asarray(v).reshape(1, -1))
 
     def __calculate_scores(self):
         """
@@ -291,7 +274,7 @@ class ClarkModel(object):
         ro = tp / tp_fn
         try:
             self.micro_fscores = 2 * pi * ro / (pi + ro)
-        except:
+        except ZeroDivisionError:
             self.micro_fscores = 0.0
 
         temp_macro = 0
@@ -302,26 +285,26 @@ class ClarkModel(object):
 
             try:
                 pi_e = tp_e / tp_fp_e
-            except:
+            except ZeroDivisionError:
                 pi_e = 0.0
 
             try:
                 ro_e = tp_e / tp_fn_e
-            except:
+            except ZeroDivisionError:
                 ro_e = 0.0
 
             try:
                 temp_macro += 2 * pi_e * ro_e / (pi_e + ro_e)
-            except:
+            except ZeroDivisionError:
                 temp_macro += 0.0
 
         self.macro_fscores = temp_macro / 7
 
-    def confusion_matrix(self, normalize=False):
+    def confusion_matrix(self, normalized=False):
         """
         Computes the confusion matrices for each of the variables
         """
 
         cn_matrix = confusion_matrix(self.true, self.pred)
         plot_confusion_matrix(cn_matrix, self.emotions,
-                              "CLARK Emotions", normalize)
+                              "CLARK Emotions", normalized)

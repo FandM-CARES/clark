@@ -1,4 +1,3 @@
-import nltk
 from nltk.corpus import stopwords
 stop_words = set(stopwords.words("english"))
 
@@ -6,8 +5,18 @@ stop_words = set(stopwords.words("english"))
 Helper functions for parsing inputs
 """
 
+
+def normalize(arr):
+    """
+    Normalizes between 0.1 and 1.0
+    """
+    a = 0.9 * (arr - np.min(arr))/np.ptp(arr) + 0.1
+    return a/a.sum(0)
+
+
 def flatten(l):
     return [item for sublist in l for item in sublist]
+
 
 def determine_tense(tagged_tuple):
     tag = tagged_tuple[1]
@@ -18,6 +27,7 @@ def determine_tense(tagged_tuple):
     elif tag in ["MD"]:
         return "future"
     return ""
+
 
 def determine_pronoun(tagged_tuple):
     tag = tagged_tuple[1]
@@ -34,11 +44,14 @@ def determine_pronoun(tagged_tuple):
     else:
         return ""
 
+
 def parts_of_speech(tokenized_res):
     return nltk.pos_tag(tokenized_res)
 
+
 def tokenize(row):
     return nltk.tokenize.casual.casual_tokenize(row)
+
 
 def ngrams_and_remove_stop_words(init_res, ngram):
     """
@@ -57,8 +70,8 @@ def ngrams_and_remove_stop_words(init_res, ngram):
 
     res = list(init_res)
 
-    bad_characters = [".","-","_","&","~",",","\\"]
-        
+    bad_characters = [".", "-", "_", "&", "~", ",", "\\"]
+
     for i, word in enumerate(res):
         res[i] = word.lower()
         if word in bad_characters:
@@ -66,20 +79,21 @@ def ngrams_and_remove_stop_words(init_res, ngram):
         if ngram == 0:
             if is_stop_word(word):
                 res[i] = ""
-    
+
     temp_ret = [x for x in res if x != ""]
-    
+
     if len(temp_ret) == 0:
         return []
 
-    if ngram == 0: 
+    if ngram == 0:
         return temp_ret
-    
-    if ngram == 1: 
-        return [" ".join(x) for x in list(nltk.bigrams(temp_ret))] 
-    
+
+    if ngram == 1:
+        return [" ".join(x) for x in list(nltk.bigrams(temp_ret))]
+
     if ngram == 2:
         return [x for x in temp_ret if not is_stop_word(x)] + [" ".join(x) for x in list(nltk.bigrams(temp_ret))]
+
 
 def is_stop_word(word):
     """
@@ -94,4 +108,3 @@ def is_stop_word(word):
     if word in stop_words:
         return True
     return False
-    

@@ -1,7 +1,7 @@
 from models.emotion_model import EmotionModel
-from models.CLARK_model import ClarkModel
-from models.AV_model import AVModel
-from models.AV_to_Emotion_model import AVtoEmotionModel
+from models.clark_model import ClarkModel
+from models.av_model import AVModel
+from models.av_to_emotion_model import AVtoEmotionModel
 from process_data import *
 import numpy as np
 from graphing_helpers import plot_ellsworth_figs
@@ -95,7 +95,7 @@ def n_fold_test(data_list, n, c_e):
         print("AV Model Done!")
     
     else:
-        models = ["DT", "NB", "CNB", "RF"]
+        models = ["decision_tree", "naive_bayes", "comp_naive_bayes", "random_forest"]
         mean_fscores = {m:[0.0, 0.0] for m in models}
 
         for i, split in enumerate(splits):
