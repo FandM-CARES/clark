@@ -3,14 +3,14 @@ from nlp_helpers import *
 from sklearn.metrics import confusion_matrix
 import math
 import numpy as np
-np.seterr(all='raise')
+np.seterr(all="raise")
 
 
 class EmotionModel(object):
 
     def __init__(self):
-        self.emotions = ['sadness', 'joy', 'fear',
-                         'anger', 'challenge', 'boredom', 'frustration']
+        self.emotions = ["sadness", "joy", "fear",
+                         "anger", "challenge", "boredom", "frustration"]
         self.ngrams = {}
         self.priors = {}
         self.micro_fscores = 0.0
@@ -23,16 +23,16 @@ class EmotionModel(object):
 
     def __init_tense(self):
         return {
-            'past': {emotion: 1 for emotion in self.emotions},
-            'present': {emotion: 1 for emotion in self.emotions},
-            'future': {emotion: 1 for emotion in self.emotions}
+            "past": {emotion: 1 for emotion in self.emotions},
+            "present": {emotion: 1 for emotion in self.emotions},
+            "future": {emotion: 1 for emotion in self.emotions}
         }
 
     def __init_pronouns(self):
         return {
-            'first': {emotion: 1 for emotion in self.emotions},
-            'second': {emotion: 1 for emotion in self.emotions},
-            'third': {emotion: 1 for emotion in self.emotions}
+            "first": {emotion: 1 for emotion in self.emotions},
+            "second": {emotion: 1 for emotion in self.emotions},
+            "third": {emotion: 1 for emotion in self.emotions}
         }
 
     def train(self, training_data):
@@ -54,9 +54,9 @@ class EmotionModel(object):
         pronoun_totals = {emotion: 0 for emotion in self.emotions}
 
         for row in training_data:
-            for turn in ['turn1', 'turn2', 'turn3']:
-                true_emotion = row[turn]['emotion']
-                tokenized_res = tokenize(row[turn]['text'])
+            for turn in ["turn1", "turn2", "turn3"]:
+                true_emotion = row[turn]["emotion"]
+                tokenized_res = tokenize(row[turn]["text"])
 
                 pos = parts_of_speech(tokenized_res)
                 for p in pos:
@@ -128,9 +128,9 @@ class EmotionModel(object):
         for row in testing_data:
             u_priors = dict(self.priors)
 
-            tokenized_turn1 = tokenize(row['turn1']['text'])
-            tokenized_turn2 = tokenize(row['turn2']['text'])
-            tokenized_turn3 = tokenize(row['turn3']['text'])
+            tokenized_turn1 = tokenize(row["turn1"]["text"])
+            tokenized_turn2 = tokenize(row["turn2"]["text"])
+            tokenized_turn3 = tokenize(row["turn3"]["text"])
 
             conv = tokenized_turn1 + tokenized_turn2 + tokenized_turn3
 
@@ -148,7 +148,7 @@ class EmotionModel(object):
             for i, e in enumerate(self.emotions):
                 u_priors[e] = classification[i]
 
-            emotion = row['turn3']['emotion']
+            emotion = row["turn3"]["emotion"]
             self.true.append(emotion)
 
             parsed_message = ngrams_and_remove_stop_words(
@@ -173,13 +173,13 @@ class EmotionModel(object):
         String: classification according to the trained model
         """
 
-        sadness = [math.log(priors['sadness']), 'sadness']
-        joy = [math.log(priors['joy']), 'joy']
-        fear = [math.log(priors['fear']), 'fear']
-        challenge = [math.log(priors['challenge']), 'challenge']
-        anger = [math.log(priors['anger']), 'anger']
-        boredom = [math.log(priors['boredom']), 'boredom']
-        frustration = [math.log(priors['frustration']), 'frustration']
+        sadness = [math.log(priors["sadness"]), "sadness"]
+        joy = [math.log(priors["joy"]), "joy"]
+        fear = [math.log(priors["fear"]), "fear"]
+        challenge = [math.log(priors["challenge"]), "challenge"]
+        anger = [math.log(priors["anger"]), "anger"]
+        boredom = [math.log(priors["boredom"]), "boredom"]
+        frustration = [math.log(priors["frustration"]), "frustration"]
 
         pos = parts_of_speech(tokenized_content)
         for p in pos:
@@ -187,37 +187,37 @@ class EmotionModel(object):
             pronoun = determine_pronoun(p)
 
             if tense in self.tense:
-                sadness[0] += float(math.log(self.tense[tense]['sadness']))
-                joy[0] += float(math.log(self.tense[tense]['joy']))
-                fear[0] += float(math.log(self.tense[tense]['fear']))
-                challenge[0] += float(math.log(self.tense[tense]['challenge']))
-                anger[0] += float(math.log(self.tense[tense]['anger']))
-                boredom[0] += float(math.log(self.tense[tense]['boredom']))
+                sadness[0] += float(math.log(self.tense[tense]["sadness"]))
+                joy[0] += float(math.log(self.tense[tense]["joy"]))
+                fear[0] += float(math.log(self.tense[tense]["fear"]))
+                challenge[0] += float(math.log(self.tense[tense]["challenge"]))
+                anger[0] += float(math.log(self.tense[tense]["anger"]))
+                boredom[0] += float(math.log(self.tense[tense]["boredom"]))
                 frustration[0] += float(math.log(self.tense[tense]
-                                                 ['frustration']))
+                                                 ["frustration"]))
 
             if pronoun in self.pronouns:
-                sadness[0] += float(math.log(self.pronouns[pronoun]['sadness']))
-                joy[0] += float(math.log(self.pronouns[pronoun]['joy']))
-                fear[0] += float(math.log(self.pronouns[pronoun]['fear']))
+                sadness[0] += float(math.log(self.pronouns[pronoun]["sadness"]))
+                joy[0] += float(math.log(self.pronouns[pronoun]["joy"]))
+                fear[0] += float(math.log(self.pronouns[pronoun]["fear"]))
                 challenge[0] += float(math.log(self.pronouns[pronoun]
-                                               ['challenge']))
-                anger[0] += float(math.log(self.pronouns[pronoun]['anger']))
-                boredom[0] += float(math.log(self.pronouns[pronoun]['boredom']))
+                                               ["challenge"]))
+                anger[0] += float(math.log(self.pronouns[pronoun]["anger"]))
+                boredom[0] += float(math.log(self.pronouns[pronoun]["boredom"]))
                 frustration[0] += float(math.log(self.pronouns[pronoun]
-                                                 ['frustration']))
+                                                 ["frustration"]))
 
         for word in content:
             if word in training_dict:
-                sadness[0] += float(math.log(training_dict[word]['sadness']))
-                joy[0] += float(math.log(training_dict[word]['joy']))
-                fear[0] += float(math.log(training_dict[word]['fear']))
+                sadness[0] += float(math.log(training_dict[word]["sadness"]))
+                joy[0] += float(math.log(training_dict[word]["joy"]))
+                fear[0] += float(math.log(training_dict[word]["fear"]))
                 challenge[0] += float(math.log(training_dict[word]
-                                               ['challenge']))
-                anger[0] += float(math.log(training_dict[word]['anger']))
-                boredom[0] += float(math.log(training_dict[word]['boredom']))
+                                               ["challenge"]))
+                anger[0] += float(math.log(training_dict[word]["anger"]))
+                boredom[0] += float(math.log(training_dict[word]["boredom"]))
                 frustration[0] += float(math.log(training_dict[word]
-                                                 ['frustration']))
+                                                 ["frustration"]))
 
         if raw:
             return list(map(lambda x: x[0], [sadness, joy, fear, challenge, anger, boredom, frustration]))
@@ -250,13 +250,13 @@ class EmotionModel(object):
                     np.logical_or(
                         np.logical_or(
                             np.logical_or(
-                                np.logical_or(np.logical_and(self.pred == 'sadness', self.true == 'sadness'), np.logical_and(
-                                    self.pred == 'joy', self.true == 'joy')),
-                                np.logical_and(self.pred == 'fear', self.true == 'fear')),
-                            np.logical_and(self.pred == 'anger', self.true == 'anger')),
-                        np.logical_and(self.pred == 'challenge', self.true == 'challenge')),
-                    np.logical_and(self.pred == 'boredom', self.true == 'boredom')),
-                np.logical_and(self.pred == 'frustration', self.true == 'frustration')))
+                                np.logical_or(np.logical_and(self.pred == "sadness", self.true == "sadness"), np.logical_and(
+                                    self.pred == "joy", self.true == "joy")),
+                                np.logical_and(self.pred == "fear", self.true == "fear")),
+                            np.logical_and(self.pred == "anger", self.true == "anger")),
+                        np.logical_and(self.pred == "challenge", self.true == "challenge")),
+                    np.logical_and(self.pred == "boredom", self.true == "boredom")),
+                np.logical_and(self.pred == "frustration", self.true == "frustration")))
         tp_fp = len(self.pred)
         tp_fn = len(self.true)
 
@@ -296,4 +296,4 @@ class EmotionModel(object):
         """
 
         cn_matrix = confusion_matrix(self.true, self.pred)
-        plot_confusion_matrix(cn_matrix, self.emotions, 'Emotions', normalize)
+        plot_confusion_matrix(cn_matrix, self.emotions, "Emotions", normalize)

@@ -6,20 +6,20 @@ from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
 import math
 import numpy as np
-np.seterr(all='raise')
+np.seterr(all="raise")
 
 
 class ClarkModel(object):
 
     def __init__(self):
-        self.variables = ['pleasantness', 'attention', 'control',
-                          'certainty', 'anticipated_effort', 'responsibility']
-        self.emotions = ['sadness', 'joy', 'fear',
-                         'anger', 'challenge', 'boredom', 'frustration']
+        self.variables = ["pleasantness", "attention", "control",
+                          "certainty", "anticipated_effort", "responsibility"]
+        self.emotions = ["sadness", "joy", "fear",
+                         "anger", "challenge", "boredom", "frustration"]
         self.ngrams = {}
         self.av2e_model = None
         self.priors = {}
-        self.variable_dimensions = ['low', 'med', 'high']
+        self.variable_dimensions = ["low", "med", "high"]
         self.micro_fscores = 0.0
         self.macro_fscores = 0.0
         self.tense = {var: self.__init_tense() for var in self.variables}
@@ -30,16 +30,16 @@ class ClarkModel(object):
 
     def __init_tense(self):
         return {
-            'past': {dim: 1 for dim in self.variable_dimensions},
-            'present': {dim: 1 for dim in self.variable_dimensions},
-            'future': {dim: 1 for dim in self.variable_dimensions}
+            "past": {dim: 1 for dim in self.variable_dimensions},
+            "present": {dim: 1 for dim in self.variable_dimensions},
+            "future": {dim: 1 for dim in self.variable_dimensions}
         }
 
     def __init_pronouns(self):
         return {
-            'first': {dim: 1 for dim in self.variable_dimensions},
-            'second': {dim: 1 for dim in self.variable_dimensions},
-            'third': {dim: 1 for dim in self.variable_dimensions}
+            "first": {dim: 1 for dim in self.variable_dimensions},
+            "second": {dim: 1 for dim in self.variable_dimensions},
+            "third": {dim: 1 for dim in self.variable_dimensions}
         }
 
     def train(self, training_data):
@@ -80,10 +80,10 @@ class ClarkModel(object):
         pronoun_vocab = set()
 
         for row in training_set:
-            for turn in ['turn1', 'turn2', 'turn3']:
+            for turn in ["turn1", "turn2", "turn3"]:
                 true_dim = self.variable_dimensions[int(
-                    row[turn]['appraisals'][variable])]
-                tokenized_res = tokenize(row[turn]['text'])
+                    row[turn]["appraisals"][variable])]
+                tokenized_res = tokenize(row[turn]["text"])
 
                 pos = parts_of_speech(tokenized_res)
                 for p in pos:
@@ -133,18 +133,18 @@ class ClarkModel(object):
 
         self.ngrams[curr_var] = words
 
-        for tense in ['past', 'present', 'future']:
+        for tense in ["past", "present", "future"]:
             for dim in self.variable_dimensions:
                 self.tense[curr_var][tense][dim] = float(
                     self.tense[curr_var][tense][dim])/float(tense_totals[dim]+len(tense_vocab))
 
-        for pronoun in ['first', 'second', 'third']:
+        for pronoun in ["first", "second", "third"]:
             for dim in self.variable_dimensions:
                 self.pronouns[curr_var][pronoun][dim] = float(
                     self.pronouns[curr_var][pronoun][dim])/float(pronoun_totals[dim]+len(pronoun_vocab))
 
     def test(self, testing_data):
-        '''
+        """
         Tests the precision/recall of the model
 
         Parameters:
@@ -152,14 +152,14 @@ class ClarkModel(object):
 
         Returns:
         Null
-        '''
+        """
 
         for row in testing_data:
             u_priors = dict(self.priors)
 
-            tokenized_turn1 = tokenize(row['turn1']['text'])
-            tokenized_turn2 = tokenize(row['turn2']['text'])
-            tokenized_turn3 = tokenize(row['turn3']['text'])
+            tokenized_turn1 = tokenize(row["turn1"]["text"])
+            tokenized_turn2 = tokenize(row["turn2"]["text"])
+            tokenized_turn3 = tokenize(row["turn3"]["text"])
 
             conv = tokenized_turn1 + tokenized_turn2 + tokenized_turn3
 
@@ -181,12 +181,12 @@ class ClarkModel(object):
 
             parsed_message = ngrams_and_remove_stop_words(
                 tokenized_turn3, self.version)
-            var_classification = {dim: '' for dim in self.variables}
+            var_classification = {dim: "" for dim in self.variables}
             for var in self.variables:
                 var_classification[var] = self.__classify(
                     self.ngrams[var], parsed_message, tokenized_turn3, u_priors[var], var, False)
 
-            self.true.append(row['turn3']['emotion'])
+            self.true.append(row["turn3"]["emotion"])
             emo_class = self.__map_to_emotion(var_classification)
             self.pred.append(emo_class[0])
 
@@ -205,9 +205,9 @@ class ClarkModel(object):
         String: classification according to the trained model
         """
 
-        low = [math.log(priors['low']), 'low']
-        med = [math.log(priors['med']), 'med']
-        high = [math.log(priors['high']), 'high']
+        low = [math.log(priors["low"]), "low"]
+        med = [math.log(priors["med"]), "med"]
+        high = [math.log(priors["high"]), "high"]
 
         pos = parts_of_speech(tokenized_content)
         for p in pos:
@@ -215,23 +215,23 @@ class ClarkModel(object):
             pronoun = determine_pronoun(p)
 
             if tense in self.tense[curr_var]:
-                low[0] += float(math.log(self.tense[curr_var][tense]['low']))
-                med[0] += float(math.log(self.tense[curr_var][tense]['med']))
-                high[0] += float(math.log(self.tense[curr_var][tense]['high']))
+                low[0] += float(math.log(self.tense[curr_var][tense]["low"]))
+                med[0] += float(math.log(self.tense[curr_var][tense]["med"]))
+                high[0] += float(math.log(self.tense[curr_var][tense]["high"]))
 
             if tense in self.pronouns[curr_var]:
                 low[0] += float(math.log(self.pronouns[curr_var]
-                                         [pronoun]['low']))
+                                         [pronoun]["low"]))
                 med[0] += float(math.log(self.pronouns[curr_var]
-                                         [pronoun]['med']))
+                                         [pronoun]["med"]))
                 high[0] += float(math.log(self.pronouns[curr_var]
-                                          [pronoun]['high']))
+                                          [pronoun]["high"]))
 
         for word in content:
             if word in training_dict:
-                low[0] += float(math.log(training_dict[word]['low']))
-                med[0] += float(math.log(training_dict[word]['med']))
-                high[0] += float(math.log(training_dict[word]['high']))
+                low[0] += float(math.log(training_dict[word]["low"]))
+                med[0] += float(math.log(training_dict[word]["med"]))
+                high[0] += float(math.log(training_dict[word]["high"]))
 
         if raw:
             return list(map(lambda x: x[0], [low, med, high]))
@@ -246,8 +246,8 @@ class ClarkModel(object):
         return a/a.sum(0)
 
     def __build_av2e_model(self, data):
-        X = [list(d['turn3']['appraisals'].values()) for d in data]
-        y = [em['turn3']['emotion'] for em in data]
+        X = [list(d["turn3"]["appraisals"].values()) for d in data]
+        y = [em["turn3"]["emotion"] for em in data]
 
         rf = RandomForestClassifier(n_estimators=10)
         rf = rf.fit(X, y)
@@ -277,13 +277,13 @@ class ClarkModel(object):
                     np.logical_or(
                         np.logical_or(
                             np.logical_or(
-                                np.logical_or(np.logical_and(self.pred == 'sadness', self.true == 'sadness'), np.logical_and(
-                                    self.pred == 'joy', self.true == 'joy')),
-                                np.logical_and(self.pred == 'fear', self.true == 'fear')),
-                            np.logical_and(self.pred == 'anger', self.true == 'anger')),
-                        np.logical_and(self.pred == 'challenge', self.true == 'challenge')),
-                    np.logical_and(self.pred == 'boredom', self.true == 'boredom')),
-                np.logical_and(self.pred == 'frustration', self.true == 'frustration')))
+                                np.logical_or(np.logical_and(self.pred == "sadness", self.true == "sadness"), np.logical_and(
+                                    self.pred == "joy", self.true == "joy")),
+                                np.logical_and(self.pred == "fear", self.true == "fear")),
+                            np.logical_and(self.pred == "anger", self.true == "anger")),
+                        np.logical_and(self.pred == "challenge", self.true == "challenge")),
+                    np.logical_and(self.pred == "boredom", self.true == "boredom")),
+                np.logical_and(self.pred == "frustration", self.true == "frustration")))
         tp_fp = len(self.pred)
         tp_fn = len(self.true)
 
@@ -324,4 +324,4 @@ class ClarkModel(object):
 
         cn_matrix = confusion_matrix(self.true, self.pred)
         plot_confusion_matrix(cn_matrix, self.emotions,
-                              'CLARK Emotions', normalize)
+                              "CLARK Emotions", normalize)

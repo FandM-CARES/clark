@@ -1,6 +1,6 @@
 from test import *
 
-newest_file = 'data/combined_091319.json'
+newest_file = "data/combined_091319.json"
 
 train_test_split([newest_file], 0.75, 3, True)
 

@@ -1,6 +1,6 @@
 import nltk
 from nltk.corpus import stopwords
-stop_words = set(stopwords.words('english'))
+stop_words = set(stopwords.words("english"))
 
 """
 Helper functions for parsing inputs
@@ -57,7 +57,7 @@ def ngrams_and_remove_stop_words(init_res, ngram):
 
     res = list(init_res)
 
-    bad_characters = ['.','-','_','&','~',',','\\']
+    bad_characters = [".","-","_","&","~",",","\\"]
         
     for i, word in enumerate(res):
         res[i] = word.lower()

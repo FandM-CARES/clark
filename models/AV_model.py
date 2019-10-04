@@ -1,22 +1,23 @@
 from graphing_helpers import *
 from nlp_helpers import *
 from sklearn.metrics import confusion_matrix
+from base.base_emotion_model import BaseEmotionModel
 import matplotlib.pyplot as plt
 import itertools
 import math
 import re
 import numpy as np
-np.seterr(all='raise')
+np.seterr(all="raise")
 
 
-class AVModel(object):
+class AVModel(BaseEmotionModel):
 
     def __init__(self):
-        self.variables = ['pleasantness', 'attention', 'control',
-                          'certainty', 'anticipated_effort', 'responsibility']
+        self.variables = ["pleasantness", "attention", "control",
+                          "certainty", "anticipated_effort", "responsibility"]
         self.ngrams = {}
         self.priors = {}
-        self.variable_dimensions = ['low', 'med', 'high']
+        self.variable_dimensions = ["low", "med", "high"]
         self.micro_fscores = {}
         self.macro_fscores = {}
         self.tense = {var: self.__init_tense() for var in self.variables}
@@ -27,16 +28,16 @@ class AVModel(object):
 
     def __init_tense(self):
         return {
-            'past': {dim: 1 for dim in self.variable_dimensions},
-            'present': {dim: 1 for dim in self.variable_dimensions},
-            'future': {dim: 1 for dim in self.variable_dimensions}
+            "past": {dim: 1 for dim in self.variable_dimensions},
+            "present": {dim: 1 for dim in self.variable_dimensions},
+            "future": {dim: 1 for dim in self.variable_dimensions}
         }
 
     def __init_pronouns(self):
         return {
-            'first': {dim: 1 for dim in self.variable_dimensions},
-            'second': {dim: 1 for dim in self.variable_dimensions},
-            'third': {dim: 1 for dim in self.variable_dimensions}
+            "first": {dim: 1 for dim in self.variable_dimensions},
+            "second": {dim: 1 for dim in self.variable_dimensions},
+            "third": {dim: 1 for dim in self.variable_dimensions}
         }
 
     def train(self, training_data):
@@ -76,10 +77,10 @@ class AVModel(object):
         pronoun_vocab = set()
 
         for row in training_set:
-            for turn in ['turn1', 'turn2', 'turn3']:
+            for turn in ["turn1", "turn2", "turn3"]:
                 true_dim = self.variable_dimensions[int(
-                    row[turn]['appraisals'][variable])]
-                tokenized_res = tokenize(row[turn]['text'])
+                    row[turn]["appraisals"][variable])]
+                tokenized_res = tokenize(row[turn]["text"])
 
                 pos = parts_of_speech(tokenized_res)
                 for p in pos:
@@ -129,12 +130,12 @@ class AVModel(object):
 
         self.ngrams[curr_var] = words
 
-        for tense in ['past', 'present', 'future']:
+        for tense in ["past", "present", "future"]:
             for dim in self.variable_dimensions:
                 self.tense[curr_var][tense][dim] = float(
                     self.tense[curr_var][tense][dim])/float(tense_totals[dim]+len(tense_vocab))
 
-        for pronoun in ['first', 'second', 'third']:
+        for pronoun in ["first", "second", "third"]:
             for dim in self.variable_dimensions:
                 self.pronouns[curr_var][pronoun][dim] = float(
                     self.pronouns[curr_var][pronoun][dim])/float(pronoun_totals[dim]+len(pronoun_vocab))
@@ -157,9 +158,9 @@ class AVModel(object):
         for row in testing_data:
             u_priors = dict(self.priors)
 
-            tokenized_turn1 = tokenize(row['turn1']['text'])
-            tokenized_turn2 = tokenize(row['turn2']['text'])
-            tokenized_turn3 = tokenize(row['turn3']['text'])
+            tokenized_turn1 = tokenize(row["turn1"]["text"])
+            tokenized_turn2 = tokenize(row["turn2"]["text"])
+            tokenized_turn3 = tokenize(row["turn3"]["text"])
 
             conv = tokenized_turn1 + tokenized_turn2 + tokenized_turn3
 
@@ -183,7 +184,7 @@ class AVModel(object):
                 tokenized_turn3, self.version)
             for var in self.variables:
                 weight = self.variable_dimensions[int(
-                    row['turn3']['appraisals'][var])]
+                    row["turn3"]["appraisals"][var])]
                 self.true[var].append(weight)
                 classification = self.__classify(
                     self.ngrams[var], parsed_message, tokenized_turn3, u_priors[var], var, False)
@@ -204,9 +205,9 @@ class AVModel(object):
         String: classification according to the trained model
         """
 
-        low = [math.log(priors['low']), 'low']
-        med = [math.log(priors['med']), 'med']
-        high = [math.log(priors['high']), 'high']
+        low = [math.log(priors["low"]), "low"]
+        med = [math.log(priors["med"]), "med"]
+        high = [math.log(priors["high"]), "high"]
 
         pos = parts_of_speech(tokenized_content)
         for p in pos:
@@ -214,23 +215,23 @@ class AVModel(object):
             pronoun = determine_pronoun(p)
 
             if tense in self.tense[curr_var]:
-                low[0] += float(math.log(self.tense[curr_var][tense]['low']))
-                med[0] += float(math.log(self.tense[curr_var][tense]['med']))
-                high[0] += float(math.log(self.tense[curr_var][tense]['high']))
+                low[0] += float(math.log(self.tense[curr_var][tense]["low"]))
+                med[0] += float(math.log(self.tense[curr_var][tense]["med"]))
+                high[0] += float(math.log(self.tense[curr_var][tense]["high"]))
 
             if tense in self.pronouns[curr_var]:
                 low[0] += float(math.log(self.pronouns[curr_var]
-                                         [pronoun]['low']))
+                                         [pronoun]["low"]))
                 med[0] += float(math.log(self.pronouns[curr_var]
-                                         [pronoun]['med']))
+                                         [pronoun]["med"]))
                 high[0] += float(math.log(self.pronouns[curr_var]
-                                          [pronoun]['high']))
+                                          [pronoun]["high"]))
 
         for word in content:
             if word in training_dict:
-                low[0] += float(math.log(training_dict[word]['low']))
-                med[0] += float(math.log(training_dict[word]['med']))
-                high[0] += float(math.log(training_dict[word]['high']))
+                low[0] += float(math.log(training_dict[word]["low"]))
+                med[0] += float(math.log(training_dict[word]["med"]))
+                high[0] += float(math.log(training_dict[word]["high"]))
 
         if raw:
             return list(map(lambda x: x[0], [low, med, high]))
@@ -259,8 +260,8 @@ class AVModel(object):
             self.pred[var] = np.asarray(self.pred[var])
             self.true[var] = np.asarray(self.true[var])
 
-            tp = np.sum(np.logical_or(np.logical_or(np.logical_and(self.pred[var] == 'low', self.true[var] == 'low'), np.logical_and(
-                self.pred[var] == 'med', self.true[var] == 'med')), np.logical_and(self.pred[var] == 'high', self.true[var] == 'high')))
+            tp = np.sum(np.logical_or(np.logical_or(np.logical_and(self.pred[var] == "low", self.true[var] == "low"), np.logical_and(
+                self.pred[var] == "med", self.true[var] == "med")), np.logical_and(self.pred[var] == "high", self.true[var] == "high")))
             tp_fp = len(self.pred[var])
             tp_fn = len(self.true[var])
 
@@ -273,7 +274,7 @@ class AVModel(object):
                 self.micro_fscores[var] = 0.0
 
             temp_macro = 0
-            for c in ['high', 'med', 'low']:
+            for c in ["high", "med", "low"]:
                 tp_c = np.sum(np.logical_and(
                     self.pred[var] == c, self.true[var] == c))
                 tp_fp_c = len([x for x in self.pred[var] if x != c])
@@ -304,4 +305,4 @@ class AVModel(object):
         for var in self.variables:
             cn_matrix = confusion_matrix(self.true[var], self.pred[var])
             plot_confusion_matrix(
-                cn_matrix, ['low', 'med', 'high'], var, normalize)
+                cn_matrix, ["low", "med", "high"], var, normalize)

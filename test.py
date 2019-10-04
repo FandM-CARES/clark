@@ -40,12 +40,12 @@ def n_fold_test(data_list, n, c_e):
         mean_fscores[0] /= n
         mean_fscores[1] /= n
 
-        with open('results/CLARK_results.csv', 'w') as csv_file:
+        with open("results/CLARK_results.csv", "w") as csv_file:
             writer = csv.writer(csv_file)
-            writer.writerow(['Micro F Score', 'Macro F Score'])
+            writer.writerow(["Micro F Score", "Macro F Score"])
             writer.writerow([mean_fscores[0], mean_fscores[1]])
 
-        print('CLARK Model Done!')
+        print("CLARK Model Done!")
 
     elif c_e == 1:
         mean_fscores = [0, 0]
@@ -61,12 +61,12 @@ def n_fold_test(data_list, n, c_e):
         mean_fscores[0] /= n
         mean_fscores[1] /= n
 
-        with open('results/Emotion_results.csv', 'w') as csv_file:
+        with open("results/Emotion_results.csv", "w") as csv_file:
             writer = csv.writer(csv_file)
-            writer.writerow(['Micro F Score', 'Macro F Score'])
+            writer.writerow(["Micro F Score", "Macro F Score"])
             writer.writerow([mean_fscores[0], mean_fscores[1]])
         
-        print('Emotions Model Done!')
+        print("Emotions Model Done!")
     
     elif c_e == 2:
         mean_fscores = {}
@@ -86,16 +86,16 @@ def n_fold_test(data_list, n, c_e):
             mean_fscores[var][0] /= n
             mean_fscores[var][1] /= n
 
-        with open('results/AV_results.csv', 'w') as csv_file:
+        with open("results/AV_results.csv", "w") as csv_file:
             writer = csv.writer(csv_file)
-            writer.writerow(['Variable', 'Micro F Score', 'Macro F Score'])
+            writer.writerow(["Variable", "Micro F Score", "Macro F Score"])
             for key, value in mean_fscores.items():
                 writer.writerow([key, value[0], value[1]])
 
-        print('AV Model Done!')
+        print("AV Model Done!")
     
     else:
-        models = ['DT', 'NB', 'CNB', 'RF']
+        models = ["DT", "NB", "CNB", "RF"]
         mean_fscores = {m:[0.0, 0.0] for m in models}
 
         for i, split in enumerate(splits):
@@ -111,13 +111,13 @@ def n_fold_test(data_list, n, c_e):
             mean_fscores[m][0] /= n
             mean_fscores[m][1] /= n
 
-        with open('results/AV2E_results.csv', 'w') as csv_file:
+        with open("results/AV2E_results.csv", "w") as csv_file:
             writer = csv.writer(csv_file)
-            writer.writerow(['Model', 'Micro F Score', 'Macro F Score'])
+            writer.writerow(["Model", "Micro F Score", "Macro F Score"])
             for m in models:
                 writer.writerow([m, mean_fscores[m][0], mean_fscores[m][1]])
         
-        print('AV2E Model Done!')
+        print("AV2E Model Done!")
 
 
 
@@ -143,12 +143,12 @@ def train_test_split(data_list, s, c_e, show_matrix=False):
         if show_matrix:
             clark.confusion_matrix()
 
-        with open('results/CLARK_results.csv', 'w') as csv_file:
+        with open("results/CLARK_results.csv", "w") as csv_file:
             writer = csv.writer(csv_file)
-            writer.writerow(['Micro F Score', 'Macro F Score'])
+            writer.writerow(["Micro F Score", "Macro F Score"])
             writer.writerow([clark.micro_fscores, clark.macro_fscores])
 
-        print('CLARK Model Done!')
+        print("CLARK Model Done!")
     
     elif c_e == 1:
         em_model = EmotionModel()
@@ -158,12 +158,12 @@ def train_test_split(data_list, s, c_e, show_matrix=False):
         if show_matrix:
             em_model.confusion_matrix()
         
-        with open('results/Emotion_results.csv', 'w') as csv_file:
+        with open("results/Emotion_results.csv", "w") as csv_file:
             writer = csv.writer(csv_file)
-            writer.writerow(['Micro F Score', 'Macro F Score'])
+            writer.writerow(["Micro F Score", "Macro F Score"])
             writer.writerow([em_model.micro_fscores, em_model.macro_fscores])
         
-        print('Emotions Model Done!')
+        print("Emotions Model Done!")
     
     else:
 
@@ -180,10 +180,10 @@ def train_test_split(data_list, s, c_e, show_matrix=False):
             fscores[var][0] = av.micro_fscores[var]
             fscores[var][1] = av.macro_fscores[var]
 
-        with open('results/AV_results.csv', 'w') as csv_file:
+        with open("results/AV_results.csv", "w") as csv_file:
             writer = csv.writer(csv_file)
-            writer.writerow(['Variable', 'Micro F Score', 'Macro F Score'])
+            writer.writerow(["Variable", "Micro F Score", "Macro F Score"])
             for key, value in fscores.items():
                 writer.writerow([key, value[0], value[1]])
 
-        print('AV Model Done!')
+        print("AV Model Done!")
