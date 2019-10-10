@@ -1,25 +1,25 @@
-from graphing_helpers import plot_confusion_matrix
-from nlp_helpers import *
-from sklearn.metrics import confusion_matrix
 import math
-import numpy as np
-np.seterr(all="raise")
+
+from models.base.base_emotion_model import BaseEmotionModel
+from nlp_helpers import (determine_pronoun, determine_tense, flatten,
+                         ngrams_and_remove_stop_words, normalize,
+                         parts_of_speech, tokenize)
 
 
-class EmotionModel(object):
+class EmotionModel(BaseEmotionModel):
+    """
+    TODO insert docstring here
+    """
 
-    def __init__(self):
-        self.emotions = ["sadness", "joy", "fear",
-                         "anger", "challenge", "boredom", "frustration"]
+    def __init__(self, ngram_choice):
+        super().__init__()
         self.ngrams = {}
         self.priors = {}
         self.micro_fscores = 0.0
         self.macro_fscores = 0.0
-        self.true = list()
-        self.pred = list()
         self.tense = self.__init_tense()
         self.pronouns = self.__init_pronouns()
-        self.version = 2  # 0 - unigrams, 1 - bigrams, 2, both
+        self.ngram_choice = ngram_choice
 
     def __init_tense(self):
         return {
@@ -71,7 +71,8 @@ class EmotionModel(object):
                         self.pronouns[p_pronoun][true_emotion] += 1
                         pronoun_totals[true_emotion] += 1
 
-                res = ngrams_and_remove_stop_words(tokenized_res, self.version)
+                res = ngrams_and_remove_stop_words(
+                    tokenized_res, self.ngram_choice)
 
                 for word in res:
                     words_vocab.add(word)
@@ -134,16 +135,16 @@ class EmotionModel(object):
 
             conv = tokenized_turn1 + tokenized_turn2 + tokenized_turn3
 
-            parsed_message = flatten([ngrams_and_remove_stop_words(x, self.version) for x in [
+            parsed_message = flatten([ngrams_and_remove_stop_words(x, self.ngram_choice) for x in [
                                      tokenized_turn1, tokenized_turn2, tokenized_turn3]])
-            classification = self.__normalize(self.__classify(
+            classification = normalize(self.__classify(
                 self.ngrams, parsed_message, conv, u_priors))
             for i, e in enumerate(self.emotions):
                 u_priors[e] = classification[i]
 
             parsed_message = ngrams_and_remove_stop_words(
-                tokenized_turn1, self.version)
-            classification = self.__normalize(self.__classify(
+                tokenized_turn1, self.ngram_choice)
+            classification = normalize(self.__classify(
                 self.ngrams, parsed_message, tokenized_turn1, u_priors))
             for i, e in enumerate(self.emotions):
                 u_priors[e] = classification[i]
@@ -152,13 +153,13 @@ class EmotionModel(object):
             self.true.append(emotion)
 
             parsed_message = ngrams_and_remove_stop_words(
-                tokenized_turn3, self.version)
+                tokenized_turn3, self.ngram_choice)
             classification = self.__classify(
                 self.ngrams, parsed_message, tokenized_turn3, u_priors, False)
 
             self.pred.append(str(classification))
 
-        self.__calculate_scores()
+        self.calculate_scores()
 
     def __classify(self, training_dict, content, tokenized_content, priors, raw=True):
         """
@@ -223,77 +224,3 @@ class EmotionModel(object):
             return list(map(lambda x: x[0], [sadness, joy, fear, challenge, anger, boredom, frustration]))
 
         return max([sadness, joy, fear, challenge, anger, boredom, frustration], key=lambda item: item[0])[1]
-
-    def __normalize(self, arr):
-        """
-        Normalizes between 0.1 and 1.0
-        """
-        a = 0.9 * (arr - np.min(arr))/np.ptp(arr) + 0.1
-        return a/a.sum(0)
-
-    def __calculate_scores(self):
-        """
-        Calculates the micro and macro f scores for each emotion
-
-        Parameters:
-        None
-
-        Returns:
-        None
-        """
-        self.pred = np.asarray(self.pred)
-        self.true = np.asarray(self.true)
-
-        tp = np.sum(
-            np.logical_or(
-                np.logical_or(
-                    np.logical_or(
-                        np.logical_or(
-                            np.logical_or(
-                                np.logical_or(np.logical_and(self.pred == "sadness", self.true == "sadness"), np.logical_and(
-                                    self.pred == "joy", self.true == "joy")),
-                                np.logical_and(self.pred == "fear", self.true == "fear")),
-                            np.logical_and(self.pred == "anger", self.true == "anger")),
-                        np.logical_and(self.pred == "challenge", self.true == "challenge")),
-                    np.logical_and(self.pred == "boredom", self.true == "boredom")),
-                np.logical_and(self.pred == "frustration", self.true == "frustration")))
-        tp_fp = len(self.pred)
-        tp_fn = len(self.true)
-
-        pi = tp / tp_fp
-        ro = tp / tp_fn
-        try:
-            self.micro_fscores = 2 * pi * ro / (pi + ro)
-        except:
-            self.micro_fscores = 0.0
-
-        temp_macro = 0
-        for e in self.emotions:
-            tp_e = np.sum(np.logical_and(self.pred == e, self.true == e))
-            tp_fp_e = len([x for x in self.pred if x != e])
-            tp_fn_e = len([x for x in self.true if x == e])
-
-            try:
-                pi_e = tp_e / tp_fp_e
-            except:
-                pi_e = 0.0
-
-            try:
-                ro_e = tp_e / tp_fn_e
-            except:
-                ro_e = 0.0
-
-            try:
-                temp_macro += 2 * pi_e * ro_e / (pi_e + ro_e)
-            except:
-                temp_macro += 0.0
-
-        self.macro_fscores = temp_macro / 7
-
-    def confusion_matrix(self, normalize=False):
-        """
-        Computes the confusion matrices for each of the variables
-        """
-
-        cn_matrix = confusion_matrix(self.true, self.pred)
-        plot_confusion_matrix(cn_matrix, self.emotions, "Emotions", normalize)

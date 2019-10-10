@@ -37,7 +37,7 @@ def n_fold_test(data_list, num_folds, model_type, **kwargs):
 
         for i, split in enumerate(splits):
             av2e_model = kwargs.get("clark_specifications").get('av2e_classifier')
-            ngram_choice = kwargs.get("clark_specifications").get("ngram_choice", "buh")
+            ngram_choice = kwargs.get("clark_specifications").get("ngram_choice")
             clark = ClarkModel(av2e_model, ngram_choice)
             clark.train(np.concatenate(splits[:i]+splits[i+1:]))
             clark.test(splits[i])
@@ -59,7 +59,7 @@ def n_fold_test(data_list, num_folds, model_type, **kwargs):
         mean_fscores = [0, 0]
 
         for i, split in enumerate(splits):
-            em_model = EmotionModel()
+            em_model = EmotionModel(kwargs.get("emotion_specifications").get("ngram_choice"))
             em_model.train(np.concatenate(splits[:i]+splits[i+1:]))
             em_model.test(splits[i])
 
@@ -134,6 +134,7 @@ def n_fold_test(data_list, num_folds, model_type, **kwargs):
 
 def train_test_split(data_list, s, c_e, show_matrix=False, **kwargs):
     """
+    TODO: convert to use the enum
     Performs a single train-test split test
 
     Parameters:
@@ -152,7 +153,7 @@ def train_test_split(data_list, s, c_e, show_matrix=False, **kwargs):
         clark.test(testing_data)
 
         if show_matrix:
-            clark.confusion_matrix()
+            clark.confusion_matrix("CLARK")
 
         with open("results/CLARK_results.csv", "w") as csv_file:
             writer = csv.writer(csv_file)
@@ -167,7 +168,7 @@ def train_test_split(data_list, s, c_e, show_matrix=False, **kwargs):
         em_model.test(testing_data)
 
         if show_matrix:
-            em_model.confusion_matrix()
+            em_model.confusion_matrix("Emotions")
 
         with open("results/Emotion_results.csv", "w") as csv_file:
             writer = csv.writer(csv_file)
@@ -183,7 +184,7 @@ def train_test_split(data_list, s, c_e, show_matrix=False, **kwargs):
         av.test(testing_data)
 
         if show_matrix:
-            av.confusion_matrix()
+            av.confusion_matrix("Appraisal Variables")
 
         fscores = {}
         for var in av.variables:
