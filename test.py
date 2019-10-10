@@ -12,7 +12,7 @@ from process_data import ProcessedData
 from sklearn.naive_bayes import MultinomialNB
 
 
-def n_fold_test(data_list, num_folds, model_type):
+def n_fold_test(data_list, num_folds, model_type, **kwargs):
     """
     Performs an n fold test on the provided data and outputs the data to a csv 
 
@@ -36,9 +36,9 @@ def n_fold_test(data_list, num_folds, model_type):
         mean_fscores = [0, 0]
 
         for i, split in enumerate(splits):
-            av2e_model = kwargs.get("av2e_classifier")
-            ngram_choice = kwargs.get("ngram_choice")
-            clark = ClarkModel(model, ngram_choice)
+            av2e_model = kwargs.get("clark_specifications").get('av2e_classifier')
+            ngram_choice = kwargs.get("clark_specifications").get("ngram_choice", "buh")
+            clark = ClarkModel(av2e_model, ngram_choice)
             clark.train(np.concatenate(splits[:i]+splits[i+1:]))
             clark.test(splits[i])
 

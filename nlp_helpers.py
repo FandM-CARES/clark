@@ -1,3 +1,5 @@
+import nltk
+import numpy as np
 from nltk.corpus import stopwords
 stop_words = set(stopwords.words("english"))
 

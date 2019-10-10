@@ -285,17 +285,17 @@ class ClarkModel(BaseEmotionModel):
 
             try:
                 pi_e = tp_e / tp_fp_e
-            except ZeroDivisionError:
+            except (ZeroDivisionError, FloatingPointError):
                 pi_e = 0.0
 
             try:
                 ro_e = tp_e / tp_fn_e
-            except ZeroDivisionError:
+            except (ZeroDivisionError, FloatingPointError):
                 ro_e = 0.0
 
             try:
                 temp_macro += 2 * pi_e * ro_e / (pi_e + ro_e)
-            except ZeroDivisionError:
+            except (ZeroDivisionError, FloatingPointError):
                 temp_macro += 0.0
 
         self.macro_fscores = temp_macro / 7
