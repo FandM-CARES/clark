@@ -2,7 +2,8 @@ import csv
 
 import numpy as np
 
-from enums.global_enums import Models
+from enums.global_enums import Models, NGrams
+from enums.clark_enums import AV2EClassifiers
 # from graphing_helpers import plot_ellsworth_figs
 from models.av_model import AVModel
 from models.av_to_emotion_model import AVtoEmotionModel
@@ -36,8 +37,8 @@ def n_fold_test(data_list, num_folds, model_type, **kwargs):
         mean_fscores = [0, 0]
 
         for i, split in enumerate(splits):
-            av2e_model = kwargs.get("clark_specifications").get('av2e_classifier')
-            ngram_choice = kwargs.get("clark_specifications").get("ngram_choice")
+            av2e_model = kwargs.get("av2e_classifier", AV2EClassifiers.RANDOM_FOREST.value)
+            ngram_choice = kwargs.get("ngram_choice", NGrams.UNIGRAM_AND_BIGRAM.value)
             clark = ClarkModel(av2e_model, ngram_choice)
             clark.train(np.concatenate(splits[:i]+splits[i+1:]))
             clark.test(splits[i])
@@ -59,7 +60,7 @@ def n_fold_test(data_list, num_folds, model_type, **kwargs):
         mean_fscores = [0, 0]
 
         for i, split in enumerate(splits):
-            em_model = EmotionModel(kwargs.get("emotion_specifications").get("ngram_choice"))
+            em_model = EmotionModel(kwargs.get("ngram_choice", NGrams.UNIGRAM_AND_BIGRAM.value))
             em_model.train(np.concatenate(splits[:i]+splits[i+1:]))
             em_model.test(splits[i])
 
@@ -78,11 +79,11 @@ def n_fold_test(data_list, num_folds, model_type, **kwargs):
 
     elif model_type == Models.APPRAISAL_VARIABLES:
         mean_fscores = {}
-        for var in AVModel().variables:
+        for var in AVModel(kwargs.get("ngram_choice", NGrams.UNIGRAM_AND_BIGRAM.value)).variables:
             mean_fscores[var] = [0, 0]
 
         for i, split in enumerate(splits):
-            av = AVModel()
+            av = AVModel(kwargs.get("ngram_choice", NGrams.UNIGRAM_AND_BIGRAM.value))
             av.train(np.concatenate(splits[:i]+splits[i+1:]))
             av.test(splits[i])
 

@@ -1,20 +1,22 @@
-from graphing_helpers import *
-from nlp_helpers import *
-from sklearn.metrics import confusion_matrix
-from models.base.base_emotion_model import BaseEmotionModel
-import matplotlib.pyplot as plt
-import itertools
 import math
-import re
+
 import numpy as np
+
+from models.base.base_emotion_model import BaseEmotionModel
+from nlp_helpers import (determine_pronoun, determine_tense, flatten,
+                         ngrams_and_remove_stop_words, normalize,
+                         parts_of_speech, tokenize)
+
 np.seterr(all="raise")
 
 
 class AVModel(BaseEmotionModel):
+    """
+    TODO 
+    """
 
-    def __init__(self):
-        self.variables = ["pleasantness", "attention", "control",
-                          "certainty", "anticipated_effort", "responsibility"]
+    def __init__(self, ngram_choice):
+        super().__init__()
         self.ngrams = {}
         self.priors = {}
         self.variable_dimensions = ["low", "med", "high"]
@@ -24,7 +26,7 @@ class AVModel(BaseEmotionModel):
         self.pronouns = {var: self.__init_pronouns() for var in self.variables}
         self.true = {}
         self.pred = {}
-        self.version = 2  # unigrams = 0, bigrams = 1, both = 2
+        self.ngram_choice = ngram_choice
 
     def __init_tense(self):
         return {
@@ -95,7 +97,7 @@ class AVModel(BaseEmotionModel):
                         self.pronouns[variable][p_pronoun][true_dim] += 1
                         pronoun_totals[true_dim] += 1
 
-                res = ngrams_and_remove_stop_words(tokenized_res, self.version)
+                res = ngrams_and_remove_stop_words(tokenized_res, self.ngram_choice)
                 for word in res:
                     words_vocab.add(word)
                     if word in words:
@@ -164,24 +166,24 @@ class AVModel(BaseEmotionModel):
 
             conv = tokenized_turn1 + tokenized_turn2 + tokenized_turn3
 
-            parsed_message = flatten([ngrams_and_remove_stop_words(x, self.version) for x in [
+            parsed_message = flatten([ngrams_and_remove_stop_words(x, self.ngram_choice) for x in [
                                      tokenized_turn1, tokenized_turn2, tokenized_turn3]])
             for var in self.variables:
-                classification = self.__normalize(self.__classify(
+                classification = normalize(self.__classify(
                     self.ngrams[var], parsed_message, conv, u_priors[var], var))
                 for i, e in enumerate(self.variable_dimensions):
                     u_priors[var][e] = classification[i]
 
             parsed_message = ngrams_and_remove_stop_words(
-                tokenized_turn1, self.version)
+                tokenized_turn1, self.ngram_choice)
             for var in self.variables:
-                classification = self.__normalize(self.__classify(
+                classification = normalize(self.__classify(
                     self.ngrams[var], parsed_message, tokenized_turn1, u_priors[var], var))
                 for i, e in enumerate(self.variable_dimensions):
                     u_priors[var][e] = classification[i]
 
             parsed_message = ngrams_and_remove_stop_words(
-                tokenized_turn3, self.version)
+                tokenized_turn3, self.ngram_choice)
             for var in self.variables:
                 weight = self.variable_dimensions[int(
                     row["turn3"]["appraisals"][var])]
@@ -238,13 +240,6 @@ class AVModel(BaseEmotionModel):
 
         return max([low, med, high], key=lambda item: item[0])[1]
 
-    def __normalize(self, arr):
-        """
-        Normalizes between 0.1 and 1.0
-        """
-        a = 0.9 * (arr - np.min(arr))/np.ptp(arr) + 0.1
-        return a/a.sum(0)
-
     def calculate_scores(self):
         """
         Calculates the micro and macro f scores for each variable
@@ -270,7 +265,7 @@ class AVModel(BaseEmotionModel):
 
             try:
                 self.micro_fscores[var] = 2 * pi * ro / (pi + ro)
-            except:
+            except ZeroDivisionError:
                 self.micro_fscores[var] = 0.0
 
             temp_macro = 0
@@ -282,22 +277,22 @@ class AVModel(BaseEmotionModel):
 
                 try:
                     pi_c = tp_c / tp_fp_c
-                except:
+                except (ZeroDivisionError, FloatingPointError):
                     pi_c = 0.0
 
                 try:
                     ro_c = tp_c / tp_fn_c
-                except:
+                except (ZeroDivisionError, FloatingPointError):
                     ro_c = 0.0
 
                 try:
                     temp_macro += 2 * pi_c * ro_c / (pi_c + ro_c)
-                except:
+                except (ZeroDivisionError, FloatingPointError):
                     temp_macro += 0.0
 
             self.macro_fscores[var] = temp_macro / 3
 
-    def confusion_matrix(self, normalize=False):
+    def confusion_matrix(self, normalized=False):
         """
         Computes the confusion matrices for each of the variables
         """
@@ -305,4 +300,4 @@ class AVModel(BaseEmotionModel):
         for var in self.variables:
             cn_matrix = confusion_matrix(self.true[var], self.pred[var])
             plot_confusion_matrix(
-                cn_matrix, ["low", "med", "high"], var, normalize)
+                cn_matrix, ["low", "med", "high"], var, normalized)
