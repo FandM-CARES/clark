@@ -74,29 +74,13 @@ class ClarkModel(BaseEmotionModel):
                 tokenized_res = tokenize(row[turn]["text"])
 
                 pos = parts_of_speech(tokenized_res)
-                for p in pos:
-                    p_tense = determine_tense(p)
-                    p_pronoun = determine_pronoun(p)
-                    if p_tense != "":
-                        tense_vocab.add(p_tense)
-                        self.tense[variable][p_tense][true_dim] += 1
-                        tense_totals[true_dim] += 1
-                    if p_pronoun != "":
-                        pronoun_vocab.add(p_pronoun)
-                        self.pronouns[variable][p_pronoun][true_dim] += 1
-                        pronoun_totals[true_dim] += 1
+                tense_vocab, tense_totals, pronoun_vocab, pronoun_totals = self.__build_pos_counts(
+                    pos, tense_vocab, variable, true_dim, tense_totals, pronoun_vocab, pronoun_totals)
 
                 res = ngrams_and_remove_stop_words(
                     tokenized_res, self.ngram_choice)
-                for word in res:
-                    words_vocab.add(word)
-                    if word in words:
-                        words[word][true_dim] += 1
-                        words_totals[true_dim] += 1
-                    else:
-                        words[word] = self.__initialize_av_weights()
-                        words[word][true_dim] += 1
-                        words_totals[true_dim] += 1
+                words_vocab, words, words_totals = self.__build_word_counts(
+                    res, words_vocab, words, true_dim, words_totals)
 
         denom = sum(words_totals.values())
         self.priors[variable] = {dim: float(
@@ -104,6 +88,33 @@ class ClarkModel(BaseEmotionModel):
 
         self.__calculate_probabilities(
             words, words_totals, words_vocab, tense_totals, tense_vocab, pronoun_totals, pronoun_vocab, variable)
+
+    def __build_word_counts(self, res, words_vocab, words, true_dim, words_totals):
+        for word in res:
+            words_vocab.add(word)
+            if word in words:
+                words[word][true_dim] += 1
+                words_totals[true_dim] += 1
+            else:
+                words[word] = self.__initialize_av_weights()
+                words[word][true_dim] += 1
+                words_totals[true_dim] += 1
+        return words_vocab, words, words_totals
+
+    def __build_pos_counts(self, pos, tense_vocab, variable, true_dim, tense_totals, pronoun_vocab, pronoun_totals):
+        for p in pos:
+            p_tense = determine_tense(p)
+            p_pronoun = determine_pronoun(p)
+            if p_tense != "":
+                tense_vocab.add(p_tense)
+                self.tense[variable][p_tense][true_dim] += 1
+                tense_totals[true_dim] += 1
+            if p_pronoun != "":
+                pronoun_vocab.add(p_pronoun)
+                self.pronouns[variable][p_pronoun][true_dim] += 1
+                pronoun_totals[true_dim] += 1
+
+        return tense_vocab, tense_totals, pronoun_vocab, pronoun_totals
 
     def __initialize_av_weights(self):
         return {dim: 1 for dim in self.variable_dimensions}
