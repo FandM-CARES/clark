@@ -1,7 +1,9 @@
 import math
 
 import numpy as np
+from sklearn.metrics import confusion_matrix
 
+from graphing_helpers import plot_confusion_matrix
 from models.base.base_emotion_model import BaseEmotionModel
 from nlp_helpers import (determine_pronoun, determine_tense, flatten,
                          ngrams_and_remove_stop_words, normalize,
@@ -97,7 +99,8 @@ class AVModel(BaseEmotionModel):
                         self.pronouns[variable][p_pronoun][true_dim] += 1
                         pronoun_totals[true_dim] += 1
 
-                res = ngrams_and_remove_stop_words(tokenized_res, self.ngram_choice)
+                res = ngrams_and_remove_stop_words(
+                    tokenized_res, self.ngram_choice)
                 for word in res:
                     words_vocab.add(word)
                     if word in words:

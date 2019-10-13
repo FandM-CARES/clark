@@ -66,7 +66,7 @@ class EmotionModel(BaseEmotionModel):
                     tokenized_res, self.ngram_choice)
 
                 words_vocab, words, words_totals = self.__build_word_counts(
-                    res, words_vocab, words, true_emotion, words_totals, emotion)
+                    res, words_vocab, words, true_emotion, words_totals)
 
         sum_totals = sum(words_totals.values())
         self.priors = {emotion: float(
@@ -75,7 +75,7 @@ class EmotionModel(BaseEmotionModel):
         self.__calculate_probabilities(
             words, words_totals, words_vocab, tense_totals, tense_vocab, pronoun_totals, pronoun_vocab)
 
-    def __build_word_counts(self, res, words_vocab, words, true_emotion, words_totals, emotion):
+    def __build_word_counts(self, res, words_vocab, words, true_emotion, words_totals):
         for word in res:
             words_vocab.add(word)
             if word in words:
