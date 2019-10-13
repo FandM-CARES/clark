@@ -59,30 +59,14 @@ class EmotionModel(BaseEmotionModel):
                 tokenized_res = tokenize(row[turn]["text"])
 
                 pos = parts_of_speech(tokenized_res)
-                for p in pos:
-                    p_tense = determine_tense(p)
-                    p_pronoun = determine_pronoun(p)
-                    if p_tense != "":
-                        tense_vocab.add(p_tense)
-                        self.tense[p_tense][true_emotion] += 1
-                        tense_totals[true_emotion] += 1
-                    if p_pronoun != "":
-                        pronoun_vocab.add(p_pronoun)
-                        self.pronouns[p_pronoun][true_emotion] += 1
-                        pronoun_totals[true_emotion] += 1
+                tense_vocab, tense_totals, pronoun_vocab, pronoun_totals = self.__build_pos_counts(
+                    pos, tense_vocab, true_emotion, tense_totals, pronoun_vocab, pronoun_totals)
 
                 res = ngrams_and_remove_stop_words(
                     tokenized_res, self.ngram_choice)
 
-                for word in res:
-                    words_vocab.add(word)
-                    if word in words:
-                        words[word][true_emotion] += 1
-                        words_totals[true_emotion] += 1
-                    else:
-                        words[word] = {emotion: 1 for emotion in self.emotions}
-                        words[word][true_emotion] += 1
-                        words_totals[true_emotion] += 1
+                words_vocab, words, words_totals = self.__build_word_counts(
+                    res, words_vocab, words, true_emotion, words_totals, emotion)
 
         sum_totals = sum(words_totals.values())
         self.priors = {emotion: float(
@@ -90,6 +74,34 @@ class EmotionModel(BaseEmotionModel):
 
         self.__calculate_probabilities(
             words, words_totals, words_vocab, tense_totals, tense_vocab, pronoun_totals, pronoun_vocab)
+
+    def __build_word_counts(self, res, words_vocab, words, true_emotion, words_totals, emotion):
+        for word in res:
+            words_vocab.add(word)
+            if word in words:
+                words[word][true_emotion] += 1
+                words_totals[true_emotion] += 1
+            else:
+                words[word] = {emotion: 1 for emotion in self.emotions}
+                words[word][true_emotion] += 1
+                words_totals[true_emotion] += 1
+
+        return words_vocab, words, words_totals
+
+    def __build_pos_counts(self, pos, tense_vocab, true_emotion, tense_totals, pronoun_vocab, pronoun_totals):
+        for p in pos:
+            p_tense = determine_tense(p)
+            p_pronoun = determine_pronoun(p)
+            if p_tense != "":
+                tense_vocab.add(p_tense)
+                self.tense[p_tense][true_emotion] += 1
+                tense_totals[true_emotion] += 1
+            if p_pronoun != "":
+                pronoun_vocab.add(p_pronoun)
+                self.pronouns[p_pronoun][true_emotion] += 1
+                pronoun_totals[true_emotion] += 1
+
+        return tense_vocab, tense_totals, pronoun_vocab, pronoun_totals
 
     def __calculate_probabilities(self, words, words_totals, words_vocab, tense_totals, tense_vocab, pronoun_totals, pronoun_vocab):
         """
