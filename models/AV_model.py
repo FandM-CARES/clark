@@ -58,7 +58,7 @@ class AVModel(BaseEmotionModel):
         for var in self.variables:
             self.__train_by_variable(training_data, var)
 
-    def __train_by_variable(self, training_set, variable, data_points={}):
+    def _train_by_variable(self, training_set, variable, data_points={}):
         """
         Calculates the counts for each unigram and priors for each classification
 
@@ -207,7 +207,7 @@ class AVModel(BaseEmotionModel):
 
         self.calculate_scores()
 
-    def __classify(self, training_dict, content, tokenized_content, priors, curr_var, raw=True):
+    def _classify(self, training_dict, content, tokenized_content, priors, curr_var, raw=True):
         """
         Classifies each message according to the trained model
 
