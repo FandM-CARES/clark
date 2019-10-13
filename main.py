@@ -1,10 +1,11 @@
-from test import *
+from test import n_fold_test
 
-newest_file = 'data/combined_061419.json'
+from enums.clark_enums import AV2EClassifiers
+from enums.global_enums import Models, NGrams
 
-# train_test_split([newest_file], 0.75, 0, True)
+newest_file = "data/combined_091319.json"
 
-# n_fold_test([newest_file],10, 3) #AV2E
-# n_fold_test([newest_file],10, 2) #AV
-# n_fold_test([newest_file],10, 1) #Emotions
-n_fold_test([newest_file],10, 0) #CLARK
+# n_fold_test([newest_file], 10, Models.APPRAISAL_VARIABLES_TO_EMOTION)
+# n_fold_test([newest_file], 10, Models.APPRAISAL_VARIABLES)
+# n_fold_test([newest_file], 10, Models.EMOTION)
+n_fold_test([newest_file], 10, Models.CLARK)

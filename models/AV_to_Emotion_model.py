@@ -1,86 +1,80 @@
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.naive_bayes import MultinomialNB, ComplementNB
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
+from sklearn.naive_bayes import ComplementNB, MultinomialNB
+from sklearn.tree import DecisionTreeClassifier
 
-class AVtoEmotionModel(object):
+from models.base.base_emotion_model import BaseEmotionModel
+
+
+class AVtoEmotionModel(BaseEmotionModel):
+    """
+    """
 
     def __init__(self):
-        self.emotions = ['sadness', 'joy', 'fear', 'anger', 'challenge', 'boredom', 'frustration']
-        self.models = ['DT', 'NB', 'CNB', 'RF']
+        super().__init__()
+        self.models = ["decision_tree", "naive_bayes",
+                       "comp_naive_bayes", "random_forest"]
         self.decision_tree = None
-        self.NB = None
-        self.CNB = None
-        self.RF = None
-        self.micro_fscores = {m:0.0 for m in self.models}
-        self.macro_fscores = {m:0.0 for m in self.models}
-        self.true = []
-        self.pred = []
+        self.naive_bayes = None
+        self.comp_naive_bayes = None
+        self.random_forest = None
+        self.micro_fscores = {m: 0.0 for m in self.models}
+        self.macro_fscores = {m: 0.0 for m in self.models}
 
-    def train(self, training_data):
-        '''
-        Builds a trained CLARK model
-
-        Parameters:
-        training_data (array): training data used to train the model
-
-        Returns:
-        Model: a trained model
-        '''
-        dt = self.__build_models(training_data)
-
+    def train(self, training_data: list) -> None:
+        self.__build_models(training_data)
 
     def __build_models(self, data):
-        X = [list(d['turn3']['appraisals'].values()) for d in data]
-        y = [em['turn3']['emotion'] for em in data]
-        
+        appraisal_values = [
+            list(d["turn3"]["appraisals"].values()) for d in data]
+        emotion_values = [em["turn3"]["emotion"] for em in data]
+
         clf = DecisionTreeClassifier(criterion="entropy", max_depth=3)
-        clf = clf.fit(X,y)
+        clf = clf.fit(appraisal_values, emotion_values)
         self.decision_tree = clf
 
-        nb = MultinomialNB()
-        nb = nb.fit(X,y)
-        self.NB = nb
+        naive_bayes = MultinomialNB()
+        naive_bayes = naive_bayes.fit(appraisal_values, emotion_values)
+        self.naive_bayes = naive_bayes
 
-        cnb = ComplementNB()
-        cnb = cnb.fit(X,y)
-        self.CNB = cnb
+        comp_naive_bayes = ComplementNB()
+        comp_naive_bayes = comp_naive_bayes.fit(
+            appraisal_values, emotion_values)
+        self.comp_naive_bayes = comp_naive_bayes
 
-        rf = RandomForestClassifier(n_estimators=10)
-        rf = rf.fit(X,y)
-        self.RF = rf
-        
-        
-    def test(self, data):
-        X = [list(d['turn3']['appraisals'].values()) for d in data]
-        y = [em['turn3']['emotion'] for em in data]
+        random_forest = RandomForestClassifier(n_estimators=10)
+        random_forest = random_forest.fit(appraisal_values, emotion_values)
+        self.random_forest = random_forest
 
-        # Decision Tree
-        y_pred = self.decision_tree.predict(X)
-        x = classification_report(y, y_pred, labels=self.emotions, output_dict=True)
+    def test(self, testing_data):
+        appraisal_values = [list(d["turn3"]["appraisals"].values())
+                            for d in testing_data]
+        emotion_values = [em["turn3"]["emotion"] for em in testing_data]
 
-        self.micro_fscores['DT'] = x['micro avg']['f1-score']
-        self.macro_fscores['DT'] = x['macro avg']['f1-score']
+        appraisal_pred = self.decision_tree.predict(appraisal_values)
+        emotion_pred = classification_report(
+            emotion_values, appraisal_pred, labels=self.emotions, output_dict=True)
 
-        # Multinomal NB
-        y_pred = self.NB.predict(X)
-        x = classification_report(y, y_pred, labels=self.emotions, output_dict=True)
+        self.micro_fscores["decision_tree"] = emotion_pred["micro avg"]["f1-score"]
+        self.macro_fscores["decision_tree"] = emotion_pred["macro avg"]["f1-score"]
 
-        self.micro_fscores['NB'] = x['micro avg']['f1-score']
-        self.macro_fscores['NB'] = x['macro avg']['f1-score']
+        appraisal_pred = self.naive_bayes.predict(appraisal_values)
+        emotion_pred = classification_report(
+            emotion_values, appraisal_pred, labels=self.emotions, output_dict=True)
 
-        # Complement NB
-        y_pred = self.NB.predict(X)
-        x = classification_report(y, y_pred, labels=self.emotions, output_dict=True)
+        self.micro_fscores["naive_bayes"] = emotion_pred["micro avg"]["f1-score"]
+        self.macro_fscores["naive_bayes"] = emotion_pred["macro avg"]["f1-score"]
 
-        self.micro_fscores['CNB'] = x['micro avg']['f1-score']
-        self.macro_fscores['CNB'] = x['macro avg']['f1-score']
+        appraisal_pred = self.comp_naive_bayes.predict(appraisal_values)
+        emotion_pred = classification_report(
+            emotion_values, appraisal_pred, labels=self.emotions, output_dict=True)
 
-        # Random Forest
-        y_pred = self.RF.predict(X)
-        x = classification_report(y, y_pred, labels=self.emotions, output_dict=True)
+        self.micro_fscores["comp_naive_bayes"] = emotion_pred["micro avg"]["f1-score"]
+        self.macro_fscores["comp_naive_bayes"] = emotion_pred["macro avg"]["f1-score"]
 
-        self.micro_fscores['RF'] = x['micro avg']['f1-score']
-        self.macro_fscores['RF'] = x['macro avg']['f1-score']
+        appraisal_pred = self.random_forest.predict(appraisal_values)
+        emotion_pred = classification_report(
+            emotion_values, appraisal_pred, labels=self.emotions, output_dict=True)
 
+        self.micro_fscores["random_forest"] = emotion_pred["micro avg"]["f1-score"]
+        self.macro_fscores["random_forest"] = emotion_pred["macro avg"]["f1-score"]

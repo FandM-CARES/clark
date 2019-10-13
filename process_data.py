@@ -5,11 +5,11 @@ import json
 class ProcessedData(object):
 
     def __init__(self, datasets, c_e):
-        self.convos = json.load(open('data/all_convos.json'))
+        self.convos = json.load(open("data/all_convos.json"))
         self.data = self.parse_data(datasets)
         self.c_e = c_e
 
-    def parse_data(self, datasets, file_type='json'):
+    def parse_data(self, datasets, file_type="json"):
         """
         Opens fles and parses the data into a multidimensional array
 
@@ -19,7 +19,7 @@ class ProcessedData(object):
         Returns:
         Array: parsed files
         """
-        if file_type == 'json':
+        if file_type == "json":
             return self.parse_json(datasets)
         else:
             return self.parse_csv(datasets)
@@ -31,10 +31,10 @@ class ProcessedData(object):
                 data = json.load(rawData)
                 for val in data:
                     for conv in self.convos:
-                        if conv['id'] == val['id']:
-                            val['turn1']['text'] = str(conv['turn1'])
-                            val['turn2']['text'] = str(conv['turn2'])
-                            val['turn3']['text'] = str(conv['turn3'])
+                        if conv["id"] == val["id"]:
+                            val["turn1"]["text"] = str(conv["turn1"])
+                            val["turn2"]["text"] = str(conv["turn2"])
+                            val["turn3"]["text"] = str(conv["turn3"])
                             parsed.append(val)
                             continue
         return parsed
