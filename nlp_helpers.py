@@ -78,9 +78,8 @@ def ngrams_and_remove_stop_words(init_res, ngram):
         res[i] = word.lower()
         if word in bad_characters:
             res[i] = ""
-        if ngram == 0:
-            if is_stop_word(word):
-                res[i] = ""
+        if ngram == 0 and is_stop_word(word):
+            res[i] = ""
 
     temp_ret = [x for x in res if x != ""]
 
