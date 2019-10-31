@@ -8,4 +8,4 @@ newest_file = "data/combined_091319.json"
 # n_fold_test([newest_file], 10, Models.APPRAISAL_VARIABLES_TO_EMOTION)
 # n_fold_test([newest_file], 10, Models.APPRAISAL_VARIABLES)
 # n_fold_test([newest_file], 10, Models.EMOTION)
-n_fold_test([newest_file], 10, Models.CLARK)
+n_fold_test([newest_file], 1, Models.CLARK)
