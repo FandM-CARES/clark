@@ -4,7 +4,7 @@ import numpy as np
 
 from enums.global_enums import Models, NGrams
 from enums.clark_enums import AV2EClassifiers
-# from graphing_helpers import plot_ellsworth_figs
+from graphing_helpers import plot_ellsworth_figs
 from models.av_model import AVModel
 from models.av_to_emotion_model import AVtoEmotionModel
 from models.clark_model import ClarkModel
@@ -37,7 +37,9 @@ def n_fold_test(data_list, num_folds, model_type, compute_matrix=False, **kwargs
     np.random.shuffle(np_data)
     splits = np.array_split(np_data, num_folds)
 
-    # plot_ellsworth_figs(np_data)
+    plot_ellsworth_figs(np_data)
+
+    return
 
     if model_type == Models.CLARK:
         __test_CLARK_model(splits, kwargs, num_folds, compute_matrix)

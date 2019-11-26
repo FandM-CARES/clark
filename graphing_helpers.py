@@ -26,7 +26,7 @@ def plot_ellsworth_figs(data):
     
     for var in em_plot:
         for em in em_plot[var]:
-            em_plot[var][em] = statistics.median(em_plot[var][em])
+            em_plot[var][em] = statistics.mode(em_plot[var][em])
 
     fig, ax = plt.subplots()
     ax.scatter(list(em_plot["pleasantness"].values()), list(em_plot["anticipated_effort"].values()))
@@ -34,7 +34,7 @@ def plot_ellsworth_figs(data):
     ax.set_ylabel("Effort")
     for i, txt in enumerate(emotions):
         ax.annotate(txt, ( list(em_plot["pleasantness"].values())[i], list(em_plot["anticipated_effort"].values())[i]))
-    plt.savefig("results/figs/effort_vs_pleasantness.png")
+    plt.savefig("results/figs/(mode)effort_vs_pleasantness.png")
 
     fig, ax = plt.subplots()
     ax.scatter(list(em_plot["responsibility"].values()), list(em_plot["control"].values()))
@@ -42,7 +42,7 @@ def plot_ellsworth_figs(data):
     ax.set_ylabel("Control")
     for i, txt in enumerate(emotions):
         ax.annotate(txt, ( list(em_plot["responsibility"].values())[i], list(em_plot["control"].values())[i]))
-    plt.savefig("results/figs/control_vs_res.png")
+    plt.savefig("results/figs/(mode)control_vs_res.png")
 
     fig, ax = plt.subplots()
     ax.scatter(list(em_plot["attention"].values()), list(em_plot["certainty"].values()))
@@ -50,7 +50,7 @@ def plot_ellsworth_figs(data):
     ax.set_ylabel("Certainty")
     for i, txt in enumerate(emotions):
         ax.annotate(txt, ( list(em_plot["attention"].values())[i], list(em_plot["certainty"].values())[i]))
-    plt.savefig("results/figs/certainty_vs_attention.png")
+    plt.savefig("results/figs/(mode)certainty_vs_attention.png")
 
 
 def plot_confusion_matrix(cm, classes, title, normalize=False, cmap=plt.cm.Blues):
