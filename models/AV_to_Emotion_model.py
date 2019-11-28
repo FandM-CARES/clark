@@ -36,7 +36,7 @@ class AVtoEmotionModel(BaseEmotionModel):
         naive_bayes = MultinomialNB()
         naive_bayes = naive_bayes.fit(appraisal_values, emotion_values)
         self.naive_bayes = naive_bayes
-
+        
         comp_naive_bayes = ComplementNB()
         comp_naive_bayes = comp_naive_bayes.fit(
             appraisal_values, emotion_values)
@@ -51,30 +51,21 @@ class AVtoEmotionModel(BaseEmotionModel):
                             for d in testing_data]
         emotion_values = [em["turn3"]["emotion"] for em in testing_data]
 
-        appraisal_pred = self.decision_tree.predict(appraisal_values)
-        emotion_pred = classification_report(
-            emotion_values, appraisal_pred, labels=self.emotions, output_dict=True)
+        for model in self.models:
+            if model == "decision_tree":
+                appraisal_pred = self.decision_tree.predict(appraisal_values)
+            elif model == "naive_bayes":
+                appraisal_pred = self.naive_bayes.predict(appraisal_values)
+            elif model == "comp_naive_bayes":
+                appraisal_pred = self.comp_naive_bayes.predict(appraisal_values)
+            elif model == "random_forest":
+                appraisal_pred = self.random_forest.predict(appraisal_values)
 
-        self.micro_fscores["decision_tree"] = emotion_pred["micro avg"]["f1-score"]
-        self.macro_fscores["decision_tree"] = emotion_pred["macro avg"]["f1-score"]
+            emotion_pred = classification_report(
+                emotion_values, appraisal_pred, labels=self.emotions, output_dict=True)
 
-        appraisal_pred = self.naive_bayes.predict(appraisal_values)
-        emotion_pred = classification_report(
-            emotion_values, appraisal_pred, labels=self.emotions, output_dict=True)
-
-        self.micro_fscores["naive_bayes"] = emotion_pred["micro avg"]["f1-score"]
-        self.macro_fscores["naive_bayes"] = emotion_pred["macro avg"]["f1-score"]
-
-        appraisal_pred = self.comp_naive_bayes.predict(appraisal_values)
-        emotion_pred = classification_report(
-            emotion_values, appraisal_pred, labels=self.emotions, output_dict=True)
-
-        self.micro_fscores["comp_naive_bayes"] = emotion_pred["micro avg"]["f1-score"]
-        self.macro_fscores["comp_naive_bayes"] = emotion_pred["macro avg"]["f1-score"]
-
-        appraisal_pred = self.random_forest.predict(appraisal_values)
-        emotion_pred = classification_report(
-            emotion_values, appraisal_pred, labels=self.emotions, output_dict=True)
-
-        self.micro_fscores["random_forest"] = emotion_pred["micro avg"]["f1-score"]
-        self.macro_fscores["random_forest"] = emotion_pred["macro avg"]["f1-score"]
+            if "accuracy" in emotion_pred.keys():
+                self.micro_fscores[model] =  emotion_pred.get("accuracy")
+            else:
+                self.micro_fscores[model] = emotion_pred.get("micro avg").get("f1-score")
+            self.macro_fscores[model] = emotion_pred.get("macro avg").get("f1-score")

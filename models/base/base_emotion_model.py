@@ -1,9 +1,11 @@
 from abc import ABC, abstractmethod
+from typing import List
 
 import numpy as np
 from sklearn.metrics import confusion_matrix
 
 from graphing_helpers import plot_confusion_matrix
+from utils.validation import check_X_y_same_size
 
 np.seterr(all="raise")
 
@@ -19,22 +21,24 @@ class BaseEmotionModel(ABC):
         self.micro_scores = dict()
         self.macro_scores = dict()
 
-    @abstractmethod
-    def train(self, training_data: list) -> None:
-        """
-        Builds a trained model
+    # @abstractmethod
+    # def fit(self, X: List[List[int]], y: List[int]) -> object:
+    #     """
+    #     Builds a trained model
 
-        Parameters:
-        training_data (array): training data used to train the model
+    #     Parameters:
+    #     X (sparse matrix): shape = [n_samples, n_features]; training vectors, where n_samples is the number
+    #     of samples and n_features is the number of features 
+    #     y (list): shape = [n_samples]; target values
 
-        Returns:
-        None
-        """
-        pass
+    #     Returns:
+    #     self
+    #     """
 
     @abstractmethod
     def test(self, testing_data: list) -> None:
-        pass
+        """
+        """
 
     def calculate_scores(self):
         """

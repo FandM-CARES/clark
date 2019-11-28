@@ -1,16 +1,18 @@
 import csv
 
 import numpy as np
+from sklearn.metrics import classification_report
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.model_selection import train_test_split
 
-from enums.global_enums import Models, NGrams
-from enums.clark_enums import AV2EClassifiers
 from graphing_helpers import plot_ellsworth_figs
 from models.av_model import AVModel
 from models.av_to_emotion_model import AVtoEmotionModel
 from models.clark_model import ClarkModel
 from models.emotion_model import EmotionModel
 from process_data import ProcessedData
-from sklearn.naive_bayes import MultinomialNB
+from utils.enums.clark_enums import AV2EClassifiers
+from utils.enums.global_enums import Models, NGrams
 
 
 def n_fold_test(data_list, num_folds, model_type, compute_matrix=False, **kwargs):
@@ -34,12 +36,16 @@ def n_fold_test(data_list, num_folds, model_type, compute_matrix=False, **kwargs
 
     data = ProcessedData(data_list, model_type)
     np_data = np.asarray(data.data)
+
+    # xTrain, xTest, yTrain, yTest = train_test_split(x, y, test_size = 0.2, random_state = 0)
+    
     np.random.shuffle(np_data)
     splits = np.array_split(np_data, num_folds)
 
-    plot_ellsworth_figs(np_data)
 
-    return
+    # plot_ellsworth_figs(np_data)
+
+    # return
 
     if model_type == Models.CLARK:
         __test_CLARK_model(splits, kwargs, num_folds, compute_matrix)
@@ -56,31 +62,31 @@ def n_fold_test(data_list, num_folds, model_type, compute_matrix=False, **kwargs
     else:
         raise ValueError("Unknown Model Selection")
 
-def __test_av2e_model(splits, num_folds):
-    models = ["decision_tree", "naive_bayes",
-              "comp_naive_bayes", "random_forest"]
-    mean_fscores = {m: [0.0, 0.0] for m in models}
+# def __test_av2e_model(splits, num_folds):
+#     models = ["decision_tree", "naive_bayes",
+#               "comp_naive_bayes", "random_forest"]
+#     mean_fscores = {m: [0.0, 0.0] for m in models}
 
-    for i, split in enumerate(splits):
-        av2e_model = AVtoEmotionModel()
-        av2e_model.train(np.concatenate(splits[:i]+splits[i+1:]))
-        av2e_model.test(splits[i])
+#     for i, split in enumerate(splits):
+#         av2e_model = AVtoEmotionModel()
+#         av2e_model.train(np.concatenate(splits[:i]+splits[i+1:]))
+#         av2e_model.test(splits[i])
 
-        for m in models:
-            mean_fscores[m][0] += av2e_model.micro_fscores[m]
-            mean_fscores[m][1] += av2e_model.macro_fscores[m]
+#         for m in models:
+#             mean_fscores[m][0] += av2e_model.micro_fscores[m]
+#             mean_fscores[m][1] += av2e_model.macro_fscores[m]
 
-    for m in models:
-        mean_fscores[m][0] /= num_folds
-        mean_fscores[m][1] /= num_folds
+#     for m in models:
+#         mean_fscores[m][0] /= num_folds
+#         mean_fscores[m][1] /= num_folds
 
-    with open("results/AV2E_results.csv", "w") as csv_file:
-        writer = csv.writer(csv_file)
-        writer.writerow(["Model", "Micro F Score", "Macro F Score"])
-        for m in models:
-            writer.writerow([m, mean_fscores[m][0], mean_fscores[m][1]])
+#     with open("results/AV2E_results.csv", "w") as csv_file:
+#         writer = csv.writer(csv_file)
+#         writer.writerow(["Model", "Micro F Score", "Macro F Score"])
+#         for m in models:
+#             writer.writerow([m, mean_fscores[m][0], mean_fscores[m][1]])
 
-    print("AV2E Model Done!")
+#     print("AV2E Model Done!")
 
 def __test_av_model(kwargs, splits, num_folds, compute_matrix):
     mean_fscores = {}
@@ -111,29 +117,29 @@ def __test_av_model(kwargs, splits, num_folds, compute_matrix):
 
     print("AV Model Done!")
 
-def __test_emotions_model(splits, kwargs, num_folds, compute_matrix):
-    mean_fscores = [0, 0]
+# def __test_emotions_model(splits, kwargs, num_folds, compute_matrix):
+#     mean_fscores = [0, 0]
 
-    for i, split in enumerate(splits):
-        em_model = EmotionModel(kwargs.get("ngram_choice", NGrams.UNIGRAM_AND_BIGRAM.value))
-        em_model.train(np.concatenate(splits[:i]+splits[i+1:]))
-        em_model.test(splits[i])
+#     for i, split in enumerate(splits):
+#         em_model = EmotionModel(kwargs.get("ngram_choice", NGrams.UNIGRAM_AND_BIGRAM.value))
+#         em_model.train(np.concatenate(splits[:i]+splits[i+1:]))
+#         em_model.test(splits[i])
 
-        mean_fscores[0] += em_model.micro_fscores
-        mean_fscores[1] += em_model.macro_fscores
+#         mean_fscores[0] += em_model.micro_fscores
+#         mean_fscores[1] += em_model.macro_fscores
 
-        if compute_matrix:
-            em_model.confusion_matrix("Emotions")
+#         if compute_matrix:
+#             em_model.confusion_matrix("Emotions")
 
-    mean_fscores[0] /= num_folds
-    mean_fscores[1] /= num_folds
+#     mean_fscores[0] /= num_folds
+#     mean_fscores[1] /= num_folds
 
-    with open("results/Emotion_results.csv", "w") as csv_file:
-        writer = csv.writer(csv_file)
-        writer.writerow(["Micro F Score", "Macro F Score"])
-        writer.writerow([mean_fscores[0], mean_fscores[1]])
+#     with open("results/Emotion_results.csv", "w") as csv_file:
+#         writer = csv.writer(csv_file)
+#         writer.writerow(["Micro F Score", "Macro F Score"])
+#         writer.writerow([mean_fscores[0], mean_fscores[1]])
 
-    print("Emotions Model Done!")
+#     print("Emotions Model Done!")
 
 def __test_CLARK_model(splits, kwargs, num_folds, compute_matrix):
     mean_fscores = [0, 0]
@@ -142,11 +148,31 @@ def __test_CLARK_model(splits, kwargs, num_folds, compute_matrix):
         av2e_model = kwargs.get("av2e_classifier", AV2EClassifiers.RANDOM_FOREST.value)
         ngram_choice = kwargs.get("ngram_choice", NGrams.UNIGRAM_AND_BIGRAM.value)
         clark = ClarkModel(av2e_model, ngram_choice)
-        clark.train(np.concatenate(splits[:i]+splits[i+1:]))
-        clark.test(splits[i])
 
-        mean_fscores[0] += clark.micro_fscores
-        mean_fscores[1] += clark.macro_fscores
+        curr_samples = np.concatenate(splits[:i]+splits[i+1:])
+        text_samples, appraisal_samples, emotion_samples = [],[],[]
+        for sample in curr_samples:
+            for turn in ["turn1", "turn2", "turn3"]:
+                text_samples.append(sample[turn]["text"])
+                appraisal_samples.append(list(sample[turn]["appraisals"].values()))
+                emotion_samples.append(sample[turn]["emotion"])
+        
+        clark.fit(text_samples, appraisal_samples, emotion_samples)
+        
+
+        test_samples = [[sample[turn]["text"] for turn in ["turn1", "turn2", "turn3"]] for sample in split]
+        emotions_pred = clark.predict(test_samples)
+        emotions_true = [sample["turn3"]["emotion"] for sample in split]
+        
+        clark_scores = classification_report(emotions_true, emotions_pred, labels=["sadness", "joy", "fear",
+                         "anger", "challenge", "boredom", "frustration"], output_dict=True)
+
+
+        if "accuracy" in clark_scores.keys():
+            mean_fscores[0] += clark_scores["accuracy"]
+        else:
+            mean_fscores[0] += clark_scores["micro avg"]["f1-score"]
+        mean_fscores[1] += clark_scores["macro avg"]["f1-score"]
 
         if compute_matrix:
             clark.confusion_matrix("CLARK")

@@ -1,6 +1,9 @@
 import math
+import statistics
 
 import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
 
 from models.av_model import AVModel
 from nlp_helpers import (determine_pronoun, determine_tense, flatten,
@@ -15,74 +18,63 @@ class ClarkModel(AVModel):
 
     def __init__(self, av2e_classifier, ngram_choice):
         super().__init__(ngram_choice)
-        self.true = []
-        self.pred = []
-        self.micro_fscores = 0.0
-        self.macro_fscores = 0.0
+        self.vectorizer = None
+        self.classifiers = list()
         self.av2e_classifier = av2e_classifier
 
-    def train(self, training_data):
-        self.__build_av2e_classifier(training_data)
-
-        for var in self.variables:
-            self._train_by_variable(training_data, var)
-
-    def test(self, testing_data):
+    def fit(self, text, appraisals, emotions):
         """
-        Tests the precision/recall of the model
+        """
+    
+        num_of_appraisals = len(appraisals[0])
+        assert num_of_appraisals == 6
+        appraisals = np.asarray(appraisals)
 
-        Parameters:
-        testing_data (array): data on which to test the model
+        self.vectorizer = TfidfVectorizer(ngram_range=(1,2), stop_words="english")
+        idf_matrix = self.vectorizer.fit_transform(text)
 
-        Returns:
-        Null
+        try:
+            for i in range(num_of_appraisals):
+                classifier = MultinomialNB()
+                classifier.fit(idf_matrix, appraisals[:,i])
+                self.classifiers.append(classifier)
+        except Exception as e:
+            print(f"Could not fit text to appraisals due to the following: {e}")
+
+        try:
+            self.av2e_classifier = self.av2e_classifier.fit(appraisals, emotions)
+        except Exception as e:
+            print(f"Could not fit text to appraisals due to the following: {e}")
+        
+        return
+    
+    def predict(self, y):
+        """
+        """
+        
+        preds = list()
+        for sample in y:
+            idf_matrix = self.vectorizer.transform(sample)
+
+            conv = self._predict_appraisal_proba(idf_matrix)
+            turn1 = self._predict_appraisal_proba(idf_matrix[0], conv)
+            turn3 = self._predict_appraisal_proba(idf_matrix[2], turn1)
+            
+            pred = [np.argmax(x) for x in turn3]
+
+            preds.append(pred)
+
+        return self.av2e_classifier.predict(preds)
+
+    def _predict_appraisal_proba(self, X, priors=[]) -> list:
+        """
         """
 
-        for row in testing_data:
-            u_priors = dict(self.priors)
-
-            tokenized_turn1 = tokenize(row["turn1"]["text"])
-            tokenized_turn2 = tokenize(row["turn2"]["text"])
-            tokenized_turn3 = tokenize(row["turn3"]["text"])
-
-            conv = tokenized_turn1 + tokenized_turn2 + tokenized_turn3
-
-            parsed_message = flatten([ngrams_and_remove_stop_words(x, self.ngram_choice) for x in [
-                                     tokenized_turn1, tokenized_turn2, tokenized_turn3]])
-            for var in self.variables:
-                classification = normalize(self._classify(
-                    self.ngrams[var], parsed_message, conv, u_priors[var], var))
-                for i, e in enumerate(self.variable_dimensions):
-                    u_priors[var][e] = classification[i]
-
-            parsed_message = ngrams_and_remove_stop_words(
-                tokenized_turn1, self.ngram_choice)
-            for var in self.variables:
-                classification = normalize(self._classify(
-                    self.ngrams[var], parsed_message, tokenized_turn1, u_priors[var], var))
-                for i, e in enumerate(self.variable_dimensions):
-                    u_priors[var][e] = classification[i]
-
-            parsed_message = ngrams_and_remove_stop_words(
-                tokenized_turn3, self.ngram_choice)
-            var_classification = {dim: "" for dim in self.variables}
-            for var in self.variables:
-                var_classification[var] = self._classify(
-                    self.ngrams[var], parsed_message, tokenized_turn3, u_priors[var], var, False)
-
-            self.true.append(row["turn3"]["emotion"])
-            emo_class = self.__map_to_emotion(var_classification)
-            self.pred.append(emo_class[0])
-
-        super(AVModel, self).calculate_scores()
-
-    def __build_av2e_classifier(self, data):
-        X = [list(d["turn3"]["appraisals"].values()) for d in data]
-        y = [em["turn3"]["emotion"] for em in data]
-
-        self.av2e_classifier = self.av2e_classifier.fit(X, y)
-
-    def __map_to_emotion(self, variables):
-        v = [self.variable_dimensions.index(x)
-             for x in list(variables.values())]
-        return self.av2e_classifier.predict(np.asarray(v).reshape(1, -1))
+        appraisal_pred = list()
+        for i in range(6): #dependent on hardcoded number of appraisals (bad)
+            res = self.classifiers[i].predict_log_proba(X)
+            appraisal_pred.append(res[0])
+        
+        if len(priors) > 0:
+            return np.add(appraisal_pred, priors)
+        return appraisal_pred
