@@ -12,7 +12,6 @@ class EmotionModel:
     """CLARK emotion model from SemEval-2019 paper."""
 
     def __init__(self) -> None:
-        super().__init__()
         self.vectorizer = TfidfVectorizer(
             ngram_range=(1, 2), stop_words="english", tokenizer=casual_tokenize, max_df=0.8
         )
